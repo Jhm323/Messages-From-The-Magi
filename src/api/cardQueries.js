@@ -160,13 +160,15 @@ export function getCardBack() {
 
 /**
  * BIRTH CARD
- * Sum month + day + all 4 digits of year, reduce to 1–52.
+ * Direct lookup by month + day using the Cards of Destiny calendar table.
  *
- * Example: born 03/15/1990
- *   3 + 15 + 1+9+9+0 = 3 + 15 + 19 = 37 → Card #37 (Jack of Diamonds)
+ * Each month starts at a fixed card (Jan=52/K♠, Feb=50/J♠ … Dec=30/4♦),
+ * counting down by 1 for each subsequent day.
+ * Formula: cardId = 53 − 2×(month−1) − day
+ * Exception: December 31 = Joker (id 53).
  *
  * @param {string} dateString  "MM/DD/YYYY" | "YYYY-MM-DD"
- * @returns {{ card, reducedValue, steps, rawSum } | null}
+ * @returns {{ card, reducedValue } | null}
  */
 export function getBirthCard(dateString) {
   const parsed = parseDate(dateString);
@@ -175,13 +177,22 @@ export function getBirthCard(dateString) {
     return null;
   }
 
-  const { month, day, year } = parsed;
-  const yearDigitSum = digitSum(year);
-  const rawSum = month + day + yearDigitSum;
-  const { value, steps } = reduceToCardNumber(rawSum);
-  const card = getCardByNumber(value);
+  const { month, day } = parsed;
 
-  return { card, reducedValue: value, rawSum, steps: [month, day, yearDigitSum, ...steps] };
+  // December 31 is the Joker — outside the numerological range
+  if (month === 12 && day === 31) {
+    return { card: getCardById(53), reducedValue: 53 };
+  }
+
+  const cardId = 53 - 2 * (month - 1) - day;
+
+  if (cardId < 1 || cardId > 52) {
+    console.warn("getBirthCard: date out of calendar range", dateString);
+    return null;
+  }
+
+  const card = getCardByNumber(cardId);
+  return { card, reducedValue: cardId };
 }
 
 /**
