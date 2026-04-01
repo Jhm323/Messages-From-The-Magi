@@ -1,0 +1,149 @@
+/**
+ * CompatibilityModal
+ * Opens a modal, collects two birth dates, calculates the compatibility card.
+ *
+ * Usage:
+ *   import { openCompatibilityModal } from './CompatibilityModal.js';
+ *   openCompatibilityModal();
+ */
+
+import { getCompatibilityCard } from "../api/cardQueries.js";
+import { renderCardResult }      from "./CardResult.js";
+
+const MODAL_ID = "modal-compatibility";
+
+// ─── Template ────────────────────────────────────────────────────────────────
+function buildHTML() {
+  return `
+<div class="modal-overlay" id="${MODAL_ID}" role="dialog" aria-modal="true" aria-labelledby="${MODAL_ID}-title">
+  <div class="modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="${MODAL_ID}-title">Compatibility Reading</h2>
+      <button class="modal__close" data-close aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-step" id="${MODAL_ID}-step-form">
+      <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+        Enter both birthdates to reveal the card that governs your connection.
+      </p>
+
+      <div class="divider--glyph">♥</div>
+
+      <div class="form-group">
+        <label class="form-label" for="${MODAL_ID}-name1">Your Name</label>
+        <input class="form-input" id="${MODAL_ID}-name1" type="text" placeholder="Your name" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="${MODAL_ID}-date1">Your Birthdate</label>
+        <input class="form-input" id="${MODAL_ID}-date1" type="date" required>
+        <span class="form-hint">MM/DD/YYYY</span>
+      </div>
+
+      <div class="divider--glyph">♥</div>
+
+      <div class="form-group">
+        <label class="form-label" for="${MODAL_ID}-name2">Partner's Name</label>
+        <input class="form-input" id="${MODAL_ID}-name2" type="text" placeholder="Their name" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="${MODAL_ID}-date2">Partner's Birthdate</label>
+        <input class="form-input" id="${MODAL_ID}-date2" type="date" required>
+        <span class="form-hint">MM/DD/YYYY</span>
+      </div>
+
+      <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
+
+      <button class="btn btn--primary" id="${MODAL_ID}-submit" style="width:100%;margin-top:0.5rem;">
+        ✦ Reveal Compatibility Card
+      </button>
+    </div>
+
+    <div class="modal-step" id="${MODAL_ID}-step-result" style="display:none;">
+      <div id="${MODAL_ID}-result-container"></div>
+      <button class="btn btn--ghost" id="${MODAL_ID}-again" style="width:100%;margin-top:1.5rem;">
+        ← Try Another Reading
+      </button>
+    </div>
+  </div>
+</div>`;
+}
+
+// ─── Mount (once) ─────────────────────────────────────────────────────────────
+function ensureModal() {
+  if (document.getElementById(MODAL_ID)) return;
+  document.body.insertAdjacentHTML("beforeend", buildHTML());
+
+  const overlay  = document.getElementById(MODAL_ID);
+  const submit   = document.getElementById(`${MODAL_ID}-submit`);
+  const again    = document.getElementById(`${MODAL_ID}-again`);
+  const errEl    = document.getElementById(`${MODAL_ID}-error`);
+
+  // Close on overlay click or close button
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.dataset.close !== undefined) {
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+  });
+
+  submit.addEventListener("click", handleSubmit);
+  again.addEventListener("click", resetToForm);
+
+  function handleSubmit() {
+    const name1  = document.getElementById(`${MODAL_ID}-name1`).value.trim() || "Person 1";
+    const date1  = document.getElementById(`${MODAL_ID}-date1`).value;
+    const name2  = document.getElementById(`${MODAL_ID}-name2`).value.trim() || "Person 2";
+    const date2  = document.getElementById(`${MODAL_ID}-date2`).value;
+
+    errEl.style.display = "none";
+
+    if (!date1 || !date2) {
+      errEl.textContent = "Please enter both birthdates to continue.";
+      errEl.style.display = "block";
+      return;
+    }
+
+    const result = getCompatibilityCard(date1, date2);
+    if (!result || !result.card) {
+      errEl.textContent = "Something went wrong. Please check the dates and try again.";
+      errEl.style.display = "block";
+      return;
+    }
+
+    // Show result
+    const container = document.getElementById(`${MODAL_ID}-result-container`);
+    container.innerHTML = renderCardResult(result.card, {
+      eyebrow: `${name1} & ${name2}`,
+      subheading: "Your Compatibility Card",
+      showAffirmation: true,
+      showAction: true,
+      showDescription: true,
+      extra: `<p style="color:var(--color-dawn);font-size:0.8rem;text-align:center;margin-top:0.5rem;">
+        Card #${result.card.id} · Numerological value: ${result.reducedValue}
+      </p>`,
+    });
+
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "none";
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
+  }
+
+  function resetToForm() {
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "block";
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
+  }
+}
+
+function close() {
+  const el = document.getElementById(MODAL_ID);
+  if (el) el.classList.remove("is-open");
+}
+
+export function openCompatibilityModal() {
+  ensureModal();
+  const el = document.getElementById(MODAL_ID);
+  el.classList.add("is-open");
+  setTimeout(() => document.getElementById(`${MODAL_ID}-name1`)?.focus(), 100);
+}
