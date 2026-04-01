@@ -696,6 +696,63 @@ strong { font-weight: 600; color: var(--color-white); }
   line-height: 1.8;
 }
 
+/* ─── GREETING CARD REVEAL ANIMATION ────────────────────────────────────── */
+.greeting-reveal-wrapper {
+  position: relative;
+}
+
+.greeting-cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 1.5rem;
+  animation: cover-melt 2s ease-in-out 1.5s forwards;
+}
+
+.greeting-cover img {
+  width: 220px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.greeting-content {
+  opacity: 0;
+  animation: content-rise 1.5s ease-out 3s forwards;
+}
+
+.greeting-replay-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  background: none;
+  border: 1px solid var(--color-gold-muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  margin: 1rem auto 0;
+  transition: all var(--transition-fast);
+}
+.greeting-replay-btn:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+  background: var(--color-gold-glow);
+}
+
+@keyframes cover-melt {
+  0%   { opacity: 1; filter: blur(0px);   transform: scale(1); }
+  100% { opacity: 0; filter: blur(12px);  transform: scale(1.08); pointer-events: none; }
+}
+
+@keyframes content-rise {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 /* ─── SUBSCRIPTION TIERS ─────────────────────────────────────────────────── */
 .tier-grid {
   display: grid;
