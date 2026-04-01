@@ -221,27 +221,35 @@ export function getBirthCard(dateString) {
 
 /**
  * COMPATIBILITY CARD
- * Sum the two birth date totals, reduce to 1–52.
+ * Sum the two birth card IDs. If sum ≤ 52, that is the card.
+ * If sum > 52, subtract 52 once to get the card ID.
+ *
+ * Example: card 26 + card 22 = 48 → 9 of Spades
+ * Example: card 26 + card 51 = 77 → 77 - 52 = 25 → Queen of Clubs
  *
  * @param {string} dateString1
  * @param {string} dateString2
- * @returns {{ card, reducedValue, steps, person1Sum, person2Sum } | null}
+ * @returns {{ card, reducedValue, person1Card, person2Card, rawSum } | null}
  */
 export function getCompatibilityCard(dateString1, dateString2) {
-  const p1 = parseDate(dateString1);
-  const p2 = parseDate(dateString2);
-  if (!p1 || !p2) {
+  const b1 = getBirthCard(dateString1);
+  const b2 = getBirthCard(dateString2);
+  if (!b1 || !b2) {
     console.warn("getCompatibilityCard: one or both dates invalid");
     return null;
   }
 
-  const sum1 = p1.month + p1.day + digitSum(p1.year);
-  const sum2 = p2.month + p2.day + digitSum(p2.year);
-  const rawSum = sum1 + sum2;
-  const { value, steps } = reduceToCardNumber(rawSum);
-  const card = getCardByNumber(value);
+  const rawSum = b1.reducedValue + b2.reducedValue;
+  const cardId = rawSum > 52 ? rawSum - 52 : rawSum;
+  const card = getCardByNumber(cardId);
 
-  return { card, reducedValue: value, rawSum, person1Sum: sum1, person2Sum: sum2, steps };
+  return {
+    card,
+    reducedValue: cardId,
+    person1Card: b1.card,
+    person2Card: b2.card,
+    rawSum,
+  };
 }
 
 /**
