@@ -93,7 +93,7 @@ function locationNameValue(name) {
   const titleCased = name
     .trim()
     .split(/\s+/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 
   return titleCased
@@ -111,7 +111,7 @@ export function normalizeLocationName(name) {
   return name
     .trim()
     .split(/\s+/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 }
 
@@ -151,10 +151,13 @@ export function getCardByRankAndSuit(rank, suit) {
   if (!rank || !suit) return null;
   const r = rank.trim();
   const s = suit.trim();
-  return CARDS.find(
-    (c) => c.rank.toLowerCase() === r.toLowerCase() &&
-           c.suit.toLowerCase() === s.toLowerCase()
-  ) || null;
+  return (
+    CARDS.find(
+      (c) =>
+        c.rank.toLowerCase() === r.toLowerCase() &&
+        c.suit.toLowerCase() === s.toLowerCase(),
+    ) || null
+  );
 }
 
 /**
@@ -163,9 +166,7 @@ export function getCardByRankAndSuit(rank, suit) {
  */
 export function getCardsBySuit(suit) {
   if (!suit) return [];
-  return CARDS.filter(
-    (c) => c.suit.toLowerCase() === suit.toLowerCase()
-  );
+  return CARDS.filter((c) => c.suit.toLowerCase() === suit.toLowerCase());
 }
 
 /** Return the full 53-card array. */
@@ -303,17 +304,22 @@ export function getYearCard(dateString, year = new Date().getFullYear()) {
   const { value, steps } = reduceToCardNumber(rawSum);
   const card = getCardByNumber(value);
 
-  return { card, reducedValue: value, rawSum, steps: [month, day, yearDigitSum, ...steps] };
+  return {
+    card,
+    reducedValue: value,
+    rawSum,
+    steps: [month, day, yearDigitSum, ...steps],
+  };
 }
 
 /**
  * PULL RANDOM CARD (Oracle Feature)
- * Returns a random card from 1–52 (Joker excluded per system rules).
+ * Returns a random card from 1–53.
  *
  * @returns {card}
  */
 export function pullRandomCard() {
-  const id = Math.floor(Math.random() * 52) + 1;
+  const id = Math.floor(Math.random() * 53) + 1;
   return getCardByNumber(id);
 }
 
