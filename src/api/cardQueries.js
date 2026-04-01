@@ -288,28 +288,14 @@ export function getLocationCard(dateString, locationName) {
 
 /**
  * YEAR CARD
- * Replace birth year with the queried year, reduce to 1–52.
+ * In the calendar lookup system, the card is determined by month + day only —
+ * the year does not change the card. Returns the same result as getBirthCard.
  *
  * @param {string} dateString  birth date
- * @param {number} year        the year to query (defaults to current year)
- * @returns {{ card, reducedValue, steps } | null}
+ * @returns {{ card, reducedValue } | null}
  */
-export function getYearCard(dateString, year = new Date().getFullYear()) {
-  const parsed = parseDate(dateString);
-  if (!parsed) return null;
-
-  const { month, day } = parsed;
-  const yearDigitSum = digitSum(year);
-  const rawSum = month + day + yearDigitSum;
-  const { value, steps } = reduceToCardNumber(rawSum);
-  const card = getCardByNumber(value);
-
-  return {
-    card,
-    reducedValue: value,
-    rawSum,
-    steps: [month, day, yearDigitSum, ...steps],
-  };
+export function getYearCard(dateString) {
+  return getBirthCard(dateString);
 }
 
 /**
@@ -325,15 +311,18 @@ export function pullRandomCard() {
 
 /**
  * CARD OF THE DAY
- * Deterministic pull based on today's date — same card all day for all users.
+ * Returns the card for today's month and day using the same calendar lookup as birth cards.
+ * Same card for everyone on the same date.
  * @returns {card}
  */
 export function getCardOfTheDay() {
   const today = new Date();
-  const seed =
-    today.getFullYear() * 10000 +
-    (today.getMonth() + 1) * 100 +
-    today.getDate();
-  const id = (seed % 52) + 1;
-  return getCardByNumber(id);
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+
+  // December 31 is the Joker
+  if (month === 12 && day === 31) return getCardById(53);
+
+  const cardId = 53 - 2 * (month - 1) - day;
+  return getCardByNumber(cardId);
 }
