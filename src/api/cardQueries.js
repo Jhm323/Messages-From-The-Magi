@@ -82,13 +82,37 @@ function parseDate(dateString) {
   return null;
 }
 
-/** Convert a location name to its alphanumeric value (A=1…Z=26) */
+/**
+ * Convert a location name to its alphanumeric value.
+ * Input is normalized to title case first (first letter of each word capitalized,
+ * remaining letters lowercase) so user input is always calculated consistently.
+ * lowercase a–z = 1–26, uppercase A–Z = 27–52.
+ * Non-letter characters are ignored.
+ */
 function locationNameValue(name) {
-  return name
-    .toUpperCase()
-    .replace(/[^A-Z]/g, "")
+  const titleCased = name
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+
+  return titleCased
+    .replace(/[^a-zA-Z]/g, "")
     .split("")
-    .reduce((acc, ch) => acc + (ch.charCodeAt(0) - 64), 0);
+    .reduce((acc, ch) => {
+      const code = ch.charCodeAt(0);
+      return acc + (code >= 97 ? code - 96 : code - 38); // a-z: 1-26, A-Z: 27-52
+    }, 0);
+}
+
+/** Normalize a location name to title case for consistent display and calculation. */
+export function normalizeLocationName(name) {
+  if (!name || typeof name !== "string") return "";
+  return name
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -224,7 +248,7 @@ export function getCompatibilityCard(dateString1, dateString2) {
  * LOCATION CARD
  * Birth card numerical value + alphanumeric value of location name → reduce to 1–52.
  *
- * Letter values: A=1, B=2 … Z=26 (spaces and punctuation ignored).
+ * Letter values: a–z = 1–26, A–Z = 27–52. Input is normalized to title case.
  *
  * @param {string} dateString    birth date
  * @param {string} locationName  e.g. "New York"
