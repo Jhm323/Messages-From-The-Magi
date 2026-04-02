@@ -11,7 +11,7 @@ const MODAL_ID = "modal-greeting";
 function buildHTML() {
   return `
 <div class="modal-overlay" id="${MODAL_ID}" role="dialog" aria-modal="true" aria-labelledby="${MODAL_ID}-title">
-  <div class="modal" style="max-width:640px;">
+  <div class="modal modal--fullscreen">
     <div class="modal__header">
       <h2 class="modal__title" id="${MODAL_ID}-title">Create a Greeting Card</h2>
       <button class="modal__close" data-close aria-label="Close">✕</button>
@@ -83,51 +83,58 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
 
   <!-- Cover: Mystic Oracle card shows first, then melts away -->
   <div class="greeting-cover" id="${MODAL_ID}-cover">
-    <img src="/images/util/card_back.jpg" alt="The Mystic Oracle">
+    <img src="/images/util/card_back.jpg" alt="The Mystic Oracle" class="greeting-cover__img">
   </div>
 
   <!-- Content: fades in after cover melts -->
   <div class="greeting-content" id="${MODAL_ID}-content">
     <div class="greeting-card card-display card-display--${suitClass(card.suit)}" id="${MODAL_ID}-printable">
-      <div style="margin-bottom:1.5rem;">
+
+      <div style="margin-bottom:0.75rem;">
         <div class="greeting-card__from">A card for</div>
-        <div class="greeting-card__recipient">${name}</div>
+        <div class="greeting-card__recipient" style="font-size:1.6rem;margin-bottom:0.25rem;">${name}</div>
         ${occasion ? `<div style="font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-muted);">on the occasion of their ${occasion}</div>` : ""}
       </div>
 
-      <div class="card-image-wrap" style="max-width:200px;margin:0 auto 1.5rem;">
-        <img src="${card.imagePath}" alt="${card.name}" loading="lazy">
+      <div style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:0.2rem;">Your Birth Card</div>
+      <div class="card-name" style="color:var(--color-gold);font-size:1.4rem;margin-bottom:0.2rem;">${card.name}</div>
+      <div style="font-size:1.4rem;margin-bottom:0.5rem;">${card.suitSymbol}</div>
+
+      <div class="card-keywords" style="margin-bottom:0.5rem;">
+        ${card.keywords.map(k => `<span class="card-keyword-tag">${k}</span>`).join("")}
       </div>
 
-      <div style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:0.25rem;">Your Birth Card</div>
-      <div class="card-name" style="color:var(--color-gold);font-size:1.2rem;margin-bottom:0.25rem;">${card.name}</div>
-      <div style="font-size:1.4rem;margin-bottom:1rem;">${card.suitSymbol}</div>
-
-      <div class="card-keywords">
-        ${card.keywords.slice(0,3).map(k => `<span class="card-keyword-tag">${k}</span>`).join("")}
-      </div>
-
-      <div class="card-affirmation" style="margin:1rem 0;">
+      <div class="card-affirmation" style="margin:0.5rem 0;font-size:1rem;padding:0.75rem 1rem;">
         "${card.affirmation}"
       </div>
 
+      <div class="card-description" style="font-size:0.95rem;margin:0.5rem 0;line-height:1.7;text-align:center;color:var(--color-light);">
+        ${card.description}
+      </div>
+
+      <div class="card-action-prompt" style="margin:0.5rem 0;">
+        <strong>✦ Your Practice</strong>
+        ${card.action}
+      </div>
+
       ${message ? `
-      <div class="divider--glyph">✦</div>
-      <div class="greeting-card__message" style="margin:1rem 0;">"${message}"</div>
+      <div class="divider--glyph" style="margin:0.75rem 0;">✦</div>
+      <div class="greeting-card__message" style="margin:0.5rem 0;font-size:1.05rem;">"${message}"</div>
       ` : ""}
 
       ${from ? `
-      <div style="font-family:var(--font-heading);font-size:0.78rem;letter-spacing:0.1em;color:var(--color-dawn);margin-top:1rem;">
+      <div style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.1em;color:var(--color-dawn);margin-top:0.5rem;">
         With love, ${from}
       </div>
       ` : ""}
 
-      <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--color-gold-muted);font-family:var(--font-heading);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-muted);">
+      <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--color-gold-muted);font-family:var(--font-heading);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-muted);">
         Messages from the Magi · Cards of Destiny
       </div>
+
     </div>
 
-    <button class="greeting-replay-btn" id="${MODAL_ID}-replay">↺ Replay</button>
+    <button class="greeting-replay-btn" id="${MODAL_ID}-replay" style="margin-top:1rem;">↺ Replay</button>
   </div>
 
 </div>`;

@@ -655,11 +655,12 @@ strong { font-weight: 600; color: var(--color-white); }
   background: linear-gradient(160deg, #1A1428 0%, #0D0D1A 100%);
   border: 2px solid var(--color-gold-muted);
   border-radius: var(--radius-xl);
-  padding: 3rem 2.5rem;
+  padding: 1.5rem 2rem;
   text-align: center;
   box-shadow: var(--shadow-card), inset 0 0 60px rgba(201,168,76,0.03);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  width: 100%;
 }
 
 .greeting-card::before {
@@ -696,28 +697,66 @@ strong { font-weight: 600; color: var(--color-white); }
   line-height: 1.8;
 }
 
+/* ─── FULLSCREEN MODAL VARIANT ───────────────────────────────────────────── */
+.modal--fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+  padding: 0;
+}
+
 /* ─── GREETING CARD REVEAL ANIMATION ────────────────────────────────────── */
 .greeting-reveal-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
   position: relative;
 }
 
 .greeting-cover {
+  position: absolute;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0 1.5rem;
   animation: cover-melt 2s ease-in-out 1.5s forwards;
 }
 
-.greeting-cover img {
-  width: 220px;
+.greeting-cover__img {
+  height: 85vh;
+  width: auto;
+  max-width: 85vw;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glow-gold);
+  object-fit: contain;
 }
 
 .greeting-content {
   opacity: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.25rem 1.5rem 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
   animation: content-rise 1.5s ease-out 3s forwards;
+  /* custom scrollbar to match theme */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-muted) transparent;
 }
 
 .greeting-replay-btn {
