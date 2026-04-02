@@ -659,7 +659,7 @@ strong { font-weight: 600; color: var(--color-white); }
   text-align: center;
   box-shadow: var(--shadow-card), inset 0 0 60px rgba(201,168,76,0.03);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -750,13 +750,32 @@ strong { font-weight: 600; color: var(--color-white); }
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 1.25rem 1.5rem 2rem;
+  padding: 2.5rem 1.5rem 2rem;
+  overflow: hidden;
+  animation: content-rise 1.5s ease-out 3s forwards;
+  box-sizing: border-box;
+}
+
+.greeting-content .greeting-card {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  animation: content-rise 1.5s ease-out 3s forwards;
-  /* custom scrollbar to match theme */
   scrollbar-width: thin;
   scrollbar-color: var(--color-gold-muted) transparent;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar {
+  width: 4px;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar-thumb {
+  background: var(--color-gold-muted);
+  border-radius: 2px;
 }
 
 .greeting-replay-btn {
