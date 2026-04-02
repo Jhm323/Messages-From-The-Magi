@@ -4,7 +4,8 @@
  * with the recipient's birth card image, affirmation, and message.
  */
 
-import { getBirthCard } from "../api/cardQueries.js";
+import "./GreetingCardModal.css";
+import { getBirthCard } from "../../api/cardQueries.js";
 
 const MODAL_ID = "modal-greeting";
 
@@ -101,7 +102,7 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
       <div style="font-size:1.4rem;margin-bottom:0.5rem;">${card.suitSymbol}</div>
 
       <div class="card-keywords" style="margin-bottom:0.5rem;">
-        ${card.keywords.map(k => `<span class="card-keyword-tag">${k}</span>`).join("")}
+        ${card.keywords.map((k) => `<span class="card-keyword-tag">${k}</span>`).join("")}
       </div>
 
       <div class="card-affirmation" style="margin:0.5rem 0;font-size:1rem;padding:0.75rem 1rem;">
@@ -117,19 +118,27 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
         ${card.action}
       </div>
 
-      ${message ? `
+      ${
+        message
+          ? `
       <div class="divider--glyph" style="margin:0.75rem 0;">✦</div>
       <div class="greeting-card__message" style="margin:0.5rem 0;font-size:1.05rem;">"${message}"</div>
-      ` : ""}
+      `
+          : ""
+      }
 
-      ${from ? `
+      ${
+        from
+          ? `
       <div style="font-family:var(--font-heading);font-size:0.85rem;letter-spacing:0.1em;color:var(--color-dawn);margin-top:0.5rem;">
         With love, ${from}
       </div>
-      ` : ""}
+      `
+          : ""
+      }
 
       <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--color-gold-muted);font-family:var(--font-heading);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-muted);">
-        Messages from the Magi · Cards of Destiny
+        Messages from the Magi
       </div>
 
     </div>
@@ -145,7 +154,7 @@ function ensureModal() {
   document.body.insertAdjacentHTML("beforeend", buildHTML());
 
   const overlay = document.getElementById(MODAL_ID);
-  const errEl   = document.getElementById(`${MODAL_ID}-error`);
+  const errEl = document.getElementById(`${MODAL_ID}-error`);
 
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay || e.target.dataset.close !== undefined) close();
@@ -155,44 +164,65 @@ function ensureModal() {
     if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
   });
 
-  document.getElementById(`${MODAL_ID}-submit`).addEventListener("click", () => {
-    const name     = document.getElementById(`${MODAL_ID}-name`).value.trim();
-    const date     = document.getElementById(`${MODAL_ID}-date`).value;
-    const occasion = document.getElementById(`${MODAL_ID}-occasion`).value.trim();
-    const message  = document.getElementById(`${MODAL_ID}-message`).value.trim();
-    const from     = document.getElementById(`${MODAL_ID}-from`).value.trim();
+  document
+    .getElementById(`${MODAL_ID}-submit`)
+    .addEventListener("click", () => {
+      const name = document.getElementById(`${MODAL_ID}-name`).value.trim();
+      const date = document.getElementById(`${MODAL_ID}-date`).value;
+      const occasion = document
+        .getElementById(`${MODAL_ID}-occasion`)
+        .value.trim();
+      const message = document
+        .getElementById(`${MODAL_ID}-message`)
+        .value.trim();
+      const from = document.getElementById(`${MODAL_ID}-from`).value.trim();
 
-    errEl.style.display = "none";
+      errEl.style.display = "none";
 
-    if (!name) { showError("Please enter the recipient's name."); return; }
-    if (!date) { showError("Please enter the recipient's birthdate."); return; }
+      if (!name) {
+        showError("Please enter the recipient's name.");
+        return;
+      }
+      if (!date) {
+        showError("Please enter the recipient's birthdate.");
+        return;
+      }
 
-    const result = getBirthCard(date);
-    if (!result || !result.card) {
-      showError("Could not calculate the birth card. Please check the date.");
-      return;
-    }
+      const result = getBirthCard(date);
+      if (!result || !result.card) {
+        showError("Could not calculate the birth card. Please check the date.");
+        return;
+      }
 
-    const output = document.getElementById(`${MODAL_ID}-card-output`);
-    output.innerHTML = renderGreetingCard({ name, occasion, message, from, card: result.card });
+      const output = document.getElementById(`${MODAL_ID}-card-output`);
+      output.innerHTML = renderGreetingCard({
+        name,
+        occasion,
+        message,
+        from,
+        card: result.card,
+      });
 
-    // Wire up replay button after rendering
-    document.getElementById(`${MODAL_ID}-replay`).addEventListener("click", () => {
-      const cover   = document.getElementById(`${MODAL_ID}-cover`);
-      const content = document.getElementById(`${MODAL_ID}-content`);
-      // Reset animations by removing, forcing reflow, re-adding
-      cover.style.animation   = "none";
-      content.style.animation = "none";
-      content.style.opacity   = "0";
-      // Force reflow
-      void cover.offsetWidth;
-      cover.style.animation   = "";
-      content.style.animation = "";
+      // Wire up replay button after rendering
+      document
+        .getElementById(`${MODAL_ID}-replay`)
+        .addEventListener("click", () => {
+          const cover = document.getElementById(`${MODAL_ID}-cover`);
+          const content = document.getElementById(`${MODAL_ID}-content`);
+          // Reset animations by removing, forcing reflow, re-adding
+          cover.style.animation = "none";
+          content.style.animation = "none";
+          content.style.opacity = "0";
+          // Force reflow
+          void cover.offsetWidth;
+          cover.style.animation = "";
+          content.style.animation = "";
+        });
+
+      document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
+      document.getElementById(`${MODAL_ID}-step-result`).style.display =
+        "block";
     });
-
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "none";
-    document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
-  });
 
   document.getElementById(`${MODAL_ID}-again`).addEventListener("click", reset);
 
@@ -206,7 +236,7 @@ function ensureModal() {
   }
 
   function reset() {
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "block";
+    document.getElementById(`${MODAL_ID}-step-form`).style.display = "block";
     document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
   }
 }

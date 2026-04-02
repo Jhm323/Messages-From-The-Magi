@@ -1,11 +1,11 @@
-# Messages from the Magi — Cards of Destiny App
+# Messages from the Magi
 ### MVP Repository
 
 ---
 
 ## Overview
 
-This is the MVP codebase for **Messages from the Magi**, a digital platform built on Sharon's Cards of Destiny system — a mystic numerological science that uses a standard 52-card deck (+ Joker) as a map of identity, timing, and consciousness.
+This is the MVP codebase for **Messages from the Magi**, a digital platform built on Sharon's oracle system — a mystic numerological science that uses a standard 52-card deck (+ Joker) as a map of identity, timing, and consciousness.
 
 ---
 
@@ -60,7 +60,7 @@ magi-app/
     ├── utils/
     │   └── helpers.js          ← Date, string, DOM, display utilities
     └── styles/
-        └── cards-of-destiny.css ← Full design system (tokens, components, animations)
+        └── main.css ← Full design system (tokens, components, animations)
 ```
 
 ---
@@ -135,7 +135,7 @@ getCardsBySuit(suit)          // All cards for one suit
 getAllCards()                  // Full 53-card array
 getCardBack()                  // { imagePath } for card back image
 
-// Calculations (Cards of Destiny numerology)
+// Calculations
 getBirthCard(dateString)       // → { card, reducedValue, rawSum, steps }
 getCompatibilityCard(d1, d2)   // → { card, reducedValue, person1Sum, person2Sum }
 getLocationCard(date, name)    // → { card, reducedValue, birthValue, locationValue }
@@ -185,7 +185,7 @@ Combined: 37 + 29 = 66 → 6+6 = 12 → Card #12 (Queen of Hearts)
 | Location Reading modal | `GeolocationModal.js` | ✅ Complete |
 | Pull-a-Card oracle | `PullCard.js` | ✅ Complete |
 | Card browser / gallery | `CardBrowser.js` + `cards.html` | ✅ Complete |
-| Design system | `cards-of-destiny.css` | ✅ Complete |
+| Design system | `main.css` | ✅ Complete |
 | Card database (53 cards) | `src/db/cards.js` | ✅ Scaffolded — needs Sharon's content |
 
 ---
@@ -208,7 +208,7 @@ Combined: 37 + 29 = 66 → 6+6 = 12 → Card #12 (Queen of Hearts)
 
 ## Design System
 
-All visual tokens live in `src/styles/cards-of-destiny.css` as CSS custom properties:
+All visual tokens live in `src/styles/main.css` as CSS custom properties:
 
 ```css
 --color-void         Deep background
@@ -239,7 +239,7 @@ All visual tokens live in `src/styles/cards-of-destiny.css` as CSS custom proper
 
 ## IP & Licensing
 
-The Cards of Destiny system, all card interpretations, affirmations, and textual content are the proprietary intellectual property of Sharon. This codebase is private and unlicensed for external distribution. See the proposal document for partnership terms.
+All card interpretations, affirmations, and textual content are the proprietary intellectual property of Sharon. This codebase is private and unlicensed for external distribution. See the proposal document for partnership terms.
 
 ---
 

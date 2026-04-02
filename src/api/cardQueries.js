@@ -12,7 +12,7 @@
  *   getAllCards()                  → full array (53 entries)
  *   getCardBack()                  → { imagePath } for card back image
  *
- * Calculation queries (Cards of Destiny numerology)
+ * Calculation queries
  *   getBirthCard(dateString)       → { card, reducedValue, steps }
  *   getCompatibilityCard(d1, d2)   → { card, reducedValue, steps }
  *   getLocationCard(birthDate, locationName) → { card, reducedValue, steps }
@@ -37,7 +37,7 @@ function digitSum(n) {
 }
 
 /**
- * Reduce a number to the range 1–52 (Cards of Destiny numerology).
+ * Reduce a number to the range 1–52.
  * Joker (53) is excluded — we never land on 53 via calculation.
  * Returns { value, steps } where steps logs each reduction.
  */
@@ -180,12 +180,12 @@ export function getCardBack() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CARDS OF DESTINY CALCULATION QUERIES
+// CALCULATION QUERIES
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * BIRTH CARD
- * Direct lookup by month + day using the Cards of Destiny calendar table.
+ * Direct lookup by month + day using the calendar table.
  *
  * Each month starts at a fixed card (Jan=52/K♠, Feb=50/J♠ … Dec=30/4♦),
  * counting down by 1 for each subsequent day.

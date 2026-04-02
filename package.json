@@ -1,7 +1,7 @@
 {
   "name": "messages-from-the-magi",
   "version": "0.1.0",
-  "description": "Messages from the Magi — Cards of Destiny App (MVP)",
+  "description": "Messages from the Magi — Oracle App (MVP)",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,7 +13,6 @@
     "vite": "^8.0.3"
   },
   "keywords": [
-    "cards-of-destiny",
     "oracle",
     "numerology",
     "mystic"

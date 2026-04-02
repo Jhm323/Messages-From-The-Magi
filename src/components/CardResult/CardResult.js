@@ -1,3 +1,5 @@
+import './CardResult.css';
+
 /**
  * CardResult — shared HTML renderer for card reading results.
  * Used by all modals and feature components.

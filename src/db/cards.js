@@ -1,5 +1,5 @@
 /**
- * Messages from the Magi — Cards of Destiny
+ * Messages from the Magi
  * PRIMARY CARD DATABASE
  *
  * 53 cards numbered 1–53
@@ -363,7 +363,7 @@ export const CARDS = [
     ["infinite potential","the wild card","the fool's wisdom","pure possibility","spirit"],
     "I embrace the unknown. I am the wildcard in my own story.",
     "Do one completely spontaneous thing today — unplanned, unstructured, purely in the moment.",
-    "The Joker stands outside the numbered system — the wild card, the sacred fool, the one who bows to no rules. This card carries the energy of infinite potential and divine play. When the Joker appears, the ordinary rules do not apply. This is a moment of pure possibility, unexpected change, or the universe's invitation to stop being so serious about the game. Note: The Joker is excluded from standard numerological calculations in the Cards of Destiny system."),
+    "The Joker stands outside the numbered system — the wild card, the sacred fool, the one who bows to no rules. This card carries the energy of infinite potential and divine play. When the Joker appears, the ordinary rules do not apply. This is a moment of pure possibility, unexpected change, or the universe's invitation to stop being so serious about the game. Note: The Joker is excluded from standard numerological calculations."),
 ];
 
 export const CARD_BACK_PATH  = "/images/util/card_back.jpg";

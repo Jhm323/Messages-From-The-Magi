@@ -1,0 +1,160 @@
+/* ─── GREETING CARD ──────────────────────────────────────────────────────── */
+.greeting-card {
+  background: linear-gradient(160deg, #1A1428 0%, #0D0D1A 100%);
+  border: 2px solid var(--color-gold-muted);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card), inset 0 0 60px rgba(201,168,76,0.03);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.greeting-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(201,168,76,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(100,80,180,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.greeting-card__from {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  margin-bottom: 0.5rem;
+}
+
+.greeting-card__recipient {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  margin-bottom: 1.5rem;
+}
+
+.greeting-card__message {
+  font-style: italic;
+  color: var(--color-light);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+/* ─── FULLSCREEN MODAL VARIANT ───────────────────────────────────────────── */
+.modal--fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+  padding: 0;
+}
+
+/* ─── GREETING CARD REVEAL ANIMATION ────────────────────────────────────── */
+.greeting-reveal-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+
+.greeting-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: cover-melt 2s ease-in-out 1.5s forwards;
+}
+
+.greeting-cover__img {
+  height: 85vh;
+  width: auto;
+  max-width: 85vw;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow-gold);
+  object-fit: contain;
+}
+
+.greeting-content {
+  opacity: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 2.5rem 1.5rem 2rem;
+  overflow: hidden;
+  animation: content-rise 1.5s ease-out 3s forwards;
+  box-sizing: border-box;
+}
+
+.greeting-content .greeting-card {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-muted) transparent;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar {
+  width: 4px;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.greeting-content .greeting-card::-webkit-scrollbar-thumb {
+  background: var(--color-gold-muted);
+  border-radius: 2px;
+}
+
+.greeting-replay-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  background: none;
+  border: 1px solid var(--color-gold-muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  margin: 1rem auto 0;
+  transition: all var(--transition-fast);
+}
+.greeting-replay-btn:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+  background: var(--color-gold-glow);
+}
+
+@keyframes cover-melt {
+  0%   { opacity: 1; filter: blur(0px);   transform: scale(1); }
+  100% { opacity: 0; filter: blur(12px);  transform: scale(1.08); pointer-events: none; }
+}
+
+@keyframes content-rise {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
