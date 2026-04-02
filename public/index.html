@@ -20,23 +20,7 @@
 </head>
 <body>
 
-  <!-- ── HEADER ──────────────────────────────────────────────────────────── -->
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a href="/" class="site-logo" style="text-decoration:none;">
-        Messages from the Magi
-      </a>
-
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="#features"      class="nav-link">Readings</a>
-        <a href="#pull-card"     class="nav-link">Oracle</a>
-        <a href="#the-system"    class="nav-link">The System</a>
-        <a href="#join"          class="nav-link">Join the Order</a>
-        <a href="#about"         class="nav-link">About</a>
-        <a href="#contact"       class="nav-link btn btn--secondary" style="margin-left:0.5rem;">Book a Reading</a>
-      </nav>
-    </div>
-  </header>
+  <div id="site-header-mount"></div>
 
   <main>
 
@@ -344,21 +328,10 @@
 
   </main>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="site-footer__logo">Messages from the Magi</div>
-    <div>A Living Oracle</div>
-    <div class="site-footer__copy">
-      © <span id="footer-year"></span> Messages from the Magi. All rights reserved.
-      This oracle system is the proprietary intellectual property of Sharon.
-    </div>
-  </footer>
+  <div id="site-footer-mount"></div>
 
   <!-- ── SCRIPTS ─────────────────────────────────────────────────────────── -->
   <script type="module" src="/src/app.js"></script>
-  <script>
-    document.getElementById("footer-year").textContent = new Date().getFullYear();
-  </script>
 
 </body>
 </html>

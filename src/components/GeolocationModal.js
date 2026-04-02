@@ -1,18 +1,12 @@
 /**
- * GeolocationModal
- * Calculates the card that governs the relationship between
- * a person and a specific location.
- *
- * Algorithm:
- *   1. Calculate birth card value from birthdate (month + day + digitSum(year))
- *   2. Calculate location value: sum of letter positions (A=1…Z=26), spaces ignored
- *   3. Add both values → reduce to 1–52 → query card
+ * GeolocationModal — Reveal the card governing a person + location.
  */
 
-import { getLocationCard } from "../api/cardQueries.js";
-import { renderCardResult } from "./CardResult.js";
+import { mountModal, openModal } from './ui/Modal.js';
+import { getLocationCard } from '../api/cardQueries.js';
+import { renderCardResult } from './CardResult.js';
 
-const MODAL_ID = "modal-geolocation";
+const MODAL_ID = 'modal-geolocation';
 
 function buildHTML() {
   return `
@@ -23,7 +17,6 @@ function buildHTML() {
       <button class="modal__close" data-close aria-label="Close">✕</button>
     </div>
 
-    <!-- STEP 1: Form -->
     <div id="${MODAL_ID}-step-form">
       <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
         Every place carries an energetic signature. This reading reveals how a specific location
@@ -57,7 +50,6 @@ function buildHTML() {
       </button>
     </div>
 
-    <!-- STEP 2: Result -->
     <div id="${MODAL_ID}-step-result" style="display:none;">
       <div id="${MODAL_ID}-result-container"></div>
 
@@ -72,43 +64,30 @@ function buildHTML() {
 }
 
 function ensureModal() {
-  if (document.getElementById(MODAL_ID)) return;
-  document.body.insertAdjacentHTML("beforeend", buildHTML());
+  const overlay = mountModal(MODAL_ID, buildHTML());
+  if (!overlay) return;
 
-  const overlay = document.getElementById(MODAL_ID);
-  const errEl   = document.getElementById(`${MODAL_ID}-error`);
+  const errEl = document.getElementById(`${MODAL_ID}-error`);
 
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay || e.target.dataset.close !== undefined) close();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
-  });
-
-  document.getElementById(`${MODAL_ID}-submit`).addEventListener("click", handleSubmit);
-  document.getElementById(`${MODAL_ID}-again`).addEventListener("click", reset);
-
-  function handleSubmit() {
-    const name     = document.getElementById(`${MODAL_ID}-name`).value.trim() || "Seeker";
+  document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
+    const name     = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
     const date     = document.getElementById(`${MODAL_ID}-date`).value;
     const location = document.getElementById(`${MODAL_ID}-location`).value.trim();
 
-    errEl.style.display = "none";
+    errEl.style.display = 'none';
 
-    if (!date)     { showError("Please enter your birthdate."); return; }
-    if (!location) { showError("Please enter a location name."); return; }
+    if (!date)     { showError('Please enter your birthdate.'); return; }
+    if (!location) { showError('Please enter a location name.'); return; }
 
     const result = getLocationCard(date, location);
     if (!result || !result.card) {
-      showError("Could not calculate the location card. Please check your inputs.");
+      showError('Could not calculate the location card. Please check your inputs.');
       return;
     }
 
-    const container = document.getElementById(`${MODAL_ID}-result-container`);
-    container.innerHTML = renderCardResult(result.card, {
+    document.getElementById(`${MODAL_ID}-result-container`).innerHTML = renderCardResult(result.card, {
       eyebrow:         `${name} · ${location}`,
-      subheading:      "Your Location Card",
+      subheading:      'Your Location Card',
       showAffirmation: true,
       showAction:      true,
       showDescription: true,
@@ -121,27 +100,23 @@ function ensureModal() {
         </div>`,
     });
 
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "none";
-    document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
-  }
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
+  });
 
-  function reset() {
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "block";
-    document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
-  }
+  document.getElementById(`${MODAL_ID}-again`).addEventListener('click', () => {
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'block';
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = 'none';
+  });
 
   function showError(msg) {
     errEl.textContent   = msg;
-    errEl.style.display = "block";
+    errEl.style.display = 'block';
   }
-}
-
-function close() {
-  document.getElementById(MODAL_ID)?.classList.remove("is-open");
 }
 
 export function openGeolocationModal() {
   ensureModal();
-  document.getElementById(MODAL_ID).classList.add("is-open");
+  openModal(MODAL_ID);
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

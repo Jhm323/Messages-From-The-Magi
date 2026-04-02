@@ -1,0 +1,44 @@
+/* ─── FORMS ───────────────────────────────────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-dawn);
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  background: var(--color-dusk);
+  border: 1px solid var(--color-mist);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-light);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-gold-muted);
+  box-shadow: 0 0 0 3px var(--color-gold-glow);
+}
+
+.form-input::placeholder {
+  color: var(--color-mist);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-mist);
+  margin-top: 0.35rem;
+}

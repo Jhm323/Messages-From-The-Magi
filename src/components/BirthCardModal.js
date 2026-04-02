@@ -2,10 +2,11 @@
  * BirthCardModal — Calculate and display a user's Birth Card.
  */
 
-import { getBirthCard } from "../api/cardQueries.js";
-import { renderCardResult } from "./CardResult.js";
+import { mountModal, openModal, closeModal } from './ui/Modal.js';
+import { getBirthCard } from '../api/cardQueries.js';
+import { renderCardResult } from './CardResult.js';
 
-const MODAL_ID = "modal-birthcard";
+const MODAL_ID = 'modal-birthcard';
 
 function buildHTML() {
   return `
@@ -53,62 +54,49 @@ function buildHTML() {
 }
 
 function ensureModal() {
-  if (document.getElementById(MODAL_ID)) return;
-  document.body.insertAdjacentHTML("beforeend", buildHTML());
+  const overlay = mountModal(MODAL_ID, buildHTML());
+  if (!overlay) return;
 
-  const overlay = document.getElementById(MODAL_ID);
-  const errEl   = document.getElementById(`${MODAL_ID}-error`);
+  const errEl = document.getElementById(`${MODAL_ID}-error`);
 
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay || e.target.dataset.close !== undefined) close();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
-  });
-
-  document.getElementById(`${MODAL_ID}-submit`).addEventListener("click", () => {
-    const name = document.getElementById(`${MODAL_ID}-name`).value.trim() || "Seeker";
+  document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
+    const name = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
     const date = document.getElementById(`${MODAL_ID}-date`).value;
 
-    errEl.style.display = "none";
-    if (!date) { showError("Please enter your birthdate."); return; }
+    errEl.style.display = 'none';
+    if (!date) { showError('Please enter your birthdate.'); return; }
 
     const result = getBirthCard(date);
     if (!result || !result.card) {
-      showError("Could not calculate your birth card. Please check the date.");
+      showError('Could not calculate your birth card. Please check the date.');
       return;
     }
 
-    const container = document.getElementById(`${MODAL_ID}-result-container`);
-    container.innerHTML = renderCardResult(result.card, {
+    document.getElementById(`${MODAL_ID}-result-container`).innerHTML = renderCardResult(result.card, {
       eyebrow:         name,
-      subheading:      "Your Birth Card",
+      subheading:      'Your Birth Card',
       showAffirmation: true,
       showAction:      true,
       showDescription: true,
     });
 
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "none";
-    document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
   });
 
-  document.getElementById(`${MODAL_ID}-again`).addEventListener("click", () => {
-    document.getElementById(`${MODAL_ID}-step-form`).style.display   = "block";
-    document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
+  document.getElementById(`${MODAL_ID}-again`).addEventListener('click', () => {
+    document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'block';
+    document.getElementById(`${MODAL_ID}-step-result`).style.display = 'none';
   });
 
   function showError(msg) {
-    errEl.textContent    = msg;
-    errEl.style.display  = "block";
+    errEl.textContent   = msg;
+    errEl.style.display = 'block';
   }
-}
-
-function close() {
-  document.getElementById(MODAL_ID)?.classList.remove("is-open");
 }
 
 export function openBirthCardModal() {
   ensureModal();
-  document.getElementById(MODAL_ID).classList.add("is-open");
+  openModal(MODAL_ID);
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

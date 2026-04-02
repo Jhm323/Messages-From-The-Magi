@@ -4,8 +4,9 @@
  * with the recipient's birth card image, affirmation, and message.
  */
 
-import "./GreetingCardModal.css";
-import { getBirthCard } from "../../api/cardQueries.js";
+import './GreetingCardModal.css';
+import { mountModal, openModal } from './ui/Modal.js';
+import { getBirthCard } from '../api/cardQueries.js';
 
 const MODAL_ID = "modal-greeting";
 
@@ -150,19 +151,10 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
 }
 
 function ensureModal() {
-  if (document.getElementById(MODAL_ID)) return;
-  document.body.insertAdjacentHTML("beforeend", buildHTML());
+  const overlay = mountModal(MODAL_ID, buildHTML());
+  if (!overlay) return;
 
-  const overlay = document.getElementById(MODAL_ID);
   const errEl = document.getElementById(`${MODAL_ID}-error`);
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay || e.target.dataset.close !== undefined) close();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
-  });
 
   document
     .getElementById(`${MODAL_ID}-submit`)
@@ -241,13 +233,8 @@ function ensureModal() {
   }
 }
 
-function close() {
-  const el = document.getElementById(MODAL_ID);
-  if (el) el.classList.remove("is-open");
-}
-
 export function openGreetingCardModal() {
   ensureModal();
-  document.getElementById(MODAL_ID).classList.add("is-open");
+  openModal(MODAL_ID);
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

@@ -8,19 +8,7 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a href="/index.html" class="site-logo" style="text-decoration:none;">
-        Messages from the Magi
-      </a>
-      <nav class="site-nav">
-        <a href="/index.html"       class="nav-link">← Home</a>
-        <a href="/cards.html"       class="nav-link nav-link--active">The Cards</a>
-        <a href="/index.html#join"  class="nav-link">Join the Order</a>
-        <a href="/index.html#about" class="nav-link btn btn--secondary" style="margin-left:0.5rem;">Book a Reading</a>
-      </nav>
-    </div>
-  </header>
+  <div id="site-header-mount"></div>
 
   <main>
     <section style="padding:4rem 0 2rem;">
@@ -39,17 +27,16 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer__logo">Messages from the Magi</div>
-    <div class="site-footer__copy">
-      © <span id="footer-year"></span> Messages from the Magi. All rights reserved.
-    </div>
-  </footer>
+  <div id="site-footer-mount"></div>
 
   <script type="module">
+    import { initHeader }      from '/src/components/Header.js';
+    import { initFooter }      from '/src/components/Footer.js';
     import { initCardBrowser } from '/src/components/CardBrowser.js';
+
+    initHeader('#site-header-mount', { page: 'cards' });
+    initFooter('#site-footer-mount');
     initCardBrowser('#card-browser-mount');
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
   </script>
 
 </body>
