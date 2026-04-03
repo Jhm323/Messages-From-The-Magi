@@ -6,7 +6,6 @@
   <meta name="description" content="Messages from the Magi. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards.">
   <title>Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <!-- Print styles for greeting cards -->
   <style>
     @media print {
       body > *:not(#modal-greeting) { display: none !important; }
@@ -31,19 +30,14 @@
       <p class="hero__body">
         A powerful time-keeping system that reveals who you are,
         where you are in time, and where you are going.
-        Discover your birth card. Explore your connections.
-        Receive guidance from the ancient order of the cards.
       </p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn--primary" data-feature="birth-card">
-          ✦ Discover Your Birth Card
-        </button>
-        <a href="#the-system" class="btn btn--secondary">Learn the System</a>
-      </div>
+      <button class="btn btn--primary" data-feature="birth-card">
+        ✦ Discover Your Birth Card
+      </button>
     </section>
 
-    <!-- ── CARD OF THE DAY ────────────────────────────────────────────────── -->
-    <section class="section" style="padding:2rem 0;" aria-label="Card of the Day">
+    <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
+    <section style="padding:2rem 0 4rem;" aria-label="Card of the Day">
       <div class="container container--narrow">
         <div class="divider--glyph">✦</div>
         <h2 class="text-center text-heading" style="margin-bottom:1.5rem;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold-muted);">
@@ -53,284 +47,10 @@
       </div>
     </section>
 
-    <hr class="divider">
-
-    <!-- ── CORE FEATURES ─────────────────────────────────────────────────── -->
-    <section class="section" id="features" aria-label="Core features">
-      <div class="container">
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">The Oracle Awaits</div>
-          <h2>Begin Your Exploration</h2>
-          <p style="color:var(--color-dawn);max-width:520px;margin:1rem auto 0;">
-            Each reading opens a doorway into the ancient science of the cards.
-            Choose where your journey begins.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-
-          <!-- Compatibility -->
-          <button class="feature-btn" data-feature="compatibility">
-            <div class="feature-btn__icon">♥♠</div>
-            <div class="feature-btn__title">Compatibility Reading</div>
-            <div class="feature-btn__desc">
-              Discover the card that governs your connection with another person.
-              Enter two birthdates and reveal the energy between you.
-            </div>
-          </button>
-
-          <!-- Greeting Card -->
-          <button class="feature-btn" data-feature="greeting-card">
-            <div class="feature-btn__icon">✉︎</div>
-            <div class="feature-btn__title">Greeting Card</div>
-            <div class="feature-btn__desc">
-              Generate a personalized, mystical greeting card drawn from
-              the recipient's birth card energy. Printable and shareable.
-            </div>
-          </button>
-
-          <!-- Birth Card -->
-          <button class="feature-btn" data-feature="birth-card">
-            <div class="feature-btn__icon">★</div>
-            <div class="feature-btn__title">Birth Card Reading</div>
-            <div class="feature-btn__desc">
-              Your birth card is the energetic signature you came in with.
-              The card that reflects your soul's nature and life path.
-            </div>
-          </button>
-
-          <!-- Geolocation -->
-          <button class="feature-btn" data-feature="geolocation">
-            <div class="feature-btn__icon">🗺</div>
-            <div class="feature-btn__title">Location Reading</div>
-            <div class="feature-btn__desc">
-              Every place carries an energetic signature. Discover how a city,
-              country, or sacred site interacts with your personal cards.
-            </div>
-          </button>
-
-          <!-- Pull a Card (links to oracle section) -->
-          <a href="#pull-card" class="feature-btn" style="text-decoration:none;color:inherit;">
-            <div class="feature-btn__icon">🃏</div>
-            <div class="feature-btn__title">Pull a Card</div>
-            <div class="feature-btn__desc">
-              Still your mind. Take a breath. Ask your question — then let
-              the cards speak. An intuitive oracle for any moment.
-            </div>
-          </a>
-
-          <!-- Browse The Cards -->
-          <a href="/cards.html" class="feature-btn" style="text-decoration:none;color:inherit;">
-            <div class="feature-btn__icon">♦</div>
-            <div class="feature-btn__title">Browse the Deck</div>
-            <div class="feature-btn__desc">
-              Explore all 53 cards — their energies, affirmations, and guidance.
-              Search and filter the full deck.
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── PULL A CARD ORACLE ─────────────────────────────────────────────── -->
-    <section class="section" id="pull-card" aria-label="Pull a card oracle">
-      <div class="container container--narrow">
-        <div id="pull-card-mount" data-pull-root></div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── THE SYSTEM ────────────────────────────────────────────────────── -->
-    <section class="section" id="the-system" aria-label="About the system">
-      <div class="container container--narrow">
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">The Mystic Science</div>
-          <h2>The System</h2>
-        </div>
-
-        <div style="color:var(--color-light);line-height:1.9;font-size:1.05rem;">
-          <p>
-            This is a time-keeping system rooted in an ancient numerological science —
-            a living map of identity, timing, and consciousness that uses an ordinary deck of 52 playing
-            cards as its foundation.
-          </p>
-
-          <div class="divider--glyph">✦</div>
-
-          <h3 style="margin-bottom:1rem;">The Four Suits</h3>
-
-          <div class="grid grid--2" style="margin-bottom:2rem;">
-            <div style="background:var(--color-dusk);border:1px solid rgba(214,90,90,0.3);border-radius:var(--radius-md);padding:1.25rem;">
-              <div style="font-size:1.4rem;color:var(--suit-hearts);">♥ Hearts</div>
-              <div style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin:0.25rem 0;">Water · Emotion</div>
-              <p style="font-size:0.9rem;color:var(--color-light);margin:0;">The realm of feeling, love, relationships, and intuition.</p>
-            </div>
-            <div style="background:var(--color-dusk);border:1px solid rgba(82,183,136,0.3);border-radius:var(--radius-md);padding:1.25rem;">
-              <div style="font-size:1.4rem;color:var(--suit-clubs);">♣ Clubs</div>
-              <div style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin:0.25rem 0;">Fire · Will</div>
-              <p style="font-size:0.9rem;color:var(--color-light);margin:0;">The realm of creativity, action, inspiration, and enterprise.</p>
-            </div>
-            <div style="background:var(--color-dusk);border:1px solid rgba(91,155,213,0.3);border-radius:var(--radius-md);padding:1.25rem;">
-              <div style="font-size:1.4rem;color:var(--suit-diamonds);">♦ Diamonds</div>
-              <div style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin:0.25rem 0;">Earth · Value</div>
-              <p style="font-size:0.9rem;color:var(--color-light);margin:0;">The realm of resources, manifestation, and material abundance.</p>
-            </div>
-            <div style="background:var(--color-dusk);border:1px solid rgba(164,127,208,0.3);border-radius:var(--radius-md);padding:1.25rem;">
-              <div style="font-size:1.4rem;color:var(--suit-spades);">♠ Spades</div>
-              <div style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin:0.25rem 0;">Air · Mind</div>
-              <p style="font-size:0.9rem;color:var(--color-light);margin:0;">The realm of truth, transformation, wisdom, and the unseen.</p>
-            </div>
-          </div>
-
-          <p>
-            Every person born into this world is associated with a specific card — their <strong>Birth Card</strong> —
-            determined by the numerological sum of their birthdate. From this foundational card, an entire map
-            of identity, relationship, and timing unfolds.
-          </p>
-          <p>
-            The system moves through time as surely as the cards move through a deck. Your place in it
-            is not fixed — it breathes, shifts, and reveals itself differently in each season of life.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── SUBSCRIPTION TIERS ─────────────────────────────────────────────── -->
-    <section class="section" id="join" aria-label="Join the Order of the Magi">
-      <div class="container">
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">Choose Your Level</div>
-          <h2>Join the Order of the Magi</h2>
-          <p style="color:var(--color-dawn);max-width:520px;margin:1rem auto 0;">
-            Rather than selecting a plan, you step into a level of awareness.
-            Each tier is a doorway — a deeper layer of the system.
-          </p>
-        </div>
-
-        <div class="tier-grid">
-
-          <!-- Initiate (Free) -->
-          <div class="tier-card">
-            <div class="tier-badge">🌌</div>
-            <div class="tier-name">Initiate</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Free</div>
-            <div class="tier-tagline">Enter the Matrix of Time</div>
-            <ul class="tier-features">
-              <li>Birth Card calculation + basic interpretation</li>
-              <li>Pull-a-Card oracle</li>
-              <li>Card affirmations and action prompts</li>
-              <li>Introduction to the system</li>
-              <li>Access to shop and booking</li>
-            </ul>
-            <button class="btn btn--primary" data-feature="birth-card" style="width:100%;">Begin ✦</button>
-          </div>
-
-          <!-- Seeker -->
-          <div class="tier-card tier-card--featured">
-            <div style="font-family:var(--font-heading);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold);margin-bottom:0.25rem;">Most Popular</div>
-            <div class="tier-badge">💎</div>
-            <div class="tier-name">Seeker</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Tier 2</div>
-            <div class="tier-tagline">Explore Your Patterns</div>
-            <ul class="tier-features">
-              <li>Everything in Initiate</li>
-              <li>User profile — save readings</li>
-              <li>Daily Card notifications</li>
-              <li>Expanded Birth Card reading</li>
-              <li>Relationship compatibility</li>
-              <li>Composite Card readings</li>
-              <li>Monthly recorded readings by Sharon</li>
-            </ul>
-            <button class="btn btn--primary" disabled style="width:100%;opacity:0.5;cursor:not-allowed;">Coming Soon</button>
-          </div>
-
-          <!-- Magi -->
-          <div class="tier-card">
-            <div class="tier-badge">🔮</div>
-            <div class="tier-name">Magi</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Tier 3</div>
-            <div class="tier-tagline">Understand Your Path Through Time</div>
-            <ul class="tier-features">
-              <li>Everything in Seeker</li>
-              <li>13 Card Life Path — full access</li>
-              <li>Spirit Card readings</li>
-              <li>Yearly Card reading</li>
-              <li>Location Card readings</li>
-              <li>Location compatibility</li>
-              <li>Planetary & Soul Card readings <span style="color:var(--color-mist)">(coming)</span></li>
-            </ul>
-            <button class="btn btn--secondary" disabled style="width:100%;opacity:0.5;cursor:not-allowed;">Coming Soon</button>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── SHARON / BOOK A READING ────────────────────────────────────────── -->
-    <section class="section" id="about" aria-label="About Sharon and the system">
-      <div class="container container--narrow text-center">
-        <div class="hero__eyebrow">The Teacher</div>
-        <h2 style="margin-bottom:1rem;">Book a Reading with Sharon</h2>
-        <p style="color:var(--color-dawn);margin-bottom:2rem;line-height:1.9;">
-          Sharon has spent decades studying, teaching, and living within this ancient system.
-          Her readings go beyond the digital experience — offering a depth of intuitive perception
-          and direct transmission that can only happen in a live session.
-        </p>
-
-        <div class="grid grid--2" style="max-width:560px;margin:0 auto 2.5rem;text-align:left;">
-          <div style="background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.25rem;">
-            <div style="color:var(--color-gold);font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Birth Card / Life Overview</div>
-            <p style="font-size:0.88rem;color:var(--color-dawn);margin:0;">Who you are, what you carry, where you are going.</p>
-          </div>
-          <div style="background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.25rem;">
-            <div style="color:var(--color-gold);font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Relationship / Synastry</div>
-            <p style="font-size:0.88rem;color:var(--color-dawn);margin:0;">The cards at play between two people.</p>
-          </div>
-          <div style="background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.25rem;">
-            <div style="color:var(--color-gold);font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Year Ahead / Timing</div>
-            <p style="font-size:0.88rem;color:var(--color-dawn);margin:0;">What the cards reveal for your current year.</p>
-          </div>
-          <div style="background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.25rem;">
-            <div style="color:var(--color-gold);font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">13 Card Life Path</div>
-            <p style="font-size:0.88rem;color:var(--color-dawn);margin:0;">A deep dive into your full card signature.</p>
-          </div>
-        </div>
-
-        <a href="#contact" class="btn btn--primary">Book a Reading with Sharon</a>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── CONTACT ────────────────────────────────────────────────────────── -->
-    <section class="section" id="contact" aria-label="Contact">
-      <div class="container container--narrow text-center">
-        <div class="hero__eyebrow">Get in Touch</div>
-        <h2 style="margin-bottom:1rem;">Contact</h2>
-        <p style="color:var(--color-dawn);margin-bottom:2rem;">
-          To book a reading with Sharon or learn more about this system — reach out below.
-        </p>
-        <!-- Placeholder for contact form / booking link -->
-        <div style="background:var(--color-dusk);border:1px dashed var(--color-mist);border-radius:var(--radius-lg);padding:3rem;color:var(--color-mist);">
-          <p style="font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;">Contact Form · Coming Soon</p>
-          <p style="font-size:0.85rem;margin-top:0.5rem;">Booking integration to be added in Phase 2.</p>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <div id="site-footer-mount"></div>
 
-  <!-- ── SCRIPTS ─────────────────────────────────────────────────────────── -->
   <script type="module" src="/src/app.js"></script>
 
 </body>

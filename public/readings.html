@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readings · Messages from the Magi</title>
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <style>
+    @media print {
+      body > *:not(#modal-greeting) { display: none !important; }
+      #modal-greeting { position: static !important; background: white !important; }
+      #modal-greeting .modal-overlay { position: static !important; }
+      #modal-greeting-printable { page-break-inside: avoid; }
+      .modal__close, .btn, .modal__header { display: none !important; }
+      .modal { box-shadow: none !important; border: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header-mount"></div>
+
+  <main>
+    <section class="section" aria-label="Readings">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:3rem;">
+          <div class="hero__eyebrow">The Oracle Awaits</div>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.75rem;">Readings</h1>
+          <p style="color:var(--color-dawn);max-width:520px;margin:0 auto;">
+            Each reading opens a doorway into the ancient science of the cards.
+            Choose where your journey begins.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <button class="feature-btn" data-feature="birth-card">
+            <div class="feature-btn__icon">★</div>
+            <div class="feature-btn__title">Birth Card Reading</div>
+            <div class="feature-btn__desc">
+              Your birth card is the energetic signature you came in with.
+              The card that reflects your soul's nature and life path.
+            </div>
+          </button>
+
+          <button class="feature-btn" data-feature="compatibility">
+            <div class="feature-btn__icon">♥♠</div>
+            <div class="feature-btn__title">Compatibility Reading</div>
+            <div class="feature-btn__desc">
+              Discover the card that governs your connection with another person.
+              Enter two birthdates and reveal the energy between you.
+            </div>
+          </button>
+
+          <button class="feature-btn" data-feature="geolocation">
+            <div class="feature-btn__icon">🗺</div>
+            <div class="feature-btn__title">Location Reading</div>
+            <div class="feature-btn__desc">
+              Every place carries an energetic signature. Discover how a city,
+              country, or sacred site interacts with your personal cards.
+            </div>
+          </button>
+
+          <button class="feature-btn" data-feature="greeting-card">
+            <div class="feature-btn__icon">✉︎</div>
+            <div class="feature-btn__title">Greeting Card</div>
+            <div class="feature-btn__desc">
+              Generate a personalized, mystical greeting card drawn from
+              the recipient's birth card energy. Printable and shareable.
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script type="module">
+    import { initHeader }              from '/src/components/Header/Header.js';
+    import { initFooter }              from '/src/components/Footer/Footer.js';
+    import { openBirthCardModal }      from '/src/components/BirthCardModal.js';
+    import { openCompatibilityModal }  from '/src/components/CompatibilityModal.js';
+    import { openGeolocationModal }    from '/src/components/GeolocationModal.js';
+    import { openGreetingCardModal }   from '/src/components/GreetingCard/GreetingCardModal.js';
+
+    initHeader('#site-header-mount', { activePath: '/readings.html' });
+    initFooter('#site-footer-mount');
+
+    document.querySelectorAll('[data-feature]').forEach(btn => {
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', () => {
+        switch (btn.dataset.feature) {
+          case 'birth-card':    openBirthCardModal();     break;
+          case 'compatibility': openCompatibilityModal(); break;
+          case 'geolocation':   openGeolocationModal();   break;
+          case 'greeting-card': openGreetingCardModal();  break;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

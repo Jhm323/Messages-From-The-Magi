@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle · Messages from the Magi</title>
+  <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+
+  <div id="site-header-mount"></div>
+
+  <main>
+    <section class="section" aria-label="Pull a card oracle">
+      <div class="container container--narrow">
+        <div id="pull-card-mount" data-pull-root></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script type="module">
+    import { initHeader }   from '/src/components/Header/Header.js';
+    import { initFooter }   from '/src/components/Footer/Footer.js';
+    import { initPullCard } from '/src/components/PullCard.js';
+
+    initHeader('#site-header-mount', { activePath: '/oracle.html' });
+    initFooter('#site-footer-mount');
+    initPullCard('#pull-card-mount');
+  </script>
+
+</body>
+</html>

@@ -1,51 +1,72 @@
 /**
- * Header — site-wide sticky navigation.
- * Usage: initHeader('#site-header-mount', { page: 'home' | 'cards' })
+ * Header — site-wide sticky navigation with left-side dropdown menu.
+ * Usage: initHeader('#site-header-mount', { activePath: '/readings.html' })
  */
 
 import './Header.css';
 
-const NAV = {
-  home: [
-    { href: '#features',   label: 'Readings' },
-    { href: '/cards.html', label: 'The Cards' },
-    { href: '#pull-card',  label: 'Oracle' },
-    { href: '#the-system', label: 'The System' },
-    { href: '#join',       label: 'Join the Order' },
-    { href: '#about',      label: 'About' },
-    { href: '#contact',    label: 'Book a Reading', extra: 'btn btn--secondary', style: 'margin-left:0.5rem;' },
-  ],
-  cards: [
-    { href: '/index.html',       label: '← Home' },
-    { href: '/cards.html',       label: 'The Cards', active: true },
-    { href: '/index.html#join',  label: 'Join the Order' },
-    { href: '/index.html#about', label: 'Book a Reading', extra: 'btn btn--secondary', style: 'margin-left:0.5rem;' },
-  ],
-};
+const NAV_ITEMS = [
+  { href: '/',              label: 'Home',            icon: '✦' },
+  { href: '/readings.html', label: 'Readings',        icon: '★' },
+  { href: '/oracle.html',   label: 'Oracle',          icon: '🃏' },
+  { href: '/cards.html',    label: 'Browse the Deck', icon: '♦' },
+  { href: '/system.html',   label: 'The System',      icon: '◈' },
+  { href: '/join.html',     label: 'Join the Order',  icon: '💎' },
+  { href: '/about.html',    label: 'About & Contact', icon: '✉' },
+];
 
-function buildHTML(page) {
-  const links = NAV[page] || NAV.home;
-  const navItems = links.map(({ href, label, extra = '', active = false, style = '' }) => {
-    const cls = ['nav-link', extra, active ? 'nav-link--active' : ''].filter(Boolean).join(' ');
-    return `<a href="${href}" class="${cls}"${style ? ` style="${style}"` : ''}>${label}</a>`;
-  }).join('\n      ');
+function buildHTML(activePath) {
+  const items = NAV_ITEMS.map(({ href, label, icon }) => {
+    const active = activePath === href;
+    return `<a href="${href}" class="nav-dropdown__link${active ? ' nav-dropdown__link--active' : ''}">
+      <span class="nav-dropdown__icon">${icon}</span>
+      <span>${label}</span>
+    </a>`;
+  }).join('\n');
 
   return `
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="site-logo" style="text-decoration:none;">
-      Messages from the Magi
-    </a>
-    <nav class="site-nav" aria-label="Main navigation">
-      ${navItems}
-    </nav>
+    <button class="nav-menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-dropdown">
+      <span class="nav-menu-btn__bar"></span>
+      <span class="nav-menu-btn__bar"></span>
+      <span class="nav-menu-btn__bar"></span>
+    </button>
+
+    <a href="/" class="site-logo" style="text-decoration:none;">Messages from the Magi</a>
+
+    <div id="site-nav-dropdown" class="nav-dropdown" aria-hidden="true">
+      <nav class="nav-dropdown__nav">
+        ${items}
+      </nav>
+    </div>
   </div>
 </header>`;
 }
 
-export function initHeader(selector, { page = 'home' } = {}) {
+export function initHeader(selector, { activePath = '/' } = {}) {
   const mount = document.querySelector(selector);
   if (!mount) return;
-  mount.insertAdjacentHTML('afterend', buildHTML(page));
+  mount.insertAdjacentHTML('afterend', buildHTML(activePath));
   mount.remove();
+
+  const btn      = document.querySelector('.nav-menu-btn');
+  const dropdown = document.getElementById('site-nav-dropdown');
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    dropdown.setAttribute('aria-hidden', String(!isOpen));
+    btn.classList.toggle('is-open', isOpen);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      dropdown.setAttribute('aria-hidden', 'true');
+      btn.classList.remove('is-open');
+    }
+  });
 }
