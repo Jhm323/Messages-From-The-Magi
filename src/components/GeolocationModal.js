@@ -2,9 +2,9 @@
  * GeolocationModal — Reveal the card governing a person + location.
  */
 
-import { mountModal, openModal } from './ui/Modal.js';
+import { mountModal, openModal } from './ui/Modal/Modal.js';
 import { getLocationCard } from '../api/cardQueries.js';
-import { renderCardResult } from './CardResult.js';
+import { renderCardResult } from './CardResult/CardResult.js';
 
 const MODAL_ID = 'modal-geolocation';
 

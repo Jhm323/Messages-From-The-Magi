@@ -2,9 +2,9 @@
  * CompatibilityModal — Reveal the card governing two people's connection.
  */
 
-import { mountModal, openModal } from './ui/Modal.js';
+import { mountModal, openModal } from './ui/Modal/Modal.js';
 import { getCompatibilityCard } from '../api/cardQueries.js';
-import { renderCardResult }      from './CardResult.js';
+import { renderCardResult }      from './CardResult/CardResult.js';
 
 const MODAL_ID = 'modal-compatibility';
 

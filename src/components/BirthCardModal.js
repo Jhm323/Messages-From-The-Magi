@@ -2,9 +2,9 @@
  * BirthCardModal — Calculate and display a user's Birth Card.
  */
 
-import { mountModal, openModal, closeModal } from './ui/Modal.js';
+import { mountModal, openModal } from './ui/Modal/Modal.js';
 import { getBirthCard } from '../api/cardQueries.js';
-import { renderCardResult } from './CardResult.js';
+import { renderCardResult } from './CardResult/CardResult.js';
 
 const MODAL_ID = 'modal-birthcard';
 

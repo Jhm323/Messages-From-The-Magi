@@ -9,7 +9,7 @@
  */
 
 import { getAllCards, getCardsBySuit } from "../api/cardQueries.js";
-import { renderCardResult }             from "./CardResult.js";
+import { renderCardResult }             from "./CardResult/CardResult.js";
 
 const DETAIL_MODAL_ID = "modal-card-detail";
 

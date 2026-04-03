@@ -8,7 +8,7 @@
  */
 
 import { pullRandomCard, getCardBack } from "../api/cardQueries.js";
-import { renderCardResult }             from "./CardResult.js";
+import { renderCardResult }             from "./CardResult/CardResult.js";
 
 export function initPullCard(selector) {
   const mount = document.querySelector(selector);

@@ -4,9 +4,9 @@
  * with the recipient's birth card image, affirmation, and message.
  */
 
-import './GreetingCardModal.css';
-import { mountModal, openModal } from './ui/Modal.js';
-import { getBirthCard } from '../api/cardQueries.js';
+import "./GreetingCardModal.css";
+import { mountModal, openModal } from "../ui/Modal/Modal.js";
+import { getBirthCard } from "../../api/cardQueries.js";
 
 const MODAL_ID = "modal-greeting";
 
