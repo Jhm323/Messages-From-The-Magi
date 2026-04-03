@@ -10,6 +10,8 @@
 
 import { getAllCards, getCardsBySuit } from "../api/cardQueries.js";
 import { renderCardResult }             from "./CardResult/CardResult.js";
+import './ui/Button/Button.js';
+import './ui/Form/Form.js';
 
 const DETAIL_MODAL_ID = "modal-card-detail";
 

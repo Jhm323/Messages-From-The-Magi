@@ -3,6 +3,8 @@
  */
 
 import { mountModal, openModal } from './ui/Modal/Modal.js';
+import './ui/Button/Button.js';
+import './ui/Form/Form.js';
 import { getBirthCard } from '../api/cardQueries.js';
 import { renderCardResult } from './CardResult/CardResult.js';
 

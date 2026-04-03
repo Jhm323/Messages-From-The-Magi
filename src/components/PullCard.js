@@ -9,6 +9,7 @@
 
 import { pullRandomCard, getCardBack } from "../api/cardQueries.js";
 import { renderCardResult }             from "./CardResult/CardResult.js";
+import './ui/Button/Button.js';
 
 export function initPullCard(selector) {
   const mount = document.querySelector(selector);
