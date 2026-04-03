@@ -88,17 +88,26 @@
     initHeader('#site-header-mount', { activePath: '/readings.html' });
     initFooter('#site-footer-mount');
 
+    const openMap = {
+      'birth-card':    openBirthCardModal,
+      'compatibility': openCompatibilityModal,
+      'geolocation':   openGeolocationModal,
+      'greeting-card': openGreetingCardModal,
+    };
+
     document.querySelectorAll('[data-feature]').forEach(btn => {
       btn.style.cursor = 'pointer';
       btn.addEventListener('click', () => {
-        switch (btn.dataset.feature) {
-          case 'birth-card':    openBirthCardModal();     break;
-          case 'compatibility': openCompatibilityModal(); break;
-          case 'geolocation':   openGeolocationModal();   break;
-          case 'greeting-card': openGreetingCardModal();  break;
-        }
+        const fn = openMap[btn.dataset.feature];
+        if (fn) fn();
       });
     });
+
+    // Auto-open modal when arriving via ?open= from the header submenu
+    const openParam = new URLSearchParams(location.search).get('open');
+    if (openParam && openMap[openParam]) {
+      openMap[openParam]();
+    }
   </script>
 
 </body>

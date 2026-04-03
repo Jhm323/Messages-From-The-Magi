@@ -7,7 +7,15 @@ import './Header.css';
 
 const NAV_ITEMS = [
   { href: '/',              label: 'Home',            icon: '✦' },
-  { href: '/readings.html', label: 'Readings',        icon: '★' },
+  {
+    href: '/readings.html', label: 'Readings', icon: '★',
+    subItems: [
+      { href: '/readings.html?open=birth-card',    label: 'Birth Card Reading',    icon: '★' },
+      { href: '/readings.html?open=compatibility', label: 'Compatibility Reading', icon: '♥♠' },
+      { href: '/readings.html?open=geolocation',   label: 'Location Reading',      icon: '🗺' },
+      { href: '/readings.html?open=greeting-card', label: 'Greeting Card',         icon: '✉' },
+    ],
+  },
   { href: '/oracle.html',   label: 'Oracle',          icon: '🃏' },
   { href: '/cards.html',    label: 'Browse the Deck', icon: '♦' },
   { href: '/system.html',   label: 'The System',      icon: '◈' },
@@ -16,8 +24,26 @@ const NAV_ITEMS = [
 ];
 
 function buildHTML(activePath) {
-  const items = NAV_ITEMS.map(({ href, label, icon }) => {
-    const active = activePath === href;
+  const items = NAV_ITEMS.map(({ href, label, icon, subItems }) => {
+    const active = activePath === href || (subItems && subItems.some(s => s.href === activePath));
+
+    if (subItems) {
+      const subs = subItems.map(sub => `
+        <a href="${sub.href}" class="nav-sub__link">
+          <span class="nav-dropdown__icon">${sub.icon}</span>
+          <span>${sub.label}</span>
+        </a>`).join('');
+      return `
+<div class="nav-item--has-sub">
+  <a href="${href}" class="nav-dropdown__link${active ? ' nav-dropdown__link--active' : ''}">
+    <span class="nav-dropdown__icon">${icon}</span>
+    <span>${label}</span>
+    <span class="nav-sub__arrow">›</span>
+  </a>
+  <div class="nav-sub-menu">${subs}</div>
+</div>`;
+    }
+
     return `<a href="${href}" class="nav-dropdown__link${active ? ' nav-dropdown__link--active' : ''}">
       <span class="nav-dropdown__icon">${icon}</span>
       <span>${label}</span>
