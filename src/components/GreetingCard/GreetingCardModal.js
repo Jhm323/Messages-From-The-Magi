@@ -12,8 +12,11 @@ import '../ui/SelectionChip/SelectionChip.js';
 import { getBirthCard } from "../../api/cardQueries.js";
 import { buildBirthdateSelects } from "../../utils/helpers.js";
 import { getUser, isLoggedIn }   from "../../auth/AuthStore.js";
+import { saveReading }           from "../../auth/SavedReadings.js";
 
 const MODAL_ID = "modal-greeting";
+
+let _pending = null;
 
 function buildHTML() {
   return `
@@ -79,7 +82,11 @@ function buildHTML() {
           ← New Card
         </button>
       </div>
-      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.75rem;">
+      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+        ♦ Save Reading
+      </button>
+      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
+      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.25rem;">
         Email integration coming soon (Tier 2)
       </p>
     </div>
@@ -234,12 +241,37 @@ function ensureModal() {
           content.style.animation = "";
         });
 
+      _pending = { card: result.card, eyebrow: name };
+      resetSaveBtn();
+
       document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
-      document.getElementById(`${MODAL_ID}-step-result`).style.display =
-        "block";
+      document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
     });
 
-  document.getElementById(`${MODAL_ID}-again`).addEventListener("click", reset);
+  document.getElementById(`${MODAL_ID}-again`).addEventListener("click", () => {
+    _pending = null;
+    reset();
+  });
+
+  document.getElementById(`${MODAL_ID}-save`).addEventListener("click", () => {
+    const msgEl = document.getElementById(`${MODAL_ID}-save-msg`);
+    if (!isLoggedIn()) {
+      msgEl.textContent = "Sign in to save your readings.";
+      msgEl.style.color = "var(--color-gold-muted)";
+      return;
+    }
+    if (!_pending) return;
+    saveReading({
+      type:           "greeting-card",
+      label:          "Greeting Card",
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
+      cardSuitSymbol: _pending.card.suitSymbol,
+    });
+    markSaved();
+  });
 
   document.getElementById(`${MODAL_ID}-print`).addEventListener("click", () => {
     window.print();
@@ -254,6 +286,18 @@ function ensureModal() {
     document.getElementById(`${MODAL_ID}-step-form`).style.display = "block";
     document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
   }
+}
+
+function resetSaveBtn() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
+  if (btn) { btn.textContent = "♦ Save Reading"; btn.disabled = false; }
+  if (msg) msg.textContent = "";
+}
+
+function markSaved() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  if (btn) { btn.textContent = "✓ Saved"; btn.disabled = true; }
 }
 
 function prefillUserData() {

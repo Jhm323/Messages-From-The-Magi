@@ -9,8 +9,11 @@ import { getCompatibilityCard } from '../api/cardQueries.js';
 import { renderCardResult }      from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
 import { getUser, isLoggedIn }   from '../auth/AuthStore.js';
+import { saveReading }           from '../auth/SavedReadings.js';
 
 const MODAL_ID = 'modal-compatibility';
+
+let _pending = null;
 
 function buildHTML() {
   return `
@@ -60,6 +63,10 @@ function buildHTML() {
       <button class="btn btn--ghost" id="${MODAL_ID}-again" style="width:100%;margin-top:1.5rem;">
         ← Try Another Reading
       </button>
+      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+        ♦ Save Reading
+      </button>
+      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
     </div>
   </div>
 </div>`;
@@ -105,14 +112,50 @@ function ensureModal() {
       </p>`,
     });
 
+    _pending = { card: result.card, eyebrow: `${name1} & ${name2}` };
+    resetSaveBtn();
+
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
   });
 
   document.getElementById(`${MODAL_ID}-again`).addEventListener('click', () => {
+    _pending = null;
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'block';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'none';
   });
+
+  document.getElementById(`${MODAL_ID}-save`).addEventListener('click', () => {
+    const msgEl = document.getElementById(`${MODAL_ID}-save-msg`);
+    if (!isLoggedIn()) {
+      msgEl.textContent = 'Sign in to save your readings.';
+      msgEl.style.color = 'var(--color-gold-muted)';
+      return;
+    }
+    if (!_pending) return;
+    saveReading({
+      type:           'compatibility',
+      label:          'Compatibility Reading',
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
+      cardSuitSymbol: _pending.card.suitSymbol,
+    });
+    markSaved();
+  });
+}
+
+function resetSaveBtn() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
+  if (btn) { btn.textContent = '♦ Save Reading'; btn.disabled = false; }
+  if (msg) msg.textContent = '';
+}
+
+function markSaved() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  if (btn) { btn.textContent = '✓ Saved'; btn.disabled = true; }
 }
 
 function prefillUserData() {

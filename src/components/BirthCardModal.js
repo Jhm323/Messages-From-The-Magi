@@ -9,8 +9,12 @@ import { getBirthCard } from '../api/cardQueries.js';
 import { renderCardResult } from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
 import { getUser, isLoggedIn } from '../auth/AuthStore.js';
+import { saveReading } from '../auth/SavedReadings.js';
 
 const MODAL_ID = 'modal-birthcard';
+
+// Holds the last revealed card so the save button can reference it
+let _pending = null;
 
 function buildHTML() {
   return `
@@ -49,7 +53,11 @@ function buildHTML() {
         <button class="btn btn--ghost" id="${MODAL_ID}-again" style="flex:1;">← New Reading</button>
         <button class="btn btn--secondary" id="${MODAL_ID}-learn" style="flex:1;" disabled>Expand Reading ✦</button>
       </div>
-      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.5rem;">
+      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+        ♦ Save Reading
+      </button>
+      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
+      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.25rem;">
         Expanded readings available in Seeker tier
       </p>
     </div>
@@ -85,19 +93,56 @@ function ensureModal() {
       showDescription: true,
     });
 
+    // Store for save button
+    _pending = { card: result.card, eyebrow: name };
+    resetSaveBtn();
+
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
   });
 
   document.getElementById(`${MODAL_ID}-again`).addEventListener('click', () => {
+    _pending = null;
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'block';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'none';
+  });
+
+  document.getElementById(`${MODAL_ID}-save`).addEventListener('click', () => {
+    const msgEl = document.getElementById(`${MODAL_ID}-save-msg`);
+    if (!isLoggedIn()) {
+      msgEl.textContent = 'Sign in to save your readings.';
+      msgEl.style.color = 'var(--color-gold-muted)';
+      return;
+    }
+    if (!_pending) return;
+    saveReading({
+      type:           'birth-card',
+      label:          'Birth Card Reading',
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
+      cardSuitSymbol: _pending.card.suitSymbol,
+    });
+    markSaved();
   });
 
   function showError(msg) {
     errEl.textContent   = msg;
     errEl.style.display = 'block';
   }
+}
+
+function resetSaveBtn() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
+  if (btn) { btn.textContent = '♦ Save Reading'; btn.disabled = false; }
+  if (msg) { msg.textContent = ''; }
+}
+
+function markSaved() {
+  const btn = document.getElementById(`${MODAL_ID}-save`);
+  if (btn) { btn.textContent = '✓ Saved'; btn.disabled = true; }
 }
 
 function prefillUserData() {

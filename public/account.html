@@ -40,14 +40,7 @@
             text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:1.5rem;">
             Saved Readings
           </h2>
-          <div style="padding:3rem;text-align:center;background:var(--color-dusk);
-            border:1px dashed var(--color-mist);border-radius:var(--radius-lg);">
-            <div style="font-size:2rem;margin-bottom:0.75rem;opacity:0.4;">♦</div>
-            <p style="color:var(--color-mist);font-size:0.9rem;margin:0;">
-              Your saved readings will appear here.<br>
-              <span style="font-size:0.82rem;">Available in Seeker tier — coming soon.</span>
-            </p>
-          </div>
+          <div id="saved-readings-list"></div>
         </div>
 
         <!-- Membership -->
@@ -78,10 +71,11 @@
   <div id="site-footer-mount"></div>
 
   <script type="module">
-    import { requireAuth }            from '/src/auth/requireAuth.js';
-    import { getUser, clearUser }     from '/src/auth/AuthStore.js';
-    import { initHeader }             from '/src/components/Header/Header.js';
-    import { initFooter }             from '/src/components/Footer/Footer.js';
+    import { requireAuth }                    from '/src/auth/requireAuth.js';
+    import { getUser, clearUser }             from '/src/auth/AuthStore.js';
+    import { getSavedReadings, deleteReading } from '/src/auth/SavedReadings.js';
+    import { initHeader }                     from '/src/components/Header/Header.js';
+    import { initFooter }                     from '/src/components/Footer/Footer.js';
 
     // Guard: redirect to home if not logged in (body stays invisible during redirect)
     requireAuth('/');
@@ -116,6 +110,75 @@
       clearUser();
       window.location.href = '/';
     });
+
+    // ── Saved readings ────────────────────────────────────────────────────────
+    const SUIT_COLORS = {
+      Hearts: 'var(--suit-hearts)', Clubs: 'var(--suit-clubs)',
+      Diamonds: 'var(--suit-diamonds)', Spades: 'var(--suit-spades)',
+      Joker: 'var(--suit-joker)',
+    };
+
+    function renderSavedReadings() {
+      const list = document.getElementById('saved-readings-list');
+      const readings = getSavedReadings();
+
+      if (readings.length === 0) {
+        list.innerHTML = `
+          <div style="padding:2.5rem;text-align:center;background:var(--color-dusk);
+            border:1px dashed var(--color-mist);border-radius:var(--radius-lg);">
+            <div style="font-size:2rem;margin-bottom:0.75rem;opacity:0.35;">♦</div>
+            <p style="color:var(--color-mist);font-size:0.9rem;margin:0;">
+              No saved readings yet.<br>
+              <span style="font-size:0.82rem;">Complete a reading and hit <strong>♦ Save Reading</strong>.</span>
+            </p>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = readings.map(r => {
+        const date = new Date(r.savedAt).toLocaleDateString('en-US', {
+          month: 'short', day: 'numeric', year: 'numeric',
+        });
+        const suitColor = SUIT_COLORS[r.cardSuit] ?? 'var(--color-gold)';
+        return `
+          <div data-reading-id="${r.id}"
+            style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;
+              background:var(--color-dusk);border:1px solid var(--color-mist);
+              border-radius:var(--radius-md);margin-bottom:0.75rem;">
+            <div style="font-size:1.4rem;color:${suitColor};flex-shrink:0;width:1.8rem;text-align:center;">
+              ${r.cardSuitSymbol}
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-family:var(--font-heading);font-size:0.88rem;color:var(--color-light);
+                white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${r.cardName}</div>
+              <div style="font-size:0.78rem;color:var(--color-dawn);margin-top:0.15rem;">
+                ${r.label} · ${r.eyebrow}
+              </div>
+            </div>
+            <div style="font-size:0.75rem;color:var(--color-mist);flex-shrink:0;text-align:right;">
+              ${date}
+            </div>
+            <button data-delete="${r.id}"
+              style="background:none;border:none;color:var(--color-mist);cursor:pointer;
+                font-size:1rem;padding:0.25rem 0.4rem;border-radius:var(--radius-sm);
+                transition:color 0.15s,background 0.15s;flex-shrink:0;"
+              aria-label="Delete reading"
+              onmouseover="this.style.color='var(--color-error)';this.style.background='rgba(224,92,92,0.1)'"
+              onmouseout="this.style.color='var(--color-mist)';this.style.background='none'">
+              ✕
+            </button>
+          </div>`;
+      }).join('');
+
+      list.querySelectorAll('[data-delete]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          deleteReading(btn.dataset.delete);
+          renderSavedReadings();
+        });
+      });
+    }
+
+    renderSavedReadings();
 
     document.body.classList.replace('js-loading', 'js-ready');
   </script>
