@@ -12,6 +12,7 @@ import { getAllCards, getCardsBySuit } from "../api/cardQueries.js";
 import { renderCardResult }             from "./CardResult/CardResult.js";
 import './ui/Button/Button.js';
 import './ui/Form/Form.js';
+import './ui/SelectionChip/SelectionChip.js';
 
 const DETAIL_MODAL_ID = "modal-card-detail";
 
@@ -79,19 +80,15 @@ function buildBrowser() {
   const suits = ["All", "Hearts", "Clubs", "Diamonds", "Spades", "Joker"];
   const allCards = getAllCards();
 
+  const suitIcon = { All: '', Hearts: '♥', Clubs: '♣', Diamonds: '♦', Spades: '♠', Joker: '★' };
   const filterBar = `
-<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;">
-  <span style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.12em;
-    text-transform:uppercase;color:var(--color-dawn);margin-right:0.5rem;">Filter:</span>
-  ${suits.map(s => `
-    <button
-      class="btn btn--ghost card-filter-btn"
-      data-suit="${s}"
-      style="padding:0.4rem 0.9rem;font-size:0.75rem;${s === 'All' ? 'border-color:var(--color-gold);color:var(--color-gold);' : ''}">
-      ${s === 'Hearts' ? '♥' : s === 'Clubs' ? '♣' : s === 'Diamonds' ? '♦' : s === 'Spades' ? '♠' : s === 'Joker' ? '★' : ''}
-      ${s}
-    </button>`).join("")}
-
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:2rem;align-items:center;">
+  <div class="chip-group" id="card-filter-chips">
+    ${suits.map(s => `
+      <button class="chip${s === 'All' ? ' is-active' : ''}" data-suit="${s}" data-value="${s}">
+        ${suitIcon[s] ? `<span class="chip__icon">${suitIcon[s]}</span>` : ''}${s}
+      </button>`).join('')}
+  </div>
   <input
     id="card-search"
     class="form-input"
@@ -127,7 +124,7 @@ export function initCardBrowser(selector) {
   const grid       = mount.querySelector("#card-browser-grid");
   const emptyState = mount.querySelector("#card-browser-empty");
   const searchInput = mount.querySelector("#card-search");
-  const filterBtns  = mount.querySelectorAll(".card-filter-btn");
+  const filterBtns  = mount.querySelectorAll(".chip[data-suit]");
 
   let currentSuit   = "All";
   let currentSearch = "";
@@ -144,12 +141,8 @@ export function initCardBrowser(selector) {
   // Suit filter
   filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
-      filterBtns.forEach(b => {
-        b.style.borderColor = "";
-        b.style.color       = "";
-      });
-      btn.style.borderColor = "var(--color-gold)";
-      btn.style.color       = "var(--color-gold)";
+      filterBtns.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
       currentSuit = btn.dataset.suit;
       applyFilters();
     });

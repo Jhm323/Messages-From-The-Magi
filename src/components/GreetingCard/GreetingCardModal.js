@@ -8,6 +8,7 @@ import "./GreetingCardModal.css";
 import { mountModal, openModal } from "../ui/Modal/Modal.js";
 import '../ui/Button/Button.js';
 import '../ui/Form/Form.js';
+import '../ui/SelectionChip/SelectionChip.js';
 import { getBirthCard } from "../../api/cardQueries.js";
 import { buildBirthdateSelects } from "../../utils/helpers.js";
 
@@ -37,8 +38,15 @@ function buildHTML() {
         ${buildBirthdateSelects(`${MODAL_ID}-month`, `${MODAL_ID}-day`)}
       </div>
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-occasion">Occasion</label>
-        <input class="form-input" id="${MODAL_ID}-occasion" type="text" placeholder="e.g. Birthday, New Year, Just Because…">
+        <label class="form-label">Occasion</label>
+        <div class="chip-group" id="${MODAL_ID}-occasion-chips" style="margin-bottom:0.6rem;">
+          <button class="chip" data-value="Birthday">🎂 Birthday</button>
+          <button class="chip" data-value="Anniversary">♥ Anniversary</button>
+          <button class="chip" data-value="New Year">✦ New Year</button>
+          <button class="chip" data-value="Celebration">★ Celebration</button>
+          <button class="chip" data-value="Just Because">Just Because</button>
+        </div>
+        <input class="form-input" id="${MODAL_ID}-occasion" type="text" placeholder="or type your own…">
       </div>
       <div class="form-group">
         <label class="form-label" for="${MODAL_ID}-message">Your Personal Message</label>
@@ -158,6 +166,20 @@ function ensureModal() {
   if (!overlay) return;
 
   const errEl = document.getElementById(`${MODAL_ID}-error`);
+
+  // Occasion chips → populate text input
+  const occasionInput = document.getElementById(`${MODAL_ID}-occasion`);
+  const occasionChips = overlay.querySelectorAll(`#${MODAL_ID}-occasion-chips .chip`);
+  occasionChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      occasionChips.forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      occasionInput.value = chip.dataset.value;
+    });
+  });
+  occasionInput.addEventListener('input', () => {
+    occasionChips.forEach(c => c.classList.remove('is-active'));
+  });
 
   document
     .getElementById(`${MODAL_ID}-submit`)

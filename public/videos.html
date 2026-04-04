@@ -23,13 +23,13 @@
           </p>
         </div>
 
-        <!-- Category filters (placeholder) -->
-        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;">
-          <button class="btn btn--ghost" style="font-size:0.8rem;padding:0.4rem 1rem;">All</button>
-          <button class="btn btn--ghost" style="font-size:0.8rem;padding:0.4rem 1rem;">Foundations</button>
-          <button class="btn btn--ghost" style="font-size:0.8rem;padding:0.4rem 1rem;">Birth Cards</button>
-          <button class="btn btn--ghost" style="font-size:0.8rem;padding:0.4rem 1rem;">Relationships</button>
-          <button class="btn btn--ghost" style="font-size:0.8rem;padding:0.4rem 1rem;">Timing</button>
+        <!-- Category filters -->
+        <div class="chip-group" id="video-filter-chips" style="justify-content:center;margin-bottom:3rem;">
+          <button class="chip is-active" data-value="all">All</button>
+          <button class="chip" data-value="foundations">Foundations</button>
+          <button class="chip" data-value="birth-cards">Birth Cards</button>
+          <button class="chip" data-value="relationships">Relationships</button>
+          <button class="chip" data-value="timing">Timing</button>
         </div>
 
         <!-- Video grid (placeholder cards) -->
@@ -94,11 +94,15 @@
   <div id="site-footer-mount"></div>
 
   <script type="module">
-    import { initHeader } from '/src/components/Header/Header.js';
-    import { initFooter } from '/src/components/Footer/Footer.js';
+    import { initHeader }    from '/src/components/Header/Header.js';
+    import { initFooter }    from '/src/components/Footer/Footer.js';
+    import { initChipGroup } from '/src/components/ui/SelectionChip/SelectionChip.js';
 
     initHeader('#site-header-mount', { activePath: '/videos.html' });
     initFooter('#site-footer-mount');
+
+    initChipGroup(document.getElementById('video-filter-chips'));
+
     document.body.classList.replace('js-loading', 'js-ready');
   </script>
 
