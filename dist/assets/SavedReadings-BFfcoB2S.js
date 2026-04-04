@@ -1,0 +1,1 @@
+var e=`magi_readings`;function t(){try{return JSON.parse(localStorage.getItem(e))??[]}catch{return[]}}function n(n){let r=t(),i={id:Date.now().toString(),savedAt:new Date().toISOString(),...n};return r.unshift(i),localStorage.setItem(e,JSON.stringify(r)),i}function r(n){let r=t().filter(e=>e.id!==n);localStorage.setItem(e,JSON.stringify(r))}export{t as n,n as r,r as t};

@@ -1,0 +1,1 @@
+function e(e,t){if(!e)return;let n=e.querySelectorAll(`.chip`);n.forEach(e=>{e.addEventListener(`click`,()=>{n.forEach(e=>e.classList.remove(`is-active`)),e.classList.add(`is-active`),t?.(e.dataset.value??e.textContent.trim())})})}export{e as t};

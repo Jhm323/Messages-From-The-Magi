@@ -39,7 +39,16 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
-      input: resolve(__dirname, 'public/index.html'),
+      input: {
+        index:    resolve(__dirname, 'public/index.html'),
+        readings: resolve(__dirname, 'public/readings.html'),
+        oracle:   resolve(__dirname, 'public/oracle.html'),
+        explore:  resolve(__dirname, 'public/explore.html'),
+        videos:   resolve(__dirname, 'public/videos.html'),
+        account:  resolve(__dirname, 'public/account.html'),
+        join:     resolve(__dirname, 'public/join.html'),
+        about:    resolve(__dirname, 'public/about.html'),
+      },
     },
   },
 });

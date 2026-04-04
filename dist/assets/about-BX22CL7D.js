@@ -1,0 +1,1 @@
+import{n as e,t}from"./Footer-Duogp7ad.js";e(`#site-header-mount`,{activePath:`/about.html`}),t(`#site-footer-mount`),document.body.classList.replace(`js-loading`,`js-ready`);
