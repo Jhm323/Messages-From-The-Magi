@@ -9,6 +9,7 @@ import { mountModal, openModal } from "../ui/Modal/Modal.js";
 import '../ui/Button/Button.js';
 import '../ui/Form/Form.js';
 import { getBirthCard } from "../../api/cardQueries.js";
+import { buildBirthdateSelects } from "../../utils/helpers.js";
 
 const MODAL_ID = "modal-greeting";
 
@@ -32,8 +33,8 @@ function buildHTML() {
         <input class="form-input" id="${MODAL_ID}-name" type="text" placeholder="e.g. Sarah" required>
       </div>
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-date">Recipient's Birthdate</label>
-        <input class="form-input" id="${MODAL_ID}-date" type="date" required>
+        <label class="form-label">Recipient's Birthdate</label>
+        ${buildBirthdateSelects(`${MODAL_ID}-month`, `${MODAL_ID}-day`)}
       </div>
       <div class="form-group">
         <label class="form-label" for="${MODAL_ID}-occasion">Occasion</label>
@@ -161,15 +162,12 @@ function ensureModal() {
   document
     .getElementById(`${MODAL_ID}-submit`)
     .addEventListener("click", () => {
-      const name = document.getElementById(`${MODAL_ID}-name`).value.trim();
-      const date = document.getElementById(`${MODAL_ID}-date`).value;
-      const occasion = document
-        .getElementById(`${MODAL_ID}-occasion`)
-        .value.trim();
-      const message = document
-        .getElementById(`${MODAL_ID}-message`)
-        .value.trim();
-      const from = document.getElementById(`${MODAL_ID}-from`).value.trim();
+      const name     = document.getElementById(`${MODAL_ID}-name`).value.trim();
+      const month    = document.getElementById(`${MODAL_ID}-month`).value;
+      const day      = document.getElementById(`${MODAL_ID}-day`).value;
+      const occasion = document.getElementById(`${MODAL_ID}-occasion`).value.trim();
+      const message  = document.getElementById(`${MODAL_ID}-message`).value.trim();
+      const from     = document.getElementById(`${MODAL_ID}-from`).value.trim();
 
       errEl.style.display = "none";
 
@@ -177,12 +175,12 @@ function ensureModal() {
         showError("Please enter the recipient's name.");
         return;
       }
-      if (!date) {
-        showError("Please enter the recipient's birthdate.");
+      if (!month || !day) {
+        showError("Please select the recipient's birth month and day.");
         return;
       }
 
-      const result = getBirthCard(date);
+      const result = getBirthCard(`${month}/${day}`);
       if (!result || !result.card) {
         showError("Could not calculate the birth card. Please check the date.");
         return;

@@ -62,22 +62,22 @@ function reduceToCardNumber(n) {
   return { value: current, steps };
 }
 
-/** Parse "MM/DD/YYYY", "YYYY-MM-DD", or "MMDDYYYY" → { month, day, year } */
+/** Parse "MM/DD", "MM/DD/YYYY", or "YYYY-MM-DD" → { month, day } */
 function parseDate(dateString) {
   if (!dateString || typeof dateString !== "string") return null;
   const s = dateString.trim();
 
+  // MM/DD (no year — primary format)
+  let m = s.match(/^(\d{1,2})\/(\d{1,2})$/);
+  if (m) return { month: +m[1], day: +m[2] };
+
   // ISO: YYYY-MM-DD
-  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (m) return { year: +m[1], month: +m[2], day: +m[3] };
+  m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) return { month: +m[2], day: +m[3] };
 
-  // US: MM/DD/YYYY or M/D/YYYY
+  // US with year: MM/DD/YYYY (legacy fallback)
   m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (m) return { year: +m[3], month: +m[1], day: +m[2] };
-
-  // Compact: MMDDYYYY
-  m = s.match(/^(\d{2})(\d{2})(\d{4})$/);
-  if (m) return { year: +m[3], month: +m[1], day: +m[2] };
+  if (m) return { month: +m[1], day: +m[2] };
 
   return null;
 }
@@ -192,7 +192,7 @@ export function getCardBack() {
  * Formula: cardId = 53 − 2×(month−1) − day
  * Exception: December 31 = Joker (id 53).
  *
- * @param {string} dateString  "MM/DD/YYYY" | "YYYY-MM-DD"
+ * @param {string} dateString  "MM/DD" | "YYYY-MM-DD"
  * @returns {{ card, reducedValue } | null}
  */
 export function getBirthCard(dateString) {

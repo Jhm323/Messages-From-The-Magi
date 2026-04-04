@@ -7,6 +7,7 @@ import './ui/Button/Button.js';
 import './ui/Form/Form.js';
 import { getBirthCard } from '../api/cardQueries.js';
 import { renderCardResult } from './CardResult/CardResult.js';
+import { buildBirthdateSelects } from '../utils/helpers.js';
 
 const MODAL_ID = 'modal-birthcard';
 
@@ -30,8 +31,8 @@ function buildHTML() {
         <input class="form-input" id="${MODAL_ID}-name" type="text" placeholder="Your name" autocomplete="given-name">
       </div>
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-date">Your Birthdate</label>
-        <input class="form-input" id="${MODAL_ID}-date" type="date" required>
+        <label class="form-label">Your Birthdate</label>
+        ${buildBirthdateSelects(`${MODAL_ID}-month`, `${MODAL_ID}-day`)}
       </div>
 
       <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
@@ -62,13 +63,14 @@ function ensureModal() {
   const errEl = document.getElementById(`${MODAL_ID}-error`);
 
   document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
-    const name = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
-    const date = document.getElementById(`${MODAL_ID}-date`).value;
+    const name  = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
+    const month = document.getElementById(`${MODAL_ID}-month`).value;
+    const day   = document.getElementById(`${MODAL_ID}-day`).value;
 
     errEl.style.display = 'none';
-    if (!date) { showError('Please enter your birthdate.'); return; }
+    if (!month || !day) { showError('Please select your birth month and day.'); return; }
 
-    const result = getBirthCard(date);
+    const result = getBirthCard(`${month}/${day}`);
     if (!result || !result.card) {
       showError('Could not calculate your birth card. Please check the date.');
       return;

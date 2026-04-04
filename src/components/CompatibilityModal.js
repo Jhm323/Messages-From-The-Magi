@@ -7,6 +7,7 @@ import './ui/Button/Button.js';
 import './ui/Form/Form.js';
 import { getCompatibilityCard } from '../api/cardQueries.js';
 import { renderCardResult }      from './CardResult/CardResult.js';
+import { buildBirthdateSelects } from '../utils/helpers.js';
 
 const MODAL_ID = 'modal-compatibility';
 
@@ -31,9 +32,8 @@ function buildHTML() {
         <input class="form-input" id="${MODAL_ID}-name1" type="text" placeholder="Your name" autocomplete="given-name">
       </div>
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-date1">Your Birthdate</label>
-        <input class="form-input" id="${MODAL_ID}-date1" type="date" required>
-        <span class="form-hint">MM/DD/YYYY</span>
+        <label class="form-label">Your Birthdate</label>
+        ${buildBirthdateSelects(`${MODAL_ID}-month1`, `${MODAL_ID}-day1`)}
       </div>
 
       <div class="divider--glyph">♥</div>
@@ -43,9 +43,8 @@ function buildHTML() {
         <input class="form-input" id="${MODAL_ID}-name2" type="text" placeholder="Their name" autocomplete="off">
       </div>
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-date2">Partner's Birthdate</label>
-        <input class="form-input" id="${MODAL_ID}-date2" type="date" required>
-        <span class="form-hint">MM/DD/YYYY</span>
+        <label class="form-label">Partner's Birthdate</label>
+        ${buildBirthdateSelects(`${MODAL_ID}-month2`, `${MODAL_ID}-day2`)}
       </div>
 
       <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
@@ -72,20 +71,22 @@ function ensureModal() {
   const errEl = document.getElementById(`${MODAL_ID}-error`);
 
   document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
-    const name1 = document.getElementById(`${MODAL_ID}-name1`).value.trim() || 'Person 1';
-    const date1 = document.getElementById(`${MODAL_ID}-date1`).value;
-    const name2 = document.getElementById(`${MODAL_ID}-name2`).value.trim() || 'Person 2';
-    const date2 = document.getElementById(`${MODAL_ID}-date2`).value;
+    const name1   = document.getElementById(`${MODAL_ID}-name1`).value.trim() || 'Person 1';
+    const month1  = document.getElementById(`${MODAL_ID}-month1`).value;
+    const day1    = document.getElementById(`${MODAL_ID}-day1`).value;
+    const name2   = document.getElementById(`${MODAL_ID}-name2`).value.trim() || 'Person 2';
+    const month2  = document.getElementById(`${MODAL_ID}-month2`).value;
+    const day2    = document.getElementById(`${MODAL_ID}-day2`).value;
 
     errEl.style.display = 'none';
 
-    if (!date1 || !date2) {
-      errEl.textContent   = 'Please enter both birthdates to continue.';
+    if (!month1 || !day1 || !month2 || !day2) {
+      errEl.textContent   = 'Please select both birthdates to continue.';
       errEl.style.display = 'block';
       return;
     }
 
-    const result = getCompatibilityCard(date1, date2);
+    const result = getCompatibilityCard(`${month1}/${day1}`, `${month2}/${day2}`);
     if (!result || !result.card) {
       errEl.textContent   = 'Something went wrong. Please check the dates and try again.';
       errEl.style.display = 'block';

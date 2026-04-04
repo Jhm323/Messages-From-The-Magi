@@ -17,15 +17,19 @@ export function formatDate(date, opts = { month: "long", day: "numeric", year: "
 }
 
 /**
- * Convert a browser <input type="date"> value ("YYYY-MM-DD")
- * to a user-facing display string ("January 15, 1990").
+ * Convert a "MM/DD" or "YYYY-MM-DD" value to a display string ("January 15").
  */
-export function displayDate(isoString) {
-  if (!isoString) return "";
-  // Parse without timezone shift
-  const [y, m, d] = isoString.split("-").map(Number);
-  const date = new Date(y, m - 1, d);
-  return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+export function displayDate(dateString) {
+  if (!dateString) return "";
+  let month, day;
+  if (dateString.includes("-")) {
+    // ISO: YYYY-MM-DD
+    const [, m, d] = dateString.split("-").map(Number);
+    month = m; day = d;
+  } else {
+    [month, day] = dateString.split("/").map(Number);
+  }
+  return new Date(2000, month - 1, day).toLocaleDateString("en-US", { month: "long", day: "numeric" });
 }
 
 // ─── Numerology Utilities ─────────────────────────────────────────────────────
@@ -44,12 +48,32 @@ export function reduceToSingleDigit(n) {
 
 /**
  * Return a human-readable breakdown of a birth date calculation.
- * e.g. "3 (March) + 15 (day) + 19 (1990 → 1+9+9+0) = 37"
+ * e.g. "3 (March) + 15 (day) = 18"
  */
-export function formatBirthCalculation(month, day, year) {
-  const yearDigits  = String(year).split("").join("+");
-  const yearSum     = String(year).split("").reduce((a, d) => a + Number(d), 0);
-  return `${month} + ${day} + ${yearDigits} (${yearSum}) = ${month + day + yearSum}`;
+export function formatBirthCalculation(month, day) {
+  return `${month} + ${day} = ${month + day}`;
+}
+
+/**
+ * Build HTML for a paired month + day select, replacing a year-inclusive date input.
+ * @param {string} monthId  id attribute for the month <select>
+ * @param {string} dayId    id attribute for the day <select>
+ */
+export function buildBirthdateSelects(monthId, dayId) {
+  const monthNames = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+  const monthOpts = monthNames.map((name, i) =>
+    `<option value="${i + 1}">${name}</option>`).join('');
+  const dayOpts = Array.from({ length: 31 }, (_, i) =>
+    `<option value="${i + 1}">${i + 1}</option>`).join('');
+  return `<div style="display:flex;gap:0.75rem;">
+    <select class="form-input" id="${monthId}" required>
+      <option value="">Month</option>${monthOpts}
+    </select>
+    <select class="form-input" id="${dayId}" required>
+      <option value="">Day</option>${dayOpts}
+    </select>
+  </div>`;
 }
 
 // ─── String Utilities ─────────────────────────────────────────────────────────

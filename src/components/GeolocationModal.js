@@ -7,6 +7,7 @@ import './ui/Button/Button.js';
 import './ui/Form/Form.js';
 import { getLocationCard } from '../api/cardQueries.js';
 import { renderCardResult } from './CardResult/CardResult.js';
+import { buildBirthdateSelects } from '../utils/helpers.js';
 
 const MODAL_ID = 'modal-geolocation';
 
@@ -32,8 +33,8 @@ function buildHTML() {
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="${MODAL_ID}-date">Your Birthdate</label>
-        <input class="form-input" id="${MODAL_ID}-date" type="date" required>
+        <label class="form-label">Your Birthdate</label>
+        ${buildBirthdateSelects(`${MODAL_ID}-month`, `${MODAL_ID}-day`)}
       </div>
 
       <div class="form-group">
@@ -73,15 +74,16 @@ function ensureModal() {
 
   document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
     const name     = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
-    const date     = document.getElementById(`${MODAL_ID}-date`).value;
+    const month    = document.getElementById(`${MODAL_ID}-month`).value;
+    const day      = document.getElementById(`${MODAL_ID}-day`).value;
     const location = document.getElementById(`${MODAL_ID}-location`).value.trim();
 
     errEl.style.display = 'none';
 
-    if (!date)     { showError('Please enter your birthdate.'); return; }
-    if (!location) { showError('Please enter a location name.'); return; }
+    if (!month || !day) { showError('Please select your birth month and day.'); return; }
+    if (!location)      { showError('Please enter a location name.'); return; }
 
-    const result = getLocationCard(date, location);
+    const result = getLocationCard(`${month}/${day}`, location);
     if (!result || !result.card) {
       showError('Could not calculate the location card. Please check your inputs.');
       return;
