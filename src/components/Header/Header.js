@@ -82,9 +82,12 @@ function renderAuthBtn() {
   if (isLoggedIn()) {
     const user    = getUser();
     const initial = user.name?.[0]?.toUpperCase() ?? '✦';
+    const avatarHTML = user.avatar
+      ? `<img src="${user.avatar}" alt="${user.name}" class="header-auth__avatar header-auth__avatar--img">`
+      : `<span class="header-auth__avatar">${initial}</span>`;
     el.innerHTML  = `
       <a href="/account.html" class="header-auth__btn">
-        <span class="header-auth__avatar">${initial}</span>
+        ${avatarHTML}
         <span class="header-auth__name">${user.name}</span>
       </a>`;
   } else {

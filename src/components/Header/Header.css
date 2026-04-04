@@ -264,6 +264,17 @@
   color: var(--color-gold);
   font-family: var(--font-heading);
   letter-spacing: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.header-auth__avatar--img {
+  object-fit: cover;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold-muted);
+  display: block;
 }
 
 .header-auth__name {

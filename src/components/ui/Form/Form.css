@@ -42,3 +42,16 @@
   color: var(--color-mist);
   margin-top: 0.35rem;
 }
+
+.form-input.is-error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(224, 92, 92, 0.12);
+}
+
+.field-error {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-error);
+  margin-top: 0.3rem;
+  min-height: 1em;
+}
