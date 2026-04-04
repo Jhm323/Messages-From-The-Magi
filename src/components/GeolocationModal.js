@@ -8,6 +8,7 @@ import './ui/Form/Form.js';
 import { getLocationCard } from '../api/cardQueries.js';
 import { renderCardResult } from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
+import { getUser, isLoggedIn }   from '../auth/AuthStore.js';
 
 const MODAL_ID = 'modal-geolocation';
 
@@ -119,8 +120,25 @@ function ensureModal() {
   }
 }
 
+function prefillUserData() {
+  if (!isLoggedIn()) return;
+  const user = getUser();
+
+  const nameEl = document.getElementById(`${MODAL_ID}-name`);
+  if (nameEl) nameEl.value = user.name ?? '';
+
+  if (user.birthday) {
+    const [, m, d] = user.birthday.split('-').map(Number);
+    const monthEl = document.getElementById(`${MODAL_ID}-month`);
+    const dayEl   = document.getElementById(`${MODAL_ID}-day`);
+    if (monthEl) monthEl.value = String(m);
+    if (dayEl)   dayEl.value   = String(d);
+  }
+}
+
 export function openGeolocationModal() {
   ensureModal();
   openModal(MODAL_ID);
+  prefillUserData();
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

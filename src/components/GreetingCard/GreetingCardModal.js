@@ -11,6 +11,7 @@ import '../ui/Form/Form.js';
 import '../ui/SelectionChip/SelectionChip.js';
 import { getBirthCard } from "../../api/cardQueries.js";
 import { buildBirthdateSelects } from "../../utils/helpers.js";
+import { getUser, isLoggedIn }   from "../../auth/AuthStore.js";
 
 const MODAL_ID = "modal-greeting";
 
@@ -255,8 +256,17 @@ function ensureModal() {
   }
 }
 
+function prefillUserData() {
+  if (!isLoggedIn()) return;
+  const user = getUser();
+  // "From" is the logged-in user; recipient name/date are intentionally left blank
+  const fromEl = document.getElementById(`${MODAL_ID}-from`);
+  if (fromEl) fromEl.value = user.name ?? '';
+}
+
 export function openGreetingCardModal() {
   ensureModal();
   openModal(MODAL_ID);
+  prefillUserData();
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

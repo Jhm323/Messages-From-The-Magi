@@ -8,6 +8,7 @@ import './ui/Form/Form.js';
 import { getCompatibilityCard } from '../api/cardQueries.js';
 import { renderCardResult }      from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
+import { getUser, isLoggedIn }   from '../auth/AuthStore.js';
 
 const MODAL_ID = 'modal-compatibility';
 
@@ -114,8 +115,25 @@ function ensureModal() {
   });
 }
 
+function prefillUserData() {
+  if (!isLoggedIn()) return;
+  const user = getUser();
+
+  const name1El = document.getElementById(`${MODAL_ID}-name1`);
+  if (name1El) name1El.value = user.name ?? '';
+
+  if (user.birthday) {
+    const [, m, d] = user.birthday.split('-').map(Number);
+    const monthEl = document.getElementById(`${MODAL_ID}-month1`);
+    const dayEl   = document.getElementById(`${MODAL_ID}-day1`);
+    if (monthEl) monthEl.value = String(m);
+    if (dayEl)   dayEl.value   = String(d);
+  }
+}
+
 export function openCompatibilityModal() {
   ensureModal();
   openModal(MODAL_ID);
+  prefillUserData();
   setTimeout(() => document.getElementById(`${MODAL_ID}-name1`)?.focus(), 100);
 }
