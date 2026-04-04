@@ -209,3 +209,66 @@
   background: var(--color-gold-glow);
   color: var(--color-gold);
 }
+
+/* ─── AUTH BUTTON ────────────────────────────────────────────────────────── */
+.header-auth {
+  flex-shrink: 0;
+}
+
+.header-auth__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-mist);
+  background: none;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-dawn);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.header-auth__btn:hover {
+  border-color: var(--color-gold-muted);
+  color: var(--color-gold);
+  background: var(--color-gold-glow);
+}
+
+.header-auth__btn--sign-in {
+  border-color: var(--color-gold-muted);
+  color: var(--color-gold);
+}
+
+.header-auth__btn--sign-in:hover {
+  background: var(--color-gold-glow);
+}
+
+.header-auth__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--color-gold-glow);
+  border: 1px solid var(--color-gold-muted);
+  font-size: 0.7rem;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  letter-spacing: 0;
+}
+
+.header-auth__name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

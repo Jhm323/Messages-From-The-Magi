@@ -4,6 +4,8 @@
  */
 
 import './Header.css';
+import { getUser, isLoggedIn, onAuthChange } from '../../auth/AuthStore.js';
+import { openLoginModal } from '../AuthModals.js';
 
 const NAV_ITEMS = [
   { href: '/',              label: 'Home',            icon: '✦' },
@@ -62,6 +64,8 @@ function buildHTML(activePath) {
 
     <a href="/" class="site-logo" style="text-decoration:none;">Messages from the Magi</a>
 
+    <div id="site-header-auth" class="header-auth"></div>
+
     <div id="site-nav-dropdown" class="nav-dropdown" aria-hidden="true">
       <nav class="nav-dropdown__nav">
         ${items}
@@ -69,6 +73,28 @@ function buildHTML(activePath) {
     </div>
   </div>
 </header>`;
+}
+
+function renderAuthBtn() {
+  const el = document.getElementById('site-header-auth');
+  if (!el) return;
+
+  if (isLoggedIn()) {
+    const user    = getUser();
+    const initial = user.name?.[0]?.toUpperCase() ?? '✦';
+    el.innerHTML  = `
+      <a href="/account.html" class="header-auth__btn">
+        <span class="header-auth__avatar">${initial}</span>
+        <span class="header-auth__name">${user.name}</span>
+      </a>`;
+  } else {
+    el.innerHTML = `
+      <button class="header-auth__btn header-auth__btn--sign-in" id="header-sign-in-btn">
+        Sign In
+      </button>`;
+    document.getElementById('header-sign-in-btn')
+      ?.addEventListener('click', openLoginModal);
+  }
 }
 
 export function initHeader(selector, { activePath = '/' } = {}) {
@@ -96,6 +122,10 @@ export function initHeader(selector, { activePath = '/' } = {}) {
       btn.classList.remove('is-open');
     }
   });
+
+  // Auth button — render now and keep in sync with auth state
+  renderAuthBtn();
+  onAuthChange(renderAuthBtn);
 
   // Submenu hover with delay so users can move mouse to submenu items
   document.querySelectorAll('.nav-item--has-sub').forEach(item => {
