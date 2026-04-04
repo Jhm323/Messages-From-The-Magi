@@ -6,7 +6,7 @@
   <title>Oracle · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
-<body>
+<body class="js-loading">
 
   <div id="site-header-mount"></div>
 
@@ -28,7 +28,8 @@
     initHeader('#site-header-mount', { activePath: '/oracle.html' });
     initFooter('#site-footer-mount');
     initPullCard('#pull-card-mount');
-  </script>
+    document.body.classList.replace('js-loading', 'js-ready');
+</script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@
   <title>The Cards · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
-<body>
+<body class="js-loading">
 
   <div id="site-header-mount"></div>
 
@@ -37,7 +37,8 @@
     initHeader('#site-header-mount', { activePath: '/cards.html' });
     initFooter('#site-footer-mount');
     initCardBrowser('#card-browser-mount');
-  </script>
+    document.body.classList.replace('js-loading', 'js-ready');
+</script>
 
 </body>
 </html>

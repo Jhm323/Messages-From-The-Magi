@@ -262,6 +262,22 @@ strong { font-weight: 600; color: var(--color-white); }
   background: linear-gradient(270deg, transparent, var(--color-gold-muted));
 }
 
+/* ─── PAGE REVEAL ────────────────────────────────────────────────────────── */
+/* Keeps the body invisible until JS has injected all component CSS,
+   then fades in with a subtle upward drift — feels intentional, not broken. */
+body.js-loading {
+  opacity: 0;
+}
+
+body.js-ready {
+  animation: page-reveal 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes page-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }

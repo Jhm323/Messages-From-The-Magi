@@ -16,7 +16,7 @@
     }
   </style>
 </head>
-<body>
+<body class="js-loading">
 
   <div id="site-header-mount"></div>
 
@@ -87,6 +87,7 @@
 
     initHeader('#site-header-mount', { activePath: '/readings.html' });
     initFooter('#site-footer-mount');
+    document.body.classList.replace('js-loading', 'js-ready');
 
     const openMap = {
       'birth-card':    openBirthCardModal,

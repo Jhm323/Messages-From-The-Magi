@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFooter("#site-footer-mount");
   initCardOfTheDay();
   bindBirthCardBtn();
+  document.body.classList.replace("js-loading", "js-ready");
 });
 
 function initCardOfTheDay() {
