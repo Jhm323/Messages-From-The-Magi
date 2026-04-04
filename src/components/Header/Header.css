@@ -157,7 +157,7 @@
   line-height: 1;
 }
 
-.nav-item--has-sub:hover .nav-sub__arrow {
+.nav-item--has-sub.sub-open .nav-sub__arrow {
   transform: rotate(90deg);
   color: var(--color-gold);
 }
@@ -184,7 +184,7 @@
     transform var(--transition-fast);
 }
 
-.nav-item--has-sub:hover .nav-sub-menu {
+.nav-item--has-sub.sub-open .nav-sub-menu {
   opacity: 1;
   pointer-events: all;
   transform: translateX(0);

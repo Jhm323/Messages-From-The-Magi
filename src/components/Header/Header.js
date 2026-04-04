@@ -95,4 +95,16 @@ export function initHeader(selector, { activePath = '/' } = {}) {
       btn.classList.remove('is-open');
     }
   });
+
+  // Submenu hover with delay so users can move mouse to submenu items
+  document.querySelectorAll('.nav-item--has-sub').forEach(item => {
+    let hideTimer;
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimer);
+      item.classList.add('sub-open');
+    });
+    item.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => item.classList.remove('sub-open'), 350);
+    });
+  });
 }
