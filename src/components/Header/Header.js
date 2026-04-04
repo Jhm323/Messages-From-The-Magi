@@ -5,7 +5,7 @@
 
 import './Header.css';
 import { getUser, isLoggedIn, onAuthChange } from '../../auth/AuthStore.js';
-import { openLoginModal } from '../AuthModals.js';
+import { openLoginModal } from '../AuthModals/AuthModals.js';
 
 const NAV_ITEMS = [
   { href: '/',              label: 'Home',            icon: '✦' },

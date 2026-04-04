@@ -9,29 +9,41 @@
  * Password validation mirrors Joi's string() schema rules, enforced client-side.
  */
 
-import './AuthModals.css';
-import { mountModal, openModal, closeModal } from './ui/Modal/Modal.js';
-import './ui/Button/Button.js';
-import './ui/Form/Form.js';
-import { setUser } from '../auth/AuthStore.js';
+import "./AuthModals.css";
+import { mountModal, openModal, closeModal } from "../ui/Modal/Modal.js";
+import "../ui/Button/Button.js";
+import "../ui/Form/Form.js";
+import { setUser } from "../../auth/AuthStore.js";
 
-const LOGIN_ID    = 'modal-login';
-const REGISTER_ID = 'modal-register';
+const LOGIN_ID = "modal-login";
+const REGISTER_ID = "modal-register";
 
 // ─── Password rules (Joi-style) ───────────────────────────────────────────────
 // Mirror these on the server with Joi when the API is wired up:
 //   Joi.string().min(8).pattern(/[A-Z]/).pattern(/[a-z]/).pattern(/[0-9]/).pattern(/[^A-Za-z0-9]/)
 
 const PASSWORD_RULES = [
-  { key: 'length',  label: 'At least 8 characters',        test: v => v.length >= 8 },
-  { key: 'upper',   label: 'One uppercase letter (A–Z)',    test: v => /[A-Z]/.test(v) },
-  { key: 'lower',   label: 'One lowercase letter (a–z)',    test: v => /[a-z]/.test(v) },
-  { key: 'number',  label: 'One number (0–9)',              test: v => /[0-9]/.test(v) },
-  { key: 'special', label: 'One special character (!@#$…)', test: v => /[^A-Za-z0-9]/.test(v) },
+  { key: "length", label: "At least 8 characters", test: (v) => v.length >= 8 },
+  {
+    key: "upper",
+    label: "One uppercase letter (A–Z)",
+    test: (v) => /[A-Z]/.test(v),
+  },
+  {
+    key: "lower",
+    label: "One lowercase letter (a–z)",
+    test: (v) => /[a-z]/.test(v),
+  },
+  { key: "number", label: "One number (0–9)", test: (v) => /[0-9]/.test(v) },
+  {
+    key: "special",
+    label: "One special character (!@#$…)",
+    test: (v) => /[^A-Za-z0-9]/.test(v),
+  },
 ];
 
 function isPasswordValid(value) {
-  return PASSWORD_RULES.every(r => r.test(value));
+  return PASSWORD_RULES.every((r) => r.test(value));
 }
 
 function isEmailValid(value) {
@@ -41,14 +53,14 @@ function isEmailValid(value) {
 // ─── Field-level error helpers ────────────────────────────────────────────────
 
 function setFieldError(modalId, field, message) {
-  const errEl   = document.getElementById(`${modalId}-${field}-error`);
+  const errEl = document.getElementById(`${modalId}-${field}-error`);
   const inputEl = document.getElementById(`${modalId}-${field}`);
-  if (errEl)   errEl.textContent = message;
-  if (inputEl) inputEl.classList.toggle('is-error', Boolean(message));
+  if (errEl) errEl.textContent = message;
+  if (inputEl) inputEl.classList.toggle("is-error", Boolean(message));
 }
 
 function clearFieldErrors(modalId, fields) {
-  fields.forEach(f => setFieldError(modalId, f, ''));
+  fields.forEach((f) => setFieldError(modalId, f, ""));
 }
 
 // ─── File → base64 ───────────────────────────────────────────────────────────
@@ -56,7 +68,7 @@ function clearFieldErrors(modalId, fields) {
 function readAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload  = e => resolve(e.target.result);
+    reader.onload = (e) => resolve(e.target.result);
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
@@ -109,43 +121,55 @@ function ensureLoginModal() {
   const overlay = mountModal(LOGIN_ID, buildLoginHTML());
   if (!overlay) return;
 
-  const FIELDS = ['email', 'password'];
+  const FIELDS = ["email", "password"];
 
-  document.getElementById(`${LOGIN_ID}-submit`).addEventListener('click', async () => {
-    clearFieldErrors(LOGIN_ID, FIELDS);
+  document
+    .getElementById(`${LOGIN_ID}-submit`)
+    .addEventListener("click", async () => {
+      clearFieldErrors(LOGIN_ID, FIELDS);
 
-    const email    = document.getElementById(`${LOGIN_ID}-email`).value.trim();
-    const password = document.getElementById(`${LOGIN_ID}-password`).value;
+      const email = document.getElementById(`${LOGIN_ID}-email`).value.trim();
+      const password = document.getElementById(`${LOGIN_ID}-password`).value;
 
-    let hasError = false;
-    if (!email)               { setFieldError(LOGIN_ID, 'email',    'Email is required.');    hasError = true; }
-    else if (!isEmailValid(email)) { setFieldError(LOGIN_ID, 'email', 'Enter a valid email address.'); hasError = true; }
-    if (!password)            { setFieldError(LOGIN_ID, 'password', 'Password is required.'); hasError = true; }
-    if (hasError) return;
+      let hasError = false;
+      if (!email) {
+        setFieldError(LOGIN_ID, "email", "Email is required.");
+        hasError = true;
+      } else if (!isEmailValid(email)) {
+        setFieldError(LOGIN_ID, "email", "Enter a valid email address.");
+        hasError = true;
+      }
+      if (!password) {
+        setFieldError(LOGIN_ID, "password", "Password is required.");
+        hasError = true;
+      }
+      if (hasError) return;
 
-    // TODO: Replace stub with real API call:
-    // const res = await fetch('/api/auth/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password }),
-    // });
-    // if (!res.ok) {
-    //   const { message } = await res.json();
-    //   setFieldError(LOGIN_ID, 'password', message);
-    //   return;
-    // }
-    // const { user } = await res.json();
-    // setUser(user);
+      // TODO: Replace stub with real API call:
+      // const res = await fetch('/api/auth/login', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email, password }),
+      // });
+      // if (!res.ok) {
+      //   const { message } = await res.json();
+      //   setFieldError(LOGIN_ID, 'password', message);
+      //   return;
+      // }
+      // const { user } = await res.json();
+      // setUser(user);
 
-    // Stub: mock successful login
-    setUser({ name: email.split('@')[0], email });
-    closeModal(LOGIN_ID);
-  });
+      // Stub: mock successful login
+      setUser({ name: email.split("@")[0], email });
+      closeModal(LOGIN_ID);
+    });
 
-  document.getElementById(`${LOGIN_ID}-to-register`).addEventListener('click', () => {
-    closeModal(LOGIN_ID);
-    openRegisterModal();
-  });
+  document
+    .getElementById(`${LOGIN_ID}-to-register`)
+    .addEventListener("click", () => {
+      closeModal(LOGIN_ID);
+      openRegisterModal();
+    });
 }
 
 export function openLoginModal() {
@@ -159,9 +183,9 @@ export function openLoginModal() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function buildRegisterHTML() {
-  const rulesHTML = PASSWORD_RULES.map(r =>
-    `<div class="password-rule" data-rule="${r.key}">${r.label}</div>`
-  ).join('');
+  const rulesHTML = PASSWORD_RULES.map(
+    (r) => `<div class="password-rule" data-rule="${r.key}">${r.label}</div>`,
+  ).join("");
 
   return `
 <div class="modal-overlay" id="${REGISTER_ID}" role="dialog" aria-modal="true" aria-labelledby="${REGISTER_ID}-title">
@@ -245,115 +269,138 @@ function ensureRegisterModal() {
   const overlay = mountModal(REGISTER_ID, buildRegisterHTML());
   if (!overlay) return;
 
-  const FIELDS = ['name', 'birthday', 'email', 'password', 'confirm'];
+  const FIELDS = ["name", "birthday", "email", "password", "confirm"];
   let avatarBase64 = null;
 
   // ── Avatar preview ────────────────────────────────────────────────────────
 
-  const avatarInput   = document.getElementById(`${REGISTER_ID}-avatar-input`);
-  const avatarPreview = document.getElementById(`${REGISTER_ID}-avatar-preview`);
-  const avatarInitial = document.getElementById(`${REGISTER_ID}-avatar-initial`);
+  const avatarInput = document.getElementById(`${REGISTER_ID}-avatar-input`);
+  const avatarPreview = document.getElementById(
+    `${REGISTER_ID}-avatar-preview`,
+  );
+  const avatarInitial = document.getElementById(
+    `${REGISTER_ID}-avatar-initial`,
+  );
 
-  avatarInput.addEventListener('change', async () => {
+  avatarInput.addEventListener("change", async () => {
     const file = avatarInput.files?.[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) {
-      alert('Please choose an image under 2 MB.');
-      avatarInput.value = '';
+      alert("Please choose an image under 2 MB.");
+      avatarInput.value = "";
       return;
     }
     avatarBase64 = await readAsBase64(file);
-    avatarInitial.style.display = 'none';
-    const img = document.createElement('img');
+    avatarInitial.style.display = "none";
+    const img = document.createElement("img");
     img.src = avatarBase64;
-    img.alt = 'Avatar preview';
+    img.alt = "Avatar preview";
     avatarPreview.appendChild(img);
   });
 
   // Update initial letter as name is typed
-  document.getElementById(`${REGISTER_ID}-name`).addEventListener('input', (e) => {
-    const initial = e.target.value.trim()[0]?.toUpperCase() ?? '✦';
-    if (!avatarBase64) avatarInitial.textContent = initial;
-  });
+  document
+    .getElementById(`${REGISTER_ID}-name`)
+    .addEventListener("input", (e) => {
+      const initial = e.target.value.trim()[0]?.toUpperCase() ?? "✦";
+      if (!avatarBase64) avatarInitial.textContent = initial;
+    });
 
   // ── Password rules live feedback ──────────────────────────────────────────
 
-  document.getElementById(`${REGISTER_ID}-password`).addEventListener('input', (e) => {
-    const val   = e.target.value;
-    const rules = overlay.querySelectorAll(`#${REGISTER_ID}-password-rules .password-rule`);
-    PASSWORD_RULES.forEach((rule, i) => {
-      rules[i]?.classList.toggle('is-met', rule.test(val));
+  document
+    .getElementById(`${REGISTER_ID}-password`)
+    .addEventListener("input", (e) => {
+      const val = e.target.value;
+      const rules = overlay.querySelectorAll(
+        `#${REGISTER_ID}-password-rules .password-rule`,
+      );
+      PASSWORD_RULES.forEach((rule, i) => {
+        rules[i]?.classList.toggle("is-met", rule.test(val));
+      });
     });
-  });
 
   // ── Submit ────────────────────────────────────────────────────────────────
 
-  document.getElementById(`${REGISTER_ID}-submit`).addEventListener('click', async () => {
-    clearFieldErrors(REGISTER_ID, FIELDS);
+  document
+    .getElementById(`${REGISTER_ID}-submit`)
+    .addEventListener("click", async () => {
+      clearFieldErrors(REGISTER_ID, FIELDS);
 
-    const name     = document.getElementById(`${REGISTER_ID}-name`).value.trim();
-    const birthday = document.getElementById(`${REGISTER_ID}-birthday`).value;
-    const email    = document.getElementById(`${REGISTER_ID}-email`).value.trim();
-    const password = document.getElementById(`${REGISTER_ID}-password`).value;
-    const confirm  = document.getElementById(`${REGISTER_ID}-confirm`).value;
+      const name = document.getElementById(`${REGISTER_ID}-name`).value.trim();
+      const birthday = document.getElementById(`${REGISTER_ID}-birthday`).value;
+      const email = document
+        .getElementById(`${REGISTER_ID}-email`)
+        .value.trim();
+      const password = document.getElementById(`${REGISTER_ID}-password`).value;
+      const confirm = document.getElementById(`${REGISTER_ID}-confirm`).value;
 
-    let hasError = false;
+      let hasError = false;
 
-    if (!name) {
-      setFieldError(REGISTER_ID, 'name', 'Name is required.');
-      hasError = true;
-    }
-    if (!birthday) {
-      setFieldError(REGISTER_ID, 'birthday', 'Birthday is required.');
-      hasError = true;
-    }
-    if (!email) {
-      setFieldError(REGISTER_ID, 'email', 'Email is required.');
-      hasError = true;
-    } else if (!isEmailValid(email)) {
-      setFieldError(REGISTER_ID, 'email', 'Enter a valid email address.');
-      hasError = true;
-    }
-    if (!isPasswordValid(password)) {
-      setFieldError(REGISTER_ID, 'password', 'Password does not meet all requirements.');
-      hasError = true;
-    }
-    if (!confirm) {
-      setFieldError(REGISTER_ID, 'confirm', 'Please confirm your password.');
-      hasError = true;
-    } else if (password !== confirm) {
-      setFieldError(REGISTER_ID, 'confirm', 'Passwords do not match.');
-      hasError = true;
-    }
-    if (hasError) return;
+      if (!name) {
+        setFieldError(REGISTER_ID, "name", "Name is required.");
+        hasError = true;
+      }
+      if (!birthday) {
+        setFieldError(REGISTER_ID, "birthday", "Birthday is required.");
+        hasError = true;
+      }
+      if (!email) {
+        setFieldError(REGISTER_ID, "email", "Email is required.");
+        hasError = true;
+      } else if (!isEmailValid(email)) {
+        setFieldError(REGISTER_ID, "email", "Enter a valid email address.");
+        hasError = true;
+      }
+      if (!isPasswordValid(password)) {
+        setFieldError(
+          REGISTER_ID,
+          "password",
+          "Password does not meet all requirements.",
+        );
+        hasError = true;
+      }
+      if (!confirm) {
+        setFieldError(REGISTER_ID, "confirm", "Please confirm your password.");
+        hasError = true;
+      } else if (password !== confirm) {
+        setFieldError(REGISTER_ID, "confirm", "Passwords do not match.");
+        hasError = true;
+      }
+      if (hasError) return;
 
-    // TODO: Replace stub with real API call:
-    // const res = await fetch('/api/auth/register', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ name, birthday, email, password, avatar: avatarBase64 }),
-    // });
-    // if (!res.ok) {
-    //   const { field, message } = await res.json();
-    //   setFieldError(REGISTER_ID, field ?? 'email', message);
-    //   return;
-    // }
-    // const { user } = await res.json();
-    // setUser(user);
+      // TODO: Replace stub with real API call:
+      // const res = await fetch('/api/auth/register', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ name, birthday, email, password, avatar: avatarBase64 }),
+      // });
+      // if (!res.ok) {
+      //   const { field, message } = await res.json();
+      //   setFieldError(REGISTER_ID, field ?? 'email', message);
+      //   return;
+      // }
+      // const { user } = await res.json();
+      // setUser(user);
 
-    // Stub: mock successful registration
-    setUser({ name, email, birthday, avatar: avatarBase64 ?? null });
-    closeModal(REGISTER_ID);
-  });
+      // Stub: mock successful registration
+      setUser({ name, email, birthday, avatar: avatarBase64 ?? null });
+      closeModal(REGISTER_ID);
+    });
 
-  document.getElementById(`${REGISTER_ID}-to-login`).addEventListener('click', () => {
-    closeModal(REGISTER_ID);
-    openLoginModal();
-  });
+  document
+    .getElementById(`${REGISTER_ID}-to-login`)
+    .addEventListener("click", () => {
+      closeModal(REGISTER_ID);
+      openLoginModal();
+    });
 }
 
 export function openRegisterModal() {
   ensureRegisterModal();
   openModal(REGISTER_ID);
-  setTimeout(() => document.getElementById(`${REGISTER_ID}-name`)?.focus(), 100);
+  setTimeout(
+    () => document.getElementById(`${REGISTER_ID}-name`)?.focus(),
+    100,
+  );
 }
