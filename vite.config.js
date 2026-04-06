@@ -48,6 +48,7 @@ export default defineConfig({
         account:  resolve(__dirname, 'public/account.html'),
         join:     resolve(__dirname, 'public/join.html'),
         about:    resolve(__dirname, 'public/about.html'),
+        shop:     resolve(__dirname, 'public/shop.html'),
       },
     },
   },

@@ -1,1 +1,0 @@
-import{n as e,t}from"./Footer-Duogp7ad.js";import{t as n}from"./SelectionChip-BcFGXq38.js";e(`#site-header-mount`,{activePath:`/videos.html`}),t(`#site-footer-mount`),n(document.getElementById(`video-filter-chips`)),document.body.classList.replace(`js-loading`,`js-ready`);

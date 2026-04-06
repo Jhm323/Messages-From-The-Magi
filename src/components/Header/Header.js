@@ -6,6 +6,8 @@
 import './Header.css';
 import { getUser, isLoggedIn, onAuthChange } from '../../auth/AuthStore.js';
 import { openLoginModal } from '../AuthModals/AuthModals.js';
+import { initCart, openCart } from '../Cart/Cart.js';
+import { getCartCount, onCartChange } from '../../cart/CartStore.js';
 
 const NAV_ITEMS = [
   { href: '/',              label: 'Home',            icon: '✦' },
@@ -22,6 +24,7 @@ const NAV_ITEMS = [
   { href: '/explore.html',  label: 'Explore the System', icon: '◈' },
   { href: '/videos.html',   label: 'Videos & Content', icon: '▶' },
   { href: '/join.html',     label: 'Join the Order',  icon: '💎' },
+  { href: '/shop.html',     label: 'The Magi Shop',   icon: '✦' },
   { href: '/about.html',    label: 'About & Contact', icon: '✉' },
 ];
 
@@ -64,6 +67,10 @@ function buildHTML(activePath) {
     <a href="/" class="site-logo" style="text-decoration:none;">Messages from the Magi</a>
 
     <div id="site-header-auth" class="header-auth"></div>
+    <button class="header-cart-btn" id="header-cart-btn" aria-label="Open cart">
+      🛍
+      <span class="header-cart-btn__badge" id="header-cart-badge">0</span>
+    </button>
 
     <div id="site-nav-dropdown" class="nav-dropdown" aria-hidden="true">
       <nav class="nav-dropdown__nav">
@@ -128,6 +135,20 @@ export function initHeader(selector, { activePath = '/' } = {}) {
   // Auth button — render now and keep in sync with auth state
   renderAuthBtn();
   onAuthChange(renderAuthBtn);
+
+  // Cart
+  initCart();
+  document.getElementById('header-cart-btn')?.addEventListener('click', openCart);
+
+  function updateCartBadge() {
+    const badge = document.getElementById('header-cart-badge');
+    if (!badge) return;
+    const count = getCartCount();
+    badge.textContent = count;
+    badge.classList.toggle('has-items', count > 0);
+  }
+  updateCartBadge();
+  onCartChange(updateCartBadge);
 
   // Submenu hover with delay so users can move mouse to submenu items
   document.querySelectorAll('.nav-item--has-sub').forEach(item => {

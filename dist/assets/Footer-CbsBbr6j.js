@@ -108,7 +108,51 @@
       <button class="auth-switch-link" id="${p}-to-login">Sign in</button>
     </p>
   </div>
-</div>`}function w(){let e=l(p,C());if(!e)return;let t=[`name`,`birthday`,`email`,`password`,`confirm`],n=null,r=document.getElementById(`${p}-avatar-input`),i=document.getElementById(`${p}-avatar-preview`),o=document.getElementById(`${p}-avatar-initial`);r.addEventListener(`change`,async()=>{let e=r.files?.[0];if(!e)return;if(e.size>2*1024*1024){alert(`Please choose an image under 2 MB.`),r.value=``;return}n=await y(e),o.style.display=`none`;let t=document.createElement(`img`);t.src=n,t.alt=`Avatar preview`,i.appendChild(t)}),document.getElementById(`${p}-name`).addEventListener(`input`,e=>{let t=e.target.value.trim()[0]?.toUpperCase()??`✦`;n||(o.textContent=t)}),document.getElementById(`${p}-password`).addEventListener(`input`,t=>{let n=t.target.value,r=e.querySelectorAll(`#${p}-password-rules .password-rule`);m.forEach((e,t)=>{r[t]?.classList.toggle(`is-met`,e.test(n))})}),document.getElementById(`${p}-submit`).addEventListener(`click`,async()=>{v(p,t);let e=document.getElementById(`${p}-name`).value.trim(),r=document.getElementById(`${p}-birthday`).value,i=document.getElementById(`${p}-email`).value.trim(),o=document.getElementById(`${p}-password`).value,s=document.getElementById(`${p}-confirm`).value,c=!1;e||(_(p,`name`,`Name is required.`),c=!0),r||(_(p,`birthday`,`Birthday is required.`),c=!0),i?g(i)||(_(p,`email`,`Enter a valid email address.`),c=!0):(_(p,`email`,`Email is required.`),c=!0),h(o)||(_(p,`password`,`Password does not meet all requirements.`),c=!0),s?o!==s&&(_(p,`confirm`,`Passwords do not match.`),c=!0):(_(p,`confirm`,`Please confirm your password.`),c=!0),!c&&(a({name:e,email:i,birthday:r,avatar:n??null}),d(p))}),document.getElementById(`${p}-to-login`).addEventListener(`click`,()=>{d(p),S()})}function T(){w(),u(p),setTimeout(()=>document.getElementById(`${p}-name`)?.focus(),100)}var E=[{href:`/`,label:`Home`,icon:`✦`},{href:`/readings.html`,label:`Readings`,icon:`★`,subItems:[{href:`/readings.html?open=birth-card`,label:`Birth Card Reading`,icon:`★`},{href:`/readings.html?open=compatibility`,label:`Compatibility Reading`,icon:`♥♠`},{href:`/readings.html?open=geolocation`,label:`Location Reading`,icon:`🗺`},{href:`/readings.html?open=greeting-card`,label:`Greeting Card`,icon:`✉`}]},{href:`/oracle.html`,label:`Oracle`,icon:`🃏`},{href:`/explore.html`,label:`Explore the System`,icon:`◈`},{href:`/videos.html`,label:`Videos & Content`,icon:`▶`},{href:`/join.html`,label:`Join the Order`,icon:`💎`},{href:`/about.html`,label:`About & Contact`,icon:`✉`}];function D(e){return`
+</div>`}function w(){let e=l(p,C());if(!e)return;let t=[`name`,`birthday`,`email`,`password`,`confirm`],n=null,r=document.getElementById(`${p}-avatar-input`),i=document.getElementById(`${p}-avatar-preview`),o=document.getElementById(`${p}-avatar-initial`);r.addEventListener(`change`,async()=>{let e=r.files?.[0];if(!e)return;if(e.size>2*1024*1024){alert(`Please choose an image under 2 MB.`),r.value=``;return}n=await y(e),o.style.display=`none`;let t=document.createElement(`img`);t.src=n,t.alt=`Avatar preview`,i.appendChild(t)}),document.getElementById(`${p}-name`).addEventListener(`input`,e=>{let t=e.target.value.trim()[0]?.toUpperCase()??`✦`;n||(o.textContent=t)}),document.getElementById(`${p}-password`).addEventListener(`input`,t=>{let n=t.target.value,r=e.querySelectorAll(`#${p}-password-rules .password-rule`);m.forEach((e,t)=>{r[t]?.classList.toggle(`is-met`,e.test(n))})}),document.getElementById(`${p}-submit`).addEventListener(`click`,async()=>{v(p,t);let e=document.getElementById(`${p}-name`).value.trim(),r=document.getElementById(`${p}-birthday`).value,i=document.getElementById(`${p}-email`).value.trim(),o=document.getElementById(`${p}-password`).value,s=document.getElementById(`${p}-confirm`).value,c=!1;e||(_(p,`name`,`Name is required.`),c=!0),r||(_(p,`birthday`,`Birthday is required.`),c=!0),i?g(i)||(_(p,`email`,`Enter a valid email address.`),c=!0):(_(p,`email`,`Email is required.`),c=!0),h(o)||(_(p,`password`,`Password does not meet all requirements.`),c=!0),s?o!==s&&(_(p,`confirm`,`Passwords do not match.`),c=!0):(_(p,`confirm`,`Please confirm your password.`),c=!0),!c&&(a({name:e,email:i,birthday:r,avatar:n??null}),d(p))}),document.getElementById(`${p}-to-login`).addEventListener(`click`,()=>{d(p),S()})}function T(){w(),u(p),setTimeout(()=>document.getElementById(`${p}-name`)?.focus(),100)}var E=`magi_cart`,D=[];function O(){try{return JSON.parse(localStorage.getItem(E))||[]}catch{return[]}}function k(e){localStorage.setItem(E,JSON.stringify(e)),D.forEach(t=>t(e))}function A(){return O()}function j(){return O().reduce((e,t)=>e+t.qty,0)}function M(){return O().reduce((e,t)=>e+t.price*t.qty,0)}function N(e){let t=O(),n=t.find(t=>t.id===e.id);n?n.qty+=1:t.push({...e,qty:1}),k(t)}function P(e){k(O().filter(t=>t.id!==e))}function F(e,t){if(t<1){P(e);return}let n=O(),r=n.find(t=>t.id===e);r&&(r.qty=t,k(n))}function I(e){return D.push(e),()=>{D=D.filter(t=>t!==e)}}var L=!1;function R(e){return`$${(e/100).toFixed(2)}`}function z(e){return`
+<div class="cart-item" data-id="${e.id}">
+  <div class="cart-item__icon">${e.icon}</div>
+  <div class="cart-item__body">
+    <div class="cart-item__name">${e.name}</div>
+    <div class="cart-item__type">${e.type}</div>
+    <div class="cart-item__price">${R(e.price*e.qty)}</div>
+    <div class="cart-item__qty">
+      <button class="cart-item__qty-btn" data-action="dec" data-id="${e.id}">−</button>
+      <span class="cart-item__qty-val">${e.qty}</span>
+      <button class="cart-item__qty-btn" data-action="inc" data-id="${e.id}">+</button>
+    </div>
+  </div>
+  <button class="cart-item__remove" data-remove="${e.id}" aria-label="Remove">✕</button>
+</div>`}function B(){let e=A(),t=j(),n=M(),r=document.getElementById(`cart-items-list`),i=document.getElementById(`cart-header-count`),a=document.getElementById(`cart-subtotal-amount`),o=document.getElementById(`cart-checkout-btn`);i&&(i.textContent=t),a&&(a.textContent=R(n)),o&&(o.disabled=t===0),r&&(e.length===0?r.innerHTML=`
+<div class="cart-empty">
+  <div class="cart-empty__icon">✦</div>
+  <div class="cart-empty__msg">Your cart is empty</div>
+  <div class="cart-empty__sub">Add something sacred to begin.</div>
+</div>`:r.innerHTML=e.map(z).join(``))}function V(){document.getElementById(`cart-drawer`)?.classList.add(`is-open`),document.getElementById(`cart-backdrop`)?.classList.add(`is-open`),document.body.style.overflow=`hidden`}function H(){document.getElementById(`cart-drawer`)?.classList.remove(`is-open`),document.getElementById(`cart-backdrop`)?.classList.remove(`is-open`),document.body.style.overflow=``}function U(){if(L)return;L=!0;let e=document.createElement(`div`);e.innerHTML=`
+<div id="cart-backdrop" class="cart-backdrop"></div>
+<div id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-header">
+    <div class="cart-header__title">
+      ✦ Your Cart
+      <span class="cart-header__count" id="cart-header-count">0</span>
+    </div>
+    <button class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">✕</button>
+  </div>
+
+  <div class="cart-items" id="cart-items-list"></div>
+
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal__label">Subtotal</span>
+      <span class="cart-subtotal__amount" id="cart-subtotal-amount">$0.00</span>
+    </div>
+    <button class="cart-checkout-btn" id="cart-checkout-btn" disabled>
+      Proceed to Checkout
+    </button>
+    <button class="cart-continue-btn" id="cart-continue-btn">
+      Continue Browsing
+    </button>
+  </div>
+</div>`,document.body.appendChild(e),document.getElementById(`cart-close-btn`).addEventListener(`click`,H),document.getElementById(`cart-backdrop`).addEventListener(`click`,H),document.getElementById(`cart-continue-btn`).addEventListener(`click`,H),document.getElementById(`cart-items-list`).addEventListener(`click`,e=>{let t=e.target.closest(`[data-remove]`);if(t){P(t.dataset.remove);return}let n=e.target.closest(`[data-action]`);if(n){let e=n.dataset.id,t=A().find(t=>t.id===e);if(!t)return;F(e,t.qty+(n.dataset.action===`inc`?1:-1))}}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&H()}),I(B),B()}var W=[{href:`/`,label:`Home`,icon:`✦`},{href:`/readings.html`,label:`Readings`,icon:`★`,subItems:[{href:`/readings.html?open=birth-card`,label:`Birth Card Reading`,icon:`★`},{href:`/readings.html?open=compatibility`,label:`Compatibility Reading`,icon:`♥♠`},{href:`/readings.html?open=geolocation`,label:`Location Reading`,icon:`🗺`},{href:`/readings.html?open=greeting-card`,label:`Greeting Card`,icon:`✉`}]},{href:`/oracle.html`,label:`Oracle`,icon:`🃏`},{href:`/explore.html`,label:`Explore the System`,icon:`◈`},{href:`/videos.html`,label:`Videos & Content`,icon:`▶`},{href:`/join.html`,label:`Join the Order`,icon:`💎`},{href:`/shop.html`,label:`The Magi Shop`,icon:`✦`},{href:`/about.html`,label:`About & Contact`,icon:`✉`}];function G(e){return`
 <header class="site-header">
   <div class="site-header__inner">
     <button class="nav-menu-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-dropdown">
@@ -120,10 +164,14 @@
     <a href="/" class="site-logo" style="text-decoration:none;">Messages from the Magi</a>
 
     <div id="site-header-auth" class="header-auth"></div>
+    <button class="header-cart-btn" id="header-cart-btn" aria-label="Open cart">
+      🛍
+      <span class="header-cart-btn__badge" id="header-cart-badge">0</span>
+    </button>
 
     <div id="site-nav-dropdown" class="nav-dropdown" aria-hidden="true">
       <nav class="nav-dropdown__nav">
-        ${E.map(({href:t,label:n,icon:r,subItems:i})=>{let a=e===t||i&&i.some(t=>t.href===e);if(i){let e=i.map(e=>`
+        ${W.map(({href:t,label:n,icon:r,subItems:i})=>{let a=e===t||i&&i.some(t=>t.href===e);if(i){let e=i.map(e=>`
         <a href="${e.href}" class="nav-sub__link">
           <span class="nav-dropdown__icon">${e.icon}</span>
           <span>${e.label}</span>
@@ -143,14 +191,14 @@
       </nav>
     </div>
   </div>
-</header>`}function O(){let e=document.getElementById(`site-header-auth`);if(e)if(i()){let t=r(),n=t.name?.[0]?.toUpperCase()??`✦`;e.innerHTML=`
+</header>`}function K(){let e=document.getElementById(`site-header-auth`);if(e)if(i()){let t=r(),n=t.name?.[0]?.toUpperCase()??`✦`;e.innerHTML=`
       <a href="/account.html" class="header-auth__btn">
         ${t.avatar?`<img src="${t.avatar}" alt="${t.name}" class="header-auth__avatar header-auth__avatar--img">`:`<span class="header-auth__avatar">${n}</span>`}
         <span class="header-auth__name">${t.name}</span>
       </a>`}else e.innerHTML=`
       <button class="header-auth__btn header-auth__btn--sign-in" id="header-sign-in-btn">
         Sign In
-      </button>`,document.getElementById(`header-sign-in-btn`)?.addEventListener(`click`,S)}function k(e,{activePath:t=`/`}={}){let n=document.querySelector(e);if(!n)return;n.insertAdjacentHTML(`afterend`,D(t)),n.remove();let r=document.querySelector(`.nav-menu-btn`),i=document.getElementById(`site-nav-dropdown`);r.addEventListener(`click`,e=>{e.stopPropagation();let t=i.classList.toggle(`is-open`);r.setAttribute(`aria-expanded`,String(t)),i.setAttribute(`aria-hidden`,String(!t)),r.classList.toggle(`is-open`,t)}),document.addEventListener(`click`,e=>{!r.contains(e.target)&&!i.contains(e.target)&&(i.classList.remove(`is-open`),r.setAttribute(`aria-expanded`,`false`),i.setAttribute(`aria-hidden`,`true`),r.classList.remove(`is-open`))}),O(),s(O),document.querySelectorAll(`.nav-item--has-sub`).forEach(e=>{let t;e.addEventListener(`mouseenter`,()=>{clearTimeout(t),e.classList.add(`sub-open`)}),e.addEventListener(`mouseleave`,()=>{t=setTimeout(()=>e.classList.remove(`sub-open`),350)})})}function A(){return`
+      </button>`,document.getElementById(`header-sign-in-btn`)?.addEventListener(`click`,S)}function q(e,{activePath:t=`/`}={}){let n=document.querySelector(e);if(!n)return;n.insertAdjacentHTML(`afterend`,G(t)),n.remove();let r=document.querySelector(`.nav-menu-btn`),i=document.getElementById(`site-nav-dropdown`);r.addEventListener(`click`,e=>{e.stopPropagation();let t=i.classList.toggle(`is-open`);r.setAttribute(`aria-expanded`,String(t)),i.setAttribute(`aria-hidden`,String(!t)),r.classList.toggle(`is-open`,t)}),document.addEventListener(`click`,e=>{!r.contains(e.target)&&!i.contains(e.target)&&(i.classList.remove(`is-open`),r.setAttribute(`aria-expanded`,`false`),i.setAttribute(`aria-hidden`,`true`),r.classList.remove(`is-open`))}),K(),s(K),U(),document.getElementById(`header-cart-btn`)?.addEventListener(`click`,V);function a(){let e=document.getElementById(`header-cart-badge`);if(!e)return;let t=j();e.textContent=t,e.classList.toggle(`has-items`,t>0)}a(),I(a),document.querySelectorAll(`.nav-item--has-sub`).forEach(e=>{let t;e.addEventListener(`mouseenter`,()=>{clearTimeout(t),e.classList.add(`sub-open`)}),e.addEventListener(`mouseleave`,()=>{t=setTimeout(()=>e.classList.remove(`sub-open`),350)})})}function J(){return`
 <footer class="site-footer">
   <div class="site-footer__logo">Messages from the Magi</div>
   <div>A Living Oracle</div>
@@ -158,4 +206,4 @@
     © <span class="footer-year"></span> Messages from the Magi. All rights reserved.
     This oracle system is the proprietary intellectual property of Sharon.
   </div>
-</footer>`}function j(e){let t=document.querySelector(e);t&&(t.insertAdjacentHTML(`afterend`,A()),t.remove(),document.querySelectorAll(`.footer-year`).forEach(e=>{e.textContent=new Date().getFullYear()}))}export{o as a,u as i,k as n,r as o,l as r,i as s,j as t};
+</footer>`}function Y(e){let t=document.querySelector(e);t&&(t.insertAdjacentHTML(`afterend`,J()),t.remove(),document.querySelectorAll(`.footer-year`).forEach(e=>{e.textContent=new Date().getFullYear()}))}export{l as a,r as c,N as i,i as l,q as n,u as o,V as r,o as s,Y as t};
