@@ -1,4 +1,4 @@
-import{a as e,c as t,l as n,o as r}from"./Footer-Dt2lRjst.js";import{r as i,t as a}from"./CardResult-ICDmN0RT.js";import{r as o}from"./SavedReadings-1dH3-Zbr.js";function s(e,t){return`<div style="display:flex;gap:0.75rem;">
+import{a as e,c as t,l as n,o as r}from"./Footer-D4rECF6l.js";import{r as i,t as a}from"./CardResult-ICDmN0RT.js";import{r as o}from"./SavedReadings-1dH3-Zbr.js";function s(e,t){return`<div style="display:flex;gap:0.75rem;">
     <select class="form-input" id="${e}" required>
       <option value="">Month</option>${[`January`,`February`,`March`,`April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`].map((e,t)=>`<option value="${t+1}">${e}</option>`).join(``)}
     </select>

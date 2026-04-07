@@ -1,4 +1,4 @@
-import{a as e,c as t,l as n,n as r,o as i,t as a}from"./Footer-Dt2lRjst.js";import{o,r as s,s as c,t as l}from"./CardResult-ICDmN0RT.js";import{n as u,t as d}from"./BirthCardModal-UcJzIp8K.js";import{r as f}from"./SavedReadings-1dH3-Zbr.js";import"./SelectionChip-CB9M93dA.js";var p=`modal-compatibility`,m=null;function h(){return`
+import{a as e,c as t,l as n,n as r,o as i,t as a}from"./Footer-D4rECF6l.js";import{o,r as s,s as c,t as l}from"./CardResult-ICDmN0RT.js";import{n as u,t as d}from"./BirthCardModal-CkMXckwb.js";import{r as f}from"./SavedReadings-1dH3-Zbr.js";import"./SelectionChip-CB9M93dA.js";var p=`modal-compatibility`,m=null;function h(){return`
 <div class="modal-overlay" id="${p}" role="dialog" aria-modal="true" aria-labelledby="${p}-title">
   <div class="modal">
     <div class="modal__header">

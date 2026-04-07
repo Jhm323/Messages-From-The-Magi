@@ -6,6 +6,17 @@
   <meta name="description" content="Messages from the Magi. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards.">
   <title>Messages from the Magi</title>
   <style>
+    /* On mobile, show the Card of the Day immediately below the header */
+    main { display: flex; flex-direction: column; }
+    .home-hero    { order: 2; }
+    .home-card    { order: 1; }
+
+    @media (min-width: 481px) {
+      /* Restore natural order on tablet and up */
+      .home-hero { order: 1; }
+      .home-card { order: 2; }
+    }
+
     @media print {
       body > *:not(#modal-greeting) { display: none !important; }
       #modal-greeting { position: static !important; background: white !important; }
@@ -15,12 +26,12 @@
       .modal { box-shadow: none !important; border: none !important; }
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-BXhqp940.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/Footer-Dt2lRjst.js">
+  <script type="module" crossorigin src="/assets/index-DFkOMVXf.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/Footer-D4rECF6l.js">
   <link rel="modulepreload" crossorigin href="/assets/CardResult-ICDmN0RT.js">
   <link rel="modulepreload" crossorigin href="/assets/SavedReadings-1dH3-Zbr.js">
-  <link rel="modulepreload" crossorigin href="/assets/BirthCardModal-UcJzIp8K.js">
-  <link rel="stylesheet" crossorigin href="/assets/Footer-DAxBCCxp.css">
+  <link rel="modulepreload" crossorigin href="/assets/BirthCardModal-CkMXckwb.js">
+  <link rel="stylesheet" crossorigin href="/assets/Footer-DWPfWGyb.css">
   <link rel="stylesheet" crossorigin href="/assets/CardResult-CUBJmL0p.css">
 </head>
 <body class="js-loading">
@@ -30,7 +41,7 @@
   <main>
 
     <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-    <section class="hero" aria-label="Welcome">
+    <section class="hero home-hero" aria-label="Welcome">
       <div class="hero__eyebrow">A Living Oracle · A Mystic Science</div>
       <h1 class="hero__title">Messages from the Magi</h1>
       <p class="hero__body">
@@ -43,7 +54,7 @@
     </section>
 
     <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
-    <section style="padding:2rem 0 4rem;" aria-label="Card of the Day">
+    <section class="home-card" style="padding:2rem 0 4rem;" aria-label="Card of the Day">
       <div class="container container--narrow">
         <div class="divider--glyph">✦</div>
         <h2 class="text-center text-heading" style="margin-bottom:1.5rem;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold-muted);">

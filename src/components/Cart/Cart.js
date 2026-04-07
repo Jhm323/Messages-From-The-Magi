@@ -11,6 +11,8 @@ import {
 } from '../../cart/CartStore.js';
 
 let _mounted = false;
+let _closeTimer = null;
+const DURATION = 350; // must match CSS transition duration
 
 function formatPrice(cents) {
   return `$${(cents / 100).toFixed(2)}`;
@@ -35,43 +37,63 @@ function itemHTML(item) {
 }
 
 function render() {
-  const items     = getCartItems();
-  const count     = getCartCount();
-  const total     = getCartTotal();
-  const listEl    = document.getElementById('cart-items-list');
-  const countEl   = document.getElementById('cart-header-count');
-  const totalEl   = document.getElementById('cart-subtotal-amount');
+  const items       = getCartItems();
+  const count       = getCartCount();
+  const total       = getCartTotal();
+  const listEl      = document.getElementById('cart-items-list');
+  const countEl     = document.getElementById('cart-header-count');
+  const totalEl     = document.getElementById('cart-subtotal-amount');
   const checkoutBtn = document.getElementById('cart-checkout-btn');
 
-  if (countEl) countEl.textContent = count;
-
-  if (totalEl) totalEl.textContent = formatPrice(total);
-
-  if (checkoutBtn) checkoutBtn.disabled = count === 0;
+  if (countEl)     countEl.textContent    = count;
+  if (totalEl)     totalEl.textContent    = formatPrice(total);
+  if (checkoutBtn) checkoutBtn.disabled   = count === 0;
 
   if (!listEl) return;
-  if (items.length === 0) {
-    listEl.innerHTML = `
+  listEl.innerHTML = items.length === 0 ? `
 <div class="cart-empty">
   <div class="cart-empty__icon">✦</div>
   <div class="cart-empty__msg">Your cart is empty</div>
   <div class="cart-empty__sub">Add something sacred to begin.</div>
-</div>`;
-  } else {
-    listEl.innerHTML = items.map(itemHTML).join('');
-  }
+</div>` : items.map(itemHTML).join('');
 }
 
+function getDrawer()   { return document.getElementById('cart-drawer'); }
+function getBackdrop() { return document.getElementById('cart-backdrop'); }
+
 export function openCart() {
-  document.getElementById('cart-drawer')?.classList.add('is-open');
-  document.getElementById('cart-backdrop')?.classList.add('is-open');
-  document.body.style.overflow = 'hidden';
+  // Cancel any in-progress close
+  clearTimeout(_closeTimer);
+
+  const drawer   = getDrawer();
+  const backdrop = getBackdrop();
+  if (!drawer) return;
+
+  // Make visible in DOM first, then trigger transition on next frame
+  drawer.style.display   = '';
+  backdrop.style.display = '';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+    });
+  });
 }
 
 export function closeCart() {
-  document.getElementById('cart-drawer')?.classList.remove('is-open');
-  document.getElementById('cart-backdrop')?.classList.remove('is-open');
-  document.body.style.overflow = '';
+  const drawer   = getDrawer();
+  const backdrop = getBackdrop();
+  if (!drawer) return;
+
+  drawer.classList.remove('is-open');
+  backdrop.classList.remove('is-open');
+
+  // Hide from DOM after transition completes — no scroll-area contribution
+  _closeTimer = setTimeout(() => {
+    drawer.style.display   = 'none';
+    backdrop.style.display = 'none';
+  }, DURATION);
 }
 
 export function initCart() {
@@ -80,8 +102,8 @@ export function initCart() {
 
   const wrapper = document.createElement('div');
   wrapper.innerHTML = `
-<div id="cart-backdrop" class="cart-backdrop"></div>
-<div id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+<div id="cart-backdrop" class="cart-backdrop" style="display:none;"></div>
+<div id="cart-drawer" class="cart-drawer" aria-label="Shopping cart" style="display:none;">
   <div class="cart-header">
     <div class="cart-header__title">
       ✦ Your Cart
@@ -118,7 +140,7 @@ export function initCart() {
 
     const qtyBtn = e.target.closest('[data-action]');
     if (qtyBtn) {
-      const id = qtyBtn.dataset.id;
+      const id   = qtyBtn.dataset.id;
       const item = getCartItems().find(i => i.id === id);
       if (!item) return;
       updateQty(id, item.qty + (qtyBtn.dataset.action === 'inc' ? 1 : -1));

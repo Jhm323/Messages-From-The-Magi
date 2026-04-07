@@ -7,6 +7,17 @@
   <title>Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
   <style>
+    /* On mobile, show the Card of the Day immediately below the header */
+    main { display: flex; flex-direction: column; }
+    .home-hero    { order: 2; }
+    .home-card    { order: 1; }
+
+    @media (min-width: 481px) {
+      /* Restore natural order on tablet and up */
+      .home-hero { order: 1; }
+      .home-card { order: 2; }
+    }
+
     @media print {
       body > *:not(#modal-greeting) { display: none !important; }
       #modal-greeting { position: static !important; background: white !important; }
@@ -24,7 +35,7 @@
   <main>
 
     <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-    <section class="hero" aria-label="Welcome">
+    <section class="hero home-hero" aria-label="Welcome">
       <div class="hero__eyebrow">A Living Oracle · A Mystic Science</div>
       <h1 class="hero__title">Messages from the Magi</h1>
       <p class="hero__body">
@@ -37,7 +48,7 @@
     </section>
 
     <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
-    <section style="padding:2rem 0 4rem;" aria-label="Card of the Day">
+    <section class="home-card" style="padding:2rem 0 4rem;" aria-label="Card of the Day">
       <div class="container container--narrow">
         <div class="divider--glyph">✦</div>
         <h2 class="text-center text-heading" style="margin-bottom:1.5rem;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold-muted);">

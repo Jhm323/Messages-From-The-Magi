@@ -1,0 +1,15 @@
+import{i as e,n as t,r as n,t as r}from"./Footer-D4rECF6l.js";t(`#site-header-mount`,{activePath:`/shop.html`}),r(`#site-footer-mount`);var i=[{id:`birth-card-guide`,name:`Birth Card PDF Guide`,type:`Digital Download`,icon:`★`,price:1200,description:`A beautifully formatted 40-page PDF covering your Birth Card, Planetary Ruling Card, and core life themes — yours to keep forever.`,badge:null},{id:`system-workbook`,name:`The Complete System Workbook`,type:`Digital Download`,icon:`◈`,price:2700,description:`An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.`,badge:`Best Seller`,featured:!0},{id:`year-spread`,name:`Year Ahead Spread Reading`,type:`Personalized PDF`,icon:`✦`,price:2200,description:`Your 13-card year spread calculated and interpreted for your current Solar Year — delivered as a personalized PDF within 48 hours.`,badge:null},{id:`compatibility-report`,name:`Love & Compatibility Report`,type:`Personalized PDF`,icon:`♥`,price:1900,description:`The full card-to-card relationship analysis between you and a partner — cosmic connections, karmic ties, and natural affinities.`,badge:null},{id:`living-deck`,name:`The Living Deck`,type:`Physical Product`,icon:`🃏`,price:4500,description:`A premium 52-card printed deck with the full Magi symbolism — gilded edges, linen finish, and a collector's keepsake box.`,badge:`New`,featured:!0},{id:`foundations-course`,name:`Magi Foundations Course`,type:`Video Course`,icon:`▶`,price:9700,description:`Six in-depth video modules taught by Sharon covering the complete system from first principles — suits, birth cards, spreads, and timing.`,badge:`Featured`}];function a(){let e=document.getElementById(`shop-grid`);e.innerHTML=i.map(e=>`
+        <div class="product-card${e.featured?` product-card--featured`:``}">
+          ${e.badge?`<span class="product-badge">${e.badge}</span>`:``}
+          <div class="product-icon">${e.icon}</div>
+          <div class="product-type">${e.type}</div>
+          <div class="product-name">${e.name}</div>
+          <p class="product-desc">${e.description}</p>
+          <div class="product-footer">
+            <div class="product-price">
+              $${(e.price/100).toFixed(2)}
+              ${e.type===`Digital Download`?`<span class="product-price__sub">one-time</span>`:``}
+            </div>
+            <button class="add-to-cart-btn" data-product-id="${e.id}">Add to Cart</button>
+          </div>
+        </div>`).join(``)}a(),document.getElementById(`shop-grid`).addEventListener(`click`,t=>{let r=t.target.closest(`.add-to-cart-btn`);if(!r)return;let a=i.find(e=>e.id===r.dataset.productId);a&&(e(a),r.textContent=`✓ Added`,r.classList.add(`is-added`),setTimeout(()=>{r.textContent=`Add to Cart`,r.classList.remove(`is-added`)},1800),n())}),document.body.classList.replace(`js-loading`,`js-ready`);

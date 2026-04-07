@@ -1,1 +1,0 @@
-import{n as e,t}from"./Footer-Dt2lRjst.js";e(`#site-header-mount`,{activePath:`/join.html`}),t(`#site-footer-mount`),document.body.classList.replace(`js-loading`,`js-ready`);
