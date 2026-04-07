@@ -1,4 +1,4 @@
-import{n as e,t}from"./Footer-CbsBbr6j.js";import{n,t as r}from"./CardResult-DYHwvmdl.js";import"./SelectionChip-CB9M93dA.js";var i=`modal-card-detail`;function a(){if(document.getElementById(i))return;document.body.insertAdjacentHTML(`beforeend`,`
+import{n as e,t}from"./Footer-Dt2lRjst.js";import{n,t as r}from"./CardResult-ICDmN0RT.js";import"./SelectionChip-CB9M93dA.js";var i=`modal-card-detail`;function a(){if(document.getElementById(i))return;document.body.insertAdjacentHTML(`beforeend`,`
     <div class="modal-overlay" id="${i}" role="dialog" aria-modal="true">
       <div class="modal" style="max-width:600px;">
         <div class="modal__header" style="margin-bottom:1rem;">

@@ -5,6 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Account · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <style>
+    .account-profile {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-mist);
+      flex-wrap: wrap;
+    }
+
+    .account-profile__info { flex: 1; min-width: 0; }
+
+    .account-profile__actions { margin-left: auto; flex-shrink: 0; }
+
+    .account-membership {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--color-dusk);
+      border: 1px solid var(--color-mist);
+      border-radius: var(--radius-lg);
+      flex-wrap: wrap;
+    }
+
+    .account-membership__actions { margin-left: auto; flex-shrink: 0; }
+
+    @media (max-width: 480px) {
+      .account-profile { gap: 1rem; }
+      .account-profile__actions { margin-left: 0; width: 100%; }
+      .account-profile__actions .btn { width: 100%; justify-content: center; }
+      .account-membership { gap: 1rem; }
+      .account-membership__actions { margin-left: 0; width: 100%; }
+      .account-membership__actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
 <body class="js-loading">
 
@@ -15,23 +52,25 @@
       <div class="container container--narrow">
 
         <!-- Profile -->
-        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--color-mist);">
+        <div class="account-profile">
           <div id="account-avatar"
             style="width:64px;height:64px;border-radius:50%;background:var(--color-gold-glow);
               border:1px solid var(--color-gold-muted);display:flex;align-items:center;
               justify-content:center;font-family:var(--font-heading);font-size:1.6rem;
               color:var(--color-gold);flex-shrink:0;">
           </div>
-          <div>
+          <div class="account-profile__info">
             <div class="hero__eyebrow" style="margin-bottom:0.25rem;">Welcome back</div>
             <h1 id="account-name" style="font-size:1.8rem;margin:0 0 0.2rem;"></h1>
             <div id="account-email" style="color:var(--color-dawn);font-size:0.9rem;"></div>
             <div id="account-birthday" style="color:var(--color-mist);font-size:0.82rem;margin-top:0.15rem;"></div>
           </div>
-          <button class="btn btn--ghost" id="sign-out-btn"
-            style="margin-left:auto;font-size:0.8rem;padding:0.4rem 1rem;flex-shrink:0;">
-            Sign Out
-          </button>
+          <div class="account-profile__actions">
+            <button class="btn btn--ghost" id="sign-out-btn"
+              style="font-size:0.8rem;padding:0.4rem 1rem;">
+              Sign Out
+            </button>
+          </div>
         </div>
 
         <!-- Saved Readings (placeholder) -->
@@ -49,18 +88,19 @@
             text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:1.5rem;">
             Membership
           </h2>
-          <div style="display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;
-            background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-lg);">
-            <div style="font-size:1.8rem;">🌌</div>
-            <div>
+          <div class="account-membership">
+            <div style="font-size:1.8rem;flex-shrink:0;">🌌</div>
+            <div style="flex:1;min-width:0;">
               <div style="font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.08em;
                 text-transform:uppercase;color:var(--color-gold);margin-bottom:0.2rem;">Initiate</div>
               <div style="font-size:0.85rem;color:var(--color-dawn);">Free tier — full access to readings and oracle.</div>
             </div>
-            <a href="/join.html" class="btn btn--ghost"
-              style="margin-left:auto;font-size:0.8rem;padding:0.4rem 1rem;flex-shrink:0;">
-              Upgrade ✦
-            </a>
+            <div class="account-membership__actions">
+              <a href="/join.html" class="btn btn--ghost"
+                style="font-size:0.8rem;padding:0.4rem 1rem;">
+                Upgrade ✦
+              </a>
+            </div>
           </div>
         </div>
 

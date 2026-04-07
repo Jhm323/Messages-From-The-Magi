@@ -283,3 +283,63 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+/* ── Tablet (≤ 768px) ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .site-logo {
+    font-size: 0.85rem;
+  }
+
+  .nav-sub-menu {
+    /* On tablet show submenu below, not to the side */
+    position: static;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 0 0 2.5rem;
+    background: transparent;
+    transform: none !important;
+  }
+
+  .nav-item--has-sub.sub-open .nav-sub-menu {
+    display: flex;
+  }
+
+  .nav-sub-menu {
+    display: none;
+  }
+}
+
+/* ── Mobile (≤ 480px) ──────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .site-header { padding: 0 0.75rem; }
+
+  .site-header__inner {
+    gap: 0.6rem;
+    height: 60px;
+  }
+
+  .site-logo {
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* Hide name on small screens — show avatar only */
+  .header-auth__name { display: none; }
+
+  .header-auth__btn {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+/* ── Small mobile (≤ 360px) ────────────────────────────────────────────── */
+@media (max-width: 360px) {
+  .site-logo { font-size: 0.65rem; }
+
+  .nav-menu-btn { width: 30px; height: 30px; }
+
+  .header-cart-btn { width: 30px; height: 30px; font-size: 0.95rem; }
+}

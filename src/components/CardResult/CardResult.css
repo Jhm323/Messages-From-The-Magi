@@ -190,3 +190,15 @@
 @media (max-width: 768px) {
   .card-image-wrap { max-width: 200px; }
 }
+
+@media (max-width: 480px) {
+  .card-display { padding: 1.5rem 1rem; }
+  .card-image-wrap { max-width: 160px; }
+  .reading-result { padding: 1.5rem 1rem; }
+  .reading-result__card-name { font-size: 1.3rem; }
+  .card-affirmation { padding: 0.75rem 1rem; font-size: 0.95rem; }
+}
+
+@media (max-width: 360px) {
+  .card-image-wrap { max-width: 130px; }
+}
