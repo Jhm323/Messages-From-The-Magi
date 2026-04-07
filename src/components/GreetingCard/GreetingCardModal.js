@@ -13,6 +13,27 @@ import { getBirthCard } from "../../api/cardQueries.js";
 import { buildBirthdateSelects } from "../../utils/helpers.js";
 import { getUser, isLoggedIn }   from "../../auth/AuthStore.js";
 import { saveReading }           from "../../auth/SavedReadings.js";
+import { addToCart }             from "../../cart/CartStore.js";
+import { openCart }              from "../Cart/Cart.js";
+
+const PRODUCTS = {
+  email: {
+    id:          'greeting-card-email',
+    name:        'Send Greeting Card via Email',
+    type:        'Digital Delivery',
+    icon:        '✉',
+    price:       499,
+    description: 'Your personalized Magi greeting card delivered to the recipient\'s inbox.',
+  },
+  print: {
+    id:          'greeting-card-print',
+    name:        'Printable Greeting Card PDF',
+    type:        'Digital Download',
+    icon:        '🖨',
+    price:       299,
+    description: 'A beautifully formatted PDF of your personalized Magi greeting card, ready to print.',
+  },
+};
 
 const MODAL_ID = "modal-greeting";
 
@@ -74,21 +95,16 @@ function buildHTML() {
     <div id="${MODAL_ID}-step-result" style="display:none;">
       <div id="${MODAL_ID}-card-output"></div>
 
-      <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-        <button class="btn btn--secondary" id="${MODAL_ID}-print" style="flex:1;">
-          🖨 Print Card
-        </button>
-        <button class="btn btn--ghost" id="${MODAL_ID}-again" style="flex:1;">
-          ← New Card
-        </button>
+      <div class="greeting-actions">
+        <div style="display:flex;gap:1rem;">
+          <button class="btn btn--primary" id="${MODAL_ID}-buy-email" style="flex:1;">
+            ✉ Send via Email
+          </button>
+          <button class="btn btn--secondary" id="${MODAL_ID}-buy-print" style="flex:1;">
+            🖨 Print PDF
+          </button>
+        </div>
       </div>
-      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
-        ♦ Save Reading
-      </button>
-      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
-      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.25rem;">
-        Email integration coming soon (Tier 2)
-      </p>
     </div>
   </div>
 </div>`;
@@ -242,39 +258,19 @@ function ensureModal() {
         });
 
       _pending = { card: result.card, eyebrow: name };
-      resetSaveBtn();
 
       document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
-      document.getElementById(`${MODAL_ID}-step-result`).style.display = "block";
+      document.getElementById(`${MODAL_ID}-step-result`).style.display = "flex";
     });
 
-  document.getElementById(`${MODAL_ID}-again`).addEventListener("click", () => {
-    _pending = null;
-    reset();
+  document.getElementById(`${MODAL_ID}-buy-email`).addEventListener("click", () => {
+    addToCart(PRODUCTS.email);
+    openCart();
   });
 
-  document.getElementById(`${MODAL_ID}-save`).addEventListener("click", () => {
-    const msgEl = document.getElementById(`${MODAL_ID}-save-msg`);
-    if (!isLoggedIn()) {
-      msgEl.textContent = "Sign in to save your readings.";
-      msgEl.style.color = "var(--color-gold-muted)";
-      return;
-    }
-    if (!_pending) return;
-    saveReading({
-      type:           "greeting-card",
-      label:          "Greeting Card",
-      eyebrow:        _pending.eyebrow,
-      cardId:         _pending.card.id,
-      cardName:       _pending.card.name,
-      cardSuit:       _pending.card.suit,
-      cardSuitSymbol: _pending.card.suitSymbol,
-    });
-    markSaved();
-  });
-
-  document.getElementById(`${MODAL_ID}-print`).addEventListener("click", () => {
-    window.print();
+  document.getElementById(`${MODAL_ID}-buy-print`).addEventListener("click", () => {
+    addToCart(PRODUCTS.print);
+    openCart();
   });
 
   function showError(msg) {
@@ -283,22 +279,11 @@ function ensureModal() {
   }
 
   function reset() {
-    document.getElementById(`${MODAL_ID}-step-form`).style.display = "block";
+    document.getElementById(`${MODAL_ID}-step-form`).style.display = "";
     document.getElementById(`${MODAL_ID}-step-result`).style.display = "none";
   }
 }
 
-function resetSaveBtn() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
-  if (btn) { btn.textContent = "♦ Save Reading"; btn.disabled = false; }
-  if (msg) msg.textContent = "";
-}
-
-function markSaved() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  if (btn) { btn.textContent = "✓ Saved"; btn.disabled = true; }
-}
 
 function prefillUserData() {
   if (!isLoggedIn()) return;
