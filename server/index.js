@@ -33,8 +33,13 @@ app.use(cors({
       callback(new Error(`CORS: origin ${origin} not allowed`));
     }
   },
-  credentials: true,
+  methods:          ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders:   ['Content-Type', 'Authorization'],
+  credentials:      true,
 }));
+
+// Respond to preflight requests on all routes
+app.options('*', cors());
 
 // ─── Body Parser ──────────────────────────────────────────────────────────────
 app.use(express.json());
