@@ -3,7 +3,7 @@ require('dotenv').config();
 const express    = require('express');
 const cors       = require('cors');
 const helmet     = require('helmet');
-const { Pool }   = require('pg');
+const db = require('./db');
 
 const healthRouter    = require('./routes/health');
 const { rateLimiter } = require('./middleware/rateLimit');
@@ -12,7 +12,6 @@ const app  = express();
 const PORT = process.env.PORT || 4000;
 
 // ─── Database ─────────────────────────────────────────────────────────────────
-const db = new Pool({ connectionString: process.env.DATABASE_URL });
 app.locals.db = db;
 
 // ─── Security ─────────────────────────────────────────────────────────────────
