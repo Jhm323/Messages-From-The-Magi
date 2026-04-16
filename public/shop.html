@@ -173,10 +173,12 @@
 
   <script type="module">
     import { initHeader } from '/src/components/Header/Header.js';
+    import { initCosmos } from '/src/components/Cosmos/Cosmos.js';
     import { initFooter } from '/src/components/Footer/Footer.js';
     import { addToCart, onCartChange } from '/src/cart/CartStore.js';
     import { openCart } from '/src/components/Cart/Cart.js';
 
+    initCosmos();
     initHeader('#site-header-mount', { activePath: '/shop.html' });
     initFooter('#site-footer-mount');
 

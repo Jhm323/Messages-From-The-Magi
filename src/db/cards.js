@@ -21,7 +21,7 @@ const SUIT_META = {
   },
   Clubs: {
     symbol: "♣",
-    element: "Air",
+    element: "Fire",
     color: "#1A7A4A",
     keywords: [
       "mind",
@@ -33,7 +33,7 @@ const SUIT_META = {
   },
   Diamonds: {
     symbol: "♦",
-    element: "Fire",
+    element: "Earth",
     color: "#2471A3",
     keywords: [
       "vision",
@@ -45,7 +45,7 @@ const SUIT_META = {
   },
   Spades: {
     symbol: "♠",
-    element: "Water",
+    element: "Air",
     color: "#6C3483",
     keywords: [
       "transformation",

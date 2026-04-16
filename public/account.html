@@ -116,10 +116,12 @@
     import { getSavedReadings, deleteReading } from '/src/auth/SavedReadings.js';
     import { initHeader }                     from '/src/components/Header/Header.js';
     import { initFooter }                     from '/src/components/Footer/Footer.js';
+    import { initCosmos }                     from '/src/components/Cosmos/Cosmos.js';
 
     // Guard: redirect to home if not logged in (body stays invisible during redirect)
     requireAuth('/');
 
+    initCosmos();
     initHeader('#site-header-mount', { activePath: '/account.html' });
     initFooter('#site-footer-mount');
 

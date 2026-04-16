@@ -84,7 +84,9 @@
     import { openCompatibilityModal }  from '/src/components/CompatibilityModal.js';
     import { openGeolocationModal }    from '/src/components/GeolocationModal.js';
     import { openGreetingCardModal }   from '/src/components/GreetingCard/GreetingCardModal.js';
+    import { initCosmos }             from '/src/components/Cosmos/Cosmos.js';
 
+    initCosmos();
     initHeader('#site-header-mount', { activePath: '/readings.html' });
     initFooter('#site-footer-mount');
     document.body.classList.replace('js-loading', 'js-ready');

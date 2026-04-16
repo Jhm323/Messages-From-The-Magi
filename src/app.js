@@ -4,6 +4,7 @@
 
 import { initHeader }         from "./components/Header/Header.js";
 import { initFooter }         from "./components/Footer/Footer.js";
+import { initCosmos }         from "./components/Cosmos/Cosmos.js";
 import "./components/ui/Button/Button.js";
 import "./components/ui/Form/Form.js";
 import { openBirthCardModal } from "./components/BirthCardModal.js";
@@ -11,6 +12,7 @@ import { getCardOfTheDay }    from "./api/cardQueries.js";
 import { renderCardResult }   from "./components/CardResult/CardResult.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  initCosmos();
   initHeader("#site-header-mount", { activePath: "/" });
   initFooter("#site-footer-mount");
   initCardOfTheDay();

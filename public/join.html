@@ -84,8 +84,10 @@
 
   <script type="module">
     import { initHeader } from '/src/components/Header/Header.js';
+    import { initCosmos } from '/src/components/Cosmos/Cosmos.js';
     import { initFooter } from '/src/components/Footer/Footer.js';
 
+    initCosmos();
     initHeader('#site-header-mount', { activePath: '/join.html' });
     initFooter('#site-footer-mount');
     document.body.classList.replace('js-loading', 'js-ready');
