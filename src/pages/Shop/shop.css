@@ -1,5 +1,16 @@
 /* ─── Shop page ──────────────────────────────────────────────────────────── */
 
+/* ── Background ──────────────────────────────────────────────────────────── */
+html:has(.shop-page) {
+  background-image: url("/images/bg-shop.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.shop-page {
+  background: transparent !important;
+}
+
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
