@@ -33,8 +33,6 @@ export function initCosmos() {
   Object.assign(canvas.style, {
     position: 'fixed',
     inset: '0',
-    width: '100%',
-    height: '100%',
     pointerEvents: 'none',
     zIndex: '0',
   });
@@ -49,8 +47,15 @@ export function initCosmos() {
 
   // ── Resize ─────────────────────────────────────────────────────────────
   function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    // Reset transform each resize so dpr scale doesn't accumulate
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     buildStars();
     buildConstellations();
   }

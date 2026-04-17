@@ -14,10 +14,10 @@
     <section class="section" aria-label="Join the Order of the Magi">
       <div class="container">
 
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">Choose Your Level</div>
-          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.75rem;">Join the Order of the Magi</h1>
-          <p style="color:var(--color-dawn);max-width:520px;margin:0 auto;">
+        <div class="section-intro">
+          <div class="hero__eyebrow anim-hero" style="--hi:0">Choose Your Level</div>
+          <h1 class="section-intro__title magic-h anim-hero" style="--hi:1">Join the Order of the Magi</h1>
+          <p class="section-intro__body anim-para" style="--pi:0">
             Rather than selecting a plan, you step into a level of awareness.
             Each tier is a doorway — a deeper layer of the system.
           </p>
@@ -25,10 +25,10 @@
 
         <div class="tier-grid">
 
-          <div class="tier-card">
+          <div class="tier-card anim-reveal" style="--ri:0">
             <div class="tier-badge">🌌</div>
             <div class="tier-name">Initiate</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Free</div>
+            <div class="tier-card__price">Free</div>
             <div class="tier-tagline">Enter the Matrix of Time</div>
             <ul class="tier-features">
               <li>Birth Card calculation + basic interpretation</li>
@@ -37,14 +37,14 @@
               <li>Introduction to the system</li>
               <li>Access to shop and booking</li>
             </ul>
-            <a href="/readings.html" class="btn btn--primary" style="width:100%;text-align:center;">Begin ✦</a>
+            <a href="/readings.html" class="btn btn--primary btn--full">Begin ✦</a>
           </div>
 
-          <div class="tier-card tier-card--featured">
-            <div style="font-family:var(--font-heading);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold);margin-bottom:0.25rem;">Most Popular</div>
+          <div class="tier-card tier-card--featured anim-reveal" style="--ri:1">
+            <div class="tier-card__badge">Most Popular</div>
             <div class="tier-badge">💎</div>
             <div class="tier-name">Seeker</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Tier 2</div>
+            <div class="tier-card__price">Tier 2</div>
             <div class="tier-tagline">Explore Your Patterns</div>
             <ul class="tier-features">
               <li>Everything in Initiate</li>
@@ -55,13 +55,13 @@
               <li>Composite Card readings</li>
               <li>Monthly recorded readings by Sharon</li>
             </ul>
-            <button class="btn btn--primary" disabled style="width:100%;opacity:0.5;cursor:not-allowed;">Coming Soon</button>
+            <button class="btn btn--primary btn--full" disabled>Coming Soon</button>
           </div>
 
-          <div class="tier-card">
+          <div class="tier-card anim-reveal" style="--ri:2">
             <div class="tier-badge">🔮</div>
             <div class="tier-name">Magi</div>
-            <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--color-gold);letter-spacing:0.06em;">Tier 3</div>
+            <div class="tier-card__price">Tier 3</div>
             <div class="tier-tagline">Understand Your Path Through Time</div>
             <ul class="tier-features">
               <li>Everything in Seeker</li>
@@ -70,9 +70,9 @@
               <li>Yearly Card reading</li>
               <li>Location Card readings</li>
               <li>Location compatibility</li>
-              <li>Planetary &amp; Soul Card readings <span style="color:var(--color-mist)">(coming)</span></li>
+              <li>Planetary &amp; Soul Card readings <span class="tier-features__coming">(coming)</span></li>
             </ul>
-            <button class="btn btn--secondary" disabled style="width:100%;opacity:0.5;cursor:not-allowed;">Coming Soon</button>
+            <button class="btn btn--secondary btn--full" disabled>Coming Soon</button>
           </div>
 
         </div>
@@ -82,16 +82,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader } from '/src/components/Header/Header.js';
-    import { initCosmos } from '/src/components/Cosmos/Cosmos.js';
-    import { initFooter } from '/src/components/Footer/Footer.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/join.html' });
-    initFooter('#site-footer-mount');
-    document.body.classList.replace('js-loading', 'js-ready');
-</script>
+  <script type="module" src="/src/pages/join.js"></script>
 
 </body>
 </html>

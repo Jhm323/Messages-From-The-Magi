@@ -5,149 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Magi Shop · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <style>
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    @media (max-width: 480px) {
-      .shop-grid { gap: 1rem; margin-top: 2rem; }
-      .product-card { padding: 1.25rem 1.1rem; }
-      .product-footer { flex-wrap: wrap; gap: 0.75rem; }
-      .add-to-cart-btn { width: 100%; justify-content: center; text-align: center; }
-    }
-
-    .product-card {
-      background: var(--color-dusk);
-      border: 1px solid var(--color-mist);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .product-card:hover {
-      border-color: var(--color-gold-muted);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card);
-    }
-
-    .product-card--featured {
-      border-color: var(--color-gold-muted);
-      background: linear-gradient(135deg, var(--color-dusk) 0%, #1e1c38 100%);
-      box-shadow: 0 0 0 1px var(--color-gold-glow), var(--shadow-card);
-    }
-
-    .product-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--radius-sm);
-      background: var(--color-gold);
-      color: var(--color-void);
-      font-family: var(--font-heading);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .product-icon {
-      font-size: 2.5rem;
-      line-height: 1;
-    }
-
-    .product-type {
-      font-family: var(--font-heading);
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-gold-muted);
-    }
-
-    .product-name {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      color: var(--color-white);
-      line-height: 1.3;
-    }
-
-    .product-desc {
-      font-size: 0.88rem;
-      color: var(--color-dawn);
-      line-height: 1.65;
-      flex: 1;
-      margin: 0;
-    }
-
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--color-mist);
-      margin-top: auto;
-    }
-
-    .product-price {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      color: var(--color-gold);
-      letter-spacing: 0.04em;
-    }
-
-    .product-price__sub {
-      font-size: 0.7rem;
-      color: var(--color-mist);
-      font-family: var(--font-heading);
-      letter-spacing: 0.06em;
-      margin-left: 0.3rem;
-    }
-
-    .add-to-cart-btn {
-      padding: 0.5rem 1.1rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-gold-muted);
-      background: var(--color-gold-glow);
-      color: var(--color-gold);
-      font-family: var(--font-heading);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
-      white-space: nowrap;
-    }
-
-    .add-to-cart-btn:hover {
-      background: var(--color-gold);
-      color: var(--color-void);
-      border-color: var(--color-gold);
-    }
-
-    .add-to-cart-btn.is-added {
-      background: var(--color-success);
-      border-color: var(--color-success);
-      color: var(--color-void);
-    }
-  </style>
 </head>
 <body class="js-loading">
 
@@ -155,14 +12,14 @@
 
   <main>
     <section class="hero">
-      <div class="hero__eyebrow">Sacred Commerce</div>
-      <h1 class="hero__title">The Magi Shop</h1>
-      <p class="hero__body">
+      <div class="hero__eyebrow anim-hero" style="--hi:0">Sacred Commerce</div>
+      <h1 class="hero__title magic-h anim-hero" style="--hi:1">The Magi Shop</h1>
+      <p class="hero__body anim-para" style="--pi:0">
         Deepen your practice with guides, readings, and tools rooted in the ancient science of the cards.
       </p>
     </section>
 
-    <section class="section" style="padding-top: 0;">
+    <section class="section" style="padding-top:0">
       <div class="container">
         <div class="shop-grid" id="shop-grid"></div>
       </div>
@@ -171,117 +28,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader } from '/src/components/Header/Header.js';
-    import { initCosmos } from '/src/components/Cosmos/Cosmos.js';
-    import { initFooter } from '/src/components/Footer/Footer.js';
-    import { addToCart, onCartChange } from '/src/cart/CartStore.js';
-    import { openCart } from '/src/components/Cart/Cart.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/shop.html' });
-    initFooter('#site-footer-mount');
-
-    const PRODUCTS = [
-      {
-        id: 'birth-card-guide',
-        name: 'Birth Card PDF Guide',
-        type: 'Digital Download',
-        icon: '★',
-        price: 1200,
-        description: 'A beautifully formatted 40-page PDF covering your Birth Card, Planetary Ruling Card, and core life themes — yours to keep forever.',
-        badge: null,
-      },
-      {
-        id: 'system-workbook',
-        name: 'The Complete System Workbook',
-        type: 'Digital Download',
-        icon: '◈',
-        price: 2700,
-        description: 'An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.',
-        badge: 'Best Seller',
-        featured: true,
-      },
-      {
-        id: 'year-spread',
-        name: 'Year Ahead Spread Reading',
-        type: 'Personalized PDF',
-        icon: '✦',
-        price: 2200,
-        description: 'Your 13-card year spread calculated and interpreted for your current Solar Year — delivered as a personalized PDF within 48 hours.',
-        badge: null,
-      },
-      {
-        id: 'compatibility-report',
-        name: 'Love & Compatibility Report',
-        type: 'Personalized PDF',
-        icon: '♥',
-        price: 1900,
-        description: 'The full card-to-card relationship analysis between you and a partner — cosmic connections, karmic ties, and natural affinities.',
-        badge: null,
-      },
-      {
-        id: 'living-deck',
-        name: 'The Living Deck',
-        type: 'Physical Product',
-        icon: '🃏',
-        price: 4500,
-        description: 'A premium 52-card printed deck with the full Magi symbolism — gilded edges, linen finish, and a collector\'s keepsake box.',
-        badge: 'New',
-        featured: true,
-      },
-      {
-        id: 'foundations-course',
-        name: 'Magi Foundations Course',
-        type: 'Video Course',
-        icon: '▶',
-        price: 9700,
-        description: 'Six in-depth video modules taught by Sharon covering the complete system from first principles — suits, birth cards, spreads, and timing.',
-        badge: 'Featured',
-      },
-    ];
-
-    function renderGrid() {
-      const grid = document.getElementById('shop-grid');
-      grid.innerHTML = PRODUCTS.map(p => `
-        <div class="product-card${p.featured ? ' product-card--featured' : ''}">
-          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-          <div class="product-icon">${p.icon}</div>
-          <div class="product-type">${p.type}</div>
-          <div class="product-name">${p.name}</div>
-          <p class="product-desc">${p.description}</p>
-          <div class="product-footer">
-            <div class="product-price">
-              $${(p.price / 100).toFixed(2)}
-              ${p.type === 'Digital Download' ? '<span class="product-price__sub">one-time</span>' : ''}
-            </div>
-            <button class="add-to-cart-btn" data-product-id="${p.id}">Add to Cart</button>
-          </div>
-        </div>`).join('');
-    }
-
-    renderGrid();
-
-    document.getElementById('shop-grid').addEventListener('click', (e) => {
-      const btn = e.target.closest('.add-to-cart-btn');
-      if (!btn) return;
-      const product = PRODUCTS.find(p => p.id === btn.dataset.productId);
-      if (!product) return;
-
-      addToCart(product);
-
-      btn.textContent = '✓ Added';
-      btn.classList.add('is-added');
-      setTimeout(() => {
-        btn.textContent = 'Add to Cart';
-        btn.classList.remove('is-added');
-      }, 1800);
-
-      openCart();
-    });
-
-    document.body.classList.replace('js-loading', 'js-ready');
-  </script>
+  <script type="module" src="/src/pages/shop.js"></script>
 
 </body>
 </html>

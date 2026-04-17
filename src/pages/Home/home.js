@@ -1,16 +1,13 @@
-/**
- * Messages from the Magi — Home Page Entry Point
- */
-
-import { initHeader }         from "./components/Header/Header.js";
-import { initFooter }         from "./components/Footer/Footer.js";
-import { initCosmos }         from "./components/Cosmos/Cosmos.js";
-import { initPageAnimations } from "./components/PageAnimations/PageAnimations.js";
-import "./components/ui/Button/Button.js";
-import "./components/ui/Form/Form.js";
-import { openBirthCardModal } from "./components/BirthCardModal.js";
-import { getCardOfTheDay }    from "./api/cardQueries.js";
-import { renderCardResult }   from "./components/CardResult/CardResult.js";
+import "./home.css";
+import { initHeader } from "../../components/Header/Header.js";
+import { initFooter } from "../../components/Footer/Footer.js";
+import { initCosmos } from "../../components/Cosmos/Cosmos.js";
+import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
+import "../../components/ui/Button/Button.js";
+import "../../components/ui/Form/Form.js";
+import { openBirthCardModal } from "../../components/BirthCardModal.js";
+import { getCardOfTheDay } from "../../api/cardQueries.js";
+import { renderCardResult } from "../../components/CardResult/CardResult.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initCosmos();
@@ -33,11 +30,11 @@ function initCardOfTheDay() {
       month: "long",
       day: "numeric",
     }),
-    subheading:      "Card of the Day",
+    subheading: "Card of the Day",
     showAffirmation: true,
-    showAction:      false,
+    showAction: false,
     showDescription: false,
-    compact:         true,
+    compact: true,
   });
 }
 

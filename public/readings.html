@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Readings · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <style>
-    @media print {
-      body > *:not(#modal-greeting) { display: none !important; }
-      #modal-greeting { position: static !important; background: white !important; }
-      #modal-greeting .modal-overlay { position: static !important; }
-      #modal-greeting-printable { page-break-inside: avoid; }
-      .modal__close, .btn, .modal__header { display: none !important; }
-      .modal { box-shadow: none !important; border: none !important; }
-    }
-  </style>
 </head>
 <body class="js-loading">
 
@@ -23,10 +13,10 @@
   <main>
     <section class="section" aria-label="Readings">
       <div class="container">
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">The Oracle Awaits</div>
-          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.75rem;">Readings</h1>
-          <p style="color:var(--color-dawn);max-width:520px;margin:0 auto;">
+        <div class="section-intro">
+          <div class="hero__eyebrow anim-hero" style="--hi:0">The Oracle Awaits</div>
+          <h1 class="section-intro__title magic-h anim-hero" style="--hi:1">Readings</h1>
+          <p class="section-intro__body anim-para" style="--pi:0">
             Each reading opens a doorway into the ancient science of the cards.
             Choose where your journey begins.
           </p>
@@ -34,7 +24,7 @@
 
         <div class="feature-grid">
 
-          <button class="feature-btn" data-feature="birth-card">
+          <button class="feature-btn anim-reveal" style="--ri:0" data-feature="birth-card">
             <div class="feature-btn__icon">★</div>
             <div class="feature-btn__title">Birth Card Reading</div>
             <div class="feature-btn__desc">
@@ -43,7 +33,7 @@
             </div>
           </button>
 
-          <button class="feature-btn" data-feature="compatibility">
+          <button class="feature-btn anim-reveal" style="--ri:1" data-feature="compatibility">
             <div class="feature-btn__icon">♥♠</div>
             <div class="feature-btn__title">Compatibility Reading</div>
             <div class="feature-btn__desc">
@@ -52,7 +42,7 @@
             </div>
           </button>
 
-          <button class="feature-btn" data-feature="geolocation">
+          <button class="feature-btn anim-reveal" style="--ri:2" data-feature="geolocation">
             <div class="feature-btn__icon">🗺</div>
             <div class="feature-btn__title">Location Reading</div>
             <div class="feature-btn__desc">
@@ -61,7 +51,7 @@
             </div>
           </button>
 
-          <button class="feature-btn" data-feature="greeting-card">
+          <button class="feature-btn anim-reveal" style="--ri:3" data-feature="greeting-card">
             <div class="feature-btn__icon">✉︎</div>
             <div class="feature-btn__title">Greeting Card</div>
             <div class="feature-btn__desc">
@@ -77,41 +67,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader }              from '/src/components/Header/Header.js';
-    import { initFooter }              from '/src/components/Footer/Footer.js';
-    import { openBirthCardModal }      from '/src/components/BirthCardModal.js';
-    import { openCompatibilityModal }  from '/src/components/CompatibilityModal.js';
-    import { openGeolocationModal }    from '/src/components/GeolocationModal.js';
-    import { openGreetingCardModal }   from '/src/components/GreetingCard/GreetingCardModal.js';
-    import { initCosmos }             from '/src/components/Cosmos/Cosmos.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/readings.html' });
-    initFooter('#site-footer-mount');
-    document.body.classList.replace('js-loading', 'js-ready');
-
-    const openMap = {
-      'birth-card':    openBirthCardModal,
-      'compatibility': openCompatibilityModal,
-      'geolocation':   openGeolocationModal,
-      'greeting-card': openGreetingCardModal,
-    };
-
-    document.querySelectorAll('[data-feature]').forEach(btn => {
-      btn.style.cursor = 'pointer';
-      btn.addEventListener('click', () => {
-        const fn = openMap[btn.dataset.feature];
-        if (fn) fn();
-      });
-    });
-
-    // Auto-open modal when arriving via ?open= from the header submenu
-    const openParam = new URLSearchParams(location.search).get('open');
-    if (openParam && openMap[openParam]) {
-      openMap[openParam]();
-    }
-  </script>
+  <script type="module" src="/src/pages/readings.js"></script>
 
 </body>
 </html>

@@ -20,18 +20,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader }   from '/src/components/Header/Header.js';
-    import { initFooter }   from '/src/components/Footer/Footer.js';
-    import { initPullCard } from '/src/components/PullCard.js';
-    import { initCosmos }  from '/src/components/Cosmos/Cosmos.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/oracle.html' });
-    initFooter('#site-footer-mount');
-    initPullCard('#pull-card-mount');
-    document.body.classList.replace('js-loading', 'js-ready');
-</script>
+  <script type="module" src="/src/pages/oracle.js"></script>
 
 </body>
 </html>

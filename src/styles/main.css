@@ -176,6 +176,126 @@ main, footer {
   font-size: 1.05rem;
 }
 
+/* ─── SECTION INTRO ──────────────────────────────────────────────────────── */
+.section-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-intro--sm { margin-bottom: 2rem; }
+
+.section-intro__title { margin-bottom: 0.75rem; }
+
+.section-intro__body {
+  color: var(--color-dawn);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.section-intro__body--wide { max-width: 560px; }
+
+/* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ─── PROSE ──────────────────────────────────────────────────────────────── */
+/* Apply to a wrapper to style descendant paragraphs, or directly to a <p>. */
+.prose,
+.prose p {
+  color: var(--color-dawn);
+  line-height: 1.9;
+}
+
+/* ─── BLOCKQUOTE ─────────────────────────────────────────────────────────── */
+.blockquote {
+  border-left: 2px solid var(--color-gold);
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-dusk);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.blockquote--sm {
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 0.9rem;
+}
+.blockquote__body {
+  color: var(--color-dawn);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+.blockquote__body--inline { margin-bottom: 0; }
+.blockquote__cite {
+  display: block;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  font-style: normal;
+}
+
+/* ─── STAT TILE ──────────────────────────────────────────────────────────── */
+.stat-tile {
+  background: var(--color-dusk);
+  border: 1px solid var(--color-mist);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-tile__number {
+  font-size: 2.5rem;
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-tile__label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  margin-bottom: 0.5rem;
+}
+.stat-tile__body {
+  font-size: 0.9rem;
+  color: var(--color-dawn);
+  line-height: 1.7;
+}
+
+/* ─── COMING SOON ────────────────────────────────────────────────────────── */
+.coming-soon {
+  background: var(--color-dusk);
+  border: 1px dashed var(--color-mist);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+}
+.coming-soon--padded { padding: 3rem; }
+.coming-soon--centered {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.coming-soon__label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-muted);
+  margin-bottom: 0.5rem;
+}
+.coming-soon__body {
+  font-size: 0.88rem;
+  color: var(--color-dawn);
+}
+
 /* ─── SUBSCRIPTION TIERS ─────────────────────────────────────────────────── */
 .tier-grid {
   display: grid;
@@ -207,6 +327,21 @@ main, footer {
 }
 
 .tier-badge { font-size: 2rem; line-height: 1; }
+
+.tier-card__price {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  letter-spacing: 0.06em;
+}
+.tier-card__badge {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+.tier-features__coming { color: var(--color-mist); }
 
 .tier-name {
   font-family: var(--font-heading);
@@ -321,13 +456,17 @@ body.js-ready {
 .text-heading { font-family: var(--font-heading); }
 .text-display { font-family: var(--font-display); }
 
+.btn--full { width: 100%; justify-content: center; text-align: center; }
+
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
 .mt-4 { margin-top: 2rem; }
 .mt-6 { margin-top: 3rem; }
 .mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
 .mb-4 { margin-bottom: 2rem; }
+.mb-5 { margin-bottom: 2.5rem; }
 
 .sr-only {
   position: absolute;
@@ -336,6 +475,16 @@ body.js-ready {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+}
+
+/* ─── PRINT ──────────────────────────────────────────────────────────────── */
+@media print {
+  body > *:not(#modal-greeting) { display: none !important; }
+  #modal-greeting { position: static !important; background: white !important; }
+  #modal-greeting .modal-overlay { position: static !important; }
+  #modal-greeting-printable { page-break-inside: avoid; }
+  .modal__close, .btn, .modal__header { display: none !important; }
+  .modal { box-shadow: none !important; border: none !important; }
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */

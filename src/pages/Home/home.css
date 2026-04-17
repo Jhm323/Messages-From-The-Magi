@@ -1,0 +1,13 @@
+/* ─── Home page layout ───────────────────────────────────────────────────── */
+main { display: flex; flex-direction: column; }
+
+.home-hero { order: 2; }
+.home-card {
+  order: 1;
+  padding: 2rem 0 4rem;
+}
+
+@media (min-width: 481px) {
+  .home-hero { order: 1; }
+  .home-card { order: 2; }
+}

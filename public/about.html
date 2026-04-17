@@ -5,131 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About & Contact · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <style>
-    /* ── Playing card shape ───────────────────────────────────────────── */
-    .card-diamond {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.75rem;
-      max-width: 460px;
-      margin: 0 auto 2.5rem;
-    }
-    .card-diamond > :nth-child(1),
-    .card-diamond > :nth-child(4) {
-      grid-column: 1 / -1;
-      width: calc(50% - 0.875rem);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .play-card {
-      --card-accent: var(--color-gold);
-      background: var(--color-dusk);
-      border: 1px solid var(--card-accent);
-      border-radius: 10px;
-      aspect-ratio: 1 / 2;
-      display: flex;
-      flex-direction: column;
-      padding: 0.6rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow:
-        0 6px 24px rgba(0,0,0,0.5),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
-      /* dealt transition */
-      transition:
-        transform 0.6s cubic-bezier(0.34, 1.18, 0.64, 1),
-        opacity   0.35s ease,
-        box-shadow 0.3s ease;
-    }
-    .play-card:hover {
-      box-shadow:
-        0 12px 40px rgba(0,0,0,0.55),
-        0 0 0 1px var(--card-accent),
-        inset 0 0 0 1px rgba(255,255,255,0.06);
-      transform: translateY(-4px) rotate(1deg) !important;
-    }
-
-    /* Diagonal hatching for card texture */
-    .play-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 12px,
-        rgba(255,255,255,0.018) 12px,
-        rgba(255,255,255,0.018) 13px
-      );
-      pointer-events: none;
-      border-radius: inherit;
-    }
-
-    /* Corner pips */
-    .play-card__pip {
-      font-size: 1rem;
-      color: var(--card-accent);
-      line-height: 1;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-    .play-card__pip--br {
-      margin-top: auto;
-      transform: rotate(180deg);
-      align-self: flex-end;
-    }
-
-    /* Center body */
-    .play-card__body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0.5rem 0.25rem;
-      position: relative;
-      z-index: 1;
-    }
-    .play-card__icon {
-      font-size: 2rem;
-      color: var(--card-accent);
-      line-height: 1;
-      margin-bottom: 0.6rem;
-    }
-    .play-card__title {
-      font-family: var(--font-heading);
-      font-size: 0.68rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--color-light);
-      line-height: 1.5;
-      margin-bottom: 0.4rem;
-    }
-    .play-card__desc {
-      font-size: 0.68rem;
-      color: var(--color-dawn);
-      line-height: 1.55;
-      text-align: center;
-    }
-
-    /* ── Deal animation ───────────────────────────────────────────────── */
-    .js-animate .play-card {
-      opacity: 0;
-      transform: perspective(900px) rotateY(-90deg) rotate(-4deg);
-    }
-    .play-card.is-dealt {
-      opacity: 1;
-      transform: perspective(900px) rotateY(0deg) rotate(0deg);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .js-animate .play-card { opacity: 1; transform: none; }
-      .play-card { transition: none; }
-    }
-  </style>
 </head>
 <body class="js-loading">
 
@@ -141,8 +16,8 @@
     <section class="section" aria-label="About Sharon">
       <div class="container container--narrow text-center">
         <div class="hero__eyebrow">The Teacher</div>
-        <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem;">Book a Reading with Sharon</h1>
-        <p style="color:var(--color-dawn);margin-bottom:2rem;line-height:1.9;">
+        <h1 class="section-intro__title">Book a Reading with Sharon</h1>
+        <p class="section-intro__body mb-4">
           Sharon has spent decades studying, teaching, and living within this ancient system.
           Her readings go beyond the digital experience — offering a depth of intuitive perception
           and direct transmission that can only happen in a live session.
@@ -200,36 +75,32 @@
 
     <hr class="divider">
 
-    <!-- ── ABOUT SHARON BIO ─────────────────────────────────────────────── -->
+    <!-- ── SHARON BIO ─────────────────────────────────────────────────────── -->
     <section class="section" aria-label="About Sharon Jeffers">
       <div class="container container--narrow">
         <div class="hero__eyebrow text-center">About Sharon Jeffers</div>
-        <h2 style="margin-bottom:1.75rem;text-align:center;">The Woman Behind the Cards</h2>
+        <h2 class="text-center mb-4">The Woman Behind the Cards</h2>
 
-        <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:1.25rem;">
-          Sharon Jeffers is an internationally known life coach and second-generation psychic medium who has worked with thousands of people from all walks of life. She began her studies in numerology and astrology at age thirteen and began doing readings spontaneously with the regular deck of playing cards at age twenty-one. She began studying this mystic science of the cards in 1990, after happening upon <em>Sacred Symbols of the Ancients</em> in a metaphysical bookstore in Los Angeles.
-        </p>
-        <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:1.25rem;">
-          Sharon is known for her accuracy with the cards and for her clear delineations of the birthdays as they associate with the playing deck. She is the author of several books — the latest being <em>Cards of Destiny</em> — and the writer for Zento Magazine's Oracle column. She has been a guest speaker at the Whole Life Expo, appeared on various radio shows, and is a repeat guest on KKCR radio in Hawaii.
-        </p>
-        <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:1.25rem;">
-          Sharon also has an extensive background in transformational healing work, applied kinesiology, and feng shui — each for more than twenty years — and has done extensive work with kids at risk, prison inmates, police departments, management teams, educators, and health professionals. She was the founder of the Center for Integrated Learning and Excelerated Learning Strategies.
-        </p>
-        <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:2rem;">
-          Her client list includes police departments, educational institutions, celebrities, and people from most countries in the world. She lives in both Kauai and Los Angeles. With over 30 years of experience helping people transform their lives, Sharon is an author, speaker, consultant, counselor, and medium.
-        </p>
+        <div class="prose">
+          <p>
+            Sharon Jeffers is an internationally known life coach and second-generation psychic medium who has worked with thousands of people from all walks of life. She began her studies in numerology and astrology at age thirteen and began doing readings spontaneously with the regular deck of playing cards at age twenty-one. She began studying this mystic science of the cards in 1990, after happening upon <em>Sacred Symbols of the Ancients</em> in a metaphysical bookstore in Los Angeles.
+          </p>
+          <p>
+            Sharon is known for her accuracy with the cards and for her clear delineations of the birthdays as they associate with the playing deck. She is the author of several books — the latest being <em>Cards of Destiny</em> — and the writer for Zento Magazine's Oracle column. She has been a guest speaker at the Whole Life Expo, appeared on various radio shows, and is a repeat guest on KKCR radio in Hawaii.
+          </p>
+          <p>
+            Sharon also has an extensive background in transformational healing work, applied kinesiology, and feng shui — each for more than twenty years — and has done extensive work with kids at risk, prison inmates, police departments, management teams, educators, and health professionals. She was the founder of the Center for Integrated Learning and Excelerated Learning Strategies.
+          </p>
+          <p>
+            Her client list includes police departments, educational institutions, celebrities, and people from most countries in the world. She lives in both Kauai and Los Angeles. With over 30 years of experience helping people transform their lives, Sharon is an author, speaker, consultant, counselor, and medium.
+          </p>
+        </div>
 
-        <blockquote style="
-          border-left: 2px solid var(--color-gold);
-          margin: 0;
-          padding: 1.25rem 1.5rem;
-          background: var(--color-dusk);
-          border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        ">
-          <p style="color:var(--color-dawn);line-height:1.8;font-style:italic;margin-bottom:0.75rem;">
+        <blockquote class="blockquote">
+          <p class="blockquote__body">
             "I've been a client of Sharon's for over two decades because she gives me the most accurate information. She is honest, caring, and very clear. If you are seeking direction in your life Sharon IS the person to work with."
           </p>
-          <cite style="color:var(--color-gold);font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.06em;font-style:normal;">— Margaret L., Atty. &nbsp;·&nbsp; B.C.</cite>
+          <cite class="blockquote__cite">— Margaret L., Atty. &nbsp;·&nbsp; B.C.</cite>
         </blockquote>
       </div>
     </section>
@@ -240,13 +111,13 @@
     <section class="section" id="contact" aria-label="Contact">
       <div class="container container--narrow text-center">
         <div class="hero__eyebrow">Get in Touch</div>
-        <h2 style="margin-bottom:1rem;">Contact</h2>
-        <p style="color:var(--color-dawn);margin-bottom:2rem;">
+        <h2 class="mb-2">Contact</h2>
+        <p class="section-intro__body mb-4">
           To book a reading with Sharon or learn more about this system — reach out below.
         </p>
-        <div style="background:var(--color-dusk);border:1px dashed var(--color-mist);border-radius:var(--radius-lg);padding:3rem;color:var(--color-mist);">
-          <p style="font-family:var(--font-heading);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;">Contact Form · Coming Soon</p>
-          <p style="font-size:0.85rem;margin-top:0.5rem;">Booking integration to be added in Phase 2.</p>
+        <div class="coming-soon coming-soon--padded">
+          <p class="coming-soon__label">Contact Form · Coming Soon</p>
+          <p class="coming-soon__body">Booking integration to be added in Phase 2.</p>
         </div>
       </div>
     </section>
@@ -255,33 +126,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader } from '/src/components/Header/Header.js';
-    import { initFooter } from '/src/components/Footer/Footer.js';
-    import { initCosmos } from '/src/components/Cosmos/Cosmos.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/about.html' });
-    initFooter('#site-footer-mount');
-    document.body.classList.replace('js-loading', 'js-ready');
-
-    // Gate initial hidden state on JS
-    document.documentElement.classList.add('js-animate');
-
-    // Deal cards when the diamond enters view
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const cards = entry.target.querySelectorAll('.play-card');
-        cards.forEach((card, i) => {
-          setTimeout(() => card.classList.add('is-dealt'), i * 160);
-        });
-        obs.unobserve(entry.target);
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.card-diamond').forEach(el => obs.observe(el));
-  </script>
+  <script type="module" src="/src/pages/about.js"></script>
 
 </body>
 </html>

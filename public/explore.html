@@ -5,352 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explore The Star of The Magi System · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <style>
-    /* ── Card table ambient ─────────────────────────────────────────────── */
-    .explore-main {
-      background:
-        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(8, 38, 18, 0.45) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 30% at 50% 100%, rgba(8, 38, 18, 0.25) 0%, transparent 70%);
-    }
-
-    /* ── Floating particles ─────────────────────────────────────────────── */
-    .x-particle {
-      position: fixed;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-      font-size: 0.7rem;
-      opacity: 0;
-      animation: xFloat var(--dur) ease-in-out infinite var(--delay);
-      color: var(--color-gold);
-      will-change: transform, opacity;
-    }
-    @keyframes xFloat {
-      0%   { opacity: 0;    transform: translateY(0)      rotate(0deg)   scale(0.8); }
-      12%  { opacity: 0.28; }
-      88%  { opacity: 0.12; }
-      100% { opacity: 0;    transform: translateY(-90px)  rotate(220deg) scale(1.1); }
-    }
-
-    /* ── Eyebrow shimmer ────────────────────────────────────────────────── */
-    .hero__eyebrow {
-      background: linear-gradient(
-        100deg,
-        var(--color-gold-muted) 15%,
-        var(--color-gold)       38%,
-        #fff4c2                 50%,
-        var(--color-gold)       62%,
-        var(--color-gold-muted) 85%
-      );
-      background-size: 220% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: eyebrowShimmer 4s linear infinite;
-    }
-    @keyframes eyebrowShimmer {
-      to { background-position: 220% center; }
-    }
-
-    /* ── Magic letter headings ──────────────────────────────────────────── */
-    .magic-h { display: block; }
-    .magic-h .ch {
-      display: inline-block;
-      animation: chDrift 5s ease-in-out infinite;
-      animation-delay: calc(var(--ci) * 90ms);
-      will-change: transform;
-    }
-    .magic-h .ch--space { animation: none; }
-    @keyframes chDrift {
-      0%,  100% { transform: translateY(0)    rotate(0deg)    scale(1);    }
-      20%        { transform: translateY(-3px) rotate(-1.1deg) scale(1.02); }
-      55%        { transform: translateY(2px)  rotate(0.7deg)  scale(0.99); }
-      80%        { transform: translateY(-1px) rotate(0.4deg)  scale(1.01); }
-    }
-
-    /* ── Scroll-triggered initial states (gated on .js-animate) ────────── */
-    .js-animate .anim-hero  { opacity: 0; transform: translateY(32px); }
-    .js-animate .anim-deal  {
-      opacity: 0;
-      transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px);
-    }
-    .js-animate .anim-reveal {
-      opacity: 0;
-      transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg);
-    }
-    .js-animate .anim-para  { opacity: 0; transform: translateY(22px); }
-
-    /* ── Transitions on .is-visible ─────────────────────────────────────── */
-    .anim-hero {
-      transition:
-        opacity 0.7s ease,
-        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: calc(var(--hi, 0) * 100ms);
-    }
-    .anim-hero.is-visible  { opacity: 1; transform: none; }
-
-    /* Card deal: CSS animation (not transition) for the bounce */
-    .anim-deal.is-visible {
-      animation: dealCard 0.65s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
-      animation-delay: calc(var(--di, 0) * 110ms);
-    }
-    @keyframes dealCard {
-      0%   { opacity: 0; transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px); }
-      55%  { opacity: 1; transform: perspective(900px) rotateY(6deg)   rotate(1deg)  translateY(0);     }
-      100% { opacity: 1; transform: perspective(900px) rotateY(0deg)   rotate(0deg)  translateY(0);     }
-    }
-
-    .anim-reveal.is-visible {
-      animation: revealCard 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-      animation-delay: calc(var(--ri, 0) * 90ms);
-    }
-    @keyframes revealCard {
-      0%   { opacity: 0; transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg); }
-      100% { opacity: 1; transform: perspective(1100px) rotateX(0deg)  translateY(0)    rotate(0deg);  }
-    }
-
-    .anim-para {
-      transition:
-        opacity 0.55s ease,
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: calc(var(--pi, 0) * 70ms);
-    }
-    .anim-para.is-visible { opacity: 1; transform: none; }
-
-    /* ── Suit block hover lift ───────────────────────────────────────────── */
-    .suit-block {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-radius: var(--radius-md);
-    }
-    .suit-block:hover {
-      transform: translateY(-4px) rotate(0.4deg);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    }
-
-    /* ── Playing card shape (shared with about.html) ────────────────────── */
-    .card-diamond {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.75rem;
-      max-width: 460px;
-      margin: 0 auto 2rem;
-    }
-    .card-diamond > :nth-child(1),
-    .card-diamond > :nth-child(4) {
-      grid-column: 1 / -1;
-      width: calc(50% - 0.875rem);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .play-card {
-      --card-accent: var(--color-gold);
-      background: var(--color-dusk);
-      border: 1px solid var(--card-accent);
-      border-radius: 10px;
-      aspect-ratio: 1 / 2;
-      display: flex;
-      flex-direction: column;
-      padding: 0.6rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow:
-        0 6px 24px rgba(0,0,0,0.5),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
-      transition:
-        transform 0.6s cubic-bezier(0.34, 1.18, 0.64, 1),
-        opacity   0.35s ease,
-        box-shadow 0.3s ease;
-    }
-    .play-card:hover {
-      box-shadow:
-        0 14px 44px rgba(0,0,0,0.6),
-        0 0 0 1px var(--card-accent),
-        inset 0 0 0 1px rgba(255,255,255,0.06);
-      transform: translateY(-5px) rotate(1.2deg) !important;
-    }
-    .play-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 12px,
-        rgba(255,255,255,0.018) 12px,
-        rgba(255,255,255,0.018) 13px
-      );
-      pointer-events: none;
-      border-radius: inherit;
-    }
-    .play-card__pip {
-      font-size: 1rem;
-      color: var(--card-accent);
-      line-height: 1;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-    .play-card__pip--br {
-      margin-top: auto;
-      transform: rotate(180deg);
-      align-self: flex-end;
-    }
-    .play-card__body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0.5rem 0.25rem;
-      position: relative;
-      z-index: 1;
-    }
-    .play-card__icon {
-      font-size: 2rem;
-      color: var(--card-accent);
-      line-height: 1;
-      margin-bottom: 0.6rem;
-    }
-    .play-card__title {
-      font-family: var(--font-heading);
-      font-size: 0.68rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--color-light);
-      line-height: 1.5;
-      margin-bottom: 0.4rem;
-    }
-    .play-card__sub {
-      font-size: 0.6rem;
-      color: var(--color-dawn);
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-    .play-card__desc {
-      font-size: 0.67rem;
-      color: var(--color-dawn);
-      line-height: 1.55;
-      text-align: center;
-    }
-
-    /* Deal animation for play-cards */
-    .js-animate .play-card {
-      opacity: 0;
-      transform: perspective(900px) rotateY(-90deg) rotate(-4deg);
-    }
-    .play-card.is-dealt {
-      opacity: 1;
-      transform: perspective(900px) rotateY(0deg) rotate(0deg);
-    }
-
-    /* ── Reduced motion: disable everything ─────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      .x-particle,
-      .magic-h .ch,
-      .hero__eyebrow { animation: none !important; }
-      .js-animate .anim-hero,
-      .js-animate .anim-deal,
-      .js-animate .anim-reveal,
-      .js-animate .anim-para,
-      .js-animate .play-card { opacity: 1 !important; transform: none !important; }
-      .play-card { transition: none; }
-    }
-  </style>
 </head>
 <body class="js-loading">
 
   <div id="site-header-mount"></div>
 
-  <main class="explore-main">
+  <main>
 
     <!-- ── PAGE HEADER ────────────────────────────────────────────────────── -->
     <section class="section" aria-label="Explore the system">
       <div class="container container--narrow">
 
-        <div class="text-center" style="margin-bottom:3rem;">
+        <div class="section-intro">
           <div class="hero__eyebrow anim-hero" style="--hi:0">The Ancient Science</div>
-          <h1 class="anim-hero" style="--hi:1;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.75rem;">
+          <h1 class="section-intro__title anim-hero" style="--hi:1">
             Explore The Star of The Magi System
           </h1>
-          <p class="anim-hero" style="--hi:2;color:var(--color-dawn);max-width:560px;margin:0 auto;line-height:1.8;">
+          <p class="section-intro__body section-intro__body--wide anim-hero" style="--hi:2">
             A time-keeping system rooted in ancient numerology — a living map of identity,
             timing, and consciousness built on an ordinary deck of 52 playing cards.
           </p>
         </div>
 
-        <!-- Suit summary tiles -->
-        <div style="color:var(--color-light);line-height:1.9;font-size:1.05rem;">
+        <div class="divider--glyph anim-hero" style="--hi:3">✦</div>
+        <h2 class="section-label text-center magic-h anim-hero" style="--hi:4">The Four Suits</h2>
 
-          <div class="divider--glyph anim-hero" style="--hi:3">✦</div>
-          <h2 class="magic-h anim-hero" style="--hi:4;font-size:1rem;font-family:var(--font-heading);letter-spacing:0.1em;
-            text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:1.5rem;text-align:center;">
-            The Four Suits
-          </h2>
-
-          <div class="card-diamond">
-            <!-- top: Hearts -->
-            <div class="play-card" style="--card-accent: var(--suit-hearts)">
-              <span class="play-card__pip">♥</span>
-              <div class="play-card__body">
-                <div class="play-card__icon">♥</div>
-                <div class="play-card__title">Hearts</div>
-                <div class="play-card__sub">Water · Emotion</div>
-                <p class="play-card__desc">Feeling, love, relationships, and intuition.</p>
-              </div>
-              <span class="play-card__pip play-card__pip--br">♥</span>
+        <div class="card-diamond">
+          <!-- top: Hearts -->
+          <div class="play-card" style="--card-accent: var(--suit-hearts)">
+            <span class="play-card__pip">♥</span>
+            <div class="play-card__body">
+              <div class="play-card__icon">♥</div>
+              <div class="play-card__title">Hearts</div>
+              <div class="play-card__sub">Water · Emotion</div>
+              <p class="play-card__desc">Feeling, love, relationships, and intuition.</p>
             </div>
-
-            <!-- middle left: Clubs -->
-            <div class="play-card" style="--card-accent: var(--suit-clubs)">
-              <span class="play-card__pip">♣</span>
-              <div class="play-card__body">
-                <div class="play-card__icon">♣</div>
-                <div class="play-card__title">Clubs</div>
-                <div class="play-card__sub">Fire · Will</div>
-                <p class="play-card__desc">Creativity, action, inspiration, and enterprise.</p>
-              </div>
-              <span class="play-card__pip play-card__pip--br">♣</span>
-            </div>
-
-            <!-- middle right: Diamonds -->
-            <div class="play-card" style="--card-accent: var(--suit-diamonds)">
-              <span class="play-card__pip">♦</span>
-              <div class="play-card__body">
-                <div class="play-card__icon">♦</div>
-                <div class="play-card__title">Diamonds</div>
-                <div class="play-card__sub">Earth · Value</div>
-                <p class="play-card__desc">Resources, manifestation, and abundance.</p>
-              </div>
-              <span class="play-card__pip play-card__pip--br">♦</span>
-            </div>
-
-            <!-- bottom: Spades -->
-            <div class="play-card" style="--card-accent: var(--suit-spades)">
-              <span class="play-card__pip">♠</span>
-              <div class="play-card__body">
-                <div class="play-card__icon">♠</div>
-                <div class="play-card__title">Spades</div>
-                <div class="play-card__sub">Air · Mind</div>
-                <p class="play-card__desc">Truth, transformation, wisdom, and the unseen.</p>
-              </div>
-              <span class="play-card__pip play-card__pip--br">♠</span>
-            </div>
+            <span class="play-card__pip play-card__pip--br">♥</span>
           </div>
 
-          <p class="anim-para" style="--pi:0">
-            Every person born into this world is associated with a specific card — their <strong>Birth Card</strong> —
-            determined by the calendar date of their birth. From this foundational card, an entire map
-            of identity, relationship, and timing unfolds.
-          </p>
-          <p class="anim-para" style="--pi:1;margin-bottom:0;">
-            The system moves through time as surely as the cards move through a deck. Your place in it
-            is not fixed — it breathes, shifts, and reveals itself differently in each season of life.
-          </p>
+          <!-- middle left: Clubs -->
+          <div class="play-card" style="--card-accent: var(--suit-clubs)">
+            <span class="play-card__pip">♣</span>
+            <div class="play-card__body">
+              <div class="play-card__icon">♣</div>
+              <div class="play-card__title">Clubs</div>
+              <div class="play-card__sub">Fire · Will</div>
+              <p class="play-card__desc">Creativity, action, inspiration, and enterprise.</p>
+            </div>
+            <span class="play-card__pip play-card__pip--br">♣</span>
+          </div>
 
+          <!-- middle right: Diamonds -->
+          <div class="play-card" style="--card-accent: var(--suit-diamonds)">
+            <span class="play-card__pip">♦</span>
+            <div class="play-card__body">
+              <div class="play-card__icon">♦</div>
+              <div class="play-card__title">Diamonds</div>
+              <div class="play-card__sub">Earth · Value</div>
+              <p class="play-card__desc">Resources, manifestation, and abundance.</p>
+            </div>
+            <span class="play-card__pip play-card__pip--br">♦</span>
+          </div>
+
+          <!-- bottom: Spades -->
+          <div class="play-card" style="--card-accent: var(--suit-spades)">
+            <span class="play-card__pip">♠</span>
+            <div class="play-card__body">
+              <div class="play-card__icon">♠</div>
+              <div class="play-card__title">Spades</div>
+              <div class="play-card__sub">Air · Mind</div>
+              <p class="play-card__desc">Truth, transformation, wisdom, and the unseen.</p>
+            </div>
+            <span class="play-card__pip play-card__pip--br">♠</span>
+          </div>
         </div>
+
+        <p class="anim-para" style="--pi:0">
+          Every person born into this world is associated with a specific card — their <strong>Birth Card</strong> —
+          determined by the calendar date of their birth. From this foundational card, an entire map
+          of identity, relationship, and timing unfolds.
+        </p>
+        <p class="anim-para" style="--pi:1">
+          The system moves through time as surely as the cards move through a deck. Your place in it
+          is not fixed — it breathes, shifts, and reveals itself differently in each season of life.
+        </p>
+
       </div>
     </section>
 
@@ -360,34 +99,34 @@
     <section class="section" aria-label="The Cards and the Calendar">
       <div class="container container--narrow">
 
-        <div class="text-center" style="margin-bottom:2.5rem;">
+        <div class="section-intro section-intro--sm">
           <div class="hero__eyebrow anim-hero" style="--hi:0">An Ancient Book of Time</div>
-          <h2 class="magic-h anim-hero" style="--hi:1;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0.75rem;">The Cards and the Calendar</h2>
-          <p class="anim-para" style="--pi:0;color:var(--color-dawn);max-width:540px;margin:0 auto;line-height:1.8;">
+          <h2 class="section-intro__title magic-h anim-hero" style="--hi:1">The Cards and the Calendar</h2>
+          <p class="section-intro__body anim-para" style="--pi:0">
             The deck of 52 playing cards is an ancient book of Time. Consider what it encodes.
           </p>
         </div>
 
-        <div class="grid grid--2" style="gap:1.5rem;margin-bottom:2.5rem;">
-          <div class="anim-deal" style="--di:0;background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.5rem;text-align:center;">
-            <div style="font-size:2.5rem;font-family:var(--font-display);color:var(--color-gold);line-height:1;margin-bottom:0.5rem;">52</div>
-            <div style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:0.5rem;">Weeks &amp; Cards</div>
-            <p style="font-size:0.9rem;color:var(--color-dawn);margin:0;line-height:1.7;">There are fifty-two weeks in the year — and fifty-two cards in the deck.</p>
+        <div class="grid grid--2 mb-5">
+          <div class="stat-tile anim-deal" style="--di:0">
+            <div class="stat-tile__number">52</div>
+            <div class="stat-tile__label">Weeks &amp; Cards</div>
+            <p class="stat-tile__body">There are fifty-two weeks in the year — and fifty-two cards in the deck.</p>
           </div>
-          <div class="anim-deal" style="--di:1;background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.5rem;text-align:center;">
-            <div style="font-size:2.5rem;font-family:var(--font-display);color:var(--color-gold);line-height:1;margin-bottom:0.5rem;">12</div>
-            <div style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:0.5rem;">Months &amp; Face Cards</div>
-            <p style="font-size:0.9rem;color:var(--color-dawn);margin:0;line-height:1.7;">There are twelve months in the year — and 12 face cards: Jacks, Queens, and Kings.</p>
+          <div class="stat-tile anim-deal" style="--di:1">
+            <div class="stat-tile__number">12</div>
+            <div class="stat-tile__label">Months &amp; Face Cards</div>
+            <p class="stat-tile__body">There are twelve months in the year — and 12 face cards: Jacks, Queens, and Kings.</p>
           </div>
-          <div class="anim-deal" style="--di:2;background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.5rem;text-align:center;">
-            <div style="font-size:2.5rem;font-family:var(--font-display);color:var(--color-gold);line-height:1;margin-bottom:0.5rem;">4</div>
-            <div style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:0.5rem;">Seasons &amp; Suits</div>
-            <p style="font-size:0.9rem;color:var(--color-dawn);margin:0;line-height:1.7;">There are four seasons in the year — and four suits: Hearts, Clubs, Diamonds, Spades.</p>
+          <div class="stat-tile anim-deal" style="--di:2">
+            <div class="stat-tile__number">4</div>
+            <div class="stat-tile__label">Seasons &amp; Suits</div>
+            <p class="stat-tile__body">There are four seasons in the year — and four suits: Hearts, Clubs, Diamonds, Spades.</p>
           </div>
-          <div class="anim-deal" style="--di:3;background:var(--color-dusk);border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:1.5rem;text-align:center;">
-            <div style="font-size:2.5rem;font-family:var(--font-display);color:var(--color-gold);line-height:1;margin-bottom:0.5rem;">365</div>
-            <div style="font-family:var(--font-heading);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-gold-muted);margin-bottom:0.5rem;">Days in a Year</div>
-            <p style="font-size:0.9rem;color:var(--color-dawn);margin:0;line-height:1.7;">When you add all 52 cards by numeric value — with the Joker as 1 — the sum is 365.</p>
+          <div class="stat-tile anim-deal" style="--di:3">
+            <div class="stat-tile__number">365</div>
+            <div class="stat-tile__label">Days in a Year</div>
+            <p class="stat-tile__body">When you add all 52 cards by numeric value — with the Joker as 1 — the sum is 365.</p>
           </div>
         </div>
 
@@ -398,11 +137,11 @@
 
     <!-- ── THE MYSTIC SCIENCE ────────────────────────────────────────────── -->
     <section class="section" aria-label="The Mystic Science of the Cards">
-      <div class="container container--narrow" style="color:var(--color-dawn);line-height:1.9;font-size:1.02rem;">
+      <div class="container container--narrow prose">
 
-        <div class="text-center" style="margin-bottom:2rem;">
+        <div class="section-intro section-intro--sm">
           <div class="hero__eyebrow anim-hero" style="--hi:0">Sharon Jeffers</div>
-          <h2 class="magic-h anim-hero" style="--hi:1;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0.5rem;">The Mystic Science of the Cards</h2>
+          <h2 class="section-intro__title magic-h anim-hero" style="--hi:1">The Mystic Science of the Cards</h2>
         </div>
 
         <p class="anim-para" style="--pi:0">
@@ -420,7 +159,7 @@
         <p class="anim-para" style="--pi:4">
           Our opportunity is to initiate the future for all, rather than live for oneself only (Ace); to communicate and cooperate to cultivate understanding (Two), rather than defend our fear of not knowing; to create and express our gifts (Three), rather than spin our wheels and dig ourselves deeper into our own delusions; to build and construct secure foundations with our ideas (Four), rather than assume fixed positions that create separation. And so it goes on through the numbers from Ace to King — the card of mastery.
         </p>
-        <p class="anim-para" style="--pi:5;margin-bottom:0;">
+        <p class="anim-para" style="--pi:5">
           This system is profoundly accurate in showing us who we are, and in guiding us to align with our greatest expression for success and happiness — and for the fulfillment of our destiny. What is your Destiny? What is Your Card? What is the suit or suits that are influencing you as an expression of creation?
         </p>
 
@@ -433,83 +172,64 @@
     <section class="section" aria-label="The Four Suits">
       <div class="container container--narrow">
 
-        <div class="text-center" style="margin-bottom:2.5rem;">
+        <div class="section-intro section-intro--sm">
           <div class="hero__eyebrow anim-hero" style="--hi:0">The Elements of Life</div>
-          <h2 class="magic-h anim-hero" style="--hi:1;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0.5rem;">The Four Suits</h2>
-          <p class="anim-para" style="--pi:0;color:var(--color-dawn);max-width:540px;margin:0 auto;line-height:1.8;">
+          <h2 class="section-intro__title magic-h anim-hero" style="--hi:1">The Four Suits</h2>
+          <p class="section-intro__body anim-para" style="--pi:0">
             Together the suits reveal the ways to the higher paths of living — through compassion, right values, creative manifestation, and the attainment of self-mastery.
           </p>
         </div>
 
         <!-- Hearts -->
-        <div class="suit-block anim-reveal" style="--ri:0;border-left:3px solid rgba(214,90,90,0.6);padding:1.5rem 1.75rem;margin-bottom:2.5rem;">
-          <div style="font-size:1.5rem;color:var(--suit-hearts);margin-bottom:0.25rem;">♥ Hearts</div>
-          <div style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:1rem;">Water · Emotion · Relationship</div>
-          <p style="color:var(--color-light);line-height:1.9;margin-bottom:0.9rem;">
+        <div class="suit-block suit-block--hearts anim-reveal" style="--ri:0">
+          <div class="suit-block__name">♥ Hearts</div>
+          <div class="suit-block__element">Water · Emotion · Relationship</div>
+          <p>
             Hearts represent people, family, home, beauty, children, youth, and childhood. They represent our passion and they teach us of love. When our hearts awaken we know compassion and we live in gratitude.
           </p>
-          <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:0;">
+          <p class="prose">
             Hearts represent the beginning of human emotions — love, life with others, family, relationships, and all things having to do with feelings. This is, in the mystic science of the cards, the first suit in the order of the deck. The Heart suit represents our early years in life and our emotional preparation for our journey through time. We create our most important foundations for living in our early years, and if those years are filled with healthy caregiving, we develop clear emotional boundaries and good discernment. We develop foundations of self-awareness and confidence. People born in the Heart suit relate to life through their feelings. These are the people-people. People are important. Most important. Feelings are important. Most of the lessons for the Heart people have to do with relationship.
           </p>
         </div>
 
         <!-- Clubs -->
-        <div class="suit-block anim-reveal" style="--ri:1;border-left:3px solid rgba(82,183,136,0.6);padding:1.5rem 1.75rem;margin-bottom:2.5rem;">
-          <div style="font-size:1.5rem;color:var(--suit-clubs);margin-bottom:0.25rem;">♣ Clubs</div>
-          <div style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:1rem;">Fire · Mind · Knowledge</div>
-          <p style="color:var(--color-light);line-height:1.9;margin-bottom:0.9rem;">
+        <div class="suit-block suit-block--clubs anim-reveal" style="--ri:1">
+          <div class="suit-block__name">♣ Clubs</div>
+          <div class="suit-block__element">Fire · Mind · Knowledge</div>
+          <p>
             Clubs represent the realm of the mind, and all things having to do with it — such as learning, education, teaching, communication, research, and sharing. They teach us the importance of knowledge. The awakened mind cultivates understanding, and knows the power of focus.
           </p>
-          <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:0;">
+          <p class="prose">
             As each card passes through its specific day, we have the opportunity to learn from its influences and embody its strengths in practical, applicable ways. This is true every day, and as we enter this sacred domain of the Mind — perhaps with these royal cards of self-mastery — we will unite on the mental planes and raise our conscious awareness collectively and intentionally through the contributions of thoughts, and see that reflected in the form of events that manifest in our world. Clubs are learning to use the mind in conjunction with the other three suits' intelligence.
           </p>
         </div>
 
         <!-- Diamonds -->
-        <div class="suit-block anim-reveal" style="--ri:2;border-left:3px solid rgba(91,155,213,0.6);padding:1.5rem 1.75rem;margin-bottom:2.5rem;">
-          <div style="font-size:1.5rem;color:var(--suit-diamonds);margin-bottom:0.25rem;">♦ Diamonds</div>
-          <div style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:1rem;">Earth · Value · Manifestation</div>
-          <p style="color:var(--color-light);line-height:1.9;margin-bottom:0.9rem;">
+        <div class="suit-block suit-block--diamonds anim-reveal" style="--ri:2">
+          <div class="suit-block__name">♦ Diamonds</div>
+          <div class="suit-block__element">Earth · Value · Manifestation</div>
+          <p>
             Diamonds represent values, money, and action. They teach us of higher values. As Wallace D. Wattles wrote in <em>The Science of Getting Rich</em> (1901):
           </p>
-          <blockquote style="border-left:2px solid var(--color-gold);padding:0.75rem 1.25rem;margin:0 0 0.9rem;background:var(--color-dusk);border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
-            <p style="color:var(--color-dawn);font-style:italic;line-height:1.8;margin:0;">"You are to become a creator, not a competitor. You are going to get what you want, but in such a way that when you get it, every other person whom you affect will have more than he has now."</p>
+          <blockquote class="blockquote blockquote--sm">
+            <p class="blockquote__body blockquote__body--inline">"You are to become a creator, not a competitor. You are going to get what you want, but in such a way that when you get it, every other person whom you affect will have more than he has now."</p>
           </blockquote>
-          <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:0;">
+          <p class="prose">
             Diamonds oversee manifestation on the material plane. People born in this suit are concerned with the worth and value of things, and the people in their lives. Lessons for Diamonds relate to values, money, and the ability to manifest in the world. Diamonds teach us to live with the greatest integrity while taking action with our ideas. The awakened Diamond is the teacher of integrity and higher values.
           </p>
         </div>
 
         <!-- Spades -->
-        <div class="suit-block anim-reveal" style="--ri:3;border-left:3px solid rgba(164,127,208,0.6);padding:1.5rem 1.75rem;margin-bottom:0;">
-          <div style="font-size:1.5rem;color:var(--suit-spades);margin-bottom:0.25rem;">♠ Spades</div>
-          <div style="font-family:var(--font-heading);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-dawn);margin-bottom:1rem;">Air · Wisdom · Mastery</div>
-          <p style="color:var(--color-light);line-height:1.9;margin-bottom:0.9rem;">
+        <div class="suit-block suit-block--spades anim-reveal" style="--ri:3">
+          <div class="suit-block__name">♠ Spades</div>
+          <div class="suit-block__element">Air · Wisdom · Mastery</div>
+          <p>
             Spades represent labor, health, and wisdom — and they teach us diligence and wisdom through determination and self-mastery. The Spade suit synthesizes the energies of the Hearts, Clubs, and Diamonds in order to bring forth wisdom through all endeavors.
           </p>
-          <p style="color:var(--color-dawn);line-height:1.9;margin-bottom:0;">
+          <p class="prose">
             Spades represent work, labor, spirituality, and wisdom. They also govern health. Often when the Spades are ruling the days in the calendar, things can seem more laborious for some. For others there is greater wisdom, and for many — health issues come up. Each card bears its own brand of wisdom for us to learn from. The Five teaches us to dance in the moment with the ever-present nature of change, learning from our experiences as we go. The Four says: take those experiences and build something solid from them. The Three says: now express what you have learned. The Two says: share it in partnership to bear fruit. And then (Ace) prepare for success — for the Diamonds are coming, beginning with the King.
           </p>
         </div>
-
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── THE FULL DECK ──────────────────────────────────────────────────── -->
-    <section class="section" aria-label="Browse the deck">
-      <div class="container">
-
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow anim-hero" style="--hi:0">The Living Deck</div>
-          <h2 class="magic-h anim-hero" style="--hi:1;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0.75rem;">The 53 Cards</h2>
-          <p class="anim-para" style="--pi:0;color:var(--color-dawn);max-width:520px;margin:0 auto;">
-            Browse the complete deck. Click any card to explore its energy, affirmation, and guidance.
-          </p>
-        </div>
-
-        <div id="card-browser-mount"></div>
 
       </div>
     </section>
@@ -518,78 +238,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module">
-    import { initHeader }      from '/src/components/Header/Header.js';
-    import { initFooter }      from '/src/components/Footer/Footer.js';
-    import { initCardBrowser } from '/src/components/CardBrowser.js';
-    import { initCosmos }      from '/src/components/Cosmos/Cosmos.js';
-
-    initCosmos();
-    initHeader('#site-header-mount', { activePath: '/explore.html' });
-    initFooter('#site-footer-mount');
-    initCardBrowser('#card-browser-mount');
-    document.body.classList.replace('js-loading', 'js-ready');
-
-    // ── Respect reduced motion ───────────────────────────────────────────
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // ── Activate animation initial states ────────────────────────────────
-    document.documentElement.classList.add('js-animate');
-
-    // ── Magic letter split for .magic-h headings ─────────────────────────
-    if (!prefersReduced) {
-      document.querySelectorAll('.magic-h').forEach(el => {
-        const text = el.textContent;
-        el.innerHTML = [...text].map((ch, i) => {
-          const isSpace = ch === ' ';
-          return `<span class="ch${isSpace ? ' ch--space' : ''}" style="--ci:${i}">${isSpace ? '\u00a0' : ch}</span>`;
-        }).join('');
-      });
-    }
-
-    // ── Floating particles ───────────────────────────────────────────────
-    if (!prefersReduced) {
-      const SYMS = ['✦', '♥', '♣', '♦', '♠', '◆', '★', '·', '✧'];
-      for (let i = 0; i < 14; i++) {
-        const p = document.createElement('span');
-        p.className = 'x-particle';
-        p.setAttribute('aria-hidden', 'true');
-        p.textContent = SYMS[i % SYMS.length];
-        p.style.setProperty('--dur', `${5 + Math.random() * 7}s`);
-        p.style.setProperty('--delay', `${-(Math.random() * 8)}s`);
-        p.style.left  = `${5 + Math.random() * 90}%`;
-        p.style.top   = `${5 + Math.random() * 90}%`;
-        document.body.appendChild(p);
-      }
-    }
-
-    // ── Intersection Observer for scroll-triggered animations ────────────
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll(
-      '.anim-hero, .anim-deal, .anim-reveal, .anim-para'
-    ).forEach(el => revealObs.observe(el));
-
-    // Deal the suit playing cards
-    const cardObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll('.play-card').forEach((card, i) => {
-          setTimeout(() => card.classList.add('is-dealt'), i * 160);
-        });
-        cardObs.unobserve(entry.target);
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.card-diamond').forEach(el => cardObs.observe(el));
-  </script>
+  <script type="module" src="/src/pages/explore.js"></script>
 
 </body>
 </html>

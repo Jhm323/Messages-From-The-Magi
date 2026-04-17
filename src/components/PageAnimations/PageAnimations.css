@@ -1,0 +1,274 @@
+/* ── Floating particles ─────────────────────────────────────────────────── */
+.x-particle {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  font-size: 0.7rem;
+  opacity: 0;
+  animation: xFloat var(--dur) ease-in-out infinite var(--delay);
+  color: var(--color-gold);
+  will-change: transform, opacity;
+}
+@keyframes xFloat {
+  0%   { opacity: 0;    transform: translateY(0)     rotate(0deg)   scale(0.8); }
+  12%  { opacity: 0.28; }
+  88%  { opacity: 0.12; }
+  100% { opacity: 0;    transform: translateY(-90px) rotate(220deg) scale(1.1); }
+}
+
+/* ── Eyebrow shimmer ────────────────────────────────────────────────────── */
+.hero__eyebrow {
+  background: linear-gradient(
+    100deg,
+    var(--color-gold-muted) 15%,
+    var(--color-gold)       38%,
+    #fff4c2                 50%,
+    var(--color-gold)       62%,
+    var(--color-gold-muted) 85%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: eyebrowShimmer 4s linear infinite;
+}
+@keyframes eyebrowShimmer {
+  to { background-position: 220% center; }
+}
+
+/* ── Magic letter headings ──────────────────────────────────────────────── */
+.magic-h { display: block; }
+.magic-h .ch {
+  display: inline-block;
+  animation: chDrift 5s ease-in-out infinite;
+  animation-delay: calc(var(--ci) * 90ms);
+  will-change: transform;
+}
+.magic-h .ch--space { animation: none; }
+@keyframes chDrift {
+  0%,  100% { transform: translateY(0)    rotate(0deg)    scale(1);    }
+  20%        { transform: translateY(-3px) rotate(-1.1deg) scale(1.02); }
+  55%        { transform: translateY(2px)  rotate(0.7deg)  scale(0.99); }
+  80%        { transform: translateY(-1px) rotate(0.4deg)  scale(1.01); }
+}
+
+/* ── Scroll-triggered initial states (gated on .js-animate) ────────────── */
+.js-animate .anim-hero  { opacity: 0; transform: translateY(32px); }
+.js-animate .anim-deal  {
+  opacity: 0;
+  transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px);
+}
+.js-animate .anim-reveal {
+  opacity: 0;
+  transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg);
+}
+.js-animate .anim-para  { opacity: 0; transform: translateY(22px); }
+
+/* ── Reveal transitions ─────────────────────────────────────────────────── */
+.anim-hero {
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--hi, 0) * 100ms);
+}
+.anim-hero.is-visible { opacity: 1; transform: none; }
+
+.anim-deal.is-visible {
+  animation: dealCard 0.65s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+  animation-delay: calc(var(--di, 0) * 110ms);
+}
+@keyframes dealCard {
+  0%   { opacity: 0; transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px); }
+  55%  { opacity: 1; transform: perspective(900px) rotateY(6deg)   rotate(1deg)  translateY(0);     }
+  100% { opacity: 1; transform: perspective(900px) rotateY(0deg)   rotate(0deg)  translateY(0);     }
+}
+
+.anim-reveal.is-visible {
+  animation: revealCard 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--ri, 0) * 90ms);
+}
+@keyframes revealCard {
+  0%   { opacity: 0; transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg); }
+  100% { opacity: 1; transform: perspective(1100px) rotateX(0deg)  translateY(0)    rotate(0deg);  }
+}
+
+.anim-para {
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--pi, 0) * 70ms);
+}
+.anim-para.is-visible { opacity: 1; transform: none; }
+
+/* ── Suit block ─────────────────────────────────────────────────────────── */
+.suit-block {
+  --suit-block-color: var(--color-gold-muted);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+  border-left: 3px solid var(--suit-block-color);
+  border-radius: var(--radius-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.suit-block:last-child { margin-bottom: 0; }
+.suit-block:hover {
+  transform: translateY(-4px) rotate(0.4deg);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.suit-block--hearts   { --suit-block-color: rgba(214, 90, 90, 0.6);  --suit-name-color: var(--suit-hearts); }
+.suit-block--clubs    { --suit-block-color: rgba(82, 183, 136, 0.6); --suit-name-color: var(--suit-clubs); }
+.suit-block--diamonds { --suit-block-color: rgba(91, 155, 213, 0.6); --suit-name-color: var(--suit-diamonds); }
+.suit-block--spades   { --suit-block-color: rgba(164, 127, 208, 0.6);--suit-name-color: var(--suit-spades); }
+
+.suit-block__name {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--suit-name-color, var(--color-gold));
+  margin-bottom: 0.25rem;
+}
+.suit-block__element {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-dawn);
+  margin-bottom: 1rem;
+}
+
+/* ── Playing card diamond layout ────────────────────────────────────────── */
+.card-diamond {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  max-width: 460px;
+  margin: 0 auto 2rem;
+}
+.card-diamond > :nth-child(1),
+.card-diamond > :nth-child(4) {
+  grid-column: 1 / -1;
+  width: calc(50% - 0.875rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Playing card ───────────────────────────────────────────────────────── */
+.play-card {
+  --card-accent: var(--color-gold);
+  background: var(--color-dusk);
+  border: 1px solid var(--card-accent);
+  border-radius: 10px;
+  aspect-ratio: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.18, 0.64, 1),
+    opacity   0.35s ease,
+    box-shadow 0.3s ease;
+}
+.play-card:hover {
+  box-shadow:
+    0 14px 44px rgba(0,0,0,0.6),
+    0 0 0 1px var(--card-accent),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+  transform: translateY(-5px) rotate(1.2deg) !important;
+}
+.play-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 12px,
+    rgba(255,255,255,0.018) 12px,
+    rgba(255,255,255,0.018) 13px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+.play-card__pip {
+  font-size: 1rem;
+  color: var(--card-accent);
+  line-height: 1;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.play-card__pip--br {
+  margin-top: auto;
+  transform: rotate(180deg);
+  align-self: flex-end;
+}
+.play-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+.play-card__icon {
+  font-size: 2rem;
+  color: var(--card-accent);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.play-card__title {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-light);
+  line-height: 1.5;
+  margin-bottom: 0.4rem;
+}
+.play-card__sub {
+  font-size: 0.6rem;
+  color: var(--color-dawn);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.play-card__desc {
+  font-size: 0.67rem;
+  color: var(--color-dawn);
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ── Play-card deal animation ───────────────────────────────────────────── */
+.js-animate .play-card {
+  opacity: 0;
+  transform: perspective(900px) rotateY(-90deg) rotate(-4deg);
+}
+.play-card.is-dealt {
+  opacity: 1;
+  transform: perspective(900px) rotateY(0deg) rotate(0deg);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .x-particle,
+  .magic-h .ch,
+  .hero__eyebrow { animation: none !important; }
+
+  .js-animate .anim-hero,
+  .js-animate .anim-deal,
+  .js-animate .anim-reveal,
+  .js-animate .anim-para,
+  .js-animate .play-card { opacity: 1 !important; transform: none !important; }
+
+  .anim-hero,
+  .anim-para,
+  .play-card { transition: none; }
+}

@@ -6,27 +6,6 @@
   <meta name="description" content="Messages from the Magi. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards.">
   <title>Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
-  <style>
-    /* On mobile, show the Card of the Day immediately below the header */
-    main { display: flex; flex-direction: column; }
-    .home-hero    { order: 2; }
-    .home-card    { order: 1; }
-
-    @media (min-width: 481px) {
-      /* Restore natural order on tablet and up */
-      .home-hero { order: 1; }
-      .home-card { order: 2; }
-    }
-
-    @media print {
-      body > *:not(#modal-greeting) { display: none !important; }
-      #modal-greeting { position: static !important; background: white !important; }
-      #modal-greeting .modal-overlay { position: static !important; }
-      #modal-greeting-printable { page-break-inside: avoid; }
-      .modal__close, .btn, .modal__header { display: none !important; }
-      .modal { box-shadow: none !important; border: none !important; }
-    }
-  </style>
 </head>
 <body class="js-loading">
 
@@ -36,25 +15,23 @@
 
     <!-- ── HERO ──────────────────────────────────────────────────────────── -->
     <section class="hero home-hero" aria-label="Welcome">
-      <div class="hero__eyebrow">A Living Oracle · A Mystic Science</div>
-      <h1 class="hero__title">Messages from the Magi</h1>
-      <p class="hero__body">
+      <div class="hero__eyebrow anim-hero" style="--hi:0">A Living Oracle · A Mystic Science</div>
+      <h1 class="hero__title magic-h anim-hero" style="--hi:1">Messages from the Magi</h1>
+      <p class="hero__body anim-para" style="--pi:0">
         A powerful time-keeping system that reveals who you are,
         where you are in time, and where you are going.
       </p>
-      <button class="btn btn--primary" data-feature="birth-card">
+      <button class="btn btn--primary anim-hero" style="--hi:2" data-feature="birth-card">
         ✦ Discover Your Birth Card
       </button>
     </section>
 
     <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
-    <section class="home-card" style="padding:2rem 0 4rem;" aria-label="Card of the Day">
+    <section class="home-card" aria-label="Card of the Day">
       <div class="container container--narrow">
-        <div class="divider--glyph">✦</div>
-        <h2 class="text-center text-heading" style="margin-bottom:1.5rem;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold-muted);">
-          Card of the Day
-        </h2>
-        <div id="card-of-day-mount"></div>
+        <div class="divider--glyph anim-reveal" style="--ri:0">✦</div>
+        <h2 class="section-label text-center anim-reveal" style="--ri:1">Card of the Day</h2>
+        <div id="card-of-day-mount" class="anim-reveal" style="--ri:2"></div>
       </div>
     </section>
 
@@ -62,7 +39,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/pages/home.js"></script>
 
 </body>
 </html>
