@@ -4,6 +4,7 @@
 html:has(.about-page) {
   background-image: url("/images/bg-about.png");
   background-position: center;
+  background-size: 180%;
 }
 
 .about-page {

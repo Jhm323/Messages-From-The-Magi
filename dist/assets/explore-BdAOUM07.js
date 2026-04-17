@@ -1,0 +1,1 @@
+import{i as e,n as t,r as n,t as r}from"./PageAnimations-B3zyfM8q.js";t(),r(),e(`#site-header-mount`,{activePath:`/explore.html`}),n(`#site-footer-mount`),document.body.classList.replace(`js-loading`,`js-ready`);

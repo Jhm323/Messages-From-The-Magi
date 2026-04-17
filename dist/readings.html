@@ -4,79 +4,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Readings · Messages from the Magi</title>
-  <style>
-    @media print {
-      body > *:not(#modal-greeting) { display: none !important; }
-      #modal-greeting { position: static !important; background: white !important; }
-      #modal-greeting .modal-overlay { position: static !important; }
-      #modal-greeting-printable { page-break-inside: avoid; }
-      .modal__close, .btn, .modal__header { display: none !important; }
-      .modal { box-shadow: none !important; border: none !important; }
-    }
-  </style>
-  <script type="module" crossorigin src="/assets/readings-DWeiPW7K.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/Footer-D4rECF6l.js">
-  <link rel="modulepreload" crossorigin href="/assets/CardResult-ICDmN0RT.js">
+  <script type="module" crossorigin src="/assets/readings-CclZcdG7.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/PageAnimations-B3zyfM8q.js">
+  <link rel="modulepreload" crossorigin href="/assets/CardResult-BxKRgbki.js">
   <link rel="modulepreload" crossorigin href="/assets/SavedReadings-1dH3-Zbr.js">
-  <link rel="modulepreload" crossorigin href="/assets/BirthCardModal-CkMXckwb.js">
+  <link rel="modulepreload" crossorigin href="/assets/BirthCardModal-C7z3CvA7.js">
   <link rel="modulepreload" crossorigin href="/assets/SelectionChip-CB9M93dA.js">
-  <link rel="stylesheet" crossorigin href="/assets/Footer-DWPfWGyb.css">
+  <link rel="stylesheet" crossorigin href="/assets/PageAnimations-B6IV6Hdb.css">
   <link rel="stylesheet" crossorigin href="/assets/CardResult-CUBJmL0p.css">
   <link rel="stylesheet" crossorigin href="/assets/SelectionChip-CSjfFDM1.css">
-  <link rel="stylesheet" crossorigin href="/assets/readings-Bq6Xa_I1.css">
+  <link rel="stylesheet" crossorigin href="/assets/readings-BhRneMqe.css">
 </head>
-<body class="js-loading">
+<body class="js-loading readings-page">
 
   <div id="site-header-mount"></div>
 
   <main>
-    <section class="section" aria-label="Readings">
+    <section class="readings-hero section" aria-label="Readings">
       <div class="container">
-        <div class="text-center" style="margin-bottom:3rem;">
-          <div class="hero__eyebrow">The Oracle Awaits</div>
-          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.75rem;">Readings</h1>
-          <p style="color:var(--color-dawn);max-width:520px;margin:0 auto;">
+
+        <div class="readings-hero__intro section-intro">
+          <div class="readings-hero__eyebrow hero__eyebrow anim-hero" style="--hi:0">The Oracle Awaits</div>
+          <h1 class="readings-hero__title section-intro__title magic-h anim-hero" style="--hi:1">Readings</h1>
+          <p class="readings-hero__body section-intro__body anim-para" style="--pi:0">
             Each reading opens a doorway into the ancient science of the cards.
             Choose where your journey begins.
           </p>
         </div>
 
-        <div class="feature-grid">
+        <div class="readings-grid">
 
-          <button class="feature-btn" data-feature="birth-card">
-            <div class="feature-btn__icon">★</div>
-            <div class="feature-btn__title">Birth Card Reading</div>
-            <div class="feature-btn__desc">
-              Your birth card is the energetic signature you came in with.
-              The card that reflects your soul's nature and life path.
+          <button class="reading-card anim-reveal" style="--ri:0" data-feature="birth-card">
+            <span class="reading-card__pip reading-card__pip--tl">★</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">★</div>
+              <div class="reading-card__title">Birth Card Reading</div>
+              <p class="reading-card__desc">
+                Your birth card is the energetic signature you came in with.
+                The card that reflects your soul's nature and life path.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">★</span>
           </button>
 
-          <button class="feature-btn" data-feature="compatibility">
-            <div class="feature-btn__icon">♥♠</div>
-            <div class="feature-btn__title">Compatibility Reading</div>
-            <div class="feature-btn__desc">
-              Discover the card that governs your connection with another person.
-              Enter two birthdates and reveal the energy between you.
+          <button class="reading-card anim-reveal" style="--ri:1" data-feature="compatibility">
+            <span class="reading-card__pip reading-card__pip--tl">♥</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">♥♠</div>
+              <div class="reading-card__title">Compatibility Reading</div>
+              <p class="reading-card__desc">
+                Discover the card that governs your connection with another person.
+                Enter two birthdates and reveal the energy between you.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">♥</span>
           </button>
 
-          <button class="feature-btn" data-feature="geolocation">
-            <div class="feature-btn__icon">🗺</div>
-            <div class="feature-btn__title">Location Reading</div>
-            <div class="feature-btn__desc">
-              Every place carries an energetic signature. Discover how a city,
-              country, or sacred site interacts with your personal cards.
+          <button class="reading-card anim-reveal" style="--ri:2" data-feature="geolocation">
+            <span class="reading-card__pip reading-card__pip--tl">♦</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">🗺</div>
+              <div class="reading-card__title">Location Reading</div>
+              <p class="reading-card__desc">
+                Every place carries an energetic signature. Discover how a city,
+                country, or sacred site interacts with your personal cards.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">♦</span>
           </button>
 
-          <button class="feature-btn" data-feature="greeting-card">
-            <div class="feature-btn__icon">✉︎</div>
-            <div class="feature-btn__title">Greeting Card</div>
-            <div class="feature-btn__desc">
-              Generate a personalized, mystical greeting card drawn from
-              the recipient's birth card energy. Printable and shareable.
+          <button class="reading-card anim-reveal" style="--ri:3" data-feature="greeting-card">
+            <span class="reading-card__pip reading-card__pip--tl">✉︎</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">✉︎</div>
+              <div class="reading-card__title">Greeting Card</div>
+              <p class="reading-card__desc">
+                Generate a personalized, mystical greeting card drawn from
+                the recipient's birth card energy. Printable and shareable.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">✉︎</span>
           </button>
 
         </div>

@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
   "redirects": [
     { "source": "/cards.html",  "destination": "/explore.html", "permanent": true },
     { "source": "/system.html", "destination": "/explore.html", "permanent": true }

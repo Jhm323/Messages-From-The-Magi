@@ -1,0 +1,1 @@
+main{flex-direction:column;display:flex}.home-hero{order:2}.home-card{order:1;padding:2rem 0 4rem}@media (width>=481px){.home-hero{order:1}.home-card{order:2}}
