@@ -1,4 +1,44 @@
 /* ─── Videos page ────────────────────────────────────────────────────────── */
+
+/* ── Background ──────────────────────────────────────────────────────────── */
+html:has(.videos-page) {
+  background-image: url("/images/bg-videos.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.videos-page {
+  background: transparent !important;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+/* .videos-hero {
+}
+
+.videos-hero__eyebrow {
+}
+
+.videos-hero__title {
+}
+
+.videos-hero__body {
+} */
+
+/* ── Filters ─────────────────────────────────────────────────────────────── */
+.videos-filters {
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* ── Video grid ──────────────────────────────────────────────────────────── */
+/* .videos-grid {
+} */
+
+/* ── Coming soon ─────────────────────────────────────────────────────────── */
+.videos-coming-soon {
+  margin-top: 4rem;
+}
+
 .video-grid {
   max-width: 900px;
   margin: 0 auto;
@@ -20,9 +60,14 @@
   border-bottom: 1px solid var(--color-mist);
 }
 
-.video-card__play-icon { font-size: 2.5rem; opacity: 0.3; }
+.video-card__play-icon {
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
 
-.video-card__content { padding: 1.25rem; }
+.video-card__content {
+  padding: 1.25rem;
+}
 
 .video-card__category {
   font-family: var(--font-heading);

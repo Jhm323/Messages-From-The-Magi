@@ -12,8 +12,9 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
-    // Redirect legacy pages to their merged destination
-    middlewareMode: false,
+    fs: {
+      allow: ['..'],
+    },
   },
   plugins: [
     {

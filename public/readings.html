@@ -6,58 +6,75 @@
   <title>Readings · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
-<body class="js-loading">
+<body class="js-loading readings-page">
 
   <div id="site-header-mount"></div>
 
   <main>
-    <section class="section" aria-label="Readings">
+    <section class="readings-hero section" aria-label="Readings">
       <div class="container">
-        <div class="section-intro">
-          <div class="hero__eyebrow anim-hero" style="--hi:0">The Oracle Awaits</div>
-          <h1 class="section-intro__title magic-h anim-hero" style="--hi:1">Readings</h1>
-          <p class="section-intro__body anim-para" style="--pi:0">
+
+        <div class="readings-hero__intro section-intro">
+          <div class="readings-hero__eyebrow hero__eyebrow anim-hero" style="--hi:0">The Oracle Awaits</div>
+          <h1 class="readings-hero__title section-intro__title magic-h anim-hero" style="--hi:1">Readings</h1>
+          <p class="readings-hero__body section-intro__body anim-para" style="--pi:0">
             Each reading opens a doorway into the ancient science of the cards.
             Choose where your journey begins.
           </p>
         </div>
 
-        <div class="feature-grid">
+        <div class="readings-grid">
 
-          <button class="feature-btn anim-reveal" style="--ri:0" data-feature="birth-card">
-            <div class="feature-btn__icon">★</div>
-            <div class="feature-btn__title">Birth Card Reading</div>
-            <div class="feature-btn__desc">
-              Your birth card is the energetic signature you came in with.
-              The card that reflects your soul's nature and life path.
+          <button class="reading-card anim-reveal" style="--ri:0" data-feature="birth-card">
+            <span class="reading-card__pip reading-card__pip--tl">★</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">★</div>
+              <div class="reading-card__title">Birth Card Reading</div>
+              <p class="reading-card__desc">
+                Your birth card is the energetic signature you came in with.
+                The card that reflects your soul's nature and life path.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">★</span>
           </button>
 
-          <button class="feature-btn anim-reveal" style="--ri:1" data-feature="compatibility">
-            <div class="feature-btn__icon">♥♠</div>
-            <div class="feature-btn__title">Compatibility Reading</div>
-            <div class="feature-btn__desc">
-              Discover the card that governs your connection with another person.
-              Enter two birthdates and reveal the energy between you.
+          <button class="reading-card anim-reveal" style="--ri:1" data-feature="compatibility">
+            <span class="reading-card__pip reading-card__pip--tl">♥</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">♥♠</div>
+              <div class="reading-card__title">Compatibility Reading</div>
+              <p class="reading-card__desc">
+                Discover the card that governs your connection with another person.
+                Enter two birthdates and reveal the energy between you.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">♥</span>
           </button>
 
-          <button class="feature-btn anim-reveal" style="--ri:2" data-feature="geolocation">
-            <div class="feature-btn__icon">🗺</div>
-            <div class="feature-btn__title">Location Reading</div>
-            <div class="feature-btn__desc">
-              Every place carries an energetic signature. Discover how a city,
-              country, or sacred site interacts with your personal cards.
+          <button class="reading-card anim-reveal" style="--ri:2" data-feature="geolocation">
+            <span class="reading-card__pip reading-card__pip--tl">♦</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">🗺</div>
+              <div class="reading-card__title">Location Reading</div>
+              <p class="reading-card__desc">
+                Every place carries an energetic signature. Discover how a city,
+                country, or sacred site interacts with your personal cards.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">♦</span>
           </button>
 
-          <button class="feature-btn anim-reveal" style="--ri:3" data-feature="greeting-card">
-            <div class="feature-btn__icon">✉︎</div>
-            <div class="feature-btn__title">Greeting Card</div>
-            <div class="feature-btn__desc">
-              Generate a personalized, mystical greeting card drawn from
-              the recipient's birth card energy. Printable and shareable.
+          <button class="reading-card anim-reveal" style="--ri:3" data-feature="greeting-card">
+            <span class="reading-card__pip reading-card__pip--tl">✉︎</span>
+            <div class="reading-card__body">
+              <div class="reading-card__icon">✉︎</div>
+              <div class="reading-card__title">Greeting Card</div>
+              <p class="reading-card__desc">
+                Generate a personalized, mystical greeting card drawn from
+                the recipient's birth card energy. Printable and shareable.
+              </p>
             </div>
+            <span class="reading-card__pip reading-card__pip--br">✉︎</span>
           </button>
 
         </div>
@@ -67,7 +84,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module" src="/src/pages/readings.js"></script>
+  <script type="module" src="/src/pages/Readings/readings.js"></script>
 
 </body>
 </html>

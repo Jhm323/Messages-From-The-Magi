@@ -3,6 +3,7 @@ import { initHeader } from "../../components/Header/Header.js";
 import { initFooter } from "../../components/Footer/Footer.js";
 import { initCosmos } from "../../components/Cosmos/Cosmos.js";
 import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
+import { initPageBackground } from "../../components/PageBackground/PageBackground.js";
 import { addToCart } from "../../cart/CartStore.js";
 import { openCart } from "../../components/Cart/Cart.js";
 
@@ -92,6 +93,7 @@ function renderGrid() {
   ).join("");
 }
 
+initPageBackground('/images/bg-shop.png');
 initCosmos();
 initHeader("#site-header-mount", { activePath: "/shop.html" });
 initFooter("#site-footer-mount");

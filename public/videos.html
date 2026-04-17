@@ -6,25 +6,24 @@
   <title>Videos & Content · Messages from the Magi</title>
   <link rel="stylesheet" href="/src/styles/main.css">
 </head>
-<body class="js-loading">
+<body class="js-loading videos-page">
 
   <div id="site-header-mount"></div>
 
   <main>
-    <section class="section" aria-label="Videos and Content">
+    <section class="videos-hero section" aria-label="Videos and Content">
       <div class="container">
 
         <div class="section-intro">
-          <div class="hero__eyebrow anim-hero" style="--hi:0">Learn the Science</div>
-          <h1 class="section-intro__title magic-h anim-hero" style="--hi:1">Videos & Content</h1>
-          <p class="section-intro__body anim-para" style="--pi:0">
+          <div class="videos-hero__eyebrow hero__eyebrow anim-hero" style="--hi:0">Learn the Science</div>
+          <h1 class="videos-hero__title section-intro__title magic-h anim-hero" style="--hi:1">Videos & Content</h1>
+          <p class="videos-hero__body section-intro__body anim-para" style="--pi:0">
             Teachings, readings, and explorations of the ancient science of the cards —
             from Sharon Jeffers and the Magi community.
           </p>
         </div>
 
-        <!-- Category filters -->
-        <div class="chip-group anim-reveal" style="--ri:0;justify-content:center;margin-bottom:3rem;" id="video-filter-chips">
+        <div class="videos-filters chip-group anim-reveal" style="--ri:0" id="video-filter-chips">
           <button class="chip is-active" data-value="all">All</button>
           <button class="chip" data-value="foundations">Foundations</button>
           <button class="chip" data-value="birth-cards">Birth Cards</button>
@@ -32,8 +31,7 @@
           <button class="chip" data-value="timing">Timing</button>
         </div>
 
-        <!-- Video grid -->
-        <div class="grid grid--2 video-grid">
+        <div class="videos-grid grid grid--2 video-grid">
 
           <div class="video-card anim-reveal" style="--ri:1">
             <div class="video-card__thumbnail">
@@ -81,8 +79,7 @@
 
         </div>
 
-        <!-- Coming soon notice -->
-        <div class="coming-soon coming-soon--centered anim-reveal mt-6" style="--ri:5">
+        <div class="videos-coming-soon coming-soon coming-soon--centered anim-reveal" style="--ri:5">
           <p class="coming-soon__label">Video Library · Coming Soon</p>
           <p class="coming-soon__body">Full video content will be available to Seeker and Magi members. <a href="/join.html">Learn about membership →</a></p>
         </div>
@@ -93,7 +90,7 @@
 
   <div id="site-footer-mount"></div>
 
-  <script type="module" src="/src/pages/videos.js"></script>
+  <script type="module" src="/src/pages/Videos/videos.js"></script>
 
 </body>
 </html>

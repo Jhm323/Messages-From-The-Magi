@@ -1,0 +1,106 @@
+/* ─── Explore page ───────────────────────────────────────────────────────── */
+
+/* ── Background ──────────────────────────────────────────────────────────── */
+html:has(.explore-page),
+body:has(.explore-page) {
+  background-image: url("/images/bg-explore.png");
+  background-position: center;
+  background-size: 160%;
+  background-repeat: repeat;
+}
+
+.explore-page {
+  background: transparent !important;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+/* .explore-hero {
+}
+
+.explore-hero__intro {
+}
+
+.explore-hero__eyebrow {
+}
+
+.explore-hero__title {
+}
+
+.explore-hero__body {
+}
+
+.explore-hero__glyph {
+}
+
+.explore-hero__suits-label {
+}
+
+.explore-hero__cards {
+}
+
+.explore-hero__text {
+}
+
+/* ── Calendar ────────────────────────────────────────────────────────────── */
+/* .explore-calendar {
+}
+
+.explore-calendar__intro {
+}
+
+.explore-calendar__eyebrow {
+}
+
+.explore-calendar__title {
+}
+
+.explore-calendar__body {
+}  */
+
+.explore-calendar__stats {
+  margin-bottom: 2rem;
+}
+
+/* ── Mystic Science ──────────────────────────────────────────────────────── */
+/* .explore-mystic {
+}
+
+.explore-mystic__intro {
+}
+
+.explore-mystic__eyebrow {
+}
+
+.explore-mystic__title {
+}
+
+.explore-mystic__text {
+} */
+
+/* ── Suits detail ────────────────────────────────────────────────────────── */
+/* .explore-suits {
+}
+
+.explore-suits__intro {
+}
+
+.explore-suits__eyebrow {
+}
+
+.explore-suits__title {
+}
+
+.explore-suits__body {
+}
+
+.explore-suits__hearts {
+}
+
+.explore-suits__clubs {
+}
+
+.explore-suits__diamonds {
+}
+
+.explore-suits__spades {
+} */

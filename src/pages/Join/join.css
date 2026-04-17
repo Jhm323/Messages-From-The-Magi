@@ -1,0 +1,29 @@
+/* ─── Join page ──────────────────────────────────────────────────────────── */
+
+html:has(.join-page) {
+  background-image: url("/images/bg-join.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.join-page {
+  background: transparent !important;
+}
+
+/* .join-hero {
+}
+
+.join-hero__eyebrow {
+}
+
+.join-hero__title {
+}
+
+.join-hero__body {
+}
+
+.join-tiers {
+}
+
+.join-tiers__grid {
+} */

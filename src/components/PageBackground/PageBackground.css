@@ -1,0 +1,28 @@
+/* ─── PageBackground ─────────────────────────────────────────────────────── */
+
+/* Body must be transparent so .page-bg shows through */
+.has-page-bg {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Html fallback — matches the darkest edge of any background image */
+html:has(.has-page-bg) {
+  background: #0e0805 !important;
+}
+
+/* The background layer itself */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.page-bg--tile {
+  background-repeat: repeat;
+  background-size: 600px 600px;
+}
