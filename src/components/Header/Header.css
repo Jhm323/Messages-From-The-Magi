@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-overlay);
-  background: rgba(12, 6, 4, 0.93);
+  /* background: rgba(12, 6, 4, 0.93); */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-gold-muted);
@@ -43,7 +43,9 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   padding: 6px;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
   flex-shrink: 0;
 }
 
@@ -58,7 +60,10 @@
   height: 2px;
   background: var(--color-dawn);
   border-radius: 2px;
-  transition: transform var(--transition-base), opacity var(--transition-base), background var(--transition-fast);
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base),
+    background var(--transition-fast);
   transform-origin: center;
 }
 
@@ -90,7 +95,9 @@
   background: var(--color-night);
   border: 1px solid var(--color-gold-muted);
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 168, 76, 0.08);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(201, 168, 76, 0.08);
   overflow: visible;
   opacity: 0;
   transform: translateY(-8px) scale(0.97);
@@ -124,7 +131,9 @@
   text-transform: uppercase;
   color: var(--color-dawn);
   text-decoration: none;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .nav-dropdown__link:hover {
@@ -153,7 +162,9 @@
   margin-left: auto;
   font-size: 1rem;
   color: var(--color-mist);
-  transition: transform var(--transition-fast), color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast);
   line-height: 1;
 }
 
@@ -202,7 +213,9 @@
   text-transform: uppercase;
   color: var(--color-dawn);
   text-decoration: none;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .nav-sub__link:hover {
@@ -315,7 +328,9 @@
 
 /* ── Mobile (≤ 480px) ──────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .site-header { padding: 0 0.75rem; }
+  .site-header {
+    padding: 0 0.75rem;
+  }
 
   .site-header__inner {
     gap: 0.6rem;
@@ -328,7 +343,9 @@
   }
 
   /* Hide name on small screens — show avatar only */
-  .header-auth__name { display: none; }
+  .header-auth__name {
+    display: none;
+  }
 
   .header-auth__btn {
     padding: 0.3rem 0.5rem;
@@ -337,9 +354,18 @@
 
 /* ── Small mobile (≤ 360px) ────────────────────────────────────────────── */
 @media (max-width: 360px) {
-  .site-logo { font-size: 0.65rem; }
+  .site-logo {
+    font-size: 0.65rem;
+  }
 
-  .nav-menu-btn { width: 30px; height: 30px; }
+  .nav-menu-btn {
+    width: 30px;
+    height: 30px;
+  }
 
-  .header-cart-btn { width: 30px; height: 30px; font-size: 0.95rem; }
+  .header-cart-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
 }
