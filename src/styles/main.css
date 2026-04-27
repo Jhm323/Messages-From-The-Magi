@@ -9,21 +9,31 @@
 
 /* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
 :root {
-  /* Core palette */
-  --color-void:      #0a0a12;
-  --color-night:     #111120;
-  --color-dusk:      #1a1a35;
-  --color-twilight:  #252545;
-  --color-mist:      #3a3a60;
-  --color-dawn:      #8888bb;
-  --color-light:     #d4d4ee;
-  --color-white:     #f0eef8;
+  /* Core palette — warm antique book / medieval mysticism */
+  --color-void:      #0c0604;   /* deep warm black */
+  --color-night:     #160c08;   /* dark crimson-black */
+  --color-dusk:      #261510;   /* deep burgundy — card/panel bg */
+  --color-twilight:  #3d2018;   /* warm dark red — hover states */
+  --color-mist:      #6b3d2e;   /* warm brick — borders */
+  --color-dawn:      #c4997a;   /* warm tan — body text / secondary */
+  --color-light:     #e8d4ba;   /* warm parchment light */
+  --color-white:     #f5edd8;   /* antique cream */
+
+  /* Brand palette */
+  --color-parchment: #f5edd8;   /* cream / antique page */
+  --color-crimson:   #8b1a1a;   /* Sharon's primary red */
+  --color-forest:    #1a3b2a;   /* dark green from the books */
 
   /* Gold accent system */
   --color-gold:        #c9a84c;
-  --color-gold-bright: #e8c56a;
+  --color-gold-bright: #e8c97a;
   --color-gold-muted:  #8a6f2e;
   --color-gold-glow:   rgba(201, 168, 76, 0.18);
+
+  /* Lattice pattern — mirrors Sharon's diamond-grid book covers */
+  --pattern-lattice:
+    repeating-linear-gradient( 45deg, rgba(201,168,76,0.07) 0, rgba(201,168,76,0.07) 1px, transparent 1px, transparent 14px),
+    repeating-linear-gradient(-45deg, rgba(201,168,76,0.07) 0, rgba(201,168,76,0.07) 1px, transparent 1px, transparent 14px);
 
   /* Suit colors */
   --suit-hearts:   #d65a5a;
@@ -50,7 +60,7 @@
   --radius-card: 16px;
 
   /* Shadows */
-  --shadow-card:       0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-card:       0 8px 32px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(139, 26, 26, 0.3);
   --shadow-glow-gold:  0 0 24px rgba(201, 168, 76, 0.35), 0 0 48px rgba(201, 168, 76, 0.15);
   --shadow-glow-suit:  0 0 20px var(--suit-color, var(--color-gold)), 0 4px 12px rgba(0, 0, 0, 0.5);
 
@@ -89,8 +99,8 @@ body {
   line-height: 1.7;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 168, 76, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(100, 80, 180, 0.06) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 26, 26, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201, 168, 76, 0.07) 0%, transparent 60%);
 }
 
 /* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
@@ -322,7 +332,7 @@ main, footer {
 
 .tier-card--featured {
   border-color: var(--color-gold-muted);
-  background: linear-gradient(135deg, var(--color-dusk) 0%, #1f1d35 100%);
+  background: linear-gradient(135deg, var(--color-dusk) 0%, #3d1010 100%);
   box-shadow: 0 0 0 1px var(--color-gold-glow), var(--shadow-card);
 }
 
