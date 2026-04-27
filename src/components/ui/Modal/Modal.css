@@ -10,7 +10,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 4rem;
+  padding: 64px;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-base);
@@ -25,7 +25,7 @@
   background: #fdf6e8;
   border: 1px solid #d4a96a;
   border-radius: var(--radius-xl);
-  padding: 2.5rem;
+  padding: 40px;
   width: 100%;
   max-width: 560px;
   max-height: 90vh;
@@ -45,8 +45,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
+  margin-bottom: 24px;
+  gap: 16px;
 }
 
 .modal__title {
@@ -80,10 +80,10 @@
 
 @media (max-width: 768px) {
   .modal {
-    padding: 1.75rem 1.25rem;
+    padding: 28px 20px;
   }
   .modal-overlay {
-    padding: 1rem;
+    padding: 16px;
   }
 }
 
@@ -94,7 +94,7 @@
   }
 
   .modal {
-    padding: 1.5rem 1rem 2rem;
+    padding: 24px 16px 32px;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     max-height: 92vh;
     /* slide up from bottom */
@@ -108,7 +108,7 @@
 
 @media (max-width: 360px) {
   .modal {
-    padding: 1.25rem 0.875rem 1.75rem;
+    padding: 20px 14px 28px;
   }
   .modal__title {
     font-size: 18px;

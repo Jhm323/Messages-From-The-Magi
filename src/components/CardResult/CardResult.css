@@ -7,7 +7,7 @@
   background: var(--color-night);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-lg);
-  padding: 2rem 1.5rem;
+  padding: 32px 24px;
   box-shadow: var(--shadow-card);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
@@ -31,7 +31,7 @@
   overflow: hidden;
   border: 2px solid var(--color-mist);
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
   background: var(--color-dusk);
 }
 
@@ -72,7 +72,7 @@
   font-size: 18px;
   color: var(--suit-color, var(--color-white));
   letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
   text-align: center;
 }
 
@@ -82,21 +82,21 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-dawn);
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
 }
 
 .card-suit-symbol {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--text-24);
+  margin-bottom: 8px;
   color: var(--suit-color, var(--color-gold));
 }
 
 .card-keywords {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 6px;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .card-keyword-tag {
@@ -104,7 +104,7 @@
   font-family: var(--font-heading);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
+  padding: 3px 9px;
   border-radius: 999px;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--color-mist);
@@ -116,18 +116,18 @@
   color: var(--color-light);
   line-height: 1.8;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .card-affirmation {
   font-style: italic;
-  font-size: 1rem;
+  font-size: var(--text-16);
   color: var(--color-gold);
   text-align: center;
-  padding: 1rem 1.5rem;
+  padding: 16px 24px;
   border-top: 1px solid var(--color-gold-muted);
   border-bottom: 1px solid var(--color-gold-muted);
-  margin: 1rem 0;
+  margin: 16px 0;
   line-height: 1.6;
 }
 
@@ -135,11 +135,11 @@
   font-size: 18px;
   color: var(--color-dawn);
   text-align: center;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   background: rgba(255,255,255,0.03);
   border-radius: var(--radius-md);
   border-left: 3px solid var(--color-gold-muted);
-  margin-top: 0.5rem;
+  margin-top: 8px;
 }
 .card-action-prompt strong {
   display: block;
@@ -148,7 +148,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
 }
 
 /* ─── RESULT CARDS (Reading Output) ──────────────────────────────────────── */
@@ -156,7 +156,7 @@
   background: linear-gradient(135deg, var(--color-dusk) 0%, var(--color-night) 100%);
   border: 1px solid var(--color-gold-muted);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 32px;
   text-align: center;
   box-shadow: var(--shadow-glow-gold);
   animation: fadeInUp 0.5s ease forwards;
@@ -168,14 +168,14 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .reading-result__card-name {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: var(--text-26);
   color: var(--color-gold);
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
 }
 
 .reading-result__number {
@@ -184,7 +184,7 @@
   color: var(--color-dawn);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 768px) {
@@ -192,11 +192,11 @@
 }
 
 @media (max-width: 480px) {
-  .card-display { padding: 1.5rem 1rem; }
+  .card-display { padding: 24px 16px; }
   .card-image-wrap { max-width: 160px; }
-  .reading-result { padding: 1.5rem 1rem; }
+  .reading-result { padding: 24px 16px; }
   .reading-result__card-name { font-size: 21px; }
-  .card-affirmation { padding: 0.75rem 1rem; font-size: 18px; }
+  .card-affirmation { padding: 12px 16px; font-size: 18px; }
 }
 
 @media (max-width: 360px) {

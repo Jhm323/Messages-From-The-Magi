@@ -18,7 +18,7 @@
 /* ── Filters ─────────────────────────────────────────────────────────────── */
 .videos-filters {
   justify-content: center;
-  margin-bottom: 3rem;
+  margin-bottom: 48px;
 }
 
 /* ── Video grid ──────────────────────────────────────────────────────────── */
@@ -27,7 +27,7 @@
 
 /* ── Coming soon ─────────────────────────────────────────────────────────── */
 .videos-coming-soon {
-  margin-top: 4rem;
+  margin-top: 64px;
 }
 
 .video-grid {
@@ -52,12 +52,12 @@
 }
 
 .video-card__play-icon {
-  font-size: 2.5rem;
+  font-size: var(--text-40);
   opacity: 0.3;
 }
 
 .video-card__content {
-  padding: 1.25rem;
+  padding: 20px;
 }
 
 .video-card__category {
@@ -66,14 +66,14 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
-  margin-bottom: 0.4rem;
+  margin-bottom: 6px;
 }
 
 .video-card__title {
   font-family: var(--font-heading);
   font-size: 18px;
   color: var(--color-light);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .video-card__body {

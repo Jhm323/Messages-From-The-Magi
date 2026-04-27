@@ -7,25 +7,25 @@
   text-align: center;
 }
 
-/* .about-hero__eyebrow {
-  /* inherits .hero__eyebrow — override here if needed */
+/* .about-hero__eyebrow { */
+/* inherits .hero__eyebrow — override here if needed */
 /* } */
 
 .about-hero__title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(32px, 5vw, 56px);
+  margin-bottom: 24px;
 }
 
 .about-hero__body {
   max-width: 560px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 48px;
   color: var(--color-dawn);
   font-size: var(--text-22);
   line-height: 1.8;
 }
 
 .about-hero__cards {
-  margin-bottom: 3rem;
+  margin-bottom: 48px;
 }
 
 /* .about-hero__cta {
@@ -37,24 +37,25 @@
 } */
 
 .about-bio__eyebrow {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .about-bio__title {
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-  margin-bottom: 2.5rem;
+  color: var(--color-dawn);
+  font-size: clamp(26px, 3.5vw, 40px);
+  margin-bottom: 40px;
 }
 
 .about-bio__text {
-  margin-bottom: 2.5rem;
+  margin-bottom: 40px;
 }
 
 .about-bio__text p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 20px;
 }
 
 .about-bio__quote {
-  margin-top: 2.5rem;
+  margin-top: 40px;
 }
 
 /* ── Contact section ─────────────────────────────────────────────────────── */
@@ -63,16 +64,16 @@
 }
 
 .about-contact__eyebrow {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .about-contact__title {
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-  margin-bottom: 1rem;
+  font-size: clamp(26px, 3.5vw, 40px);
+  margin-bottom: 16px;
 }
 
 .about-contact__body {
-  margin-bottom: 2.5rem;
+  margin-bottom: 40px;
 }
 
 .about-contact__form {
@@ -86,6 +87,6 @@
     font-size: var(--text-18);
   }
   .about-bio__title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 24px;
   }
 }

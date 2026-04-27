@@ -23,8 +23,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 32px;
+  margin-top: 48px;
 }
 
 /* ── Reading card (playing-card shape: 1:2 ratio) ────────────────────────── */
@@ -35,7 +35,7 @@
   background: var(--color-dusk);
   border: 1px solid var(--color-gold-muted);
   border-radius: var(--radius-lg);
-  padding: 1.25rem;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,14 +76,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
   flex: 1;
   justify-content: center;
-  padding: 0.5rem 0;
+  padding: 8px 0;
 }
 
 .reading-card__icon {
-  font-size: 2rem;
+  font-size: var(--text-32);
   line-height: 1;
   color: var(--color-gold);
 }
@@ -106,7 +106,7 @@
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .readings-grid {
-    gap: 1.25rem;
+    gap: 20px;
   }
 
   .reading-card {

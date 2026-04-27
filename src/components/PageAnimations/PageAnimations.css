@@ -128,8 +128,8 @@
 /* ── Suit block ─────────────────────────────────────────────────────────── */
 .suit-block {
   --suit-block-color: var(--color-gold-muted);
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 2.5rem;
+  padding: 24px 28px;
+  margin-bottom: 40px;
   border-left: 3px solid var(--suit-block-color);
   border-radius: var(--radius-md);
   transition:
@@ -162,10 +162,10 @@
 }
 
 .suit-block__name {
-  font-size: 1.5rem;
+  font-size: var(--text-24);
   line-height: 1;
   color: var(--suit-name-color, var(--color-gold));
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
 }
 .suit-block__element {
   font-family: var(--font-heading);
@@ -173,21 +173,21 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-dawn);
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 /* ── Playing card diamond layout ────────────────────────────────────────── */
 .card-diamond {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
+  gap: 28px;
   max-width: 460px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 32px;
 }
 .card-diamond > :nth-child(1),
 .card-diamond > :nth-child(4) {
   grid-column: 1 / -1;
-  width: calc(50% - 0.875rem);
+  width: calc(50% - 14px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -201,7 +201,7 @@
   aspect-ratio: 1 / 2;
   display: flex;
   flex-direction: column;
-  padding: 0.6rem;
+  padding: 9px;
   position: relative;
   overflow: hidden;
   box-shadow:
@@ -234,7 +234,7 @@
   border-radius: inherit;
 }
 .play-card__pip {
-  font-size: 1rem;
+  font-size: var(--text-16);
   color: var(--card-accent);
   line-height: 1;
   display: block;
@@ -253,15 +253,15 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0.5rem 0.25rem;
+  padding: 8px 4px;
   position: relative;
   z-index: 1;
 }
 .play-card__icon {
-  font-size: 2rem;
+  font-size: var(--text-32);
   color: var(--card-accent);
   line-height: 1;
-  margin-bottom: 0.6rem;
+  margin-bottom: 9px;
 }
 .play-card__title {
   font-family: var(--font-heading);
@@ -270,14 +270,14 @@
   text-transform: uppercase;
   color: var(--color-light);
   line-height: 1.5;
-  margin-bottom: 0.4rem;
+  margin-bottom: 6px;
 }
 .play-card__sub {
   font-size: 14px;
   color: var(--color-dawn);
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
+  margin-bottom: 6px;
 }
 .play-card__desc {
   font-size: 14px;
