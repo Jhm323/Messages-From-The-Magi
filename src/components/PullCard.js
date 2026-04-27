@@ -65,15 +65,8 @@ function buildShell() {
 
   return `
 <div style="text-align:center;">
-  <h3 style="font-family:var(--font-display);color:var(--color-gold);font-size:1.4rem;margin-bottom:0.5rem;">
-    Pull a Card
-  </h3>
-  <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto;">
-    Still your mind. Take a breath. Ask your question — then let the cards speak.
-  </p>
-
   <div data-card-back
-    style="width:200px;height:300px;margin:0 auto 1.5rem;border-radius:var(--radius-md);overflow:hidden;border:2px solid var(--color-gold-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:box-shadow 0.3s;"
+    style="width:200px;height:300px;margin:0 auto 24px;border-radius:var(--radius-md);overflow:hidden;border:2px solid var(--color-gold-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:box-shadow 0.3s;"
     onclick="this.closest('[data-pull-root]')?.querySelector('[data-draw]')?.click()">
     <img src="${back.imagePath}" alt="Card back" style="width:100%;height:100%;object-fit:cover;">
   </div>
@@ -82,6 +75,6 @@ function buildShell() {
     ✦ Pull a Card
   </button>
 
-  <div data-result style="display:none;margin-top:2rem;"></div>
+  <div data-result style="display:none;margin-top:32px;"></div>
 </div>`;
 }
