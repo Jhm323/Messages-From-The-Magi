@@ -1,96 +1,44 @@
 /* ─── Explore page ───────────────────────────────────────────────────────── */
 
-/* ── Background ──────────────────────────────────────────────────────────── */
+/* ── Legibility overrides for cream background ───────────────────────────── */
 
-
-/* ── Hero ────────────────────────────────────────────────────────────────── */
-/* .explore-hero {
-}
-
-.explore-hero__intro {
-}
-
-.explore-hero__eyebrow {
-}
-
-.explore-hero__title {
-}
-
-.explore-hero__body {
-}
-
-.explore-hero__glyph {
-}
-
+/* Headings on cream */
+.explore-hero__title,
+.explore-calendar__title,
+.explore-mystic__title,
+.explore-suits__title,
 .explore-hero__suits-label {
+  color: var(--color-gold);
 }
 
-.explore-hero__cards {
+/* Section body copy */
+.explore-hero__body,
+.explore-calendar__body,
+.explore-suits__body {
+  color: var(--color-mist);
 }
 
-.explore-hero__text {
+/* Free-standing paragraphs on cream */
+.explore-hero__text,
+.explore-mystic__text {
+  color: var(--color-twilight);
+}
+
+/* Suit block text */
+.suit-block p {
+  color: var(--color-twilight);
+}
+
+.suit-block__element {
+  color: var(--color-mist);
+}
+
+/* Strong on cream */
+.explore-page strong {
+  color: var(--color-twilight);
 }
 
 /* ── Calendar ────────────────────────────────────────────────────────────── */
-/* .explore-calendar {
-}
-
-.explore-calendar__intro {
-}
-
-.explore-calendar__eyebrow {
-}
-
-.explore-calendar__title {
-}
-
-.explore-calendar__body {
-}  */
-
 .explore-calendar__stats {
   margin-bottom: 32px;
 }
-
-/* ── Mystic Science ──────────────────────────────────────────────────────── */
-/* .explore-mystic {
-}
-
-.explore-mystic__intro {
-}
-
-.explore-mystic__eyebrow {
-}
-
-.explore-mystic__title {
-}
-
-.explore-mystic__text {
-} */
-
-/* ── Suits detail ────────────────────────────────────────────────────────── */
-/* .explore-suits {
-}
-
-.explore-suits__intro {
-}
-
-.explore-suits__eyebrow {
-}
-
-.explore-suits__title {
-}
-
-.explore-suits__body {
-}
-
-.explore-suits__hearts {
-}
-
-.explore-suits__clubs {
-}
-
-.explore-suits__diamonds {
-}
-
-.explore-suits__spades {
-} */

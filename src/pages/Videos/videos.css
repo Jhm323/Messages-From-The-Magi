@@ -1,19 +1,25 @@
 /* ─── Videos page ────────────────────────────────────────────────────────── */
 
-/* ── Background ──────────────────────────────────────────────────────────── */
-
-/* ── Hero ────────────────────────────────────────────────────────────────── */
-/* .videos-hero {
-}
-
-.videos-hero__eyebrow {
-}
-
+/* ── Legibility overrides for cream background ───────────────────────────── */
 .videos-hero__title {
+  color: var(--color-gold);
 }
 
 .videos-hero__body {
-} */
+  color: var(--color-mist);
+}
+
+/* Filter chips sit on cream — darken text and border */
+.videos-page .chip {
+  color: var(--color-mist);
+  border-color: var(--color-mist);
+}
+.videos-page .chip:hover,
+.videos-page .chip.is-active {
+  color: var(--color-gold-muted);
+  border-color: var(--color-gold-muted);
+  background: rgba(138, 111, 46, 0.1);
+}
 
 /* ── Filters ─────────────────────────────────────────────────────────────── */
 .videos-filters {
@@ -53,7 +59,8 @@
 
 .video-card__play-icon {
   font-size: var(--text-40);
-  opacity: 0.3;
+  color: var(--color-gold);
+  opacity: 0.75;
 }
 
 .video-card__content {
@@ -72,7 +79,7 @@
 .video-card__title {
   font-family: var(--font-heading);
   font-size: 18px;
-  color: var(--color-light);
+  color: var(--color-gold);
   margin-bottom: 8px;
 }
 

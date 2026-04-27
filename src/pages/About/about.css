@@ -12,8 +12,9 @@
 /* } */
 
 .about-hero__title {
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(var(--text-32), 5vw, var(--text-56));
   margin-bottom: 24px;
+  color: var(--color-gold);
 }
 
 .about-hero__body {
@@ -41,8 +42,8 @@
 }
 
 .about-bio__title {
-  color: var(--color-dawn);
-  font-size: clamp(26px, 3.5vw, 40px);
+  color: var(--color-gold);
+  font-size: clamp(var(--text-26), 3.5vw, var(--text-40));
   margin-bottom: 40px;
 }
 
@@ -68,8 +69,9 @@
 }
 
 .about-contact__title {
-  font-size: clamp(26px, 3.5vw, 40px);
+  font-size: clamp(var(--text-26), 3.5vw, var(--text-40));
   margin-bottom: 16px;
+  color: var(--color-gold);
 }
 
 .about-contact__body {
