@@ -9,13 +9,20 @@ export function initPageAnimations() {
   // ── Magic letter split for .magic-h headings ──────────────────────────
   if (!reduced) {
     document.querySelectorAll(".magic-h").forEach((el) => {
-      const text = el.textContent;
-      el.innerHTML = [...text]
-        .map((ch, i) => {
-          const isSpace = ch === " ";
-          return `<span class="ch${isSpace ? " ch--space" : ""}" style="--ci:${i}">${isSpace ? "\u00a0" : ch}</span>`;
-        })
-        .join("");
+      const words = el.textContent.trim().split(" ");
+      let ci = 0;
+      const parts = [];
+      words.forEach((word, wi) => {
+        const letters = [...word]
+          .map((ch) => `<span class="ch" style="--ci:${ci++}">${ch}</span>`)
+          .join("");
+        parts.push(`<span class="ch-word">${letters}</span>`);
+        if (wi < words.length - 1) {
+          ci++; // keep timing consistent with original character count
+          parts.push(" ");
+        }
+      });
+      el.innerHTML = parts.join("");
     });
   }
 

@@ -16,7 +16,7 @@
   border: 1px solid var(--color-mist);
   background: transparent;
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-dawn);

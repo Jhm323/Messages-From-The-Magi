@@ -78,7 +78,7 @@
 
 .card-number-badge {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: var(--text-18);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -100,7 +100,7 @@
 }
 
 .card-keyword-tag {
-  font-size: 15px;
+  font-size: var(--text-18);
   font-family: var(--font-heading);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -144,7 +144,7 @@
 .card-action-prompt strong {
   display: block;
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -164,7 +164,7 @@
 
 .reading-result__eyebrow {
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -180,7 +180,7 @@
 
 .reading-result__number {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   color: var(--color-dawn);
   letter-spacing: 0.1em;
   text-transform: uppercase;

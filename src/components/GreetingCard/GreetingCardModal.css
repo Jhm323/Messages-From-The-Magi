@@ -23,7 +23,7 @@
 
 .greeting-card__from {
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -39,7 +39,7 @@
 
 .greeting-card__message {
   font-style: italic;
-  color: var(--color-light);
+  color: var(--color-mist);
   font-size: 18px;
   margin-bottom: 32px;
   line-height: 1.8;
@@ -148,7 +148,7 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);

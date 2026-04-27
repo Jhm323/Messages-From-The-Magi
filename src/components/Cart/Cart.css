@@ -51,7 +51,7 @@
 
 .cart-header__title {
   font-family: var(--font-heading);
-  font-size: 17px;
+  font-size: var(--text-18);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold);
@@ -69,7 +69,7 @@
   border-radius: 50%;
   background: var(--color-gold-glow);
   border: 1px solid var(--color-gold-muted);
-  font-size: 14px;
+  font-size: var(--text-18);
   color: var(--color-gold);
 }
 
@@ -127,7 +127,7 @@
 
 .cart-empty__msg {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-mist);
@@ -179,7 +179,7 @@
 
 .cart-item__name {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   letter-spacing: 0.05em;
   color: var(--color-white);
   text-transform: uppercase;
@@ -187,14 +187,14 @@
 }
 
 .cart-item__type {
-  font-size: 16px;
+  font-size: var(--text-18);
   color: var(--color-mist);
   font-style: italic;
 }
 
 .cart-item__price {
   font-family: var(--font-heading);
-  font-size: 17px;
+  font-size: var(--text-18);
   color: var(--color-gold);
   letter-spacing: 0.04em;
   margin-top: 4px;
@@ -230,7 +230,7 @@
 
 .cart-item__qty-val {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   color: var(--color-light);
   min-width: 19px;
   text-align: center;
@@ -271,7 +271,7 @@
 
 .cart-subtotal__label {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -291,7 +291,7 @@
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: var(--text-18);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-void);
@@ -319,7 +319,7 @@
   background: none;
   border: none;
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-mist);
@@ -366,7 +366,7 @@
   background: var(--color-gold);
   color: var(--color-void);
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: var(--text-18);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -402,6 +402,6 @@
 }
 
 @media (max-width: 360px) {
-  .cart-header__title { font-size: 16px; }
-  .cart-item__name    { font-size: 15px; }
+  .cart-header__title { font-size: var(--text-18); }
+  .cart-item__name    { font-size: var(--text-18); }
 }

@@ -30,6 +30,10 @@
   animation-delay: calc(var(--ci) * 90ms);
   will-change: transform;
 }
+.magic-h .ch-word {
+  display: inline-block;
+  white-space: nowrap;
+}
 .magic-h .ch--space {
   animation: none;
 }
@@ -169,7 +173,7 @@
 }
 .suit-block__element {
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: var(--text-18);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -265,22 +269,22 @@
 }
 .play-card__title {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: var(--text-18);
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-light);
+  color: var(--color-white);
   line-height: 1.5;
   margin-bottom: 6px;
 }
 .play-card__sub {
-  font-size: 14px;
+  font-size: var(--text-18);
   color: var(--color-dawn);
   letter-spacing: 0.07em;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
 .play-card__desc {
-  font-size: 14px;
+  font-size: var(--text-18);
   color: var(--color-dawn);
   line-height: 1.55;
   text-align: center;
