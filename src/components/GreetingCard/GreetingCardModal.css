@@ -1,7 +1,7 @@
 /* ─── GREETING CARD ──────────────────────────────────────────────────────── */
 .greeting-card {
-  background: linear-gradient(160deg, #2a1510 0%, #160c08 100%);
-  border: 2px solid var(--color-gold-muted);
+  background: linear-gradient(160deg, #fdf6e8 0%, #f5e6c8 100%);
+  border: 2px solid #d4a96a;
   border-radius: var(--radius-xl);
   padding: 1.5rem 2rem;
   text-align: center;
@@ -51,7 +51,7 @@
   height: 100vh;
   max-width: 100vw;
   max-height: 100vh;
-  border-radius: 0;
+  border-radius: var(--radius-xl);
   display: flex;
   flex-direction: column;
   align-items: center;

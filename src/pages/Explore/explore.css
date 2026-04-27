@@ -1,17 +1,7 @@
 /* ─── Explore page ───────────────────────────────────────────────────────── */
 
 /* ── Background ──────────────────────────────────────────────────────────── */
-html:has(.explore-page),
-body:has(.explore-page) {
-  background-image: url("/images/bg-explore.png");
-  background-position: center;
-  background-size: 160%;
-  background-repeat: repeat;
-}
 
-.explore-page {
-  background: transparent !important;
-}
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 /* .explore-hero {

@@ -1,30 +1,11 @@
-/* ── Floating particles ─────────────────────────────────────────────────── */
-.x-particle {
-  position: fixed;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  font-size: 0.7rem;
-  opacity: 0;
-  animation: xFloat var(--dur) ease-in-out infinite var(--delay);
-  color: var(--color-gold);
-  will-change: transform, opacity;
-}
-@keyframes xFloat {
-  0%   { opacity: 0;    transform: translateY(0)     rotate(0deg)   scale(0.8); }
-  12%  { opacity: 0.28; }
-  88%  { opacity: 0.12; }
-  100% { opacity: 0;    transform: translateY(-90px) rotate(220deg) scale(1.1); }
-}
-
 /* ── Eyebrow shimmer ────────────────────────────────────────────────────── */
 .hero__eyebrow {
   background: linear-gradient(
     100deg,
     var(--color-gold-muted) 15%,
-    var(--color-gold)       38%,
-    #fff4c2                 50%,
-    var(--color-gold)       62%,
+    var(--color-gold) 38%,
+    #fff4c2 50%,
+    var(--color-gold) 62%,
     var(--color-gold-muted) 85%
   );
   background-size: 220% auto;
@@ -34,28 +15,46 @@
   animation: eyebrowShimmer 4s linear infinite;
 }
 @keyframes eyebrowShimmer {
-  to { background-position: 220% center; }
+  to {
+    background-position: 220% center;
+  }
 }
 
 /* ── Magic letter headings ──────────────────────────────────────────────── */
-.magic-h { display: block; }
+.magic-h {
+  display: block;
+}
 .magic-h .ch {
   display: inline-block;
   animation: chDrift 5s ease-in-out infinite;
   animation-delay: calc(var(--ci) * 90ms);
   will-change: transform;
 }
-.magic-h .ch--space { animation: none; }
+.magic-h .ch--space {
+  animation: none;
+}
 @keyframes chDrift {
-  0%,  100% { transform: translateY(0)    rotate(0deg)    scale(1);    }
-  20%        { transform: translateY(-3px) rotate(-1.1deg) scale(1.02); }
-  55%        { transform: translateY(2px)  rotate(0.7deg)  scale(0.99); }
-  80%        { transform: translateY(-1px) rotate(0.4deg)  scale(1.01); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  20% {
+    transform: translateY(-3px) rotate(-1.1deg) scale(1.02);
+  }
+  55% {
+    transform: translateY(2px) rotate(0.7deg) scale(0.99);
+  }
+  80% {
+    transform: translateY(-1px) rotate(0.4deg) scale(1.01);
+  }
 }
 
 /* ── Scroll-triggered initial states (gated on .js-animate) ────────────── */
-.js-animate .anim-hero  { opacity: 0; transform: translateY(32px); }
-.js-animate .anim-deal  {
+.js-animate .anim-hero {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.js-animate .anim-deal {
   opacity: 0;
   transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px);
 }
@@ -63,7 +62,10 @@
   opacity: 0;
   transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg);
 }
-.js-animate .anim-para  { opacity: 0; transform: translateY(22px); }
+.js-animate .anim-para {
+  opacity: 0;
+  transform: translateY(22px);
+}
 
 /* ── Reveal transitions ─────────────────────────────────────────────────── */
 .anim-hero {
@@ -72,16 +74,29 @@
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--hi, 0) * 100ms);
 }
-.anim-hero.is-visible { opacity: 1; transform: none; }
+.anim-hero.is-visible {
+  opacity: 1;
+  transform: none;
+}
 
 .anim-deal.is-visible {
   animation: dealCard 0.65s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
   animation-delay: calc(var(--di, 0) * 110ms);
 }
 @keyframes dealCard {
-  0%   { opacity: 0; transform: perspective(900px) rotateY(-75deg) rotate(-6deg) translateY(-12px); }
-  55%  { opacity: 1; transform: perspective(900px) rotateY(6deg)   rotate(1deg)  translateY(0);     }
-  100% { opacity: 1; transform: perspective(900px) rotateY(0deg)   rotate(0deg)  translateY(0);     }
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateY(-75deg) rotate(-6deg)
+      translateY(-12px);
+  }
+  55% {
+    opacity: 1;
+    transform: perspective(900px) rotateY(6deg) rotate(1deg) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateY(0deg) rotate(0deg) translateY(0);
+  }
 }
 
 .anim-reveal.is-visible {
@@ -89,8 +104,14 @@
   animation-delay: calc(var(--ri, 0) * 90ms);
 }
 @keyframes revealCard {
-  0%   { opacity: 0; transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg); }
-  100% { opacity: 1; transform: perspective(1100px) rotateX(0deg)  translateY(0)    rotate(0deg);  }
+  0% {
+    opacity: 0;
+    transform: perspective(1100px) rotateX(38deg) translateY(44px) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1100px) rotateX(0deg) translateY(0) rotate(0deg);
+  }
 }
 
 .anim-para {
@@ -99,7 +120,10 @@
     transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--pi, 0) * 70ms);
 }
-.anim-para.is-visible { opacity: 1; transform: none; }
+.anim-para.is-visible {
+  opacity: 1;
+  transform: none;
+}
 
 /* ── Suit block ─────────────────────────────────────────────────────────── */
 .suit-block {
@@ -108,18 +132,34 @@
   margin-bottom: 2.5rem;
   border-left: 3px solid var(--suit-block-color);
   border-radius: var(--radius-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
-.suit-block:last-child { margin-bottom: 0; }
+.suit-block:last-child {
+  margin-bottom: 0;
+}
 .suit-block:hover {
   transform: translateY(-4px) rotate(0.4deg);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-.suit-block--hearts   { --suit-block-color: rgba(214, 90, 90, 0.6);  --suit-name-color: var(--suit-hearts); }
-.suit-block--clubs    { --suit-block-color: rgba(82, 183, 136, 0.6); --suit-name-color: var(--suit-clubs); }
-.suit-block--diamonds { --suit-block-color: rgba(91, 155, 213, 0.6); --suit-name-color: var(--suit-diamonds); }
-.suit-block--spades   { --suit-block-color: rgba(164, 127, 208, 0.6);--suit-name-color: var(--suit-spades); }
+.suit-block--hearts {
+  --suit-block-color: rgba(214, 90, 90, 0.6);
+  --suit-name-color: var(--suit-hearts);
+}
+.suit-block--clubs {
+  --suit-block-color: rgba(82, 183, 136, 0.6);
+  --suit-name-color: var(--suit-clubs);
+}
+.suit-block--diamonds {
+  --suit-block-color: rgba(91, 155, 213, 0.6);
+  --suit-name-color: var(--suit-diamonds);
+}
+.suit-block--spades {
+  --suit-block-color: rgba(164, 127, 208, 0.6);
+  --suit-name-color: var(--suit-spades);
+}
 
 .suit-block__name {
   font-size: 1.5rem;
@@ -165,30 +205,30 @@
   position: relative;
   overflow: hidden;
   box-shadow:
-    0 6px 24px rgba(0,0,0,0.5),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+    0 6px 24px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   transition:
     transform 0.6s cubic-bezier(0.34, 1.18, 0.64, 1),
-    opacity   0.35s ease,
+    opacity 0.35s ease,
     box-shadow 0.3s ease;
 }
 .play-card:hover {
   box-shadow:
-    0 14px 44px rgba(0,0,0,0.6),
+    0 14px 44px rgba(0, 0, 0, 0.6),
     0 0 0 1px var(--card-accent),
-    inset 0 0 0 1px rgba(255,255,255,0.06);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   transform: translateY(-5px) rotate(1.2deg) !important;
 }
 .play-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     -45deg,
     transparent,
     transparent 12px,
-    rgba(255,255,255,0.018) 12px,
-    rgba(255,255,255,0.018) 13px
+    rgba(255, 255, 255, 0.018) 12px,
+    rgba(255, 255, 255, 0.018) 13px
   );
   pointer-events: none;
   border-radius: inherit;
@@ -260,15 +300,22 @@
 @media (prefers-reduced-motion: reduce) {
   .x-particle,
   .magic-h .ch,
-  .hero__eyebrow { animation: none !important; }
+  .hero__eyebrow {
+    animation: none !important;
+  }
 
   .js-animate .anim-hero,
   .js-animate .anim-deal,
   .js-animate .anim-reveal,
   .js-animate .anim-para,
-  .js-animate .play-card { opacity: 1 !important; transform: none !important; }
+  .js-animate .play-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 
   .anim-hero,
   .anim-para,
-  .play-card { transition: none; }
+  .play-card {
+    transition: none;
+  }
 }

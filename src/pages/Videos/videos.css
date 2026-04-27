@@ -1,15 +1,6 @@
 /* ─── Videos page ────────────────────────────────────────────────────────── */
 
 /* ── Background ──────────────────────────────────────────────────────────── */
-html:has(.videos-page) {
-  background-image: url("/images/bg-videos.png");
-  background-position: center;
-  background-size: cover;
-}
-
-.videos-page {
-  background: transparent !important;
-}
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 /* .videos-hero {

@@ -1,15 +1,6 @@
 /* ─── Shop page ──────────────────────────────────────────────────────────── */
 
 /* ── Background ──────────────────────────────────────────────────────────── */
-html:has(.shop-page) {
-  background-image: url("/images/bg-shop.png");
-  background-position: center;
-  background-size: cover;
-}
-
-.shop-page {
-  background: transparent !important;
-}
 
 .shop-grid {
   display: grid;

@@ -1,15 +1,6 @@
 /* ─── Readings page ──────────────────────────────────────────────────────── */
 
 /* ── Background ──────────────────────────────────────────────────────────── */
-html:has(.readings-page) {
-  background-image: url("/images/bg-readings.png");
-  background-position: center;
-  background-size: 175%;
-}
-
-.readings-page {
-  background: transparent !important;
-}
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 /* .readings-hero {

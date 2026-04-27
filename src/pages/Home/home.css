@@ -1,13 +1,7 @@
 /* ─── Home page ───────────────────────────────────────────────────────────── */
 
 /* ── Background ──────────────────────────────────────────────────────────── */
-html:has(.home-page) {
-  background-image: var(--pattern-lattice);
-}
 
-.home-page {
-  background: transparent !important;
-}
 
 /* ── Layout ──────────────────────────────────────────────────────────────── */
 main {

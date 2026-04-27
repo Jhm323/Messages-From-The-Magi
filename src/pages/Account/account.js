@@ -4,12 +4,10 @@ import { getUser, clearUser } from "../../auth/AuthStore.js";
 import { getSavedReadings, deleteReading } from "../../auth/SavedReadings.js";
 import { initHeader } from "../../components/Header/Header.js";
 import { initFooter } from "../../components/Footer/Footer.js";
-import { initCosmos } from "../../components/Cosmos/Cosmos.js";
 import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
 
 requireAuth("/");
 
-initCosmos();
 initPageAnimations();
 initHeader("#site-header-mount", { activePath: "/account.html" });
 initFooter("#site-footer-mount");
