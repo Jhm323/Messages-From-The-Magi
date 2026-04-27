@@ -6,7 +6,7 @@
 .form-label {
   display: block;
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -38,7 +38,7 @@
 }
 
 .form-hint {
-  font-size: 0.8rem;
+  font-size: 16px;
   color: var(--color-mist);
   margin-top: 0.35rem;
 }
@@ -50,7 +50,7 @@
 
 .field-error {
   display: block;
-  font-size: 0.78rem;
+  font-size: 16px;
   color: var(--color-error);
   margin-top: 0.3rem;
   min-height: 1em;

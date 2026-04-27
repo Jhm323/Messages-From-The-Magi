@@ -69,7 +69,7 @@
 
 .card-name {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 18px;
   color: var(--suit-color, var(--color-white));
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -78,7 +78,7 @@
 
 .card-number-badge {
   font-family: var(--font-heading);
-  font-size: 0.7rem;
+  font-size: 14px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -100,7 +100,7 @@
 }
 
 .card-keyword-tag {
-  font-size: 0.72rem;
+  font-size: 15px;
   font-family: var(--font-heading);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -112,7 +112,7 @@
 }
 
 .card-description {
-  font-size: 0.95rem;
+  font-size: 18px;
   color: var(--color-light);
   line-height: 1.8;
   text-align: center;
@@ -132,7 +132,7 @@
 }
 
 .card-action-prompt {
-  font-size: 0.9rem;
+  font-size: 18px;
   color: var(--color-dawn);
   text-align: center;
   padding: 0.75rem 1rem;
@@ -144,7 +144,7 @@
 .card-action-prompt strong {
   display: block;
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -164,7 +164,7 @@
 
 .reading-result__eyebrow {
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 15px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -180,7 +180,7 @@
 
 .reading-result__number {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 16px;
   color: var(--color-dawn);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -195,8 +195,8 @@
   .card-display { padding: 1.5rem 1rem; }
   .card-image-wrap { max-width: 160px; }
   .reading-result { padding: 1.5rem 1rem; }
-  .reading-result__card-name { font-size: 1.3rem; }
-  .card-affirmation { padding: 0.75rem 1rem; font-size: 0.95rem; }
+  .reading-result__card-name { font-size: 21px; }
+  .card-affirmation { padding: 0.75rem 1rem; font-size: 18px; }
 }
 
 @media (max-width: 360px) {

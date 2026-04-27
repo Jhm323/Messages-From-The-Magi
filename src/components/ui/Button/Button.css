@@ -4,7 +4,7 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 17px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.85rem 2rem;
@@ -112,7 +112,7 @@
 }
 
 .feature-btn__desc {
-  font-size: 0.85rem;
+  font-size: 17px;
   color: var(--color-dawn);
   line-height: 1.5;
 }
@@ -135,7 +135,7 @@
 
 @media (max-width: 360px) {
   .btn {
-    font-size: 0.75rem;
+    font-size: 15px;
     padding: 0.65rem 1rem;
     letter-spacing: 0.06em;
   }

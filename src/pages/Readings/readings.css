@@ -56,7 +56,7 @@
 
 /* Corner pips */
 .reading-card__pip {
-  font-size: 1.1rem;
+  font-size: 18px;
   color: var(--color-gold-muted);
   line-height: 1;
   align-self: flex-start;
@@ -90,7 +90,7 @@
 
 .reading-card__title {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 17px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-white);
@@ -98,7 +98,7 @@
 }
 
 .reading-card__desc {
-  font-size: 0.8rem;
+  font-size: 16px;
   color: var(--color-dawn);
   line-height: 1.6;
 }

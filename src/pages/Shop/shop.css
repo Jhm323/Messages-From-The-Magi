@@ -48,7 +48,7 @@
   background: var(--color-gold);
   color: var(--color-void);
   font-family: var(--font-heading);
-  font-size: 0.62rem;
+  font-size: 14px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
@@ -58,7 +58,7 @@
 
 .product-type {
   font-family: var(--font-heading);
-  font-size: 0.7rem;
+  font-size: 14px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -73,7 +73,7 @@
 }
 
 .product-desc {
-  font-size: 0.88rem;
+  font-size: 17px;
   color: var(--color-dawn);
   line-height: 1.65;
   flex: 1;
@@ -90,12 +90,12 @@
 
 .product-price {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 20px;
   color: var(--color-gold);
   letter-spacing: 0.04em;
 }
 .product-price__sub {
-  font-size: 0.7rem;
+  font-size: 14px;
   color: var(--color-mist);
   font-family: var(--font-heading);
   letter-spacing: 0.06em;
@@ -109,7 +109,7 @@
   background: var(--color-gold-glow);
   color: var(--color-gold);
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;

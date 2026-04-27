@@ -3,7 +3,6 @@
   position: sticky;
   top: 0;
   z-index: var(--z-overlay);
-  /* background: rgba(12, 6, 4, 0.93); */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-gold-muted);
@@ -126,7 +125,7 @@
   padding: 0.7rem 1rem;
   border-radius: var(--radius-md);
   font-family: var(--font-heading);
-  font-size: 0.82rem;
+  font-size: 16px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -208,7 +207,7 @@
   padding: 0.65rem 1rem;
   border-radius: var(--radius-md);
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 16px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -237,7 +236,7 @@
   border: 1px solid var(--color-mist);
   background: none;
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -273,7 +272,7 @@
   border-radius: 50%;
   background: var(--color-gold-glow);
   border: 1px solid var(--color-gold-muted);
-  font-size: 0.7rem;
+  font-size: 14px;
   color: var(--color-gold);
   font-family: var(--font-heading);
   letter-spacing: 0;
@@ -302,7 +301,7 @@
 /* ── Tablet (≤ 768px) ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .site-logo {
-    font-size: 0.85rem;
+    font-size: 17px;
   }
 
   .nav-sub-menu {
@@ -338,7 +337,7 @@
   }
 
   .site-logo {
-    font-size: 0.72rem;
+    font-size: 15px;
     letter-spacing: 0.03em;
   }
 
@@ -355,7 +354,7 @@
 /* ── Small mobile (≤ 360px) ────────────────────────────────────────────── */
 @media (max-width: 360px) {
   .site-logo {
-    font-size: 0.65rem;
+    font-size: 14px;
   }
 
   .nav-menu-btn {
@@ -366,6 +365,6 @@
   .header-cart-btn {
     width: 30px;
     height: 30px;
-    font-size: 0.95rem;
+    font-size: 18px;
   }
 }

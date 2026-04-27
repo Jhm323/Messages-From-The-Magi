@@ -37,12 +37,12 @@
 }
 
 /* Profile text */
-.account-name     { font-size: 1.8rem; margin: 0 0 0.2rem; }
-.account-email    { color: var(--color-dawn); font-size: 0.9rem; }
-.account-birthday { color: var(--color-mist); font-size: 0.82rem; margin-top: 0.15rem; }
+.account-name     { font-size: 29px; margin: 0 0 0.2rem; }
+.account-email    { color: var(--color-dawn); font-size: 18px; }
+.account-birthday { color: var(--color-mist); font-size: 16px; margin-top: 0.15rem; }
 
 /* Sign-out button (compact override) */
-.account-sign-out { font-size: 0.8rem; padding: 0.4rem 1rem; }
+.account-sign-out { font-size: 16px; padding: 0.4rem 1rem; }
 
 /* Membership card */
 .account-membership {
@@ -55,17 +55,17 @@
   border-radius: var(--radius-lg);
   flex-wrap: wrap;
 }
-.account-membership__icon    { font-size: 1.8rem; flex-shrink: 0; }
+.account-membership__icon    { font-size: 29px; flex-shrink: 0; }
 .account-membership__body    { flex: 1; min-width: 0; }
 .account-membership__tier {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 16px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 0.2rem;
 }
-.account-membership__desc    { font-size: 0.85rem; color: var(--color-dawn); }
+.account-membership__desc    { font-size: 17px; color: var(--color-dawn); }
 .account-membership__actions { margin-left: auto; flex-shrink: 0; }
 
 /* Saved reading list items */
@@ -89,14 +89,14 @@
 .reading-item__body { flex: 1; min-width: 0; }
 .reading-item__name {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 17px;
   color: var(--color-light);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.reading-item__meta { font-size: 0.78rem; color: var(--color-dawn); margin-top: 0.15rem; }
-.reading-item__date { font-size: 0.75rem; color: var(--color-mist); flex-shrink: 0; text-align: right; }
+.reading-item__meta { font-size: 16px; color: var(--color-dawn); margin-top: 0.15rem; }
+.reading-item__date { font-size: 15px; color: var(--color-mist); flex-shrink: 0; text-align: right; }
 .reading-item__delete {
   background: none;
   border: none;

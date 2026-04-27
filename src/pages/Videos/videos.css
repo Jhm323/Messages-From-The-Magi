@@ -62,7 +62,7 @@
 
 .video-card__category {
   font-family: var(--font-heading);
-  font-size: 0.68rem;
+  font-size: 14px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-muted);
@@ -71,13 +71,13 @@
 
 .video-card__title {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 18px;
   color: var(--color-light);
   margin-bottom: 0.5rem;
 }
 
 .video-card__body {
-  font-size: 0.85rem;
+  font-size: 17px;
   color: var(--color-dawn);
   line-height: 1.6;
 }

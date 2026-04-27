@@ -4,7 +4,7 @@
   padding: 3rem 1.5rem 2rem;
   text-align: center;
   color: var(--color-dawn);
-  font-size: 0.85rem;
+  font-size: 17px;
 }
 
 .site-footer__logo {
@@ -16,6 +16,6 @@
 
 .site-footer__copy {
   color: var(--color-mist);
-  font-size: 0.8rem;
+  font-size: 16px;
   margin-top: 0.5rem;
 }

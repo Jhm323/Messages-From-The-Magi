@@ -169,7 +169,7 @@
 }
 .suit-block__element {
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-dawn);
@@ -265,7 +265,7 @@
 }
 .play-card__title {
   font-family: var(--font-heading);
-  font-size: 0.68rem;
+  font-size: 14px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--color-light);
@@ -273,14 +273,14 @@
   margin-bottom: 0.4rem;
 }
 .play-card__sub {
-  font-size: 0.6rem;
+  font-size: 14px;
   color: var(--color-dawn);
   letter-spacing: 0.07em;
   text-transform: uppercase;
   margin-bottom: 0.4rem;
 }
 .play-card__desc {
-  font-size: 0.67rem;
+  font-size: 14px;
   color: var(--color-dawn);
   line-height: 1.55;
   text-align: center;
