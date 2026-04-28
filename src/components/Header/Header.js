@@ -10,38 +10,45 @@ import { initCart, openCart } from '../Cart/Cart.js';
 import { getCartCount, onCartChange } from '../../cart/CartStore.js';
 
 const NAV_ITEMS = [
-  { href: '/',              label: 'Home',            icon: '✦' },
+  { href: '/',              label: 'Home',               icon: '✦' },
   {
-    href: '/readings.html', label: 'Readings', icon: '★',
+    href: '/readings.html', label: 'Readings',            icon: '♥', iconColor: 'var(--suit-hearts)',
     subItems: [
-      { href: '/readings.html?open=birth-card',    label: 'Birth Card Reading',    icon: '★' },
-      { href: '/readings.html?open=compatibility', label: 'Compatibility Reading', icon: '♥♠' },
-      { href: '/readings.html?open=geolocation',   label: 'Location Reading',      icon: '🗺' },
-      { href: '/readings.html?open=greeting-card', label: 'Greeting Card',         icon: '✉' },
+      { href: '/readings.html?open=birth-card',    label: 'Birth Card Reading',    icon: '♣', iconColor: 'var(--suit-clubs)' },
+      { href: '/readings.html?open=compatibility', label: 'Compatibility Reading', iconHTML: '<span style="color:var(--suit-hearts)">♥</span><span style="color:var(--suit-spades)">♠</span>' },
+      { href: '/readings.html?open=geolocation',   label: 'Location Reading',      icon: '♦', iconColor: 'var(--suit-diamonds)' },
+      { href: '/readings.html?open=greeting-card', label: 'Greeting Card',         icon: '♠', iconColor: 'var(--suit-spades)' },
     ],
   },
-  { href: '/oracle.html',   label: 'Oracle',          icon: '🃏' },
-  { href: '/explore.html',  label: 'Explore the System', icon: '◈' },
-  { href: '/videos.html',   label: 'Videos & Content', icon: '▶' },
-  { href: '/join.html',     label: 'Join the Order',  icon: '💎' },
-  { href: '/shop.html',     label: 'The Magi Shop',   icon: '✦' },
-  { href: '/about.html',    label: 'About & Contact', icon: '✉' },
+  { href: '/oracle.html',   label: 'Oracle',             icon: '🃏' },
+  { href: '/explore.html',  label: 'Explore the System', icon: '♦', iconColor: 'var(--suit-diamonds)' },
+  { href: '/videos.html',   label: 'Videos & Content',  icon: '▶' },
+  { href: '/join.html',     label: 'Join the Order',     icon: '♣', iconColor: 'var(--suit-clubs)' },
+  { href: '/shop.html',     label: 'The Magi Shop',      icon: '💎' },
+  { href: '/about.html',    label: 'About & Contact',    icon: '♠', iconColor: 'var(--suit-spades)' },
 ];
 
+function iconSpan(item, cls = 'nav-dropdown__icon') {
+  const style = item.iconColor ? ` style="color:${item.iconColor}"` : '';
+  const content = item.iconHTML ?? item.icon;
+  return `<span class="${cls}"${style}>${content}</span>`;
+}
+
 function buildHTML(activePath) {
-  const items = NAV_ITEMS.map(({ href, label, icon, subItems }) => {
+  const items = NAV_ITEMS.map((item) => {
+    const { href, label, subItems } = item;
     const active = activePath === href || (subItems && subItems.some(s => s.href === activePath));
 
     if (subItems) {
       const subs = subItems.map(sub => `
         <a href="${sub.href}" class="nav-sub__link">
-          <span class="nav-dropdown__icon">${sub.icon}</span>
+          ${iconSpan(sub)}
           <span>${sub.label}</span>
         </a>`).join('');
       return `
 <div class="nav-item--has-sub">
   <a href="${href}" class="nav-dropdown__link${active ? ' nav-dropdown__link--active' : ''}">
-    <span class="nav-dropdown__icon">${icon}</span>
+    ${iconSpan(item)}
     <span>${label}</span>
     <span class="nav-sub__arrow">›</span>
   </a>
@@ -50,7 +57,7 @@ function buildHTML(activePath) {
     }
 
     return `<a href="${href}" class="nav-dropdown__link${active ? ' nav-dropdown__link--active' : ''}">
-      <span class="nav-dropdown__icon">${icon}</span>
+      ${iconSpan(item)}
       <span>${label}</span>
     </a>`;
   }).join('\n');
@@ -68,7 +75,7 @@ function buildHTML(activePath) {
 
     <div id="site-header-auth" class="header-auth"></div>
     <button class="header-cart-btn" id="header-cart-btn" aria-label="Open cart">
-      🛍
+      🛒
       <span class="header-cart-btn__badge" id="header-cart-badge">0</span>
     </button>
 

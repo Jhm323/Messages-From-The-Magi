@@ -7,17 +7,6 @@ import { openCart } from "../../components/Cart/Cart.js";
 
 const PRODUCTS = [
   {
-    id: "living-deck",
-    name: "The Living Deck",
-    type: "Physical Product",
-    icon: "🃏",
-    price: 4500,
-    description:
-      "A premium 52-card printed deck with the full Magi symbolism — gilded edges, linen finish, and a collector's keepsake box.",
-    badge: "New",
-    featured: true,
-  },
-  {
     id: "foundations-course",
     name: "Magi Foundations Course",
     type: "Video Course",
@@ -37,6 +26,29 @@ const PRODUCTS = [
     description:
       "The full card-to-card relationship analysis between you and a partner — cosmic connections, karmic ties, and natural affinities.",
     badge: null,
+  },
+  {
+    id: "living-deck",
+    name: "The Living Deck",
+    type: "Physical Product",
+    icon: "🃏",
+    price: 4500,
+    description:
+      "A premium 52-card printed deck with the full Magi symbolism — gilded edges, linen finish, and a collector's keepsake box.",
+    badge: "New",
+    featured: true,
+  },
+  {
+    id: "system-workbook",
+    name: "The Complete System Workbook",
+    type: "Digital Download",
+    icon: "♠",
+    iconColor: "var(--suit-spades)",
+    price: 2700,
+    description:
+      "An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.",
+    badge: "Best Seller",
+    featured: true,
   },
   {
     id: "birth-card-guide",
@@ -59,18 +71,6 @@ const PRODUCTS = [
     description:
       "Your 13-card year spread calculated and interpreted for your current Solar Year — delivered as a personalized PDF within 48 hours.",
     badge: null,
-  },
-  {
-    id: "system-workbook",
-    name: "The Complete System Workbook",
-    type: "Digital Download",
-    icon: "♠",
-    iconColor: "var(--suit-spades)",
-    price: 2700,
-    description:
-      "An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.",
-    badge: "Best Seller",
-    featured: true,
   },
 ];
 
