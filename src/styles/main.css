@@ -28,15 +28,15 @@
   --color-gold-glow: rgba(201, 168, 76, 0.18);
 
   /* Suit colors */
-  --suit-hearts: #d65a5a;
-  --suit-clubs: #52b788;
-  --suit-diamonds: #5b9bd5;
-  --suit-spades: #a47fd0;
+  --suit-hearts: #e11c1c;
+  --suit-clubs: #000000;
+  --suit-diamonds: #e11c1c;
+  --suit-spades: #000000;
   --suit-joker: #c9a84c;
 
-  /* Dark surface colors */
-  --color-dusk: #82523f;
-  --color-night: #68534e;
+  /* Warm surface colors */
+  --color-dusk:  #f5edd8;
+  --color-night: #e8d4ba;
 
   /* Functional */
   --color-success: #52b788;
@@ -119,7 +119,7 @@ html {
 }
 
 body {
-  background-color: #f5e6c8;
+  background-color: #ffffff;
   color: var(--color-twilight);
   font-family: var(--font-body);
   font-size: var(--text-18);
@@ -299,7 +299,7 @@ footer {
   border-left: 2px solid var(--color-gold);
   margin: 0;
   padding: 20px 24px;
-  background: var(--color-dusk);
+  background: var(--color-parchment);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 .blockquote--sm {
@@ -308,7 +308,7 @@ footer {
   margin-bottom: 14px;
 }
 .blockquote__body {
-  color: var(--color-dawn);
+  color: var(--color-mist);
   line-height: 1.8;
   font-style: italic;
   margin-bottom: 12px;
@@ -327,8 +327,8 @@ footer {
 
 /* ─── STAT TILE ──────────────────────────────────────────────────────────── */
 .stat-tile {
-  background: var(--color-dusk);
-  border: 1px solid var(--color-mist);
+  background: var(--color-parchment);
+  border: 1px solid var(--color-gold-muted);
   border-radius: var(--radius-md);
   padding: 24px;
   text-align: center;
@@ -350,14 +350,14 @@ footer {
 }
 .stat-tile__body {
   font-size: var(--text-14);
-  color: var(--color-dawn);
+  color: var(--color-mist);
   line-height: 1.7;
 }
 
 /* ─── COMING SOON ────────────────────────────────────────────────────────── */
 .coming-soon {
-  background: var(--color-dusk);
-  border: 1px dashed var(--color-mist);
+  background: var(--color-parchment);
+  border: 1px dashed var(--color-gold-muted);
   border-radius: var(--radius-lg);
   padding: 32px;
   text-align: center;
@@ -380,7 +380,7 @@ footer {
 }
 .coming-soon__body {
   font-size: var(--text-14);
-  color: var(--color-dawn);
+  color: var(--color-mist);
 }
 
 /* ─── SUBSCRIPTION TIERS ─────────────────────────────────────────────────── */
@@ -392,7 +392,7 @@ footer {
 }
 
 .tier-card {
-  background: var(--color-dusk);
+  background: #2b1208;
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-lg);
   padding: 32px;
@@ -409,7 +409,7 @@ footer {
 
 .tier-card--featured {
   border-color: var(--color-gold-muted);
-  background: linear-gradient(135deg, var(--color-dusk) 0%, #3d1010 100%);
+  background: linear-gradient(135deg, #2b1208 0%, #3d1010 100%);
   box-shadow:
     0 0 0 1px var(--color-gold-glow),
     var(--shadow-card);

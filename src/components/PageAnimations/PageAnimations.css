@@ -278,14 +278,14 @@
 }
 .play-card__sub {
   font-size: var(--text-18);
-  color: var(--color-dawn);
+  color: var(--color-mist);
   letter-spacing: 0.07em;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
 .play-card__desc {
   font-size: var(--text-18);
-  color: var(--color-dawn);
+  color: var(--color-mist);
   line-height: 1.55;
   text-align: center;
 }
