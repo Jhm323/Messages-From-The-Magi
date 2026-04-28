@@ -392,8 +392,8 @@ footer {
 }
 
 .tier-card {
-  background: #2b1208;
-  border: 1px solid var(--color-mist);
+  background: var(--color-dusk);
+  border: 1px solid var(--color-gold-muted);
   border-radius: var(--radius-lg);
   padding: 32px;
   display: flex;
@@ -408,8 +408,8 @@ footer {
 }
 
 .tier-card--featured {
-  border-color: var(--color-gold-muted);
-  background: linear-gradient(135deg, #2b1208 0%, #3d1010 100%);
+  border-color: var(--color-gold);
+  background: linear-gradient(135deg, var(--color-dusk) 0%, var(--color-light) 100%);
   box-shadow:
     0 0 0 1px var(--color-gold-glow),
     var(--shadow-card);
@@ -440,7 +440,7 @@ footer {
 .tier-name {
   font-family: var(--font-heading);
   font-size: var(--text-19);
-  color: var(--color-white);
+  color: var(--color-twilight);
   letter-spacing: 0.04em;
 }
 
@@ -460,7 +460,7 @@ footer {
 
 .tier-features li {
   font-size: var(--text-14);
-  color: var(--color-dawn);
+  color: var(--color-mist);
   padding-left: 19px;
   position: relative;
 }
