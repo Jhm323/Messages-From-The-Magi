@@ -24,7 +24,6 @@
   font-size: var(--text-16);
   color: var(--color-gold);
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   white-space: nowrap;
   flex: 1;
 }

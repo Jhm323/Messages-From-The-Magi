@@ -7,47 +7,6 @@ import { openCart } from "../../components/Cart/Cart.js";
 
 const PRODUCTS = [
   {
-    id: "birth-card-guide",
-    name: "Birth Card PDF Guide",
-    type: "Digital Download",
-    icon: "★",
-    price: 1200,
-    description:
-      "A beautifully formatted 40-page PDF covering your Birth Card, Planetary Ruling Card, and core life themes — yours to keep forever.",
-    badge: null,
-  },
-  {
-    id: "system-workbook",
-    name: "The Complete System Workbook",
-    type: "Digital Download",
-    icon: "◈",
-    price: 2700,
-    description:
-      "An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.",
-    badge: "Best Seller",
-    featured: true,
-  },
-  {
-    id: "year-spread",
-    name: "Year Ahead Spread Reading",
-    type: "Personalized PDF",
-    icon: "✦",
-    price: 2200,
-    description:
-      "Your 13-card year spread calculated and interpreted for your current Solar Year — delivered as a personalized PDF within 48 hours.",
-    badge: null,
-  },
-  {
-    id: "compatibility-report",
-    name: "Love & Compatibility Report",
-    type: "Personalized PDF",
-    icon: "♥",
-    price: 1900,
-    description:
-      "The full card-to-card relationship analysis between you and a partner — cosmic connections, karmic ties, and natural affinities.",
-    badge: null,
-  },
-  {
     id: "living-deck",
     name: "The Living Deck",
     type: "Physical Product",
@@ -68,6 +27,51 @@ const PRODUCTS = [
       "Six in-depth video modules taught by Sharon covering the complete system from first principles — suits, birth cards, spreads, and timing.",
     badge: "Featured",
   },
+  {
+    id: "compatibility-report",
+    name: "Love & Compatibility Report",
+    type: "Personalized PDF",
+    icon: "♥",
+    iconColor: "var(--suit-hearts)",
+    price: 1900,
+    description:
+      "The full card-to-card relationship analysis between you and a partner — cosmic connections, karmic ties, and natural affinities.",
+    badge: null,
+  },
+  {
+    id: "birth-card-guide",
+    name: "Birth Card PDF Guide",
+    type: "Digital Download",
+    icon: "♣",
+    iconColor: "var(--suit-clubs)",
+    price: 1200,
+    description:
+      "A beautifully formatted 40-page PDF covering your Birth Card, Planetary Ruling Card, and core life themes — yours to keep forever.",
+    badge: null,
+  },
+  {
+    id: "year-spread",
+    name: "Year Ahead Spread Reading",
+    type: "Personalized PDF",
+    icon: "♦",
+    iconColor: "var(--suit-diamonds)",
+    price: 2200,
+    description:
+      "Your 13-card year spread calculated and interpreted for your current Solar Year — delivered as a personalized PDF within 48 hours.",
+    badge: null,
+  },
+  {
+    id: "system-workbook",
+    name: "The Complete System Workbook",
+    type: "Digital Download",
+    icon: "♠",
+    iconColor: "var(--suit-spades)",
+    price: 2700,
+    description:
+      "An 80-page deep-dive workbook walking you through the full Star of the Magi system — suits, spreads, and self-discovery exercises.",
+    badge: "Best Seller",
+    featured: true,
+  },
 ];
 
 function renderGrid() {
@@ -76,7 +80,7 @@ function renderGrid() {
     (p, i) => `
     <div class="product-card anim-reveal${p.featured ? " product-card--featured" : ""}" style="--ri:${i}">
       ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
-      <div class="product-icon">${p.icon}</div>
+      <div class="product-icon"${p.iconColor ? ` style="color:${p.iconColor}"` : ""}>${p.icon}</div>
       <div class="product-type">${p.type}</div>
       <div class="product-name">${p.name}</div>
       <p class="product-desc">${p.description}</p>

@@ -64,7 +64,7 @@ function buildHTML(activePath) {
       <span class="nav-menu-btn__bar"></span>
     </button>
 
-    <a href="/" class="site-logo" style="text-decoration:none;">Messages from the Magi</a>
+    <a href="/" class="site-logo" style="text-decoration:none;">The Mystic Oracle</a>
 
     <div id="site-header-auth" class="header-auth"></div>
     <button class="header-cart-btn" id="header-cart-btn" aria-label="Open cart">
