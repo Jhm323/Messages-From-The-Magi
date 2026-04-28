@@ -36,7 +36,6 @@
 .product-card--featured {
   border-color: var(--color-gold-muted);
   background: linear-gradient(135deg, var(--color-dusk) 0%, rgba(201, 168, 76, 0.18) 100%);
-  box-shadow: 0 0 0 1px var(--color-gold-glow), var(--shadow-card);
 }
 
 .product-badge {
