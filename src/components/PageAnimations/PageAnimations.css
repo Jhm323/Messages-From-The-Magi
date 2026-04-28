@@ -149,19 +149,19 @@
 }
 
 .suit-block--hearts {
-  --suit-block-color: rgba(214, 90, 90, 0.6);
+  --suit-block-color: var(--suit-hearts);
   --suit-name-color: var(--suit-hearts);
 }
 .suit-block--clubs {
-  --suit-block-color: rgba(82, 183, 136, 0.6);
+  --suit-block-color: var(--suit-clubs);
   --suit-name-color: var(--suit-clubs);
 }
 .suit-block--diamonds {
-  --suit-block-color: rgba(91, 155, 213, 0.6);
+  --suit-block-color: var(--suit-diamonds);
   --suit-name-color: var(--suit-diamonds);
 }
 .suit-block--spades {
-  --suit-block-color: rgba(164, 127, 208, 0.6);
+  --suit-block-color: var(--suit-spades);
   --suit-name-color: var(--suit-spades);
 }
 

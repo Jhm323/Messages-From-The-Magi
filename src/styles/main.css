@@ -18,8 +18,6 @@
 
   /* Brand palette */
   --color-parchment: #f5edd8;
-  --color-crimson: #8b1a1a;
-  --color-forest: #1a3b2a;
 
   /* Gold accent system */
   --color-gold: #c9a84c;
@@ -35,7 +33,7 @@
   --suit-joker: #c9a84c;
 
   /* Warm surface colors */
-  --color-dusk:  #f5edd8;
+  --color-dusk: #f5edd8;
   --color-night: #e8d4ba;
 
   /* Functional */
@@ -409,7 +407,11 @@ footer {
 
 .tier-card--featured {
   border-color: var(--color-gold);
-  background: linear-gradient(135deg, var(--color-dusk) 0%, var(--color-light) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-dusk) 0%,
+    var(--color-light) 100%
+  );
   box-shadow:
     0 0 0 1px var(--color-gold-glow),
     var(--shadow-card);

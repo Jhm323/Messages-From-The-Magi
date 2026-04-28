@@ -57,7 +57,7 @@
 /* Corner pips */
 .reading-card__pip {
   font-size: 18px;
-  color: var(--color-gold-muted);
+  color: var(--suit-color, var(--color-gold-muted));
   line-height: 1;
   align-self: flex-start;
 }
@@ -85,7 +85,7 @@
 .reading-card__icon {
   font-size: var(--text-32);
   line-height: 1;
-  color: var(--color-gold);
+  color: var(--suit-color, var(--color-gold));
 }
 
 .reading-card__title {
