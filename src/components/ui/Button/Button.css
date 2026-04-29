@@ -19,37 +19,37 @@
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--color-gold) 0%, #a07830 100%);
-  color: var(--color-void);
+  background: linear-gradient(135deg, var(--color-crimson) 0%, #4a1214 100%);
+  color: var(--color-parchment);
   font-weight: 700;
-  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 4px 20px rgba(101, 26, 28, 0.3);
 }
 .btn--primary:hover {
-  background: linear-gradient(135deg, var(--color-gold-bright) 0%, var(--color-gold) 100%);
-  box-shadow: var(--shadow-glow-gold);
+  background: linear-gradient(135deg, #7a1f21 0%, var(--color-crimson) 100%);
+  box-shadow: 0 0 24px rgba(101, 26, 28, 0.35), 0 0 48px rgba(101, 26, 28, 0.15);
   transform: translateY(-2px);
-  color: var(--color-void);
+  color: var(--color-parchment);
 }
 
 .btn--secondary {
   background: transparent;
-  color: var(--color-gold);
-  border: 1px solid var(--color-gold-muted);
+  color: var(--color-crimson);
+  border: 1px solid var(--color-crimson);
 }
 .btn--secondary:hover {
-  border-color: var(--color-gold);
-  background: var(--color-gold-glow);
-  color: var(--color-gold-bright);
+  border-color: var(--color-crimson);
+  background: rgba(101, 26, 28, 0.08);
+  color: var(--color-crimson);
 }
 
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-light);
-  border: 1px solid var(--color-mist);
+  background: rgba(23, 22, 23, 0.04);
+  color: var(--color-twilight);
+  border: 1px solid var(--color-dawn);
 }
 .btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-dawn);
+  background: rgba(23, 22, 23, 0.08);
+  border-color: var(--color-mist);
 }
 
 .btn--suit {
@@ -92,10 +92,10 @@
 }
 
 .feature-btn:hover {
-  border-color: var(--color-gold-muted);
-  background: var(--color-twilight);
+  border-color: var(--color-crimson);
+  background: rgba(101, 26, 28, 0.04);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 8px 32px rgba(23, 22, 23, 0.08);
   color: inherit;
 }
 
@@ -107,13 +107,13 @@
 .feature-btn__title {
   font-family: var(--font-heading);
   font-size: var(--text-16);
-  color: var(--color-white);
+  color: var(--color-twilight);
   letter-spacing: 0.04em;
 }
 
 .feature-btn__desc {
   font-size: var(--text-18);
-  color: var(--color-dawn);
+  color: var(--color-mist);
   line-height: 1.5;
 }
 

@@ -9,32 +9,36 @@
 
 /* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
 :root {
-  /* Core palette — warm antique book / medieval mysticism */
-  --color-twilight: #3d2018;
-  --color-mist: #6b3d2e;
-  --color-dawn: #c4997a;
-  --color-light: #e8d4ba;
-  --color-white: #f5edd8;
+  /* Core palette — arcane elegance */
+  --color-twilight: #171617;
+  --color-mist: #462431;
+  --color-dawn: #7a6050;
+  --color-light: #e8d9c4;
+  --color-white: #ffffff;
+  --color-void: #171617;
 
   /* Brand palette */
-  --color-parchment: #f5edd8;
+  --color-crimson: #651a1c;
+  --color-plum: #462431;
+  --color-sage: #565c44;
+  --color-parchment: #eddbc7;
 
   /* Gold accent system */
-  --color-gold: #c9a84c;
-  --color-gold-bright: #e8c97a;
-  --color-gold-muted: #8a6f2e;
-  --color-gold-glow: rgba(201, 168, 76, 0.18);
+  --color-gold: #a77b3c;
+  --color-gold-bright: #c9a060;
+  --color-gold-muted: #7a5828;
+  --color-gold-glow: rgba(167, 123, 60, 0.15);
 
   /* Suit colors */
-  --suit-hearts: #e11c1c;
-  --suit-clubs: #000000;
-  --suit-diamonds: #e11c1c;
-  --suit-spades: #000000;
-  --suit-joker: #c9a84c;
+  --suit-hearts: #651a1c;
+  --suit-clubs: #171617;
+  --suit-diamonds: #651a1c;
+  --suit-spades: #171617;
+  --suit-joker: #a77b3c;
 
   /* Warm surface colors */
-  --color-dusk: #f5edd8;
-  --color-night: #e8d4ba;
+  --color-dusk: #eddbc7;
+  --color-night: #dfd0b8;
 
   /* Functional */
   --color-success: #52b788;
@@ -84,9 +88,9 @@
 
   /* Shadows */
   --shadow-card:
-    0 8px 32px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(139, 26, 26, 0.3);
+    0 8px 32px rgba(23, 22, 23, 0.12), 0 2px 8px rgba(101, 26, 28, 0.08);
   --shadow-glow-gold:
-    0 0 24px rgba(201, 168, 76, 0.35), 0 0 48px rgba(201, 168, 76, 0.15);
+    0 0 24px rgba(167, 123, 60, 0.35), 0 0 48px rgba(167, 123, 60, 0.15);
   --shadow-glow-suit:
     0 0 20px var(--suit-color, var(--color-gold)), 0 4px 12px rgba(0, 0, 0, 0.5);
 
@@ -117,7 +121,7 @@ html {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--color-parchment);
   color: var(--color-twilight);
   font-family: var(--font-body);
   font-size: var(--text-18);
@@ -234,7 +238,7 @@ footer {
   font-family: var(--font-display);
   font-size: clamp(35px, 6vw, 72px);
   color: var(--color-gold);
-  text-shadow: 0 0 40px rgba(201, 168, 76, 0.4);
+  text-shadow: 0 0 40px rgba(167, 123, 60, 0.35);
   margin-bottom: 12px;
 }
 
@@ -558,10 +562,10 @@ body.js-ready {
 @keyframes pulse-gold {
   0%,
   100% {
-    box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
+    box-shadow: 0 0 10px rgba(167, 123, 60, 0.2);
   }
   50% {
-    box-shadow: 0 0 30px rgba(201, 168, 76, 0.5);
+    box-shadow: 0 0 30px rgba(167, 123, 60, 0.5);
   }
 }
 

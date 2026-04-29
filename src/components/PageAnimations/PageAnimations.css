@@ -272,7 +272,7 @@
   font-size: var(--text-18);
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-white);
+  color: var(--color-twilight);
   line-height: 1.5;
   margin-bottom: 6px;
 }
