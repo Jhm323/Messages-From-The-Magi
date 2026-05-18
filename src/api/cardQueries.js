@@ -300,12 +300,12 @@ export function getYearCard(dateString) {
 
 /**
  * PULL RANDOM CARD (Oracle Feature)
- * Returns a random card from 1–53.
+ * Returns a random card from 1–52 (Joker excluded).
  *
  * @returns {card}
  */
 export function pullRandomCard() {
-  const id = Math.floor(Math.random() * 53) + 1;
+  const id = Math.floor(Math.random() * 52) + 1;
   return getCardByNumber(id);
 }
 
