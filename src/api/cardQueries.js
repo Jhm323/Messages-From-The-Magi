@@ -16,7 +16,7 @@
  *   getBirthCard(dateString)       → { card, reducedValue, steps }
  *   getCompatibilityCard(d1, d2)   → { card, reducedValue, steps }
  *   getLocationCard(birthDate, locationName) → { card, reducedValue, steps }
- *   getYearCard(dateString, year)  → { card, reducedValue }
+ *   getYearCard(dateString)        → { card, reducedValue }
  *   pullRandomCard()               → random card (1–52, joker excluded)
  *
  * All calculation functions reduce digit sums until ≤ 52.

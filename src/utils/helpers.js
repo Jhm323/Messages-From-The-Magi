@@ -89,19 +89,6 @@ export function truncate(str, maxLen = 120) {
   return str.slice(0, maxLen).trimEnd() + "…";
 }
 
-/**
- * Convert a location name to its alphanumeric value (A=1…Z=26).
- * Spaces and non-alpha characters are ignored.
- * Exported here for UI display purposes (also used internally in cardQueries).
- */
-export function locationNameValue(name) {
-  return name
-    .toUpperCase()
-    .replace(/[^A-Z]/g, "")
-    .split("")
-    .reduce((acc, ch) => acc + (ch.charCodeAt(0) - 64), 0);
-}
-
 // ─── DOM Utilities ────────────────────────────────────────────────────────────
 
 /** Return a CSS variable value from :root */
