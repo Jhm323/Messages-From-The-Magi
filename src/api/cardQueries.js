@@ -16,7 +16,6 @@
  *   getBirthCard(dateString)       → { card, reducedValue, steps }
  *   getCompatibilityCard(d1, d2)   → { card, reducedValue, steps }
  *   getLocationCard(birthDate, locationName) → { card, reducedValue, steps }
- *   getYearCard(dateString)        → { card, reducedValue }
  *   pullRandomCard()               → random card (1–52, joker excluded)
  *
  * All calculation functions reduce digit sums until ≤ 52.
@@ -284,18 +283,6 @@ export function getLocationCard(dateString, locationName) {
     locationName,
     steps,
   };
-}
-
-/**
- * YEAR CARD
- * In the calendar lookup system, the card is determined by month + day only —
- * the year does not change the card. Returns the same result as getBirthCard.
- *
- * @param {string} dateString  birth date
- * @returns {{ card, reducedValue } | null}
- */
-export function getYearCard(dateString) {
-  return getBirthCard(dateString);
 }
 
 /**
