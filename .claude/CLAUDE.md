@@ -18,6 +18,11 @@ Messages from the Magi is a digital oracle platform built on Sharon Jeffers' mys
 ### CSS
 
 - Follow BEM naming throughout: `block__element--modifier`
+- All font sizes must be written in px — never rem, em, or unitless values
+- All spacing values (padding, margin, gap) must be written in px — never rem or em
+- BEM naming is mandatory for all classes: `block__element--modifier` — no exceptions, no utility classes outside of `main.css`
+- Never write a CSS rule that could be expressed as a BEM modifier as a one-off override instead
+- When in doubt, follow MDN and the BEM official methodology as the authoritative references
 - Do not write inline `style="..."` attributes in JS or HTML — use BEM classes and CSS instead
 - All design tokens (colors, fonts, radii, spacing) must use CSS variables from `src/styles/main.css`
 - Do not hardcode color values, font names, or size values inline

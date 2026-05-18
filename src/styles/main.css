@@ -251,7 +251,7 @@ footer {
 
 .hero__sub {
   color: var(--color-dawn);
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   max-width: 36ch;
@@ -695,7 +695,7 @@ body.js-ready {
     padding: 36px 16px 28px;
   }
   .hero__body {
-    font-size: var(--text-15);
+    font-size: var(--text-17);
   }
 
   .section {
@@ -725,7 +725,7 @@ body.js-ready {
 
   .btn {
     padding: 12px 22px;
-    font-size: var(--text-13);
+    font-size: var(--text-15);
   }
 }
 
