@@ -36,7 +36,7 @@ export function renderCardResult(card, opts = {}) {
   <div class="reading-result__card-name">${card.name}</div>
   <div class="reading-result__number">Card ${card.id} · ${card.suitElement} · Value ${card.numericalValue}</div>
 
-  <div class="card-image-wrap animate-card-reveal" style="max-width:${compact ? '160px' : '220px'};margin:0 auto 1.5rem;">
+  <div class="card-image-wrap animate-card-reveal${compact ? ' card-image-wrap--compact' : ''}">
     <img src="${card.imagePath}" alt="${card.name}" loading="lazy">
   </div>
 

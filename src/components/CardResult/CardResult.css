@@ -42,6 +42,10 @@
   display: block;
 }
 
+.card-image-wrap--compact {
+  max-width: 160px;
+}
+
 .card-image-wrap--flip {
   perspective: 1000px;
 }
