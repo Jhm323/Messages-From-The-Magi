@@ -256,6 +256,16 @@ footer {
   font-size: var(--text-22);
 }
 
+.hero__sub {
+  color: var(--color-dawn);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 36ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
 /* ─── SECTION INTRO ──────────────────────────────────────────────────────── */
 .section-intro {
   text-align: center;

@@ -4,7 +4,6 @@ import { initFooter } from "../../components/Footer/Footer.js";
 import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
 import "../../components/ui/Button/Button.js";
 import "../../components/ui/Form/Form.js";
-import { openBirthCardModal } from "../../components/BirthCardModal.js";
 import { getCardOfTheDay } from "../../api/cardQueries.js";
 import { renderCardResult } from "../../components/CardResult/CardResult.js";
 
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeader("#site-header-mount", { activePath: "/" });
   initFooter("#site-footer-mount");
   initCardOfTheDay();
-  bindBirthCardBtn();
   document.body.classList.replace("js-loading", "js-ready");
 });
 
@@ -36,9 +34,3 @@ function initCardOfTheDay() {
   });
 }
 
-function bindBirthCardBtn() {
-  document.querySelectorAll("[data-feature='birth-card']").forEach((btn) => {
-    btn.style.cursor = "pointer";
-    btn.addEventListener("click", openBirthCardModal);
-  });
-}
