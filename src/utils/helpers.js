@@ -47,14 +47,6 @@ export function reduceToSingleDigit(n) {
 }
 
 /**
- * Return a human-readable breakdown of a birth date calculation.
- * e.g. "3 (March) + 15 (day) = 18"
- */
-export function formatBirthCalculation(month, day) {
-  return `${month} + ${day} = ${month + day}`;
-}
-
-/**
  * Build HTML for a paired month + day select, replacing a year-inclusive date input.
  * @param {string} monthId  id attribute for the month <select>
  * @param {string} dayId    id attribute for the day <select>
@@ -66,7 +58,7 @@ export function buildBirthdateSelects(monthId, dayId) {
     `<option value="${i + 1}">${name}</option>`).join('');
   const dayOpts = Array.from({ length: 31 }, (_, i) =>
     `<option value="${i + 1}">${i + 1}</option>`).join('');
-  return `<div style="display:flex;gap:0.75rem;">
+  return `<div class="form-date-selects">
     <select class="form-input" id="${monthId}" required>
       <option value="">Month</option>${monthOpts}
     </select>
