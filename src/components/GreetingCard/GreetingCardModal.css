@@ -1,4 +1,3 @@
-/* ─── GREETING CARD ──────────────────────────────────────────────────────── */
 .greeting-card {
   background: linear-gradient(160deg, #fdf6e8 0%, #f5e6c8 100%);
   border: 2px solid #d4a96a;
@@ -45,7 +44,6 @@
   line-height: 1.8;
 }
 
-/* ─── FULLSCREEN MODAL VARIANT ───────────────────────────────────────────── */
 .modal--fullscreen {
   width: 100vw;
   height: 100vh;
@@ -104,7 +102,6 @@
   padding-top: 16px;
 }
 
-/* ─── GREETING CARD REVEAL ANIMATION ────────────────────────────────────── */
 .greeting-reveal-wrapper {
   width: 100%;
   min-height: 100%;

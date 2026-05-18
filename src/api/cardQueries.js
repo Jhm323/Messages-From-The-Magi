@@ -24,9 +24,7 @@
 
 import { CARDS, CARD_BACK_PATH } from "../db/cards.js";
 
-// ─────────────────────────────────────────────────────────────────────────────
 // INTERNAL HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
 
 /** Sum all digits in a number string or integer */
 function digitSum(n) {
@@ -114,9 +112,7 @@ export function normalizeLocationName(name) {
     .join(" ");
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // CORE LOOKUP QUERIES
-// ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * Get a card by its canonical number (1–52, numerology range).
@@ -178,9 +174,7 @@ export function getCardBack() {
   return { imagePath: CARD_BACK_PATH };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // CALCULATION QUERIES
-// ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * BIRTH CARD

@@ -1,6 +1,4 @@
-/* ─── Videos page ────────────────────────────────────────────────────────── */
 
-/* ── Legibility overrides for cream background ───────────────────────────── */
 .videos-hero__title {
   color: var(--color-gold);
 }
@@ -21,17 +19,14 @@
   background: rgba(138, 111, 46, 0.1);
 }
 
-/* ── Filters ─────────────────────────────────────────────────────────────── */
 .videos-filters {
   justify-content: center;
   margin-bottom: 48px;
 }
 
-/* ── Video grid ──────────────────────────────────────────────────────────── */
 /* .videos-grid {
 } */
 
-/* ── Coming soon ─────────────────────────────────────────────────────────── */
 .videos-coming-soon {
   margin-top: 64px;
 }
@@ -88,8 +83,6 @@
   color: var(--color-mist);
   line-height: 1.6;
 }
-
-/* ── Substack Strip ───────────────────────────────────────────────────────── */
 
 .substack-strip {
   margin-top: 3rem;

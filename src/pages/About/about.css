@@ -1,8 +1,5 @@
-/* ─── About page ─────────────────────────────────────────────────────────── */
 
-/* ── Background ──────────────────────────────────────────────────────────── */
 
-/* ── Hero (readings section) ─────────────────────────────────────────────── */
 .about-hero {
   text-align: center;
 }
@@ -33,7 +30,6 @@
   /* inherits .btn .btn--primary */
 /* } */
 
-/* ── Bio (Sharon's background) ───────────────────────────────────────────── */
 /* .about-bio {
 } */
 
@@ -65,7 +61,6 @@
   color: var(--color-mist);
 }
 
-/* ── Contact section ─────────────────────────────────────────────────────── */
 .about-contact {
   text-align: center;
 }
@@ -89,7 +84,6 @@
   margin: 0 auto;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .about-hero__body {
     font-size: var(--text-18);

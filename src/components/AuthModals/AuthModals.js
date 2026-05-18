@@ -18,7 +18,6 @@ import { setUser } from "../../auth/AuthStore.js";
 const LOGIN_ID = "modal-login";
 const REGISTER_ID = "modal-register";
 
-// ─── Password rules (Joi-style) ───────────────────────────────────────────────
 // Mirror these on the server with Joi when the API is wired up:
 //   Joi.string().min(8).pattern(/[A-Z]/).pattern(/[a-z]/).pattern(/[0-9]/).pattern(/[^A-Za-z0-9]/)
 
@@ -50,8 +49,6 @@ function isEmailValid(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-// ─── Field-level error helpers ────────────────────────────────────────────────
-
 function setFieldError(modalId, field, message) {
   const errEl = document.getElementById(`${modalId}-${field}-error`);
   const inputEl = document.getElementById(`${modalId}-${field}`);
@@ -63,8 +60,6 @@ function clearFieldErrors(modalId, fields) {
   fields.forEach((f) => setFieldError(modalId, f, ""));
 }
 
-// ─── File → base64 ───────────────────────────────────────────────────────────
-
 function readAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -74,9 +69,7 @@ function readAsBase64(file) {
   });
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // LOGIN
-// ─────────────────────────────────────────────────────────────────────────────
 
 function buildLoginHTML() {
   return `
@@ -178,9 +171,7 @@ export function openLoginModal() {
   setTimeout(() => document.getElementById(`${LOGIN_ID}-email`)?.focus(), 100);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // REGISTER
-// ─────────────────────────────────────────────────────────────────────────────
 
 function buildRegisterHTML() {
   const rulesHTML = PASSWORD_RULES.map(
@@ -272,8 +263,6 @@ function ensureRegisterModal() {
   const FIELDS = ["name", "birthday", "email", "password", "confirm"];
   let avatarBase64 = null;
 
-  // ── Avatar preview ────────────────────────────────────────────────────────
-
   const avatarInput = document.getElementById(`${REGISTER_ID}-avatar-input`);
   const avatarPreview = document.getElementById(
     `${REGISTER_ID}-avatar-preview`,
@@ -306,8 +295,6 @@ function ensureRegisterModal() {
       if (!avatarBase64) avatarInitial.textContent = initial;
     });
 
-  // ── Password rules live feedback ──────────────────────────────────────────
-
   document
     .getElementById(`${REGISTER_ID}-password`)
     .addEventListener("input", (e) => {
@@ -319,8 +306,6 @@ function ensureRegisterModal() {
         rules[i]?.classList.toggle("is-met", rule.test(val));
       });
     });
-
-  // ── Submit ────────────────────────────────────────────────────────────────
 
   document
     .getElementById(`${REGISTER_ID}-submit`)

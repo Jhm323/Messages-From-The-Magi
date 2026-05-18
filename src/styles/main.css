@@ -4,10 +4,8 @@
    Component styles live alongside their components in src/components/
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── FONTS ─────────────────────────────────────────────────────────────── */
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 
-/* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
 :root {
   /* Core palette — arcane elegance */
   --color-twilight: #171617;
@@ -107,7 +105,6 @@
   --z-toast: 300;
 }
 
-/* ─── RESET & BASE ───────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -129,7 +126,6 @@ body {
   min-height: 100vh;
 }
 
-/* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
 h1,
 h2,
 h3,
@@ -178,8 +174,6 @@ strong {
   color: var(--color-twilight);
 }
 
-/* ─── LAYOUT ─────────────────────────────────────────────────────────────── */
-
 /* Clip horizontal overflow at the content level only — not header (clips dropdown) */
 main,
 footer {
@@ -218,7 +212,6 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
-/* ─── HERO / BANNER ──────────────────────────────────────────────────────── */
 .hero {
   text-align: center;
   padding: 96px 24px 64px;
@@ -266,7 +259,6 @@ footer {
   text-align: center;
 }
 
-/* ─── SECTION INTRO ──────────────────────────────────────────────────────── */
 .section-intro {
   text-align: center;
   margin-bottom: 48px;
@@ -289,7 +281,6 @@ footer {
   max-width: 560px;
 }
 
-/* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
 .section-label {
   font-size: var(--text-16);
   font-family: var(--font-heading);
@@ -299,14 +290,12 @@ footer {
   margin-bottom: 24px;
 }
 
-/* ─── PROSE ──────────────────────────────────────────────────────────────── */
 .prose,
 .prose p {
   color: var(--color-twilight);
   line-height: 1.9;
 }
 
-/* ─── BLOCKQUOTE ─────────────────────────────────────────────────────────── */
 .blockquote {
   border-left: 2px solid var(--color-gold);
   margin: 0;
@@ -337,7 +326,6 @@ footer {
   font-style: normal;
 }
 
-/* ─── STAT TILE ──────────────────────────────────────────────────────────── */
 .stat-tile {
   background: var(--color-parchment);
   border: 1px solid var(--color-gold-muted);
@@ -366,7 +354,6 @@ footer {
   line-height: 1.7;
 }
 
-/* ─── COMING SOON ────────────────────────────────────────────────────────── */
 .coming-soon {
   background: var(--color-parchment);
   border: 1px dashed var(--color-gold-muted);
@@ -395,7 +382,6 @@ footer {
   color: var(--color-mist);
 }
 
-/* ─── SUBSCRIPTION TIERS ─────────────────────────────────────────────────── */
 .tier-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -490,7 +476,6 @@ footer {
   top: 2px;
 }
 
-/* ─── DIVIDERS ───────────────────────────────────────────────────────────── */
 .divider {
   border: none;
   height: 1px;
@@ -522,7 +507,6 @@ footer {
   background: linear-gradient(270deg, transparent, var(--color-gold-muted));
 }
 
-/* ─── PAGE REVEAL ────────────────────────────────────────────────────────── */
 body.js-loading {
   opacity: 0;
 }
@@ -542,7 +526,6 @@ body.js-ready {
   }
 }
 
-/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -603,7 +586,6 @@ body.js-ready {
   animation: pulse-gold 2.5s ease-in-out infinite;
 }
 
-/* ─── UTILITY CLASSES ────────────────────────────────────────────────────── */
 .text-gold {
   color: var(--color-gold);
 }
@@ -663,7 +645,6 @@ body.js-ready {
   white-space: nowrap;
 }
 
-/* ─── PRINT ──────────────────────────────────────────────────────────────── */
 @media print {
   body > *:not(#modal-greeting) {
     display: none !important;
@@ -689,9 +670,6 @@ body.js-ready {
   }
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
-
-/* ── Tablet (≤ 768px) ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero {
     padding: 48px 20px 32px;
@@ -708,7 +686,6 @@ body.js-ready {
   }
 }
 
-/* ── Mobile (≤ 480px) ──────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .container {
     padding: 0 16px;
@@ -752,7 +729,6 @@ body.js-ready {
   }
 }
 
-/* ── Small mobile (≤ 360px) ────────────────────────────────────────────── */
 @media (max-width: 360px) {
   .container {
     padding: 0 12px;

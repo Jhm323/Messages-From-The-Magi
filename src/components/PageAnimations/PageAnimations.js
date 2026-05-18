@@ -6,7 +6,6 @@ export function initPageAnimations() {
   // Gate initial hidden states on JS being present
   document.documentElement.classList.add("js-animate");
 
-  // ── Magic letter split for .magic-h headings ──────────────────────────
   if (!reduced) {
     document.querySelectorAll(".magic-h").forEach((el) => {
       const words = el.textContent.trim().split(" ");
@@ -26,7 +25,6 @@ export function initPageAnimations() {
     });
   }
 
-  // ── Scroll-reveal observer ─────────────────────────────────────────────
   const revealObs = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -43,7 +41,6 @@ export function initPageAnimations() {
     .querySelectorAll(".anim-hero, .anim-deal, .anim-reveal, .anim-para")
     .forEach((el) => revealObs.observe(el));
 
-  // ── Card diamond deal observer ─────────────────────────────────────────
   const cardObs = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

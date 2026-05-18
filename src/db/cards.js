@@ -101,7 +101,6 @@ function card(id, rank, suit, img, keywords, affirmation, action, description) {
 }
 
 export const CARDS = [
-  /* ── HEARTS 1–13 ─────────────────────────────────────────────── */
   card(
     1,
     "Ace",
@@ -263,7 +262,6 @@ export const CARDS = [
     "Perhaps it's time to relax more deeply into your passionate nature and explore in detail what you truly are desiring from life. Beauty and ease are two of the keywords for the King of Hearts, and when he shows up he wants to bestow upon you his goodness and graciousness for you to incorporate into your life. Mastery with emotions, feelings, and self-expression are important to balance. Success can be yours if you are true to your most sensitive nature. If you seek a lover — he will come. This card can also signify a baby boy who is on the way. It is time to take action with that which you see as the greatest possibility so that it might take form. Mastery and success with artistic ventures is highly favored, as is profession and self-owned business. It's okay to be master of your own time.",
   ),
 
-  /* ── CLUBS 14–26 ──────────────────────────────────────────────── */
   card(
     14,
     "Ace",
@@ -425,7 +423,6 @@ export const CARDS = [
     "The crown of authenticity invites you to walk to the beat of your own drum. Of course that's after you gather the materials for the drum, build the drum, and then play it in perfect harmony with your innermost natural rhythms. The power of this mental crown blesses you with the gifts of insight, intuition, patience, and personal power to be in perfect delivery of who you are, right here and now. Let your imagination transport you to the castle of your dreams, as it is there you will find your true passion. This card signifies an intelligent man who could have great influence for you right now. Be open and receptive to who comes before you. Your inner conversations are the secret to all that you create in your life. Be sure you are having the conversations that create what you want.",
   ),
 
-  /* ── DIAMONDS 27–39 ───────────────────────────────────────────── */
   card(
     27,
     "Ace",
@@ -599,7 +596,6 @@ export const CARDS = [
     "Ethics is the name of the game, integrity and focus are the keys that open the doors to good fortune. This is a time when your awareness and your perception will serve you well in all situations. Don't take things at face value, rather seek to find the source within or behind what is being presented to you and by all means, trust your intuitive intelligence. This card is an indication of success in business. It is time to step into your power and take hold of what you know belongs to you. Trust the ideas that come to you. Someone of power will be available to assist you. It's important for you to take the lead, be the boss, and run the show in partnerships. Your intuition is trustworthy, give it the power to lead your way. The key to success with this king is to assume the crown of integrity.",
   ),
 
-  /* ── SPADES 40–52 ─────────────────────────────────────────────── */
   card(
     40,
     "Ace",
@@ -803,7 +799,6 @@ export const CARDS = [
     "The King of Spades has come to ask you if you are assuming your personal power. If you are being asked to rise to wear this crown, what is holding you back? New insights and self-awareness will lead to the answer you seek. The key is to be courageous with the actions you know you need to take. This king asks you to assume the throne of your personal kingdom and rule with compassion, understanding, integrity, and wisdom, as it is from this position that you can guide the change you desire. This is a time to rule your kingdom as you know it is meant to be — your kingdom being your life. Engage those around you to empower them to be in their greatness, as this is the work of a king. All systems are go for forward movement, whatever that means for you now.",
   ),
 
-  /* ── JOKER 53 ─────────────────────────────────────────────────── */
   card(
     53,
     "Joker",

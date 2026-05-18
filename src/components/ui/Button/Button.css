@@ -1,4 +1,3 @@
-/* ─── BUTTONS ────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -72,7 +71,6 @@
   transform: none !important;
 }
 
-/* ─── FEATURE BUTTONS ────────────────────────────────────────────────────── */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

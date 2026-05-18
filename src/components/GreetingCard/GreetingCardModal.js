@@ -303,7 +303,6 @@ function ensureModal() {
   }
 }
 
-
 function prefillUserData() {
   if (!isLoggedIn()) return;
   const user = getUser();

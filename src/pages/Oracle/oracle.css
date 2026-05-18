@@ -1,6 +1,4 @@
-/* ─── Oracle page ─────────────────────────────────────────────────────────── */
 
-/* ── Hero ────────────────────────────────────────────────────────────────── */
 .oracle-hero__intro {
   text-align: center;
 }
@@ -18,12 +16,10 @@
   line-height: 1.8;
 }
 
-/* ── Pull card interactive zone ──────────────────────────────────────────── */
 #pull-card-mount {
   text-align: center;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .oracle-hero__body {
     font-size: var(--text-18);

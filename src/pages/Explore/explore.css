@@ -1,4 +1,3 @@
-/* ─── Explore page ───────────────────────────────────────────────────────── */
 
 /* Headings on cream */
 .explore-hero__title,
@@ -36,7 +35,6 @@
   color: var(--color-twilight);
 }
 
-/* ── Calendar ────────────────────────────────────────────────────────────── */
 .explore-calendar__stats {
   margin-bottom: 32px;
 }

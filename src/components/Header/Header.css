@@ -1,4 +1,3 @@
-/* ─── HEADER ─────────────────────────────────────────────────────────────── */
 .site-header {
   position: sticky;
   top: 0;
@@ -29,7 +28,6 @@
   flex: 1;
 }
 
-/* ─── HAMBURGER BUTTON ───────────────────────────────────────────────────── */
 .nav-menu-btn {
   display: flex;
   flex-direction: column;
@@ -85,7 +83,6 @@
   background: var(--color-gold);
 }
 
-/* ─── DROPDOWN PANEL ─────────────────────────────────────────────────────── */
 .nav-dropdown {
   position: absolute;
   top: calc(100% + 12px);
@@ -152,7 +149,6 @@
   flex-shrink: 0;
 }
 
-/* ─── SUBMENU (hover flyout) ─────────────────────────────────────────────── */
 .nav-item--has-sub {
   position: relative;
 }
@@ -222,7 +218,6 @@
   color: var(--color-gold);
 }
 
-/* ─── AUTH BUTTON ────────────────────────────────────────────────────────── */
 .header-auth {
   flex-shrink: 0;
 }
@@ -296,9 +291,6 @@
   white-space: nowrap;
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
-
-/* ── Tablet (≤ 768px) ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .site-logo {
     font-size: var(--text-18);
@@ -325,7 +317,6 @@
   }
 }
 
-/* ── Mobile (≤ 480px) ──────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .site-header {
     padding: 0 12px;
@@ -351,7 +342,6 @@
   }
 }
 
-/* ── Small mobile (≤ 360px) ────────────────────────────────────────────── */
 @media (max-width: 360px) {
   .site-logo {
     font-size: var(--text-18);

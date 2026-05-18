@@ -3,8 +3,6 @@
  * Shared formatting and helper functions used across components.
  */
 
-// ─── Date Utilities ───────────────────────────────────────────────────────────
-
 /**
  * Format a JS Date or ISO string for display.
  * @param {Date|string} date
@@ -31,8 +29,6 @@ export function displayDate(dateString) {
   }
   return new Date(2000, month - 1, day).toLocaleDateString("en-US", { month: "long", day: "numeric" });
 }
-
-// ─── Numerology Utilities ─────────────────────────────────────────────────────
 
 /**
  * Reduce any integer to a single digit (1–9).
@@ -68,8 +64,6 @@ export function buildBirthdateSelects(monthId, dayId) {
   </div>`;
 }
 
-// ─── String Utilities ─────────────────────────────────────────────────────────
-
 /** Title-case a string: "ace of hearts" → "Ace of Hearts" */
 export function titleCase(str) {
   return str.replace(/\b\w/g, (c) => c.toUpperCase());
@@ -80,8 +74,6 @@ export function truncate(str, maxLen = 120) {
   if (!str || str.length <= maxLen) return str;
   return str.slice(0, maxLen).trimEnd() + "…";
 }
-
-// ─── DOM Utilities ────────────────────────────────────────────────────────────
 
 /** Return a CSS variable value from :root */
 export function cssVar(name) {
@@ -99,8 +91,6 @@ export function scrollTo(selector) {
   const el = document.querySelector(selector);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
-
-// ─── Card Display Helpers ─────────────────────────────────────────────────────
 
 /** Return the CSS color variable name for a suit */
 export function suitColorVar(suit) {

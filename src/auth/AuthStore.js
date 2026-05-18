@@ -11,8 +11,6 @@
 
 const STORAGE_KEY = 'magi_session';
 
-// ─── State ────────────────────────────────────────────────────────────────────
-
 let _user = null;
 const _listeners = new Set();
 
@@ -23,8 +21,6 @@ try {
 } catch {
   _user = null;
 }
-
-// ─── Public API ───────────────────────────────────────────────────────────────
 
 /** Return the current user object, or null if not logged in. */
 export function getUser() {

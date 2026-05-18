@@ -16,7 +16,6 @@ import './ui/SelectionChip/SelectionChip.js';
 
 const DETAIL_MODAL_ID = "modal-card-detail";
 
-// ─── Detail Modal ─────────────────────────────────────────────────────────────
 function ensureDetailModal() {
   if (document.getElementById(DETAIL_MODAL_ID)) return;
   document.body.insertAdjacentHTML("beforeend", `
@@ -53,7 +52,6 @@ function openCardDetail(card) {
   document.getElementById(DETAIL_MODAL_ID).classList.add("is-open");
 }
 
-// ─── Card Thumbnail ───────────────────────────────────────────────────────────
 function cardThumb(card) {
   const suitCls = card.suit.toLowerCase();
   return `
@@ -75,7 +73,6 @@ function cardThumb(card) {
 </button>`;
 }
 
-// ─── Browser Shell ────────────────────────────────────────────────────────────
 function buildBrowser() {
   const suits = ["All", "Hearts", "Clubs", "Diamonds", "Spades", "Joker"];
   const allCards = getAllCards();
@@ -114,7 +111,6 @@ function buildBrowser() {
   return filterBar + grid + noResults;
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 export function initCardBrowser(selector) {
   const mount = document.querySelector(selector);
   if (!mount) return;

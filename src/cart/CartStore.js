@@ -6,8 +6,6 @@
 
 const STORAGE_KEY = 'magi_cart';
 
-// ─── State ────────────────────────────────────────────────────────────────────
-
 let _items = [];
 const _listeners = new Set();
 
@@ -18,16 +16,12 @@ try {
   _items = [];
 }
 
-// ─── Internal ─────────────────────────────────────────────────────────────────
-
 function _save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(_items));
   } catch { /* storage unavailable */ }
   _listeners.forEach(fn => fn([..._items]));
 }
-
-// ─── Public API ───────────────────────────────────────────────────────────────
 
 export function getCartItems() {
   return [..._items];

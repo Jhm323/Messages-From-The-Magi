@@ -1,8 +1,5 @@
-/* ─── Readings page ──────────────────────────────────────────────────────── */
 
-/* ── Background ──────────────────────────────────────────────────────────── */
 
-/* ── Hero ────────────────────────────────────────────────────────────────── */
 /* .readings-hero {
 }
 
@@ -18,7 +15,6 @@
 .readings-hero__body {
 } */
 
-/* ── Reading card grid ───────────────────────────────────────────────────── */
 .readings-grid {
   display: flex;
   flex-wrap: wrap;
@@ -27,7 +23,6 @@
   margin-top: 48px;
 }
 
-/* ── Reading card (playing-card shape: 1:2 ratio) ────────────────────────── */
 .reading-card {
   position: relative;
   aspect-ratio: 1 / 2;
@@ -103,7 +98,6 @@
   line-height: 1.6;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .readings-grid {
     gap: 20px;
