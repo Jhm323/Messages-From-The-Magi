@@ -51,7 +51,7 @@ function buildHTML() {
 
     <!-- STEP 1: Form -->
     <div id="${MODAL_ID}-step-form">
-      <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+      <p class="modal__intro">
         Enter the recipient's details to generate a personalized card drawn from their birth card energy.
       </p>
 
@@ -85,9 +85,9 @@ function buildHTML() {
         <input class="form-input" id="${MODAL_ID}-from" type="text" placeholder="Your name">
       </div>
 
-      <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
+      <div id="${MODAL_ID}-error" role="alert" class="modal__error"></div>
 
-      <button class="btn btn--primary" id="${MODAL_ID}-submit" style="width:100%;">
+      <button class="btn btn--primary btn--full" id="${MODAL_ID}-submit">
         ✦ Generate Card
       </button>
     </div>

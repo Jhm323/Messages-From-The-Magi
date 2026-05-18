@@ -2,6 +2,7 @@
  * CompatibilityModal — Reveal the card governing two people's connection.
  */
 
+import './CompatibilityModal.css';
 import { mountModal, openModal } from './ui/Modal/Modal.js';
 import './ui/Button/Button.js';
 import './ui/Form/Form.js';
@@ -26,7 +27,7 @@ function buildHTML() {
     </div>
 
     <div class="modal-step" id="${MODAL_ID}-step-form">
-      <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+      <p class="modal__intro">
         Enter both birthdates to reveal the card that governs your connection.
       </p>
 
@@ -52,22 +53,22 @@ function buildHTML() {
         ${buildBirthdateSelects(`${MODAL_ID}-month2`, `${MODAL_ID}-day2`)}
       </div>
 
-      <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
+      <div id="${MODAL_ID}-error" role="alert" class="modal__error"></div>
 
-      <button class="btn btn--primary" id="${MODAL_ID}-submit" style="width:100%;margin-top:0.5rem;">
+      <button class="btn btn--primary btn--full modal__submit" id="${MODAL_ID}-submit">
         ✦ Reveal Compatibility Card
       </button>
     </div>
 
     <div class="modal-step" id="${MODAL_ID}-step-result" style="display:none;">
       <div id="${MODAL_ID}-result-container"></div>
-      <button class="btn btn--ghost" id="${MODAL_ID}-again" style="width:100%;margin-top:1.5rem;">
+      <button class="btn btn--ghost btn--full modal__again-btn" id="${MODAL_ID}-again">
         ← Try Another Reading
       </button>
-      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+      <button class="btn btn--ghost modal__save-btn" id="${MODAL_ID}-save">
         ♦ Save Reading
       </button>
-      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
+      <div id="${MODAL_ID}-save-msg" class="modal__save-msg"></div>
     </div>
   </div>
 </div>`;

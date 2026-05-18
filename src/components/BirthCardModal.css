@@ -1,0 +1,6 @@
+.modal__tier-note {
+  color: var(--color-mist);
+  font-size: 0.78rem;
+  text-align: center;
+  margin-top: 0.25rem;
+}

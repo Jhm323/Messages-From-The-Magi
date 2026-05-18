@@ -26,7 +26,7 @@ function buildHTML() {
     </div>
 
     <div id="${MODAL_ID}-step-form">
-      <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+      <p class="modal__intro">
         Every place carries an energetic signature. This reading reveals how a specific location
         interacts with your personal cards — ideal for travel, relocation, or understanding why
         certain places feel the way they do.
@@ -50,10 +50,9 @@ function buildHTML() {
         <span class="form-hint">City, country, or any place name</span>
       </div>
 
-      <div id="${MODAL_ID}-error" role="alert"
-        style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
+      <div id="${MODAL_ID}-error" role="alert" class="modal__error"></div>
 
-      <button class="btn btn--primary" id="${MODAL_ID}-submit" style="width:100%;">
+      <button class="btn btn--primary btn--full" id="${MODAL_ID}-submit">
         ✦ Reveal My Location Card
       </button>
     </div>
@@ -61,15 +60,15 @@ function buildHTML() {
     <div id="${MODAL_ID}-step-result" style="display:none;">
       <div id="${MODAL_ID}-result-container"></div>
 
-      <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-        <button class="btn btn--ghost" id="${MODAL_ID}-again" style="flex:1;">
+      <div class="modal__actions">
+        <button class="btn btn--ghost" id="${MODAL_ID}-again">
           ← Try Another Location
         </button>
       </div>
-      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+      <button class="btn btn--ghost modal__save-btn" id="${MODAL_ID}-save">
         ♦ Save Reading
       </button>
-      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
+      <div id="${MODAL_ID}-save-msg" class="modal__save-msg"></div>
     </div>
   </div>
 </div>`;

@@ -61,6 +61,11 @@
   background: rgba(var(--suit-rgb, 201, 168, 76), 0.24);
 }
 
+.btn--full {
+  width: 100%;
+  justify-content: center;
+}
+
 .btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;

@@ -2,6 +2,7 @@
  * BirthCardModal — Calculate and display a user's Birth Card.
  */
 
+import './BirthCardModal.css';
 import { mountModal, openModal } from './ui/Modal/Modal.js';
 import './ui/Button/Button.js';
 import './ui/Form/Form.js';
@@ -27,7 +28,7 @@ function buildHTML() {
     </div>
 
     <div id="${MODAL_ID}-step-form">
-      <p style="color:var(--color-dawn);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+      <p class="modal__intro">
         Your Birth Card is the energetic signature you were born with — the card that reflects
         your soul's nature, your gifts, and your path in this life.
       </p>
@@ -41,24 +42,24 @@ function buildHTML() {
         ${buildBirthdateSelects(`${MODAL_ID}-month`, `${MODAL_ID}-day`)}
       </div>
 
-      <div id="${MODAL_ID}-error" role="alert" style="color:var(--color-error);font-size:0.85rem;margin-bottom:0.75rem;display:none;"></div>
+      <div id="${MODAL_ID}-error" role="alert" class="modal__error"></div>
 
-      <button class="btn btn--primary" id="${MODAL_ID}-submit" style="width:100%;">
+      <button class="btn btn--primary btn--full" id="${MODAL_ID}-submit">
         ✦ Reveal My Birth Card
       </button>
     </div>
 
     <div id="${MODAL_ID}-step-result" style="display:none;">
       <div id="${MODAL_ID}-result-container"></div>
-      <div style="margin-top:1.5rem;display:flex;gap:1rem;">
-        <button class="btn btn--ghost" id="${MODAL_ID}-again" style="flex:1;">← New Reading</button>
-        <button class="btn btn--secondary" id="${MODAL_ID}-learn" style="flex:1;" disabled>Expand Reading ✦</button>
+      <div class="modal__actions">
+        <button class="btn btn--ghost" id="${MODAL_ID}-again">← New Reading</button>
+        <button class="btn btn--secondary" id="${MODAL_ID}-learn" disabled>Expand Reading ✦</button>
       </div>
-      <button class="btn btn--ghost" id="${MODAL_ID}-save" style="width:100%;margin-top:0.75rem;">
+      <button class="btn btn--ghost modal__save-btn" id="${MODAL_ID}-save">
         ♦ Save Reading
       </button>
-      <div id="${MODAL_ID}-save-msg" style="font-size:0.78rem;text-align:center;color:var(--color-mist);margin-top:0.4rem;min-height:1.2em;"></div>
-      <p style="color:var(--color-mist);font-size:0.78rem;text-align:center;margin-top:0.25rem;">
+      <div id="${MODAL_ID}-save-msg" class="modal__save-msg"></div>
+      <p class="modal__tier-note">
         Expanded readings available in Seeker tier
       </p>
     </div>
