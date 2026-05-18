@@ -5,57 +5,69 @@
  */
 
 const STORAGE_KEY = 'magi_cart';
-let _listeners = [];
 
-function _load() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch { return []; }
+// ─── State ────────────────────────────────────────────────────────────────────
+
+let _items = [];
+const _listeners = new Set();
+
+// Hydrate from localStorage once on module load
+try {
+  _items = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
+} catch {
+  _items = [];
 }
 
-function _save(items) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  _listeners.forEach(fn => fn(items));
+// ─── Internal ─────────────────────────────────────────────────────────────────
+
+function _save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(_items));
+  } catch { /* storage unavailable */ }
+  _listeners.forEach(fn => fn([..._items]));
 }
+
+// ─── Public API ───────────────────────────────────────────────────────────────
 
 export function getCartItems() {
-  return _load();
+  return [..._items];
 }
 
 export function getCartCount() {
-  return _load().reduce((sum, item) => sum + item.qty, 0);
+  return _items.reduce((sum, item) => sum + item.qty, 0);
 }
 
 export function getCartTotal() {
-  return _load().reduce((sum, item) => sum + item.price * item.qty, 0);
+  return _items.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
 export function addToCart(product) {
-  const items = _load();
-  const existing = items.find(i => i.id === product.id);
+  const existing = _items.find(i => i.id === product.id);
   if (existing) {
     existing.qty += 1;
   } else {
-    items.push({ ...product, qty: 1 });
+    _items.push({ ...product, qty: 1 });
   }
-  _save(items);
+  _save();
 }
 
 export function removeFromCart(productId) {
-  _save(_load().filter(i => i.id !== productId));
+  _items = _items.filter(i => i.id !== productId);
+  _save();
 }
 
 export function updateQty(productId, qty) {
   if (qty < 1) { removeFromCart(productId); return; }
-  const items = _load();
-  const item = items.find(i => i.id === productId);
-  if (item) { item.qty = qty; _save(items); }
+  const item = _items.find(i => i.id === productId);
+  if (item) { item.qty = qty; _save(); }
 }
 
 export function clearCart() {
-  _save([]);
+  _items = [];
+  _save();
 }
 
 export function onCartChange(fn) {
-  _listeners.push(fn);
-  return () => { _listeners = _listeners.filter(l => l !== fn); };
+  _listeners.add(fn);
+  return () => _listeners.delete(fn);
 }
