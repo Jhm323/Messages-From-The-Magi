@@ -10,6 +10,7 @@ import { renderCardResult } from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
 import { getUser, isLoggedIn }   from '../auth/AuthStore.js';
 import { saveReading }           from '../auth/SavedReadings.js';
+import { resetSaveBtn, markSaved, showError, hideError, prefillUserData } from './ui/Modal/modalHelpers.js';
 
 const MODAL_ID = 'modal-geolocation';
 
@@ -78,22 +79,20 @@ function ensureModal() {
   const overlay = mountModal(MODAL_ID, buildHTML());
   if (!overlay) return;
 
-  const errEl = document.getElementById(`${MODAL_ID}-error`);
-
   document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
     const name     = document.getElementById(`${MODAL_ID}-name`).value.trim() || 'Seeker';
     const month    = document.getElementById(`${MODAL_ID}-month`).value;
     const day      = document.getElementById(`${MODAL_ID}-day`).value;
     const location = document.getElementById(`${MODAL_ID}-location`).value.trim();
 
-    errEl.style.display = 'none';
+    hideError(MODAL_ID);
 
-    if (!month || !day) { showError('Please select your birth month and day.'); return; }
-    if (!location)      { showError('Please enter a location name.'); return; }
+    if (!month || !day) { showError(MODAL_ID, 'Please select your birth month and day.'); return; }
+    if (!location)      { showError(MODAL_ID, 'Please enter a location name.'); return; }
 
     const result = getLocationCard(`${month}/${day}`, location);
     if (!result || !result.card) {
-      showError('Could not calculate the location card. Please check your inputs.');
+      showError(MODAL_ID, 'Could not calculate the location card. Please check your inputs.');
       return;
     }
 
@@ -113,7 +112,7 @@ function ensureModal() {
     });
 
     _pending = { card: result.card, eyebrow: `${name} · ${location}`, location };
-    resetSaveBtn();
+    resetSaveBtn(MODAL_ID);
 
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
@@ -142,46 +141,13 @@ function ensureModal() {
       cardSuit:       _pending.card.suit,
       cardSuitSymbol: _pending.card.suitSymbol,
     });
-    markSaved();
+    markSaved(MODAL_ID);
   });
-
-  function showError(msg) {
-    errEl.textContent   = msg;
-    errEl.style.display = 'block';
-  }
-}
-
-function resetSaveBtn() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
-  if (btn) { btn.textContent = '♦ Save Reading'; btn.disabled = false; }
-  if (msg) msg.textContent = '';
-}
-
-function markSaved() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  if (btn) { btn.textContent = '✓ Saved'; btn.disabled = true; }
-}
-
-function prefillUserData() {
-  if (!isLoggedIn()) return;
-  const user = getUser();
-
-  const nameEl = document.getElementById(`${MODAL_ID}-name`);
-  if (nameEl) nameEl.value = user.name ?? '';
-
-  if (user.birthday) {
-    const [, m, d] = user.birthday.split('-').map(Number);
-    const monthEl = document.getElementById(`${MODAL_ID}-month`);
-    const dayEl   = document.getElementById(`${MODAL_ID}-day`);
-    if (monthEl) monthEl.value = String(m);
-    if (dayEl)   dayEl.value   = String(d);
-  }
 }
 
 export function openGeolocationModal() {
   ensureModal();
   openModal(MODAL_ID);
-  prefillUserData();
+  if (isLoggedIn()) prefillUserData(MODAL_ID, getUser());
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
 }

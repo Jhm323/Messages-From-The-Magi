@@ -6,6 +6,7 @@
 
 import "./GreetingCardModal.css";
 import { mountModal, openModal } from "../ui/Modal/Modal.js";
+import { showError, hideError } from "../ui/Modal/modalHelpers.js";
 import '../ui/Button/Button.js';
 import '../ui/Form/Form.js';
 import '../ui/SelectionChip/SelectionChip.js';
@@ -189,8 +190,6 @@ function ensureModal() {
   const overlay = mountModal(MODAL_ID, buildHTML());
   if (!overlay) return;
 
-  const errEl = document.getElementById(`${MODAL_ID}-error`);
-
   // Occasion chips → populate text input
   const occasionInput = document.getElementById(`${MODAL_ID}-occasion`);
   const occasionChips = overlay.querySelectorAll(`#${MODAL_ID}-occasion-chips .chip`);
@@ -215,20 +214,20 @@ function ensureModal() {
       const message  = document.getElementById(`${MODAL_ID}-message`).value.trim();
       const from     = document.getElementById(`${MODAL_ID}-from`).value.trim();
 
-      errEl.style.display = "none";
+      hideError(MODAL_ID);
 
       if (!name) {
-        showError("Please enter the recipient's name.");
+        showError(MODAL_ID, "Please enter the recipient's name.");
         return;
       }
       if (!month || !day) {
-        showError("Please select the recipient's birth month and day.");
+        showError(MODAL_ID, "Please select the recipient's birth month and day.");
         return;
       }
 
       const result = getBirthCard(`${month}/${day}`);
       if (!result || !result.card) {
-        showError("Could not calculate the birth card. Please check the date.");
+        showError(MODAL_ID, "Could not calculate the birth card. Please check the date.");
         return;
       }
 
@@ -272,11 +271,6 @@ function ensureModal() {
     addToCart(PRODUCTS.print);
     openCart();
   });
-
-  function showError(msg) {
-    errEl.textContent = msg;
-    errEl.style.display = "block";
-  }
 
   function reset() {
     document.getElementById(`${MODAL_ID}-step-form`).style.display = "";

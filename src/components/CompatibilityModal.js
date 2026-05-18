@@ -10,6 +10,7 @@ import { renderCardResult }      from './CardResult/CardResult.js';
 import { buildBirthdateSelects } from '../utils/helpers.js';
 import { getUser, isLoggedIn }   from '../auth/AuthStore.js';
 import { saveReading }           from '../auth/SavedReadings.js';
+import { resetSaveBtn, markSaved, showError, hideError, prefillUserData } from './ui/Modal/modalHelpers.js';
 
 const MODAL_ID = 'modal-compatibility';
 
@@ -76,8 +77,6 @@ function ensureModal() {
   const overlay = mountModal(MODAL_ID, buildHTML());
   if (!overlay) return;
 
-  const errEl = document.getElementById(`${MODAL_ID}-error`);
-
   document.getElementById(`${MODAL_ID}-submit`).addEventListener('click', () => {
     const name1   = document.getElementById(`${MODAL_ID}-name1`).value.trim() || 'Person 1';
     const month1  = document.getElementById(`${MODAL_ID}-month1`).value;
@@ -86,18 +85,16 @@ function ensureModal() {
     const month2  = document.getElementById(`${MODAL_ID}-month2`).value;
     const day2    = document.getElementById(`${MODAL_ID}-day2`).value;
 
-    errEl.style.display = 'none';
+    hideError(MODAL_ID);
 
     if (!month1 || !day1 || !month2 || !day2) {
-      errEl.textContent   = 'Please select both birthdates to continue.';
-      errEl.style.display = 'block';
+      showError(MODAL_ID, 'Please select both birthdates to continue.');
       return;
     }
 
     const result = getCompatibilityCard(`${month1}/${day1}`, `${month2}/${day2}`);
     if (!result || !result.card) {
-      errEl.textContent   = 'Something went wrong. Please check the dates and try again.';
-      errEl.style.display = 'block';
+      showError(MODAL_ID, 'Something went wrong. Please check the dates and try again.');
       return;
     }
 
@@ -113,7 +110,7 @@ function ensureModal() {
     });
 
     _pending = { card: result.card, eyebrow: `${name1} & ${name2}` };
-    resetSaveBtn();
+    resetSaveBtn(MODAL_ID);
 
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
     document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
@@ -142,41 +139,17 @@ function ensureModal() {
       cardSuit:       _pending.card.suit,
       cardSuitSymbol: _pending.card.suitSymbol,
     });
-    markSaved();
+    markSaved(MODAL_ID);
   });
-}
-
-function resetSaveBtn() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  const msg = document.getElementById(`${MODAL_ID}-save-msg`);
-  if (btn) { btn.textContent = '♦ Save Reading'; btn.disabled = false; }
-  if (msg) msg.textContent = '';
-}
-
-function markSaved() {
-  const btn = document.getElementById(`${MODAL_ID}-save`);
-  if (btn) { btn.textContent = '✓ Saved'; btn.disabled = true; }
-}
-
-function prefillUserData() {
-  if (!isLoggedIn()) return;
-  const user = getUser();
-
-  const name1El = document.getElementById(`${MODAL_ID}-name1`);
-  if (name1El) name1El.value = user.name ?? '';
-
-  if (user.birthday) {
-    const [, m, d] = user.birthday.split('-').map(Number);
-    const monthEl = document.getElementById(`${MODAL_ID}-month1`);
-    const dayEl   = document.getElementById(`${MODAL_ID}-day1`);
-    if (monthEl) monthEl.value = String(m);
-    if (dayEl)   dayEl.value   = String(d);
-  }
 }
 
 export function openCompatibilityModal() {
   ensureModal();
   openModal(MODAL_ID);
-  prefillUserData();
+  if (isLoggedIn()) prefillUserData(MODAL_ID, getUser(), {
+    name:  `${MODAL_ID}-name1`,
+    month: `${MODAL_ID}-month1`,
+    day:   `${MODAL_ID}-day1`,
+  });
   setTimeout(() => document.getElementById(`${MODAL_ID}-name1`)?.focus(), 100);
 }
