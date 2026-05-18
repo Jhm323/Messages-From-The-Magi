@@ -88,7 +88,7 @@ function card(id, rank, suit, img, keywords, affirmation, action, description) {
     suit,
     name: suit === "Joker" ? "Joker" : `${rank} of ${suit}`,
     numericalValue: RANK_NUM[rank],
-    imagePath: `/images/cards/${img}`,
+    imagePath: `/assets/cards/${img}`,
     suitSymbol: m.symbol,
     suitElement: m.element,
     suitColor: m.color,
@@ -822,5 +822,5 @@ export const CARDS = [
   ),
 ];
 
-export const CARD_BACK_PATH = "/images/util/card_back.jpg";
+export const CARD_BACK_PATH = "/assets/util/card_back.jpg";
 export const SUIT_METADATA = SUIT_META;

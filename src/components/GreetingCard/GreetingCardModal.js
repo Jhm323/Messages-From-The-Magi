@@ -120,7 +120,7 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
 
   <!-- Cover: Mystic Oracle card shows first, then melts away -->
   <div class="greeting-cover" id="${MODAL_ID}-cover">
-    <img src="/images/util/card_back.jpg" alt="The Mystic Oracle" class="greeting-cover__img">
+    <img src="/assets/util/card_back.jpg" alt="The Mystic Oracle" class="greeting-cover__img">
   </div>
 
   <!-- Content: fades in after cover melts -->
