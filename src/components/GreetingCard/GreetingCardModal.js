@@ -6,7 +6,7 @@
 
 import "./GreetingCardModal.css";
 import { mountModal, openModal } from "../ui/Modal/Modal.js";
-import { showError, hideError } from "../ui/Modal/modalHelpers.js";
+import { showError, hideError, resetSaveBtn, markSaved } from "../ui/Modal/modalHelpers.js";
 import '../ui/Button/Button.js';
 import '../ui/Form/Form.js';
 import '../ui/SelectionChip/SelectionChip.js';
@@ -106,6 +106,10 @@ function buildHTML() {
           </button>
         </div>
       </div>
+      <button class="btn btn--ghost modal__save-btn" id="${MODAL_ID}-save">
+        ♦ Save Reading
+      </button>
+      <div id="${MODAL_ID}-save-msg" class="modal__save-msg"></div>
     </div>
   </div>
 </div>`;
@@ -257,10 +261,31 @@ function ensureModal() {
         });
 
       _pending = { card: result.card, eyebrow: name };
+      resetSaveBtn(MODAL_ID);
 
       document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
       document.getElementById(`${MODAL_ID}-step-result`).style.display = "flex";
     });
+
+  document.getElementById(`${MODAL_ID}-save`).addEventListener("click", () => {
+    const msgEl = document.getElementById(`${MODAL_ID}-save-msg`);
+    if (!isLoggedIn()) {
+      msgEl.textContent = 'Sign in to save your readings.';
+      msgEl.style.color = 'var(--color-gold-muted)';
+      return;
+    }
+    if (!_pending) return;
+    saveReading({
+      type:           'greeting-card',
+      label:          'Greeting Card Reading',
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
+      cardSuitSymbol: _pending.card.suitSymbol,
+    });
+    markSaved(MODAL_ID);
+  });
 
   document.getElementById(`${MODAL_ID}-buy-email`).addEventListener("click", () => {
     addToCart(PRODUCTS.email);
