@@ -129,12 +129,3 @@ export function rankLabel(rank) {
   };
   return labels[rank] ?? rank;
 }
-
-/**
- * Generate a shareable URL for a specific card.
- * Used when/if deep-linking is added to the card browser.
- */
-export function cardShareUrl(cardId) {
-  const base = window.location.origin;
-  return `${base}/cards.html?card=${cardId}`;
-}
