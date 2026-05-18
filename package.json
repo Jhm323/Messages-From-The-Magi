@@ -17,7 +17,7 @@
     "numerology",
     "mystic"
   ],
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "engines": {
     "node": ">=20"

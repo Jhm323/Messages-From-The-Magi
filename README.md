@@ -24,7 +24,7 @@ npm run build
 cd server && npm install && npm run dev
 ```
 
-Requires **Node.js 20+**.
+Frontend requires **Node.js 20+**. Server requires **Node.js 18+**.
 
 ---
 
@@ -43,10 +43,10 @@ Messages-From-The-Magi/
 │   ├── shop.html                   ← Shop
 │   ├── about.html                  ← About Sharon + contact
 │   ├── account.html                ← User profile
-│   └── images/
-│       ├── bg-*.png                ← Page background images
-│       ├── cards/                  ← 53 card images
-│       └── util/                   ← Card back images
+│   └── assets/
+│       ├── cards/                  ← 53 card images (01_ace_of_hearts.jpg … 53_joker.jpg)
+│       ├── util/                   ← Card back images (card_back.jpg, card_back_alt.jpg)
+│       └── star.svg
 │
 ├── src/
 │   ├── styles/
@@ -56,23 +56,26 @@ Messages-From-The-Magi/
 │   │   ├── Home/                   home.js + home.css
 │   │   ├── Readings/               readings.js + readings.css
 │   │   ├── Explore/                explore.js + explore.css
-│   │   ├── Oracle/                 oracle.js
+│   │   ├── Oracle/                 oracle.js + oracle.css
 │   │   ├── Videos/                 videos.js + videos.css
 │   │   ├── Join/                   join.js + join.css
 │   │   ├── Shop/                   shop.js + shop.css
 │   │   ├── About/                  about.js + about.css
 │   │   └── Account/                account.js + account.css
 │   │
-│   ├── components/                 ← Shared UI components (JS + CSS co-located)
-│   │   ├── Header/
-│   │   ├── Footer/
-│   │   ├── Cosmos/                 ← Starfield canvas animation
-│   │   ├── PageAnimations/         ← Scroll-triggered reveal animations
-│   │   ├── PageBackground/         ← Full-viewport background image component
-│   │   ├── CardResult/             ← Shared card display
-│   │   ├── Cart/
-│   │   ├── AuthModals/
-│   │   ├── GreetingCard/
+│   ├── components/                 ← Shared UI components
+│   │   ├── Header/                 Header.js + Header.css
+│   │   ├── Footer/                 Footer.js + Footer.css
+│   │   ├── PageAnimations/         Scroll-triggered reveal animations
+│   │   ├── AuthModals/             AuthModals.js + AuthModals.css
+│   │   ├── CardResult/             Shared card display component
+│   │   ├── Cart/                   Cart.js + Cart.css
+│   │   ├── GreetingCard/           GreetingCardModal.js + GreetingCardModal.css
+│   │   ├── BirthCardModal.js       ← Birth card reading modal
+│   │   ├── CompatibilityModal.js   ← Compatibility reading modal
+│   │   ├── GeolocationModal.js     ← Location reading modal
+│   │   ├── PullCard.js             ← Pull-a-card oracle component
+│   │   ├── CardBrowser.js          ← Full card deck browser
 │   │   └── ui/                     ← Button, Form, Modal, LoadingSpinner, SelectionChip
 │   │
 │   ├── api/
@@ -86,12 +89,29 @@ Messages-From-The-Magi/
 │   ├── cart/
 │   │   └── CartStore.js
 │   │
-│   └── db/
-│       └── cards.js                ← Client-side card database (53 cards)
+│   ├── db/
+│   │   └── cards.js                ← Client-side card database (53 cards)
+│   │
+│   ├── utils/
+│   │   └── helpers.js
+│   │
+│   └── app.js                      ← App entry point
 │
-├── server/                         ← Express API backend
-│   ├── index.js                    ← Entry point
-│   └── routes/                     ← API route handlers
+├── server/                         ← Express API backend (deployed on Railway)
+│   ├── index.js                    ← Entry point (port 4000)
+│   ├── railway.json                ← Railway deployment config
+│   ├── .env.example
+│   ├── db/
+│   │   ├── index.js                ← pg pool setup
+│   │   └── schema.sql              ← PostgreSQL schema (users, cards, card_meanings, birth_card_rules)
+│   ├── middleware/
+│   │   ├── auth.js                 ← Clerk session verification
+│   │   └── rateLimit.js            ← express-rate-limit config
+│   └── routes/
+│       └── health.js               ← GET /health (DB connectivity check)
+│
+├── scripts/
+│   └── rotate-cards.mjs            ← One-time utility: batch-rotated card images using sharp
 │
 ├── vite.config.js
 ├── vercel.json
@@ -106,9 +126,10 @@ Every page follows the same structure:
 
 - **HTML** — `public/[page].html` — `body` carries a `[page]-page` class, animation delay vars are the only inline styles
 - **CSS** — `src/pages/[Page]/[page].css` — imported in the JS; contains the background rule + BEM component classes
-- **JS** — `src/pages/[Page]/[page].js` — imports CSS, initializes header, footer, cosmos, animations
+- **JS** — `src/pages/[Page]/[page].js` — imports CSS, initializes header, footer, animations
 
 **Background pattern (every page):**
+
 ```css
 html:has(.[page]-page) {
   background-image: url("/images/bg-[page].png");
@@ -136,7 +157,7 @@ html:has(.[page]-page) {
   suit:           "Hearts",               // Hearts | Clubs | Diamonds | Spades | Joker
   rank:           "Ace",
   numericalValue: 1,                      // Joker = 0
-  imagePath:      "/images/cards/01_ace_of_hearts.jpg",
+  imagePath:      "/assets/cards/01_ace_of_hearts.jpg",
   suitSymbol:     "♥",
   suitElement:    "Water",
   suitKeywords:   ["emotion", "love", "intuition"],
@@ -150,7 +171,7 @@ html:has(.[page]-page) {
 ### Card Numbering
 
 | Range | Suit     |
-|-------|----------|
+| ----- | -------- |
 | 1–13  | Hearts   |
 | 14–26 | Clubs    |
 | 27–39 | Diamonds |
@@ -163,20 +184,20 @@ html:has(.[page]-page) {
 
 ```js
 // Lookup
-getCardByNumber(n)
-getCardByRankAndSuit(rank, suit)
-getCardsBySuit(suit)
-getAllCards()
+getCardByNumber(n);
+getCardByRankAndSuit(rank, suit);
+getCardsBySuit(suit);
+getAllCards();
 
 // Calculations
-getBirthCard(dateString)           // → { card, reducedValue, rawSum, steps }
-getCompatibilityCard(d1, d2)       // → { card, reducedValue }
-getLocationCard(date, locationName)
-getYearCard(dateString, year)
+getBirthCard(dateString); // → { card, reducedValue, rawSum, steps }
+getCompatibilityCard(d1, d2); // → { card, reducedValue }
+getLocationCard(date, locationName);
+getYearCard(dateString, year);
 
 // Oracle
-pullRandomCard()                   // Random card 1–52
-getCardOfTheDay()                  // Deterministic daily card — same for all users
+pullRandomCard(); // Random card 1–52
+getCardOfTheDay(); // Deterministic daily card — same for all users
 ```
 
 ### Numerology Algorithm
@@ -188,27 +209,51 @@ getCardOfTheDay()                  // Deterministic daily card — same for all 
 
 ---
 
+## Backend (`server/`)
+
+The Express server runs on port 4000 and is deployed via **Railway** (`railway.json`). Current middleware stack: Helmet, CORS, express-rate-limit, Clerk auth verification.
+
+### Database Schema (`server/db/schema.sql`)
+
+Four tables:
+
+- **`users`** — Clerk user ID (text PK), email, birth_date, subscription_tier
+- **`cards`** — id, name, number, suit, symbol, image_url
+- **`card_meanings`** — per-card meanings scoped to context (`birth` | `daily` | `compatibility` | `spread`)
+- **`birth_card_rules`** — month + day range → card lookup table
+
+### Live Routes
+
+| Method | Path    | Description                       |
+| ------ | ------- | --------------------------------- |
+| GET    | /health | DB connectivity check + timestamp |
+
+All other API routes are not yet built.
+
+---
+
 ## Current Status
 
-| Page / Feature | Status |
-|---|---|
-| All 9 pages — HTML, CSS, JS | ✅ Complete |
-| Design system (`main.css`) | ✅ Complete |
-| Page backgrounds per route | ✅ Complete |
-| BEM component structure per page | ✅ Complete |
-| Header + footer components | ✅ Complete |
-| Cosmos starfield animation | ✅ Complete |
-| Scroll-triggered animations | ✅ Complete |
-| Birth card modal | ✅ Complete |
-| Compatibility modal | ✅ Complete |
-| Greeting card modal | ✅ Complete |
-| Location reading modal | ✅ Complete |
-| Pull-a-card oracle | ✅ Complete |
-| Card database (53 cards) | ✅ Scaffolded — awaiting Sharon's content |
-| Shop grid + cart | ✅ Complete |
-| User auth (Clerk) | 🔧 Wired — needs server-side route protection |
-| PostgreSQL backend | 🔲 Not provisioned |
-| REST API | 🔲 Not built |
+| Page / Feature                               | Status                                                                                  |
+| -------------------------------------------- | --------------------------------------------------------------------------------------- |
+| All 9 pages — HTML, CSS, JS                  | ✅ Complete                                                                             |
+| Design system (`main.css`)                   | ✅ Complete                                                                             |
+| Page backgrounds per route                   | ✅ Complete                                                                             |
+| BEM component structure per page             | ✅ Complete                                                                             |
+| Header + footer components                   | ✅ Complete                                                                             |
+| Scroll-triggered animations                  | ✅ Complete                                                                             |
+| Birth card modal                             | ✅ Complete                                                                             |
+| Compatibility modal                          | ✅ Complete                                                                             |
+| Greeting card modal                          | ✅ Complete                                                                             |
+| Location reading modal                       | ✅ Complete                                                                             |
+| Pull-a-card oracle                           | ✅ Complete                                                                             |
+| Card browser                                 | ✅ Complete                                                                             |
+| Card database (53 cards)                     | ✅ Scaffolded — awaiting Sharon's content                                               |
+| Shop grid + cart                             | ✅ Complete                                                                             |
+| Server — health route, middleware, DB schema | ✅ Complete                                                                             |
+| User auth (Clerk)                            | 🔧 Wired frontend — server-side verification middleware exists but routes not protected |
+| PostgreSQL backend                           | 🔲 Schema written, not provisioned                                                      |
+| REST API routes                              | 🔲 Not built (only /health exists)                                                      |
 
 ---
 
@@ -216,8 +261,8 @@ getCardOfTheDay()                  // Deterministic daily card — same for all 
 
 **Priority order — ship in sequence:**
 
-1. **Finish auth** — protect routes server-side via Clerk session verification
-2. **Provision PostgreSQL** — create `users` and `cards` tables
+1. **Provision PostgreSQL** — deploy schema, wire `server/db/index.js` to real DB
+2. **Protect routes server-side** — apply Clerk middleware to auth-required endpoints
 3. **Build admin tool** — start entering Sharon's card data
 4. **`/api/birthcard` endpoint** — test in Postman
 5. **Wire birth card frontend** — first real end-to-end feature
@@ -252,4 +297,8 @@ All tokens in `src/styles/main.css`:
 
 ## IP & Licensing
 
-All card interpretations, affirmations, and written content are the proprietary intellectual property of Sharon Jeffers. This repository is private and unlicensed for external distribution.
+Copyright © 2025 Sharon Jeffers. All rights reserved.
+
+This repository is source-available for review and collaboration purposes only. It is not open source. You may not copy, modify, distribute, or use any portion of this codebase for commercial or non-commercial purposes without prior written permission.
+
+All card interpretations, affirmations, descriptions, and written content are the exclusive intellectual property of Sharon Jeffers and are protected under applicable copyright law.
