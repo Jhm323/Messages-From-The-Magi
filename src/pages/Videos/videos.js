@@ -10,9 +10,6 @@ initFooter("#site-footer-mount");
 initChipGroup(document.getElementById("video-filter-chips"));
 document.body.classList.replace("js-loading", "js-ready");
 
-const SUBSTACK_RSS = "https://starofthemagi.substack.com/feed";
-const CORS_PROXY = "https://corsproxy.io/?";
-
 const YT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YT_CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
 const YT_MAX = 8;
@@ -23,7 +20,7 @@ async function loadSubstackPosts() {
   if (!strip || !grid) return;
 
   try {
-    const res = await fetch(`${CORS_PROXY}${encodeURIComponent(SUBSTACK_RSS)}`);
+    const res = await fetch("/api/rss");
     const text = await res.text();
     const xml = new DOMParser().parseFromString(text, "text/xml");
     const items = [...xml.querySelectorAll("item")].slice(0, 3);
