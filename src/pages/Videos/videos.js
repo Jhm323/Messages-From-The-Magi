@@ -33,12 +33,29 @@ async function loadSubstackPosts() {
       return;
     }
 
+    // The generic Sharon profile image shared across most posts — skip it
+    const GENERIC_IMG = "3c131585-ebd0-4497-964b-d28b4d24bdc8";
+
     grid.innerHTML = items
       .map((item) => {
         const title = item.querySelector("title")?.textContent ?? "";
         const link = item.querySelector("link")?.textContent ?? "#";
         const pubDate = item.querySelector("pubDate")?.textContent ?? "";
         const desc = item.querySelector("description")?.textContent ?? "";
+
+        // Full post HTML lives in content:encoded
+        const encoded = item.querySelector("encoded")?.textContent ?? "";
+
+        // Prefer first <img> from post body (post-specific art)
+        const imgMatch = encoded.match(/<img[^>]+src=["']([^"']+)["']/i);
+        const bodyImg = imgMatch ? imgMatch[1] : null;
+
+        // Fall back to enclosure only if it isn't the generic profile image
+        const enclosureUrl =
+          item.querySelector("enclosure")?.getAttribute("url") ?? null;
+        const enclosureImg = enclosureUrl || null;
+
+        const imageUrl = bodyImg || enclosureImg;
 
         const excerpt =
           desc
@@ -56,6 +73,13 @@ async function loadSubstackPosts() {
 
         return `
         <a class="substack-card" href="${link}" target="_blank" rel="noopener noreferrer">
+          ${
+            imageUrl
+              ? `<div class="substack-card__img-wrap">
+              <img class="substack-card__img" src="${imageUrl}" alt="${title}" loading="lazy" />
+            </div>`
+              : ""
+          }
           <div class="substack-card__date">${date}</div>
           <div class="substack-card__title">${title}</div>
           <p class="substack-card__excerpt">${excerpt}</p>

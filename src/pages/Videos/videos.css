@@ -226,3 +226,24 @@
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
 }
+
+.substack-card__img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  background: var(--color-night);
+}
+
+.substack-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.substack-card:hover .substack-card__img {
+  transform: scale(1.03);
+}
