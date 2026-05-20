@@ -18,7 +18,10 @@ async function loadSubstackPosts() {
   if (!strip || !grid) return;
 
   try {
-    const res = await fetch("/api/rss");
+    const rssEndpoint = import.meta.env.DEV
+      ? `https://corsproxy.io/?${encodeURIComponent("https://starofthemagi.substack.com/feed")}`
+      : "/api/rss";
+    const res = await fetch(rssEndpoint);
     const text = await res.text();
     const xml = new DOMParser().parseFromString(text, "text/xml");
     const items = [...xml.querySelectorAll("item")].slice(0, 3);
@@ -27,9 +30,6 @@ async function loadSubstackPosts() {
       strip.style.display = "none";
       return;
     }
-
-    // The generic Sharon profile image shared across most posts — skip it
-    const GENERIC_IMG = "3c131585-ebd0-4497-964b-d28b4d24bdc8";
 
     grid.innerHTML = items
       .map((item) => {
@@ -48,10 +48,8 @@ async function loadSubstackPosts() {
         // Fall back to enclosure only if it isn't the generic profile image
         const enclosureUrl =
           item.querySelector("enclosure")?.getAttribute("url") ?? null;
-        const enclosureImg =
-          enclosureUrl && !enclosureUrl.includes(GENERIC_IMG)
-            ? enclosureUrl
-            : null;
+
+        const enclosureImg = enclosureUrl ?? null;
 
         const imageUrl = bodyImg || enclosureImg;
 
