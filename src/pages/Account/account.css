@@ -176,6 +176,16 @@
   background: rgba(214, 90, 90, 0.1);
 }
 
+.reading-item--clickable {
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.reading-item--clickable:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.05);
+}
+
 /* Mobile */
 @media (max-width: 480px) {
   .account-profile {

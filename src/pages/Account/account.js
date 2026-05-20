@@ -5,6 +5,9 @@ import { getSavedReadings, deleteReading } from "../../auth/SavedReadings.js";
 import { initHeader } from "../../components/Header/Header.js";
 import { initFooter } from "../../components/Footer/Footer.js";
 import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
+import { openBirthCardModalWithData }     from '../../components/BirthCardModal/BirthCardModal.js';
+import { openCompatibilityModalWithData } from '../../components/CompatibilityModal/CompatibilityModal.js';
+import { openGeolocationModalWithData }   from '../../components/GeolocationModal.js';
 
 requireAuth("/");
 
@@ -74,7 +77,7 @@ function renderSavedReadings() {
       });
       const suitColor = SUIT_COLORS[r.cardSuit] ?? "var(--color-gold)";
       return `
-      <div class="reading-item" data-reading-id="${r.id}">
+      <div class="reading-item reading-item--clickable" data-reading-id="${r.id}" data-reading-type="${r.type}" title="Reopen this reading">
         <div class="reading-item__suit" style="color:${suitColor}">${r.cardSuitSymbol}</div>
         <div class="reading-item__body">
           <div class="reading-item__name">${r.cardName}</div>
@@ -90,6 +93,28 @@ function renderSavedReadings() {
     btn.addEventListener("click", () => {
       deleteReading(btn.dataset.delete);
       renderSavedReadings();
+    });
+  });
+
+  list.querySelectorAll('.reading-item--clickable').forEach((item) => {
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('[data-delete]')) return;
+
+      const id = item.dataset.readingId;
+      const reading = getSavedReadings().find(r => r.id === id);
+      if (!reading?.inputs) return;
+
+      const type = reading.type;
+      if (type === 'birth-card') {
+        sessionStorage.setItem('magi_reopen', JSON.stringify(reading));
+        window.location.href = '/readings.html?open=birth-card';
+      } else if (type === 'compatibility') {
+        sessionStorage.setItem('magi_reopen', JSON.stringify(reading));
+        window.location.href = '/readings.html?open=compatibility';
+      } else if (type === 'geolocation') {
+        sessionStorage.setItem('magi_reopen', JSON.stringify(reading));
+        window.location.href = '/readings.html?open=geolocation';
+      }
     });
   });
 }

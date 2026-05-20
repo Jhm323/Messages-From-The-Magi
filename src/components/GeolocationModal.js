@@ -110,7 +110,7 @@ function ensureModal() {
         </div>`,
     });
 
-    _pending = { card: result.card, eyebrow: `${name} · ${location}`, location };
+    _pending = { card: result.card, eyebrow: `${name} · ${location}`, name, month, day, location };
     resetSaveBtn(MODAL_ID);
 
     document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
@@ -139,6 +139,12 @@ function ensureModal() {
       cardName:       _pending.card.name,
       cardSuit:       _pending.card.suit,
       cardSuitSymbol: _pending.card.suitSymbol,
+      inputs: {
+        name:     _pending.name,
+        month:    _pending.month,
+        day:      _pending.day,
+        location: _pending.location,
+      },
     });
     markSaved(MODAL_ID);
   });
@@ -149,4 +155,45 @@ export function openGeolocationModal() {
   openModal(MODAL_ID);
   if (isLoggedIn()) prefillUserData(MODAL_ID, getUser());
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
+}
+
+/**
+ * Re-open the geolocation modal directly at the result step using saved data.
+ * @param {{ inputs: { name, month, day, location } }} reading
+ */
+export function openGeolocationModalWithData(reading) {
+  ensureModal();
+  openModal(MODAL_ID);
+
+  const { name, month, day, location } = reading.inputs ?? {};
+  const result = getLocationCard(`${month}/${day}`, location);
+  if (!result?.card) return;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
+  set(`${MODAL_ID}-name`,     name);
+  set(`${MODAL_ID}-month`,    month);
+  set(`${MODAL_ID}-day`,      day);
+  set(`${MODAL_ID}-location`, location);
+
+  document.getElementById(`${MODAL_ID}-result-container`).innerHTML =
+    renderCardResult(result.card, {
+      eyebrow:         `${name} · ${location}`,
+      subheading:      'Your Location Card',
+      showAffirmation: true,
+      showAction:      true,
+      showDescription: true,
+      extra: `
+        <div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(255,255,255,0.03);
+          border-radius:var(--radius-md);font-size:0.8rem;color:var(--color-dawn);text-align:center;
+          font-family:var(--font-heading);letter-spacing:0.06em;">
+          Birth value ${result.birthValue} + Location value ${result.locationValue}
+          = Card #${result.reducedValue}
+        </div>`,
+    });
+
+  _pending = { card: result.card, eyebrow: `${name} · ${location}`, name, month, day, location };
+  resetSaveBtn(MODAL_ID);
+
+  document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
+  document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
 }

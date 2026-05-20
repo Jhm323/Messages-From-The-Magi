@@ -109,8 +109,7 @@ function ensureModal() {
           showDescription: true,
         });
 
-      // Store for save button
-      _pending = { card: result.card, eyebrow: name };
+      _pending = { card: result.card, eyebrow: name, month, day };
       resetSaveBtn(MODAL_ID);
 
       document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
@@ -133,13 +132,18 @@ function ensureModal() {
     }
     if (!_pending) return;
     saveReading({
-      type: "birth-card",
-      label: "Birth Card Reading",
-      eyebrow: _pending.eyebrow,
-      cardId: _pending.card.id,
-      cardName: _pending.card.name,
-      cardSuit: _pending.card.suit,
+      type:           'birth-card',
+      label:          'Birth Card Reading',
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
       cardSuitSymbol: _pending.card.suitSymbol,
+      inputs: {
+        name:  _pending.eyebrow,
+        month: _pending.month,
+        day:   _pending.day,
+      },
     });
     markSaved(MODAL_ID);
   });
@@ -150,4 +154,39 @@ export function openBirthCardModal() {
   openModal(MODAL_ID);
   if (isLoggedIn()) prefillUserData(MODAL_ID, getUser());
   setTimeout(() => document.getElementById(`${MODAL_ID}-name`)?.focus(), 100);
+}
+
+/**
+ * Re-open the birth card modal directly at the result step using saved data.
+ * @param {{ inputs: { name, month, day } }} reading
+ */
+export function openBirthCardModalWithData(reading) {
+  ensureModal();
+  openModal(MODAL_ID);
+
+  const { name, month, day } = reading.inputs ?? {};
+  const result = getBirthCard(`${month}/${day}`);
+  if (!result?.card) return;
+
+  const nameEl  = document.getElementById(`${MODAL_ID}-name`);
+  const monthEl = document.getElementById(`${MODAL_ID}-month`);
+  const dayEl   = document.getElementById(`${MODAL_ID}-day`);
+  if (nameEl)  nameEl.value  = name  ?? '';
+  if (monthEl) monthEl.value = month ?? '';
+  if (dayEl)   dayEl.value   = day   ?? '';
+
+  document.getElementById(`${MODAL_ID}-result-container`).innerHTML =
+    renderCardResult(result.card, {
+      eyebrow:         name,
+      subheading:      'Your Birth Card',
+      showAffirmation: true,
+      showAction:      true,
+      showDescription: true,
+    });
+
+  _pending = { card: result.card, eyebrow: name, month, day };
+  resetSaveBtn(MODAL_ID);
+
+  document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
+  document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
 }

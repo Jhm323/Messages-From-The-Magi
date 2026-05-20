@@ -127,7 +127,7 @@ function ensureModal() {
       </p>`,
         });
 
-      _pending = { card: result.card, eyebrow: `${name1} & ${name2}` };
+      _pending = { card: result.card, eyebrow: `${name1} & ${name2}`, name1, month1, day1, name2, month2, day2 };
       resetSaveBtn(MODAL_ID);
 
       document.getElementById(`${MODAL_ID}-step-form`).style.display = "none";
@@ -150,13 +150,21 @@ function ensureModal() {
     }
     if (!_pending) return;
     saveReading({
-      type: "compatibility",
-      label: "Compatibility Reading",
-      eyebrow: _pending.eyebrow,
-      cardId: _pending.card.id,
-      cardName: _pending.card.name,
-      cardSuit: _pending.card.suit,
+      type:           'compatibility',
+      label:          'Compatibility Reading',
+      eyebrow:        _pending.eyebrow,
+      cardId:         _pending.card.id,
+      cardName:       _pending.card.name,
+      cardSuit:       _pending.card.suit,
       cardSuitSymbol: _pending.card.suitSymbol,
+      inputs: {
+        name1:  _pending.name1,
+        month1: _pending.month1,
+        day1:   _pending.day1,
+        name2:  _pending.name2,
+        month2: _pending.month2,
+        day2:   _pending.day2,
+      },
     });
     markSaved(MODAL_ID);
   });
@@ -172,4 +180,43 @@ export function openCompatibilityModal() {
       day: `${MODAL_ID}-day1`,
     });
   setTimeout(() => document.getElementById(`${MODAL_ID}-name1`)?.focus(), 100);
+}
+
+/**
+ * Re-open the compatibility modal directly at the result step using saved data.
+ * @param {{ inputs: { name1, month1, day1, name2, month2, day2 } }} reading
+ */
+export function openCompatibilityModalWithData(reading) {
+  ensureModal();
+  openModal(MODAL_ID);
+
+  const { name1, month1, day1, name2, month2, day2 } = reading.inputs ?? {};
+  const result = getCompatibilityCard(`${month1}/${day1}`, `${month2}/${day2}`);
+  if (!result?.card) return;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
+  set(`${MODAL_ID}-name1`,  name1);
+  set(`${MODAL_ID}-month1`, month1);
+  set(`${MODAL_ID}-day1`,   day1);
+  set(`${MODAL_ID}-name2`,  name2);
+  set(`${MODAL_ID}-month2`, month2);
+  set(`${MODAL_ID}-day2`,   day2);
+
+  document.getElementById(`${MODAL_ID}-result-container`).innerHTML =
+    renderCardResult(result.card, {
+      eyebrow:         `${name1} & ${name2}`,
+      subheading:      'Your Compatibility Card',
+      showAffirmation: true,
+      showAction:      true,
+      showDescription: true,
+      extra: `<p style="color:var(--color-dawn);font-size:0.8rem;text-align:center;margin-top:0.5rem;">
+        Card #${result.card.id} · Numerological value: ${result.reducedValue}
+      </p>`,
+    });
+
+  _pending = { card: result.card, eyebrow: `${name1} & ${name2}`, name1, month1, day1, name2, month2, day2 };
+  resetSaveBtn(MODAL_ID);
+
+  document.getElementById(`${MODAL_ID}-step-form`).style.display   = 'none';
+  document.getElementById(`${MODAL_ID}-step-result`).style.display = 'block';
 }
