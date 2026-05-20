@@ -1,48 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Mystic Oracle. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards.">
-  <title>The Mystic Oracle</title>
-  <link rel="stylesheet" href="/src/styles/main.css">
-</head>
-<body class="js-loading home-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Mystic Oracle. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards."
+    />
+    <title>The Mystic Oracle</title>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body class="js-loading home-page">
+    <div id="site-header-mount"></div>
 
-  <div id="site-header-mount"></div>
+    <main>
+      <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+      <section class="hero home-hero" aria-label="Welcome">
+        <div class="hero__eyebrow anim-hero" style="--hi: 0">
+          A Living Oracle · A Mystic Science
+        </div>
+        <h1 class="hero__title magic-h anim-hero" style="--hi: 1">
+          The Mystic Oracle
+        </h1>
+        <p class="hero__body anim-para" style="--pi: 0">
+          A powerful time-keeping system that reveals who you are, where you are
+          in time, and where you are going.<br /><br />
+          The magic is all around you. What do your cards reveal?
+        </p>
+        <a
+          class="btn btn--primary anim-hero"
+          style="--hi: 2"
+          href="/readings.html"
+        >
+          ✦ Explore Your Readings
+        </a>
+      </section>
 
-  <main>
+      <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
+      <section class="home-card" aria-label="Card of the Day">
+        <div class="container container--narrow">
+          <div class="divider--glyph anim-reveal" style="--ri: 0">✦</div>
+          <h2 class="section-label text-center anim-reveal" style="--ri: 1">
+            Card of the Day
+          </h2>
+          <div id="card-of-day-mount" class="anim-reveal" style="--ri: 2"></div>
+        </div>
+      </section>
+    </main>
 
-    <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-    <section class="hero home-hero" aria-label="Welcome">
-<div class="hero__eyebrow anim-hero" style="--hi:0">A Living Oracle · A Mystic Science</div>
-      <h1 class="hero__title magic-h anim-hero" style="--hi:1">The Mystic Oracle</h1>
-      <p class="hero__body anim-para" style="--pi:0">
-        A powerful time-keeping system that reveals who you are,
-        where you are in time, and where you are going.
-      </p>
-      <p class="hero__sub anim-para" style="--pi:1">
-        The magic is all around you. What do the cards reveal?
-      </p>
-      <a class="btn btn--primary anim-hero" style="--hi:2" href="/readings.html">
-        ✦ Explore Your Readings
-      </a>
-    </section>
+    <div id="site-footer-mount"></div>
 
-    <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
-    <section class="home-card" aria-label="Card of the Day">
-      <div class="container container--narrow">
-        <div class="divider--glyph anim-reveal" style="--ri:0">✦</div>
-        <h2 class="section-label text-center anim-reveal" style="--ri:1">Card of the Day</h2>
-        <div id="card-of-day-mount" class="anim-reveal" style="--ri:2"></div>
-      </div>
-    </section>
-
-  </main>
-
-  <div id="site-footer-mount"></div>
-
-  <script type="module" src="/src/pages/Home/home.js"></script>
-
-</body>
+    <script type="module" src="/src/pages/Home/home.js"></script>
+  </body>
 </html>

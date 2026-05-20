@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./PageAnimations-SjEbwQho.js";t(`#site-header-mount`,{activePath:`/shop.html`}),e(`#site-footer-mount`),n(),document.body.classList.replace(`js-loading`,`js-ready`);

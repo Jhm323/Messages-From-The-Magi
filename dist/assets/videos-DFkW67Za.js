@@ -1,1 +1,0 @@
-import{i as e,n as t,r as n,t as r}from"./PageAnimations-B3zyfM8q.js";import{t as i}from"./SelectionChip-CB9M93dA.js";t(),r(),e(`#site-header-mount`,{activePath:`/videos.html`}),n(`#site-footer-mount`),i(document.getElementById(`video-filter-chips`)),document.body.classList.replace(`js-loading`,`js-ready`);

@@ -1,51 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Messages from the Magi. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards.">
-  <title>Messages from the Magi</title>
-  <script type="module" crossorigin src="/assets/index-DLwpZYFb.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/PageAnimations-B3zyfM8q.js">
-  <link rel="modulepreload" crossorigin href="/assets/CardResult-BxKRgbki.js">
-  <link rel="modulepreload" crossorigin href="/assets/SavedReadings-1dH3-Zbr.js">
-  <link rel="modulepreload" crossorigin href="/assets/BirthCardModal-C7z3CvA7.js">
-  <link rel="stylesheet" crossorigin href="/assets/PageAnimations-B6IV6Hdb.css">
-  <link rel="stylesheet" crossorigin href="/assets/CardResult-CUBJmL0p.css">
-  <link rel="stylesheet" crossorigin href="/assets/index-BN8M3shY.css">
-</head>
-<body class="js-loading">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Mystic Oracle. Discover your birth card, explore compatibility, and receive guidance from the ancient mystic science of the cards."
+    />
+    <title>The Mystic Oracle</title>
+    <script type="module" crossorigin src="/assets/index-C_PzYEoY.js"></script>
+    <link
+      rel="modulepreload"
+      crossorigin
+      href="/assets/PageAnimations-SjEbwQho.js"
+    />
+    <link
+      rel="modulepreload"
+      crossorigin
+      href="/assets/CardResult-Dyqsb-xX.js"
+    />
+    <link
+      rel="stylesheet"
+      crossorigin
+      href="/assets/PageAnimations-BJsxDwQH.css"
+    />
+    <link rel="stylesheet" crossorigin href="/assets/CardResult-DJKRWqbL.css" />
+    <link rel="stylesheet" crossorigin href="/assets/index-D2RlUUaB.css" />
+  </head>
+  <body class="js-loading home-page">
+    <div id="site-header-mount"></div>
 
-  <div id="site-header-mount"></div>
+    <main>
+      <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+      <section class="hero home-hero" aria-label="Welcome">
+        <div class="hero__eyebrow anim-hero" style="--hi: 0">
+          A Living Oracle · A Mystic Science
+        </div>
+        <h1 class="hero__title magic-h anim-hero" style="--hi: 1">
+          The Mystic Oracle
+        </h1>
+        <p class="hero__body anim-para" style="--pi: 0">
+          A powerful time-keeping system that reveals who you are, where you are
+          in time, and where you are going.
+        </p>
+        <p class="hero__sub anim-para" style="--pi: 1">
+          The magic is all around you. What do the cards reveal?
+        </p>
+        <a
+          class="btn btn--primary anim-hero"
+          style="--hi: 2"
+          href="/readings.html"
+        >
+          ✦ Explore Your Readings
+        </a>
+      </section>
 
-  <main>
+      <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
+      <section class="home-card" aria-label="Card of the Day">
+        <div class="container container--narrow">
+          <div class="divider--glyph anim-reveal" style="--ri: 0">✦</div>
+          <h2 class="section-label text-center anim-reveal" style="--ri: 1">
+            Card of the Day
+          </h2>
+          <div id="card-of-day-mount" class="anim-reveal" style="--ri: 2"></div>
+        </div>
+      </section>
+    </main>
 
-    <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-    <section class="hero home-hero" aria-label="Welcome">
-      <div class="hero__eyebrow anim-hero" style="--hi:0">A Living Oracle · A Mystic Science</div>
-      <h1 class="hero__title magic-h anim-hero" style="--hi:1">Messages from the Magi</h1>
-      <p class="hero__body anim-para" style="--pi:0">
-        A powerful time-keeping system that reveals who you are,
-        where you are in time, and where you are going.
-      </p>
-      <button class="btn btn--primary anim-hero" style="--hi:2" data-feature="birth-card">
-        ✦ Discover Your Birth Card
-      </button>
-    </section>
-
-    <!-- ── CARD OF THE DAY ───────────────────────────────────────────────── -->
-    <section class="home-card" aria-label="Card of the Day">
-      <div class="container container--narrow">
-        <div class="divider--glyph anim-reveal" style="--ri:0">✦</div>
-        <h2 class="section-label text-center anim-reveal" style="--ri:1">Card of the Day</h2>
-        <div id="card-of-day-mount" class="anim-reveal" style="--ri:2"></div>
-      </div>
-    </section>
-
-  </main>
-
-  <div id="site-footer-mount"></div>
-
-
-</body>
+    <div id="site-footer-mount"></div>
+  </body>
 </html>
