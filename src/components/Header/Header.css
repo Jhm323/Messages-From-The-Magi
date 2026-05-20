@@ -296,6 +296,10 @@
     font-size: var(--text-18);
   }
 
+  .nav-dropdown {
+    width: 280px;
+  }
+
   .nav-sub-menu {
     /* On tablet show submenu below, not to the side */
     position: static;
