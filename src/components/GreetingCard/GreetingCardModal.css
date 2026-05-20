@@ -38,7 +38,7 @@
 
 .greeting-card__message {
   font-style: italic;
-  color: var(--color-mist);
+  color: #5a3e28;
   font-size: 18px;
   margin-bottom: 32px;
   line-height: 1.8;
@@ -161,6 +161,22 @@
   color: var(--color-gold);
   border-color: var(--color-gold);
   background: var(--color-gold-glow);
+}
+
+.greeting-card {
+  color: #3a2a1a;
+}
+
+.greeting-card .card-description {
+  color: #3a2a1a;
+}
+
+.greeting-card .card-action-prompt {
+  color: #3a2a1a;
+}
+
+.greeting-card .card-affirmation {
+  color: #3a2a1a;
 }
 
 @keyframes cover-melt {

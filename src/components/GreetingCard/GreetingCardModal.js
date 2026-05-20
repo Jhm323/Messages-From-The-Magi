@@ -150,7 +150,7 @@ function renderGreetingCard({ name, occasion, message, from, card }) {
         "${card.affirmation}"
       </div>
 
-      <div class="card-description" style="font-size:0.95rem;margin:0.5rem 0;line-height:1.7;text-align:center;color:var(--color-light);">
+      <div class="card-description" style="font-size:0.95rem;margin:0.5rem 0;line-height:1.7;text-align:center;">
         ${card.description}
       </div>
 
