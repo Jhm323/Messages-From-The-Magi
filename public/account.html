@@ -25,6 +25,7 @@
           </div>
           <div class="account-profile__actions">
             <button class="btn btn--ghost account-sign-out" id="sign-out-btn">Sign Out</button>
+            <button class="btn btn--ghost account-sign-out" id="edit-profile-btn">Edit Profile</button>
           </div>
         </div>
 
@@ -52,6 +53,39 @@
       </div>
     </section>
   </main>
+
+  <div class="modal-overlay" id="modal-edit-profile" role="dialog" aria-modal="true" aria-labelledby="modal-edit-profile-title">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-edit-profile-title">Edit Profile</h2>
+        <button class="modal__close" id="edit-profile-close" aria-label="Close">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-profile-name">Name</label>
+        <input class="form-input" id="edit-profile-name" type="text" placeholder="Your name" autocomplete="given-name">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-profile-birthday">Birthday</label>
+        <input class="form-input" id="edit-profile-birthday" type="date">
+        <span class="form-hint">Used to calculate your birth card</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-profile-avatar">Avatar URL</label>
+        <input class="form-input" id="edit-profile-avatar" type="url" placeholder="https://…" autocomplete="off">
+        <span class="form-hint">Paste a link to an image</span>
+      </div>
+
+      <div id="edit-profile-error" role="alert" class="modal__error"></div>
+
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="edit-profile-save">Save Changes</button>
+        <button class="btn btn--ghost" id="edit-profile-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <div id="site-footer-mount"></div>
 

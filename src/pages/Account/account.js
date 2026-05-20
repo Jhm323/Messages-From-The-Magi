@@ -1,6 +1,6 @@
 import "./account.css";
 import { requireAuth } from "../../auth/requireAuth.js";
-import { getUser, clearUser } from "../../auth/AuthStore.js";
+import { getUser, clearUser, setUser } from "../../auth/AuthStore.js";
 import { getSavedReadings, deleteReading } from "../../auth/SavedReadings.js";
 import { initHeader } from "../../components/Header/Header.js";
 import { initFooter } from "../../components/Footer/Footer.js";
@@ -15,33 +15,96 @@ initPageAnimations();
 initHeader("#site-header-mount", { activePath: "/account.html" });
 initFooter("#site-footer-mount");
 
-const user = getUser();
-const initial = user.name?.[0]?.toUpperCase() ?? "✦";
-const avatarEl = document.getElementById("account-avatar");
+function renderProfile() {
+  const user = getUser();
+  if (!user) return;
 
-if (user.avatar) {
-  avatarEl.innerHTML = `<img src="${user.avatar}" alt="${user.name}">`;
-} else {
-  avatarEl.textContent = initial;
-}
+  const initial = user.name?.[0]?.toUpperCase() ?? "✦";
+  const avatarEl = document.getElementById("account-avatar");
 
-document.getElementById("account-name").textContent = user.name ?? "Seeker";
-document.getElementById("account-email").textContent = user.email ?? "";
+  if (user.avatar) {
+    avatarEl.innerHTML = `<img src="${user.avatar}" alt="${user.name}">`;
+  } else {
+    avatarEl.innerHTML = '';
+    avatarEl.textContent = initial;
+  }
 
-if (user.birthday) {
-  const [y, m, d] = user.birthday.split("-").map(Number);
-  const formatted = new Date(y, m - 1, d).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  document.getElementById("account-name").textContent = user.name ?? "Seeker";
+  document.getElementById("account-email").textContent = user.email ?? "";
+
   const bdayEl = document.getElementById("account-birthday");
-  if (bdayEl) bdayEl.textContent = formatted;
+  if (bdayEl) {
+    if (user.birthday) {
+      const [y, m, d] = user.birthday.split("-").map(Number);
+      bdayEl.textContent = new Date(y, m - 1, d).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+    } else {
+      bdayEl.textContent = '';
+    }
+  }
 }
+
+renderProfile();
 
 document.getElementById("sign-out-btn").addEventListener("click", () => {
   clearUser();
   window.location.href = "/";
+});
+
+const editModal     = document.getElementById('modal-edit-profile');
+const editOpenBtn   = document.getElementById('edit-profile-btn');
+const editCloseBtn  = document.getElementById('edit-profile-close');
+const editCancelBtn = document.getElementById('edit-profile-cancel');
+const editSaveBtn   = document.getElementById('edit-profile-save');
+const editError     = document.getElementById('edit-profile-error');
+
+function openEditModal() {
+  const user = getUser();
+  document.getElementById('edit-profile-name').value     = user.name     ?? '';
+  document.getElementById('edit-profile-birthday').value = user.birthday ?? '';
+  document.getElementById('edit-profile-avatar').value   = user.avatar   ?? '';
+  editError.textContent = '';
+  editModal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('edit-profile-name')?.focus(), 100);
+}
+
+function closeEditModal() {
+  editModal.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+editOpenBtn.addEventListener('click', openEditModal);
+editCloseBtn.addEventListener('click', closeEditModal);
+editCancelBtn.addEventListener('click', closeEditModal);
+
+editModal.addEventListener('click', (e) => {
+  if (e.target === editModal) closeEditModal();
+});
+
+editSaveBtn.addEventListener('click', () => {
+  const name     = document.getElementById('edit-profile-name').value.trim();
+  const birthday = document.getElementById('edit-profile-birthday').value;
+  const avatar   = document.getElementById('edit-profile-avatar').value.trim();
+
+  if (!name) {
+    editError.textContent = 'Name is required.';
+    editError.style.display = 'block';
+    return;
+  }
+
+  setUser({
+    ...getUser(),
+    name,
+    birthday: birthday || undefined,
+    avatar:   avatar   || undefined,
+  });
+
+  closeEditModal();
+  renderProfile();
 });
 
 const SUIT_COLORS = {
