@@ -328,12 +328,8 @@
 
   .site-header__inner {
     gap: 9px;
-    height: 60px;
-  }
-
-  .site-logo {
-    font-size: var(--text-18);
-    letter-spacing: 0.03em;
+    height: auto;
+    padding: 8px 0;
   }
 
   /* Hide name on small screens — show avatar only */
@@ -343,6 +339,43 @@
 
   .header-auth__btn {
     padding: 4px 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header__inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 0;
+    gap: 6px;
+  }
+
+  /* Logo takes full top row */
+  .site-logo {
+    order: -1;
+    flex: 0 0 100%;
+    text-align: center;
+    font-size: var(--text-16);
+    letter-spacing: 0.06em;
+  }
+
+  /* Bottom row: hamburger on left, auth + cart on right */
+  .nav-menu-btn {
+    order: 0;
+    margin-right: auto;
+  }
+
+  .header-auth {
+    order: 1;
+  }
+
+  .header-cart-btn {
+    order: 2;
+  }
+
+  /* Dropdown anchors from top of inner, not the button */
+  .nav-dropdown {
+    top: calc(100% + 4px);
   }
 }
 
