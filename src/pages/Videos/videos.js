@@ -2,12 +2,10 @@ import "./videos.css";
 import { initHeader } from "../../components/Header/Header.js";
 import { initFooter } from "../../components/Footer/Footer.js";
 import { initPageAnimations } from "../../components/PageAnimations/PageAnimations.js";
-import { initChipGroup } from "../../components/ui/SelectionChip/SelectionChip.js";
 
 initPageAnimations();
 initHeader("#site-header-mount", { activePath: "/videos.html" });
 initFooter("#site-footer-mount");
-initChipGroup(document.getElementById("video-filter-chips"));
 document.body.classList.replace("js-loading", "js-ready");
 
 const YT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
@@ -50,7 +48,10 @@ async function loadSubstackPosts() {
         // Fall back to enclosure only if it isn't the generic profile image
         const enclosureUrl =
           item.querySelector("enclosure")?.getAttribute("url") ?? null;
-        const enclosureImg = enclosureUrl || null;
+        const enclosureImg =
+          enclosureUrl && !enclosureUrl.includes(GENERIC_IMG)
+            ? enclosureUrl
+            : null;
 
         const imageUrl = bodyImg || enclosureImg;
 

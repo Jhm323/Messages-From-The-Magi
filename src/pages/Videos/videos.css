@@ -7,29 +7,8 @@
   color: var(--color-mist);
 }
 
-/* Filter chips sit on cream — darken text and border */
-.videos-page .chip {
-  color: var(--color-mist);
-  border-color: var(--color-mist);
-}
-.videos-page .chip:hover,
-.videos-page .chip.is-active {
-  color: var(--color-gold-muted);
-  border-color: var(--color-gold-muted);
-  background: rgba(138, 111, 46, 0.1);
-}
-
-.videos-filters {
-  justify-content: center;
-  margin-bottom: 48px;
-}
-
 /* .videos-grid {
 } */
-
-.videos-coming-soon {
-  margin-top: 64px;
-}
 
 .video-grid {
   max-width: 900px;
@@ -64,26 +43,11 @@
   padding: 20px;
 }
 
-.video-card__category {
-  font-family: var(--font-heading);
-  font-size: var(--text-18);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-gold-muted);
-  margin-bottom: 6px;
-}
-
 .video-card__title {
   font-family: var(--font-heading);
   font-size: 18px;
   color: var(--color-gold);
   margin-bottom: 8px;
-}
-
-.video-card__body {
-  font-size: var(--text-18);
-  color: var(--color-mist);
-  line-height: 1.6;
 }
 
 .substack-strip {
