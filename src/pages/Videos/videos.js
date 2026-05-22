@@ -105,7 +105,6 @@ async function loadYouTubeVideos() {
     )
     .join("");
 
-  console.log("[videos] YT_CHANNEL_ID:", YT_CHANNEL_ID);
   if (!YT_CHANNEL_ID) {
     renderVideoFallback(grid);
     return;
