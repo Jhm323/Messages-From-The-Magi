@@ -8,7 +8,6 @@ initHeader("#site-header-mount", { activePath: "/videos.html" });
 initFooter("#site-footer-mount");
 document.body.classList.replace("js-loading", "js-ready");
 
-const YT_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const YT_CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
 const YT_MAX = 8;
 
@@ -106,14 +105,14 @@ async function loadYouTubeVideos() {
     )
     .join("");
 
-  if (!YT_API_KEY || !YT_CHANNEL_ID) {
+  if (!YT_CHANNEL_ID) {
     renderVideoFallback(grid);
     return;
   }
 
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet&order=date&type=video&maxResults=${YT_MAX}`;
-    const res = await fetch(url);
+    const params = new URLSearchParams({ channelId: YT_CHANNEL_ID, maxResults: YT_MAX, order: "date", type: "video" });
+    const res = await fetch(`/api/youtube?${params}`);
     if (!res.ok) throw new Error(`YouTube API ${res.status}`);
     const data = await res.json();
 
